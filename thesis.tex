@@ -17,17 +17,19 @@
 ]{scrbook}
 
 
+
 % details about your thesis
-\newcommand{\titel}{My very fancy thesis title.}
+\newcommand{\titel}{Automatisierte Provisionierungsmechanismen für Laufzeitumgebungen von Legacy z/OS Anwendungen mit „IBM Cloud Provisioning and Management for z/OS“ am Beispiel der „Rechnungsschreibung“ bei DATEV eG}
 \newcommand{\artderarbeit}{Bachelorarbeit}  % {Bachelorarbeit,Masterarbeit}
 \newcommand{\autor}{Georg Simon Ohm}
 \newcommand{\studiengang}{Informatik}  % {Informatik,Wirtschaftsinformatik,Medieninformatik}
 \newcommand{\matrikelnr}{123\,4567}
 \newcommand{\erstgutachter}{Prof.\,Dr.~Korbinian Riedhammer}
-\newcommand{\zweitgutachter}{Prof.\,Dr.~Bartosz von\,Rymon\,Lipinski}
+\newcommand{\zweitgutachter}{Prof.\,Dr.~Friedhelm Stappert}
 \newcommand{\logo}{figures/TH-Nuernberg-RGB.png}
 \newcommand{\keywords}{hot, fuzz}
  
+
 
 % custom head and foot
 \usepackage[automark]{scrlayer-scrpage}
@@ -49,7 +51,7 @@
 \usepackage[T1]{fontenc}
 \usepackage{lmodern,relsize,textcomp,csquotes}
 \usepackage{amsmath,amsfonts}
-\usepackage[ngerman,english]{babel}  % flip for German thesis
+\usepackage[ngerman]{babel}  % flip for German thesis
 \usepackage[final]{graphicx}
 \usepackage{setspace,geometry,xcolor}
 \usepackage{makeidx}
@@ -119,6 +121,7 @@
 \newcommand{\ie}{\mbox{i.\,e.\ }}
 \newcommand{\wrt}{\mbox{w.\,r.\,t.\ }}
 \newcommand{\etal}{\mbox{\emph{et.\,al.\ }}}
+\renewcommand*\contentsname{Inhaltsverzeichnis}
 
 
 % TODO remove if not needed...
@@ -160,7 +163,8 @@
 \listoftables
 \cleardoublepage
 
-\renewcommand{\lstlistlistingname}{List of Listings}  % change for German thesis
+\renewcommand{\lstlistlistingname}{Quellcodeverzeichnis}  % change for German thesis
+\renewcommand{\lstlistingname}{Quellcode}
 \lstlistoflistings
 \cleardoublepage
 
