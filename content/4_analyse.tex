@@ -7,21 +7,51 @@ Anschließend wird der aktuelle Bereiststellungsprozess für Laufzeitumgebungen,
 Die DATEV eG bietet ihren Kunden kostenpflichtige Leistungen an, wenn ein Kunde eine solche in Anspruch nimmt ist die DATEV eG nach § 14 Absatz 2 UStG verpflichtet eine Rechnung auszustellen.
 Bei einer Rechnung handelt es sich nach § 14 Absatz 1 UStG um ein Dokument, mit dem über eine Lieferung oder sonstige Leistung abgerechnet wird.
 
-Die Erzeugung der Rechnungen lässt sich in mehrere Schritte unterteilen, gesammelt werden diese Schritte als `Rechnungsschreibung' bezeichnet.\\
+Die Erzeugung der Rechnungen lässt sich in mehrere Schritte unterteilen, gesammelt werden diese Schritte als Rechnungsschreibung bezeichnet.\\
+Der gesamte Ablauf findet auf einem Großrechner statt.
 Zunächst wird nach jeder kostenpflichtigen Leistungserbringung durch die dazugehörige Anwendung ein Berechnungssatz erzeugt.
 Ein Berechnungssatz beinhaltet die Metainformationen der Berechnung unter anderem die Artikelnummer, Menge und den Ordnungsbegriff.
-Der Preis und der Rechnungsempfänger wird zu einem späteren Zeitpunkt innerhalb der `Rechnungsschreibung' ermittelt.
-So fallen in der DATEV eG monatlich circa 30 Millionen Datensätze an.
-Das Einpflegen der Berechnungssätze in den Rechnungsschreibungsablauf erfolgt über die allgemeine DMVINF\footnote{DatevMakroVerarbeitungsinformation}-Schnittstelle.
-Für die Schnittstelle wurde die Programmiersprache Assembler verwendet.
+Der Preis und der Rechnungsempfänger wird zu einem späteren Zeitpunkt innerhalb der Rechnungsschreibung ermittelt.
 
-Die Anwendung hat drei Möglichkeiten die DMVINF-Schnittstelle zu bedienen. \\
-Bei der Ersten Möglichkeit handelt es sich um das direkte Befüllen der Schnittstelle.
+Für das Einpflegen der Berechnungssätze in den Rechnungsschreibungsablauf stehen den Anwendungen drei Möglichkeiten zur Verfügung. \\
+Bei der Ersten Möglichkeit handelt es sich um die Verwendung des DMVINF\footnote{DatevMakroVerarbeitungsinformation}-Moduls und der dazugehörigen Schnittstelle.
+Dieses Modul ist in der Progammiersprache Assembler entwickelt worden.
+
+Hier Norbert ansprechen!!! kompletten Absatz neuschreiben Körnung nicht vergessen
+
 Während des gesamten Übergabeprozesses dürfen von der sendenden Anwendung nur bestimmte Informationsfelder (Ordnungsbegriffe, Länderschlüssel und Mengen) geändert werden.
 Zusätzlich werden alle variablen Informationen einer Formalprüfung unterzogen.
 Außerdem wird ein Kontrollsatz mit Anzahl der Sätze und Summe der einzelnen Artikel in den Berechnungsdaten hinterlegt.
 Diese Massnahmen sorgen dafür, dass auch im späteren Verlauf Datenmanipulation ausgeschlossen ist. \\
-Eine weitere Möglichkeit die DMVINF-Schnittstelle zu bedienen ist, die Übergabe über einen WebService.
+
+
+Eine weitere Möglichkeit die DMVINF-Schnittstelle zu bedienen ist die Übergabe über einen mit der Programmiersprache Java realisierte WebService.
+Hier werden die Berechnungsinformationen im XML-Format bereitgestellt.
+Das Ergebnis der entsprechenden Plausibilitätsprüfungen, die in einem Onlineverfahren durchgeführt werden, wird direkt an die aufrufende Anwendung zurückgegeben.
+Sind die Daten korrekt werden diese vorerst in einer Datenbank gespeichert.
+Vor dem nächsten Schritt wird diese Datenbank ausgelesen und mit der ersten Möglichkeit in den Kernablauf eingespeist. \\
+Bei der letzten Möglichkeit handelt es sich um die Übergabe mittels einer CSV-Datei.
+Die Datei wird auf den Großrechner übertragen und dort mit dem DMVINF-Modul verarbeitet.
+Dieses Verfahren wird kaum von produktiven Anwendungen sondern hauptsächlich für Test- oder Qualitätssicherungszwecke genutzt.\\
+Mittels dieser drei Möglichkeiten werden insgesamt monatlich circa 30 Millionen Datensätze bereitgestellt und weiterverarbeitet.
+Diese Datensätze stehen innerhalb der durch das DMVINF-Modul erzeugten Berechnungsdateien dem weiteren Verlauf als Input zur Verfügung.
+Um sicher zu stellen, das all diese Dateien auch verarbeitet werden, wird bei Erstellung einer solchen ein Eintrag in eine Kontrolldatei vorgenommen.
+In dieser Kontrolldatei wird jedes Lesen und somit auch das Lesen im weiteren Verlauf gekennzeichnet.
+Eine monatliche Überprüfung führt die zuständige Abteilung durch.
+
+Der nächste Schritt des Rechnungschreibungsprozesses ist die sogenannte Tägliche Bewertung.
+Dieser Ablauf läuft einmal täglich von Montag bis Freitag und ist für die Preis- und Rechnungsempfängerermittlung zuständig.
+Zur Realisierung wurden die Programmiersprachen Assembler und COBOL genutzt.
+Am Ende dieses Ablaufes steht die ARUBA\footnote{Abrechnungs- und Umsatz-Basis}-Db2-Datenbank.
+Dort werden die Berechnungsdaten der letzten 36 Monate aufbewahrt.
+Dabei handelt es ich um insgesamt circa 3,8 Milliarden Datensätze von einer Gesamtgröße von circa 400 GB mit Indizes.
+Diese Datensätze beinhalten alle Informationen für die entgültige Erzeugung der Rechnungen.\\
+Der erste Schritt der Täglichen Bewertung ist das Zusammenführen der Berechnungsdateien aus dem vorherigen Schritt und aus den bereits vorhanden Daten des laufenden Monats aus der ARUBA-Db2-Datenbank.
+Zusätzlich werden während dieser Zusammenführung den Berechnungssätzen auf Basis der abgebenden Anwendung die entsprechenden Rechnungstellungsrythmen (täglich oder monatlich) zugewiesen.
+Anschließend wird mit Hilfe der Beraternummer die zugehörigen Betriebsstätte-, Rechnungsempfänger-, Hauptberater- und Mitglieds- bzw. Geschäftspartnernummer ermittelt.
+Die Beraternummer ist als oberster Ordnungsbegriff in den Berechnungssätzen enthalten.
+Außerdem wird die Debitorenkontonummer entweder durch die Mitglieds- oder durch die Geschäftspartnernummer zugeordnet.
+
 
 
 
