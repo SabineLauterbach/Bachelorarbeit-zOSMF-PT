@@ -1,5 +1,6 @@
 \chapter{Analyse}\label{ch:analyse}
 Im Folgendem erfolgt eine Beschreibung der Beispielanwendung `Rechnungsschreibung`.
+Die dafür benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 1 aus der Abteilung, die für die Rechnungsschreibung zuständig ist.
 Hierbei wird vor allem der technische Aspekt beleuchtet.
 Anschließend wird der aktuelle Bereiststellungsprozess für Laufzeitumgebungen, den dazugehörigen Datenbanksystem und einer Messaging Lösung dargestellt.
 
@@ -16,16 +17,21 @@ Der Preis und der Rechnungsempfänger wird zu einem späteren Zeitpunkt innerhal
 Für das Einpflegen der Berechnungssätze in den Rechnungsschreibungsablauf stehen den Anwendungen drei Möglichkeiten zur Verfügung. \\
 Bei der Ersten Möglichkeit handelt es sich um die Verwendung des DMVINF\footnote{DatevMakroVerarbeitungsinformation}-Moduls und der dazugehörigen Schnittstelle.
 Dieses Modul ist in der Progammiersprache Assembler entwickelt worden.
-
-Hier Norbert ansprechen!!! kompletten Absatz neuschreiben Körnung nicht vergessen
-
-Während des gesamten Übergabeprozesses dürfen von der sendenden Anwendung nur bestimmte Informationsfelder (Ordnungsbegriffe, Länderschlüssel und Mengen) geändert werden.
-Zusätzlich werden alle variablen Informationen einer Formalprüfung unterzogen.
-Außerdem wird ein Kontrollsatz mit Anzahl der Sätze und Summe der einzelnen Artikel in den Berechnungsdaten hinterlegt.
-Diese Massnahmen sorgen dafür, dass auch im späteren Verlauf Datenmanipulation ausgeschlossen ist. \\
-
-
-Eine weitere Möglichkeit die DMVINF-Schnittstelle zu bedienen ist die Übergabe über einen mit der Programmiersprache Java realisierte WebService.
+Das Ergebnis dieses Moduls ist eine sequentielle Datei am Großrechner, dieses Format lässt sich mit einer .txt Datei unter Windows vergleichen.
+Diese Datei, auch Berechnungsdatei genannt, hat folgenden Aufbau.
+Der erste Satz enthält Steuerinformationen wie zum Beispiel Datum/Uhrzeit, Produkt usw.
+Danach kommen die eigentlichen Berechnungssätze.
+Schließlich folgt noch die Anzahl der Sätze und die Summe der einzelnen Artikel in einem Satz mit Kontrollinformationen.
+Diese Kontrollinformationen werden im weiteren Verlauf mit den eingelesenen Werten abgeglichen, dadurch wird Datenverlust und unkontrollierte Eingriffsmöglichkeiten von außen ausgeschlossen.
+Aus dem Aufbau einer solchen Datei lässt sich schließen, dass verschiedene Schritte für die Erzeugung innerhalb der Anwedung notwendig sind.
+Für die nachfolgenden Schritte stellt das DMVINF-Modul jeweils Schnittstellen zur Verfügung.
+Zuerst wird beim sogenannten Open die Datei erstellt und der Steuersatz geschrieben.
+Danach folgt das eigentliche Schreiben der Berechnungssätze, dabei dürfen nur bestimmte Felder (Ordnungsbegriffe, Länderschlüssel und Mengen) verändert werden.
+Um unzulässige Veränderungen zu verhindert, haben diese einen Abbruch der Verarbeitung zur Folge.
+Schließlich folgt noch der `Close` bei dem die Kontrollinformationen geschrieben werden.
+Hinzuzufügen ist, dass die variablen Informationen einer Formalprüfung unterzogen werden.
+So entstehen je nach fachlicher Logik und Laufhäufigkeit der Anwendung mehrere Berechnungsdateien. \\
+Eine weitere Möglichkeit die Berechnungsinformationen in den Ablauf einzupflegen ist die Übergabe über einen mit der Programmiersprache Java realisierte WebService.
 Hier werden die Berechnungsinformationen im XML-Format bereitgestellt.
 Das Ergebnis der entsprechenden Plausibilitätsprüfungen, die in einem Onlineverfahren durchgeführt werden, wird direkt an die aufrufende Anwendung zurückgegeben.
 Sind die Daten korrekt werden diese vorerst in einer Datenbank gespeichert.
