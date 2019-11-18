@@ -4,12 +4,15 @@ Die dafür benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 1 a
 Hierbei wird vor allem der technische Aspekt beleuchtet.
 Anschließend wird der aktuelle Bereiststellungsprozess für Laufzeitumgebungen, den dazugehörigen Datenbanksystem und einer Messaging Lösung dargestellt.
 
-\section{Beschreibung Rechnungsschreibung}
+\section{Rechnungsschreibung}
+
+\subsection{Beschreibung}
 Die DATEV eG bietet ihren Kunden kostenpflichtige Leistungen an, wenn ein Kunde eine solche in Anspruch nimmt ist die DATEV eG nach § 14 Absatz 2 UStG verpflichtet eine Rechnung auszustellen.
 Bei einer Rechnung handelt es sich nach § 14 Absatz 1 UStG um ein Dokument, mit dem über eine Lieferung oder sonstige Leistung abgerechnet wird.
 
 Die Erzeugung der Rechnungen lässt sich in mehrere Schritte unterteilen, gesammelt werden diese Schritte als Rechnungsschreibung bezeichnet.\\
-Der gesamte Ablauf findet auf einem Großrechner statt.
+Bei dem Ablauf handelt es sich um einen Batch\footnote{Stapelverarbeitung}-Ablauf, der auf einem Großrechner läuft.
+Nur die Preisermittlung wird in ein CICS ausgelagert.
 Zunächst wird nach jeder kostenpflichtigen Leistungserbringung durch die dazugehörige Anwendung ein Berechnungssatz erzeugt.
 Ein Berechnungssatz beinhaltet die Metainformationen der Berechnung unter anderem die Artikelnummer, Menge und den Ordnungsbegriff.
 Der Preis und der Rechnungsempfänger wird zu einem späteren Zeitpunkt innerhalb der Rechnungsschreibung ermittelt.
@@ -57,11 +60,29 @@ Zusätzlich werden während dieser Zusammenführung den Berechnungssätzen auf B
 Anschließend wird mit Hilfe der Beraternummer die zugehörigen Betriebsstätte-, Rechnungsempfänger-, Hauptberater- und Mitglieds- bzw. Geschäftspartnernummer ermittelt.
 Die Beraternummer ist als oberster Ordnungsbegriff in den Berechnungssätzen enthalten.
 Außerdem wird die Debitorenkontonummer entweder durch die Mitglieds- oder durch die Geschäftspartnernummer zugeordnet.
+Für die Preisermittlung werden die Datensätze nach Geschäftspartner gruppiert.
+Im DATEV eG Umfeld ist ein Geschäftspartner entweder eine Kanzlei oder ein einzelner Mandant, dieser ist jedoch meist einer Kanzlei zugeordnet.
+Dann werden die gruppierten Daten aus Performancengründen an ein CICS übertragen.
+Die Architektur wird in \ref{cicsarch} beschrieben.
+Dort findet die Preisermittlung mit den dazugehörigen kundenindividuellen Abhängigkeiten, wie zum Beispiel Rabatte, statt.
+Anschließend werden die Daten wieder zurück an den Batch-Ablauf übertragen.
+Hier werden die Rechnungsnettobeträge geprüft, ob diese über einem bestimmten Rechnungslimitbetrag liegen.
+Falls dies nicht der Fall ist, werden die Berechnungssätze als BUL\footnote{Beratuer unter Limit} gekennzeichnet und in die folgende Rechnungsperiode vorgetragen.
+Schließlich wird noch die Umsatzsteuer ermittelt.
+Abschließend werden die neu erzeugten Berechnungsdaten in die ARUBA-Db2-Datenbank eingepflegt und entsprechend gekennzeichnet.
 
+Als letzter Schritt folgt die Rechnungsaufbereitung.
+Diese erfolgt am ersten Werktag im Monat.
+Mit Hilfe der ARUBA-Db2-Datenbank wird ermittelt, welchen Kunden eine Rechnung zugestellt werden muss.
+Außerdem wird dabei der Zustellungsweg, per Post oder E-Mail, bestimmt.
+Darauf folgt die Aufbereitung der Druckrohdaten und letztlich das versenden der Rechnungen an die Berater.
+Zusätzlich werden die Rechnungen noch im PDF Format archiviert.
 
+\subsection{CICS in diesem Umfeld}
 
+\subsubsection{Architektur}\label{cicsarch}
 
-\section{Aktueller Bereitstellungsprozess}
+\subsubsection{Aktueller Bereitstellungsprozess}
 Mit vielen anderen Abteilungen sprechen\\
 Viel auf `Zuruf` und Besprechungen\\
 Genauere Infos noch von den CICSAdmins nachfragen\\
