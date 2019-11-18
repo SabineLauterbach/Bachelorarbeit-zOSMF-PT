@@ -6,7 +6,7 @@ Anschließend wird der aktuelle Bereiststellungsprozess für Laufzeitumgebungen,
 
 \section{Rechnungsschreibung}
 
-\subsection{Beschreibung}
+\subsection{Beschreibung}\label{rechBesch}
 Die DATEV eG bietet ihren Kunden kostenpflichtige Leistungen an, wenn ein Kunde eine solche in Anspruch nimmt ist die DATEV eG nach § 14 Absatz 2 UStG verpflichtet eine Rechnung auszustellen.
 Bei einer Rechnung handelt es sich nach § 14 Absatz 1 UStG um ein Dokument, mit dem über eine Lieferung oder sonstige Leistung abgerechnet wird.
 
@@ -63,7 +63,7 @@ Außerdem wird die Debitorenkontonummer entweder durch die Mitglieds- oder durch
 Für die Preisermittlung werden die Datensätze nach Geschäftspartner gruppiert.
 Im DATEV eG Umfeld ist ein Geschäftspartner entweder eine Kanzlei oder ein einzelner Mandant, dieser ist jedoch meist einer Kanzlei zugeordnet.
 Dann werden die gruppierten Daten aus Performancengründen an ein CICS übertragen.
-Die Architektur wird in \ref{cicsarch} beschrieben.
+Die Architektur wird in \ref{rechArch} beschrieben.
 Dort findet die Preisermittlung mit den dazugehörigen kundenindividuellen Abhängigkeiten, wie zum Beispiel Rabatte, statt.
 Anschließend werden die Daten wieder zurück an den Batch-Ablauf übertragen.
 Hier werden die Rechnungsnettobeträge geprüft, ob diese über einem bestimmten Rechnungslimitbetrag liegen.
@@ -78,11 +78,36 @@ Außerdem wird dabei der Zustellungsweg, per Post oder E-Mail, bestimmt.
 Darauf folgt die Aufbereitung der Druckrohdaten und letztlich das versenden der Rechnungen an die Berater.
 Zusätzlich werden die Rechnungen noch im PDF Format archiviert.
 
-\subsection{CICS in diesem Umfeld}
+\subsection{Architektur}\label{rechArch}
+In dieser Arbeit steht das automatisierte Provisionieren von Laufzeitumgebungen im Fokus.
+In diesem Fall handelt es sich um die Laufzeitumgebung CICS.
+Deshalb wird im Folgenden nur darauf eingegangen.
 
-\subsubsection{Architektur}\label{cicsarch}
+Das System muss an Lasttagen bis zu 180.000 Geschäftspartner verarbeiten können.
+Um all diese an das CICS zu übertragen stehen dem System mehrere IBM MQ Queues zur Verfügung.
+Darunter ist eine allgemeine Queue in der alle Aufträge, die für die Weiterverarbeitung zur Verfügung stehen, geschrieben werden.
+Pro Geschäftspartner wird ein Auftrag angelegt.
+In diesem Auftrag befinden sich die Namen vier weiterer Queues.
+Eine dieser Queues beinhaltet alle Informationen, die für die Preisermittlung des dazugehörigen Geschäftspartners notwendig sind.
+In den restlichen drei Queues sind die Ergebnisse der Preisermittlung gespeichert.
+Die Queuenamen werden nicht dynamisch generiert, da dies zu Performanceproblemen führt.
+Deshalb existieren für jede der vier Queues jeweils 100 vorgefertigte Namen.
+Somit können auch maximal nur 100 Aufträge gleichzeitig auf Weiterverarbeitung warten.
+Falls dieses Limit erreicht ist, wartet der Batch-Ablauf bis ein Auftrag fertig wird.
+Sobald ein Auftrag in die allgemeinen Auftragsqueue geschrieben wird, wird eine CICS-Transaktionen gestartet.
+Diese führt die Preisermittlung durch und schreibt das Ergebnis auf die dazugehörigen Queues.
+Ist dies geschehen stehen die Queues wieder für einen neuen Auftrag zur Verfügung.
+Es können maximal 30 Transaktionen zeitgleich arbeiten.\\
+Für die Preisermittlung wird auch eine Db2-Datenbank, in der die Einzelpreise der Artikel gespeichert sind, verwendet.
+Wenn alle Transaktionen direkt auf diese Datenbank zugreifen würden, hätte dies über 60 Millionen Datenbankzugriffe zur Folge.
+Dies führt zu massiven Performancenproblemen.
+Deshalb werden bevor die eigentliche Preisermittlung stattfindet, alle benötigten Einzelpreise und Preisabhängigkeiten ermittelt.
+Diese Informationen werden dann in einen sogenannten `SHARED GETMAIN`-Bereich gespeichert.
+Dabei handelt es sich im Prinzip um einen Hauptspeicherbereich des Großrechners.
+Die Adresse von diesem Bereich wird dem Ablauf zur Verfügung gestellt.
+Somit greifen die einzelnen Transaktionen nicht mehr auf direkt auf die Datenbank zu sondern auf den schnelleren Hauptspeicher.
 
-\subsubsection{Aktueller Bereitstellungsprozess}
+\section{Aktueller Bereitstellungsprozess}
 Mit vielen anderen Abteilungen sprechen\\
 Viel auf `Zuruf` und Besprechungen\\
 Genauere Infos noch von den CICSAdmins nachfragen\\
