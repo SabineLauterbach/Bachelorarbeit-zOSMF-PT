@@ -5,11 +5,10 @@ Hierbei wird vor allem der technische Aspekt beleuchtet.
 Anschließend wird der aktuelle Bereiststellungsprozess für Laufzeitumgebungen, den dazugehörigen Datenbanksystem und einer Messaging Lösung dargestellt.
 
 \section{Rechnungsschreibung}
-
-\subsection{Beschreibung}\label{rechBesch}
 Die DATEV eG bietet ihren Kunden kostenpflichtige Leistungen an, wenn ein Kunde eine solche in Anspruch nimmt ist die DATEV eG nach § 14 Absatz 2 UStG verpflichtet eine Rechnung auszustellen.
 Bei einer Rechnung handelt es sich nach § 14 Absatz 1 UStG um ein Dokument, mit dem über eine Lieferung oder sonstige Leistung abgerechnet wird.
 
+\subsection{Beschreibung}\label{rechBesch}
 Die Erzeugung der Rechnungen lässt sich in mehrere Schritte unterteilen, gesammelt werden diese Schritte als Rechnungsschreibung bezeichnet.\\
 Bei dem Ablauf handelt es sich um einen Batch\footnote{Stapelverarbeitung}-Ablauf, der auf einem Großrechner läuft.
 Nur die Preisermittlung wird in ein CICS ausgelagert.
@@ -105,7 +104,7 @@ Deshalb werden bevor die eigentliche Preisermittlung stattfindet, alle benötigt
 Diese Informationen werden dann in einen sogenannten `SHARED GETMAIN`-Bereich gespeichert.
 Dabei handelt es sich im Prinzip um einen Hauptspeicherbereich des Großrechners.
 Die Adresse von diesem Bereich wird dem Ablauf zur Verfügung gestellt.
-Somit greifen die einzelnen Transaktionen nicht mehr auf direkt auf die Datenbank zu sondern auf den schnelleren Hauptspeicher.
+Somit greifen die einzelnen Transaktionen nicht mehr direkt auf die Datenbank zu, sondern auf den schnelleren Hauptspeicher.
 
 \section{Aktueller Bereitstellungsprozess}
 Mit vielen anderen Abteilungen sprechen\\
