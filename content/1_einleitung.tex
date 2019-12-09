@@ -54,30 +54,24 @@ So ist zum Beispiel die Programmiersprache auf den TIOBE Index Platz 28.\footnot
 Zum anderen gibt es in Deutschland nur XXX Universitäten und Hochschulen die einen Studiengang mit Schwerpunkt Mainframe anbieten.\cite{fehlt noch}
 
 Als nächstes ist die Herstellerabhängigkeit von IBM zu erwähnen.
-Die DATEV eG ist nicht nur in der Wahl eines Betriebssystems eingeschränkt, sondern auch einem Datenbanksystem oder einer Messaging Lösung.
+Die DATEV eG ist nicht nur in der Wahl des Betriebssystems eingeschränkt, sondern auch einem Datenbanksystem oder einer Messaging Lösung.
 Außerdem hat die IBM eine Quasi-Monopolstellung\cite{fehlt noch} im Mainframebereich, so ist die DATEV eG auch in ihrer Preisverhandlungspolitik eingeschränkt.
 Hinzu kommt die Abhängigkeit von der IBM Mainframe Strategie, also ob die IBM selbst noch weitere Resourcen in ihren Großrechnerbereich investiert.
 Dies wird durch eine sinkende Kundenzahl am Markt verstärkt.\footnote{weltweite installierte MIPS-Zahl sei laut IBM steigend}
 
-Zuletzt ist der Modernisierungsbedarf beim Entwicklungsprozess zu nennen.
+Für die DATEV eG ist trotz der Risiken eine Ablösung der Mainframe Bestandsanwendungen durch cloud-native Anwendungen aktuell nicht absehbar.
+Ein weiterer Punkt ist, dass die Sicherung des Bestandsgeschäfts über einen Zeitraum von Jahren oder Jahrzenten notwendig sein wird.
+Aufgrund der Stärken des Großrechners will man bei Moderniesieungsprojekten eine Alternative für die cloud-native Entwicklung anbieten.
+Um dieses Ziel zu erreichen wird bei der DATEV eG in den letzten Jahren der Entwicklungsprozess für Mainframe-Projekte überarbeitet und diesen an übliche Entwicklungsstandards anzupassen.
+So wird auf eine von der IBM entwickelten auf eclipse-basierende Entwicklungsumgebung gesetzt.
+Somit ist die DATEV eG auch in diesem Bereich von der IBM abhängig.
+Außerdem läuft seit einiger Zeit die Umstellung auf git für die Verwaltung von COBOL und IBM-Assembler Sourcen.
 
-
-
-
-
-So gewinnen bei der DATEV eG PaaS (Plattform as a Service) Ansätze immer mehr an Bedeutung.
+Zum Entwicklungsprozess zählt jedoch nicht nur das Erzeugen von Code, sondern auch die Bereitstellung der dazugehörigen Laufzeitumgebung.
+So gewinnen bei der DATEV eG, außerhalb des Mainframeumfelds, PaaS (Plattform as a Service) Ansätze immer mehr an Bedeutung.
 Ein Vorteil dabei ist die unkomplizierte, automatisierte Provisionierung von Laufzeitumgebungen.
 Dadurch wird die Entwicklungsgeschwindigkeit erhöht und die Bereitstellung von isolierten Testumgebungen vereinfacht.
 Außerdem können während eines laufenden Entwicklungsprozesses Komponenten, wie zum Beispiel ein Datenbanksystem, hinzugefügt oder ausgetauscht werden.
-Bei der DATEV eG kommen diese Ansätze jedoch hauptsächlich bei Neuentwicklungen außerhalb des Mainframeumfelds zum Einsatz.
-
-
-
-
-Was ist der Mainframe\\
-Geschichte\\
-kurzer technischer Einblick Mainframe und Vorteile und (Bedeutung bei Datev) \\
-wieso er bei Datev eingesetzt wird \\
- Moma \\
- Problemstellung \\
- Wieso Rechnungsschreibung als Beispiel? \\
+Um sich auch in diesem Bereich der großrechnerfremden Entwicklung anzupassen, sucht die DATEV eG hier nach einer Lösung.
+Für die automatisierte Provisionierung von Laufzeitumgebungen im Mainframeumfeld stellt die IBM seit dem Jahr 2019 das Tool `IBM Cloud Provisioning and Management for z/OS`\footnote{Beschreibung in Absatz \ref{sec:zosmf}} zur Verfügung.
+Anhand des Beispiels der Rechnungsschreibung \footnote{Beschreibung im Kapitel \ref{rechBesch}} wird in dieser Arbeit untersucht, ob und wie es möglich ist, ähnlich wie bei einem PaaS Ansatz, solche Provisionierungsmechanismen für z/OS Anwendungen zu automatisieren.
