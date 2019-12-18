@@ -2,17 +2,31 @@
 In diesem Kapitel werden für diese Arbeit wichtige Begriffe und Systeme erläutert.
 
 \section{Customer Information Control System}\label{cics}
-Bei dem Customer Informatione Control System, kurz CICS, handelt es sich um einen Applikationsserver für einen IBM-Großrechner.
+Das Customer Information Control System, kurz CICS, ist ein Applikationsserver für einen IBM-Großrechner.
 Ein Applikationsserver stellt eine Umgebung zur Verfügung, in der Anwendungen gehostet werden können.
 Dabei kümmert sich dieser unter anderem um Transaktionalität, Webkommunikation und Sicherheit.
 Hierfür stellen Applikationsserver eine API zur Verfügung.
 CICS hat einen weiteren Vorteil, es unterstützt verschiedene Programmiersprachen.
-So können innerhalb einer Anwendung, die einzelnen Programme in der für ihren Use-Case am besten geeigneten Sprache implementiert werden.
+So können Programme innerhalb einer Anwendung in der für ihren Use-Case am besten geeigneten Sprache implementiert werden.
 Zu den unterstützten Sprachen zählen neben COBOL und IBM Assembler auch Java und Java EE.
- 
-
-
 \cite{Rayns.2011}
+
+\subsection{CICS Transaktion}\label{subsec:trans}
+Ein Businessablauf wird im CICS in einer Transaktion gekapselt.
+So kann eine Transaktion mehrere Programme unterschiedlicher Programmiersprachen umfassen.
+Eine Transaktion besitzt ein eindeutiges Kürzel, die TransaktionsID.
+Über die TransaktionsID kann der Ablauf gestartet werden.
+Dies kann sowohl per Webanfrage oder per Messaging Queue als auch aus einem anderem Programm heraus oder per Hand geschehen.
+In der Transaktion werden alle Änderungen die Programme an Resourcen, wie zum Beispiel einer Datenbank oder Dateien, tätigen protokolliert.
+So wird im Fehlerfall sichergestellt, dass diese rückgängig gemacht werden können.
+ \cite{Rayns.2011}
+
+\subsection{Voraussetzungen}\label{subsec:voraus}
+Im Umfeld der DATEV eG sind die Hard- und Softwarevorausetzungen um ein CICS beziehungsweise eine CICS Instanz zu erstellen und zu starten vorhanden.
+Der Fokus dieser Arbeit liegt auf letzterem somit werden nur die dafür notwendigen Voraussetzungen dargelegt.
+
+\subsection{Anlegen CICS Instanz}\label{subsec:createCICS}
+Die in diesem Absatz benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 2 aus der Abteilung, die für die CICS Administration zuständig ist.
 
 \section{IBM Cloud Provisioning and Management for z/OS}\label{sec:zosmf}
 
