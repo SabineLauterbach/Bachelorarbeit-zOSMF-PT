@@ -28,21 +28,25 @@ Danach kommen die eigentlichen Berechnungssätze.
 Schließlich folgt noch die Anzahl der Sätze und die Summe der einzelnen Artikel in einem Satz mit Kontrollinformationen.
 Diese Kontrollinformationen werden im weiteren Verlauf mit den eingelesenen Werten abgeglichen, dadurch wird Datenverlust und unkontrollierte Eingriffsmöglichkeiten von außen ausgeschlossen.
 Aus dem Aufbau einer solchen Datei lässt sich schließen, dass verschiedene Schritte für die Erzeugung innerhalb der Anwedung notwendig sind.
+
 Für die nachfolgenden Schritte stellt das DMVINF-Modul jeweils Schnittstellen zur Verfügung.
 Zuerst wird beim sogenannten Open die Datei erstellt und der Steuersatz geschrieben.
 Danach folgt das eigentliche Schreiben der Berechnungssätze, dabei dürfen nur bestimmte Felder (Ordnungsbegriffe, Länderschlüssel und Mengen) verändert werden.
 Um unzulässige Veränderungen zu verhindert, haben diese einen Abbruch der Verarbeitung zur Folge.
 Schließlich folgt noch der `Close` bei dem die Kontrollinformationen geschrieben werden.
 Hinzuzufügen ist, dass die variablen Informationen einer Formalprüfung unterzogen werden.
-So entstehen je nach fachlicher Logik und Laufhäufigkeit der Anwendung mehrere Berechnungsdateien. \\
+So entstehen je nach fachlicher Logik und Laufhäufigkeit der Anwendung mehrere Berechnungsdateien.
+
 Eine weitere Möglichkeit die Berechnungsinformationen in den Ablauf einzupflegen ist die Übergabe über einen mit der Programmiersprache Java realisierte WebService.
 Hier werden die Berechnungsinformationen im XML-Format bereitgestellt.
 Das Ergebnis der entsprechenden Plausibilitätsprüfungen, die in einem Onlineverfahren durchgeführt werden, wird direkt an die aufrufende Anwendung zurückgegeben.
 Sind die Daten korrekt werden diese vorerst in einer Datenbank gespeichert.
-Vor dem nächsten Schritt wird diese Datenbank ausgelesen und mit der ersten Möglichkeit in den Kernablauf eingespeist. \\
+Vor dem nächsten Schritt wird diese Datenbank ausgelesen und mit der ersten Möglichkeit in den Kernablauf eingespeist.
+
 Bei der letzten Möglichkeit handelt es sich um die Übergabe mittels einer CSV-Datei.
 Die Datei wird auf den Großrechner übertragen und dort mit dem DMVINF-Modul verarbeitet.
-Dieses Verfahren wird kaum von produktiven Anwendungen sondern hauptsächlich für Test- oder Qualitätssicherungszwecke genutzt.\\
+Dieses Verfahren wird kaum von produktiven Anwendungen sondern hauptsächlich für Test- oder Qualitätssicherungszwecke genutzt.
+
 Mittels dieser drei Möglichkeiten werden insgesamt monatlich circa 30 Millionen Datensätze bereitgestellt und weiterverarbeitet.
 Diese Datensätze stehen innerhalb der durch das DMVINF-Modul erzeugten Berechnungsdateien dem weiteren Verlauf als Input zur Verfügung.
 Um sicher zu stellen, das all diese Dateien auch verarbeitet werden, wird bei Erstellung einer solchen ein Eintrag in eine Kontrolldatei vorgenommen.
@@ -55,7 +59,8 @@ Zur Realisierung wurden die Programmiersprachen Assembler und COBOL genutzt.
 Am Ende dieses Ablaufes steht die ARUBA\footnote{Abrechnungs- und Umsatz-Basis}-Db2-Datenbank.
 Dort werden die Berechnungsdaten der letzten 36 Monate aufbewahrt.
 Dabei handelt es ich um insgesamt circa 3,8 Milliarden Datensätze von einer Gesamtgröße von circa 400 GB mit Indizes.
-Diese Datensätze beinhalten alle Informationen für die entgültige Erzeugung der Rechnungen.\\
+Diese Datensätze beinhalten alle Informationen für die entgültige Erzeugung der Rechnungen.
+
 Der erste Schritt der Täglichen Bewertung ist das Zusammenführen der Berechnungsdateien aus dem vorherigen Schritt und aus den bereits vorhanden Daten des laufenden Monats aus der ARUBA-Db2-Datenbank.
 Zusätzlich werden während dieser Zusammenführung den Berechnungssätzen auf Basis der abgebenden Anwendung die entsprechenden Rechnungstellungsrythmen (täglich oder monatlich) zugewiesen.
 Anschließend wird mit Hilfe der Beraternummer die zugehörigen Betriebsstätte-, Rechnungsempfänger-, Hauptberater- und Mitglieds- bzw. Geschäftspartnernummer ermittelt.
@@ -63,6 +68,7 @@ Die Beraternummer ist als oberster Ordnungsbegriff in den Berechnungssätzen ent
 Außerdem wird die Debitorenkontonummer entweder durch die Mitglieds- oder durch die Geschäftspartnernummer zugeordnet.
 Für die Preisermittlung werden die Datensätze nach Geschäftspartner gruppiert.
 Im DATEV eG Umfeld ist ein Geschäftspartner entweder eine Kanzlei oder ein einzelner Mandant, dieser ist jedoch meist einer Kanzlei zugeordnet.
+
 Dann werden die gruppierten Daten aus Performancengründen an ein CICS übertragen.
 Die Architektur wird in \ref{rechArch} beschrieben.
 Dort findet die Preisermittlung mit den dazugehörigen kundenindividuellen Abhängigkeiten, wie zum Beispiel Rabatte, statt.
@@ -98,7 +104,8 @@ Falls dieses Limit erreicht ist, wartet der Batch-Ablauf bis ein Auftrag fertig 
 Sobald ein Auftrag in die allgemeinen Auftragsqueue geschrieben wird, wird eine CICS-Transaktionen gestartet.
 Diese führt die Preisermittlung durch und schreibt das Ergebnis auf die dazugehörigen Queues.
 Ist dies geschehen stehen die Queues wieder für einen neuen Auftrag zur Verfügung.
-Es können maximal 30 Transaktionen zeitgleich arbeiten.\\
+Es können maximal 30 Transaktionen zeitgleich arbeiten.
+
 Für die Preisermittlung wird auch eine Db2-Datenbank, in der die Einzelpreise der Artikel gespeichert sind, verwendet.
 Wenn alle Transaktionen direkt auf diese Datenbank zugreifen würden, hätte dies über 60 Millionen Datenbankzugriffe zur Folge.
 Dies führt zu massiven Performancenproblemen.
