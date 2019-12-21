@@ -29,8 +29,15 @@ Der Fokus dieser Arbeit liegt auf letzterem somit werden nur die dafür notwendi
 Die in diesem Absatz benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 2 aus der Abteilung, die für die CICS Administration zuständig ist.
 Um eine lauffähige CICS Instanz einzurichten sind mehrere Schritte notwendig.
 Diese werden im Folgendem beschrieben.
-\subsubsection{Virtuell}
-asdf
+\subsubsection{VTAM-ACB}
+Der VTAM\footnote{Virtual Telecommunications Access Method\cite{Rogers.2011}}-ACB\footnote{Access method control block}\cite{IBM.2014} enhält Informationen, die das CICS für VTAM beschreibt.
+Hier muss kein Eintrag für eine CICS Instanz erstellt werden, da dieser dynamisch generiert wird.
+Durch diesen Vorgang wird die Instanz als logische Netzwerkkomponente dem System bekannt gemacht.
+Dies ist auch der Grund weshalb in dieser Arbeit nicht weiter auf diesen Schritt eingegangen wird.
+
+\subsubsection{Eintragung ins RACF}
+Nachdem die CICS Instan
+
 
 \section{IBM Cloud Provisioning and Management for z/OS}\label{sec:zosmf}
 
