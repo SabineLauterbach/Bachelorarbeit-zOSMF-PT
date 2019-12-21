@@ -18,6 +18,7 @@ Zunächst wird nach jeder kostenpflichtigen Leistungserbringung durch die dazuge
 Ein Berechnungssatz beinhaltet die Metainformationen der Berechnung unter anderem die Artikelnummer, Menge und den Ordnungsbegriff.
 Der Preis und der Rechnungsempfänger wird zu einem späteren Zeitpunkt innerhalb der Rechnungsschreibung ermittelt.
 
+\subsubsection{Einpflegung Berechnungssätze}
 Für das Einpflegen der Berechnungssätze in den Rechnungsschreibungsablauf stehen den Anwendungen drei Möglichkeiten zur Verfügung. \\
 Bei der Ersten Möglichkeit handelt es sich um die Verwendung des DMVINF\footnote{DatevMakroVerarbeitungsinformation}-Moduls und der dazugehörigen Schnittstelle.
 Dieses Modul ist in der Progammiersprache Assembler entwickelt worden.
@@ -53,6 +54,7 @@ Um sicher zu stellen, das all diese Dateien auch verarbeitet werden, wird bei Er
 In dieser Kontrolldatei wird jedes Lesen und somit auch das Lesen im weiteren Verlauf gekennzeichnet.
 Eine monatliche Überprüfung führt die zuständige Abteilung durch.
 
+\subsubsection{Tägliche Bewertung}
 Der nächste Schritt des Rechnungschreibungsprozesses ist die sogenannte Tägliche Bewertung.
 Dieser Ablauf läuft einmal täglich von Montag bis Freitag und ist für die Preis- und Rechnungsempfängerermittlung zuständig.
 Zur Realisierung wurden die Programmiersprachen Assembler und COBOL genutzt.
@@ -78,6 +80,7 @@ Falls dies nicht der Fall ist, werden die Berechnungssätze als BUL\footnote{Ber
 Schließlich wird noch die Umsatzsteuer ermittelt.
 Abschließend werden die neu erzeugten Berechnungsdaten in die ARUBA-Db2-Datenbank eingepflegt und entsprechend gekennzeichnet.
 
+\subsubsection{Rechnungsaufbereitung}
 Als letzter Schritt folgt die Rechnungsaufbereitung.
 Diese erfolgt am ersten Werktag im Monat.
 Mit Hilfe der ARUBA-Db2-Datenbank wird ermittelt, welchen Kunden eine Rechnung zugestellt werden muss.
