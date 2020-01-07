@@ -62,6 +62,35 @@ Anschließend müssen alle im Absatz \ref{subsec:createCICS} beschriebene Schrit
 Also müssen die für diese Instanz spezifischen Dateien, die Einträge für die CICS Instanz aus der CSD Datei und schließlich auch der STC Job gelöscht werden.
 
 \section{IBM Cloud Provisioning and Management for z/OS}\label{sec:zosmf}
+In diesem Absatz wird zunächst auf die für dieses Kapitel grundlegenden Begriffe eingegangen.
+Anschließend wird IBM Cloud Provisioning and Management for z/OS, kurz z/OSMF, erläutert.
+Im Anschluss darauf wird das auf Kommandozeilenbefehle basierende z/OS Provisioning Toolkit, kurz z/OS PT, und dessen Möglichkeiten dargestellt.
+
+\subsection{Begrifferklärung}
+Im folgenden werden einige allgemeine Begriffe, die im Umfeld von IBM Cloud Provisioning and Management for z/OS vorkommen, erläutert.
+
+\subsubsection{Workflow}
+Ein Workflow ist eine beliebig komplexe eindeutige Aneinanderreihung von sogenannten Steps.
+Nach der Ausführung dieser wird ein bestimmtes Ziel erreicht, zum Beispiel die erfolgreiche Bereitstellung eines CICS Systems.
+Die Definition eines Workflows und den dazugehörigen Steps wird in XML umgesetzt.
+Ein Step beschreibt einen Teilablauf eines Workflows.
+Innerhalb eines Steps können sowohl interne und externe Scripte als auch JCLs und somit Programme ausgeführt werden.
+Des weiteren besteht die Möglichkeit REST-Calls zu tätigen.
+Außerdem können Bedingungen für die Durchführung eines Steps definiert werden.
+So ist es zum Beispiel möglich einen Step nur durchzuführen, wenn eine bestimmte Variable einen bestimmten Wert besitzt.
+Ein weiteres Beispiel ist, es können erforderliche Steps definiert werden, so dass bevor ein Step auf eine Datei zugreift, mittels eines vorherigen Steps geprüft wird ob diese vorhanden ist und wenn nicht diese erzeugt.
+Es wird ein XML Schema verwendet um sicherzustellen, dass zur Laufzeit keine syntaktischen Fehler vorhanden sind.
+\cite{Rotthove.2018}
+
+Ein Nachteil von Workflows ist, dass diese statisch sind, das heißt, dass die Variablenzuweißungen immer zum Zeitpunkt der Erstellung stattfindet.
+Dadurch ergibt sich, dass für jede kleine Änderung ein eigener Workflow erzeugt werden muss.
+Somit ist ein Workflow eher ein Einmal- bzw. Wegwerfprodukt.
+
+
+
+\subsection{z/OS Provisioning Toolkit}
+z/OS PT bietet ein Kommandozeileninterface zum bereitstellen und verwalten von Laufzeitumgebungen zur Verfügung
+\cite{IBM.2019}
 
 Technische Begriffe erklären / Mainframe Begriffe erklären
 
