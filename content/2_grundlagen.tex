@@ -72,7 +72,7 @@ Im folgenden werden einige allgemeine Begriffe, die im Umfeld von IBM Cloud Prov
 \subsubsection{Workflow}
 Ein Workflow ist eine beliebig komplexe eindeutige Aneinanderreihung von sogenannten Steps.
 Nach der Ausführung dieser wird ein bestimmtes Ziel erreicht, zum Beispiel die erfolgreiche Bereitstellung eines CICS Systems.
-Die Definition eines Workflows und den dazugehörigen Steps wird in XML umgesetzt.
+Die Definition eines Workflows, den dazugehörigen Steps und ihrer Variablen wird in XML umgesetzt.
 Ein Step beschreibt einen Teilablauf eines Workflows.
 Innerhalb eines Steps können sowohl interne und externe Scripte als auch JCLs und somit Programme ausgeführt werden.
 Des weiteren besteht die Möglichkeit REST-Calls zu tätigen.
@@ -86,7 +86,29 @@ Ein Nachteil von Workflows ist, dass diese statisch sind, das heißt, dass die V
 Dadurch ergibt sich, dass für jede kleine Änderung ein eigener Workflow erzeugt werden muss.
 Somit ist ein Workflow eher ein Einmal- bzw. Wegwerfprodukt.
 
+\subsubsection{Template}
+Bei dem Nachteil von Workflows als Wegwerfprodukt setzen die sogenannten Templates an.
+Ein Template besteht aus drei Dateien.
 
+Einer Datei für Eingabevariablen.
+In dieser Datei können Workflowvariablen Werte zugewiesen werden.
+Diese Variablen müssen bei ihrer Definition im Workflow entsprechend gekennzeichnet sein.
+
+Die nächste Datei ist die sogenannte Aktion-Definitions-Datei.
+Hier werden die Aktionen, die ein Anwender mit diesem Template durchführen kann, festgelegt.
+Einer Aktion wird eine Workflow Definitions Datei und somit ein Workflow zugewiesen.
+Dabei ist zu beachten, dass die Datei für die Eingabevariablen und welche Variablen davon verwendet werden, anzugeben ist.
+
+Als letzte Datei ist die Manifest-Datei zu nennen.
+In dieser wird dem Template mitgeteilt an welchem Speicherort sich die oben genannten Dateien befinden.
+Da ein Template immer provisioniert werden kann, wird hier auch der Speicherort des Bereitstellungsworkflows angeben.
+Zusätzlich kann noch eine Beschreibung des Templates hinzugefügt werden.
+
+Somit bildet ein Template einen Rahmen um mehrere Workflows und ermöglich so schnellere De-/provisionierung.
+Zudem bietet es flexibler als Workflows, da Variablen nur an einer Stelle geändert werden müssen.
+Jedoch muss bei jeder kleinen Änderung trotzdem ein neues Template erstellt werden.
+????????????????????????????????????????? geht das auch zu Provisionierungszeitpunkt???????????????????
+\cite{IBM.2019}
 
 \subsection{z/OS Provisioning Toolkit}
 z/OS PT bietet ein Kommandozeileninterface zum bereitstellen und verwalten von Laufzeitumgebungen zur Verfügung
