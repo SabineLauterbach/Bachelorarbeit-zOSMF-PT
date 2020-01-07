@@ -26,20 +26,40 @@ Im Umfeld der DATEV eG sind die Hard- und Softwarevorausetzungen um ein CICS bez
 Der Fokus dieser Arbeit liegt auf letzterem somit werden nur die dafür notwendigen Voraussetzungen dargelegt.
 Außerdem liegt der Fokus nur auf Systemen, die vorerst nicht für die produktiven Systeme der DATEV eG vorgesehen sind.
 Aus diesem Grund werden nur Schritte, die für ein solches Testsystem benötigt werden, dargestellt.
+Eine weitere Eingrenzung besteht darin, dass nur die Arbeitsschritte, die mit z/OSMF\footnote{Beschreibung in Absatz \ref{sec:zosmf}} automatisiert werden, erläutert werden.
 
 \subsection{Einrichtung CICS Instanz}\label{subsec:createCICS}
 Die in diesem Absatz benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 2 aus der Abteilung, die für die CICS Administration zuständig ist.
-Um eine lauffähige CICS Instanz einzurichten sind mehrere Schritte notwendig.
+Um eine lauffähige CICS Instanz den Vorausetzungen aus dem Absatz \ref{subsec:voraus} entsprechend einzurichten, sind mehrere Schritte notwendig.
 Diese werden im Folgendem beschrieben.
 
-\subsubsection{VTAM-ACB}
-Der VTAM\footnote{Virtual Telecommunications Access Method\cite{Rogers.2011}}-ACB\footnote{Access method control block\cite{IBM.2014}} enhält Informationen, die das CICS für VTAM beschreibt.
-Hier muss kein Eintrag für eine CICS Instanz erstellt werden, da dieser dynamisch generiert wird.
-Dies ist auch der Grund weshalb in dieser Arbeit nicht weiter auf diesen Schritt eingegangen wird.
-Durch diesen Vorgang wird die Instanz als logische Netzwerkkomponente dem System bekannt gemacht.
+\subsubsection{CICS spezifische Dateien}\label{sssec:speziDat}
+Zunächst müssen CICS spezifische Dateien im z/OS angelegt werden.
+Im Falle dieser Arbeit handelt es sich um 17 verschiedene.
+Diese Dateien benötigt die CICS Instanz um zum Beispiel Systemfehler zu protokollieren.
+Eine weitere Datei ist dafür zuständig, dass ein Debugger innerhalb der Instanz verwendet werden kann.
 
-\subsubsection{Eintragung ins RACF}
-Bevor eine CICS-Instanz erzeugt werden kann, muss ein RACF\footnote{IBM Resource Acces Control Facility, Sicherheitssystem für z/OS, welches Zugriffkontrollen und Prüfungsfunktionen zur Verfügung stellt.\cite{Winnard.2015}}-Antrag erstellt werden.
+\subsubsection{CSD}
+In der CICS system defintion, kurz CSD, Datei muss jede Ressource, die dem System zur Verfügung stehen soll, definiert werden.
+Eine CSD Datei kann für mehrere CICS Instanzen verwendet werden.
+Eine solche allgemeine CSD Datei hat ca. 22.600 Einträge.
+Dort ist unter anderem für jede CICS Instanz hinterlegt, zu welchem Db2 Datenbanksystem und welchem MQ Messagingsystem sich diese Instanz verbinden soll.
+
+\subsubsection{STC Job}
+Bei einem Started Task Controll-Job, kurz STC Job, handelt es sich um einen Batch Job, der mit Hilfe des `START`-Konsolenkommandos innerhalb von z/OS gestartet werden kann.
+Dieser Batch Job wird deshalb auch als Started Task bezeichnet.\cite{Cassier.2007}
+Bei der DATEV eG existiert für jedes CICS ein solcher Job.
+In diesem werden zunächst einige zur Laufzeit benötigten Bibliotheken und Dateien eingebunden, unter anderem die CICS spezifischen Dateien\footnote{Beschreibung in Absatz \ref{sssec:speziDat}}.
+Außerdem werden hier die SIT \footnote{CICS system initialization table} Parameter definiert.
+Zunächst wird festgelegt welche Standard SIT verwendet werden soll.
+Anschließend können diese Standardwerte überschrieben werden.
+Zu diesen Parameter zählen unter anderem, der eindeutige Name der CICS Instanz, der Speicherort der dazugehören CSD und ob eine Verbindung zu einem Db2 Datenbanksystem hergestellt werden soll.
+
+\subsection{Entfernung CICS Instanz}
+Um eine CICS Instanz zu entfernen muss diese zunächst gestoppt werden.
+Dies ist über das `STOP`-Konsolenkommando von z/OS möglich.
+Anschließend müssen alle im Absatz \ref{subsec:createCICS} beschriebene Schritte rückgängig gemacht werden.
+Also müssen die für diese Instanz spezifischen Dateien, die Einträge für die CICS Instanz aus der CSD Datei und schließlich auch der STC Job gelöscht werden.
 
 \section{IBM Cloud Provisioning and Management for z/OS}\label{sec:zosmf}
 
