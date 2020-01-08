@@ -55,28 +55,28 @@ In dieser Kontrolldatei wird jedes Lesen und somit auch das Lesen im weiteren Ve
 Eine monatliche Überprüfung führt die zuständige Abteilung durch.
 
 \subsubsection{Tägliche Bewertung}
-Der nächste Schritt des Rechnungschreibungsprozesses ist die sogenannte Tägliche Bewertung.
+Der nächste Schritt des Rechnungsschreibungsprozesses ist die sogenannte Tägliche Bewertung.
 Dieser Ablauf läuft einmal täglich von Montag bis Freitag und ist für die Preis- und Rechnungsempfängerermittlung zuständig.
 Zur Realisierung wurden die Programmiersprachen Assembler und COBOL genutzt.
 Am Ende dieses Ablaufes steht die ARUBA\footnote{Abrechnungs- und Umsatz-Basis}-Db2-Datenbank.
 Dort werden die Berechnungsdaten der letzten 36 Monate aufbewahrt.
 Dabei handelt es ich um insgesamt circa 3,8 Milliarden Datensätze von einer Gesamtgröße von circa 400 GB mit Indizes.
-Diese Datensätze beinhalten alle Informationen für die entgültige Erzeugung der Rechnungen.
+Diese Datensätze beinhalten alle Informationen für die endgültige Erzeugung der Rechnungen.
 
-Der erste Schritt der Täglichen Bewertung ist das Zusammenführen der Berechnungsdateien aus dem vorherigen Schritt und aus den bereits vorhanden Daten des laufenden Monats aus der ARUBA-Db2-Datenbank.
-Zusätzlich werden während dieser Zusammenführung den Berechnungssätzen auf Basis der abgebenden Anwendung die entsprechenden Rechnungstellungsrythmen (täglich oder monatlich) zugewiesen.
+Der erste Schritt der Täglichen Bewertung ist das Zusammenführen der Berechnungsdateien aus dem vorherigen Schritt und aus den bereits vorhandenen Daten des laufenden Monats aus der ARUBA-Db2-Datenbank.
+Zusätzlich werden während dieser Zusammenführung den Berechnungssätzen auf Basis der abgebenden Anwendung die entsprechenden Rechnungsstellungsrythmen (täglich oder monatlich) zugewiesen.
 Anschließend wird mit Hilfe der Beraternummer die zugehörigen Betriebsstätte-, Rechnungsempfänger-, Hauptberater- und Mitglieds- bzw. Geschäftspartnernummer ermittelt.
 Die Beraternummer ist als oberster Ordnungsbegriff in den Berechnungssätzen enthalten.
 Außerdem wird die Debitorenkontonummer entweder durch die Mitglieds- oder durch die Geschäftspartnernummer zugeordnet.
 Für die Preisermittlung werden die Datensätze nach Geschäftspartner gruppiert.
 Im DATEV eG Umfeld ist ein Geschäftspartner entweder eine Kanzlei oder ein einzelner Mandant, dieser ist jedoch meist einer Kanzlei zugeordnet.
 
-Dann werden die gruppierten Daten aus Performancengründen an ein CICS übertragen.
+Dann werden die gruppierten Daten auf Grund der Performance an ein CICS übertragen.
 Die Architektur wird in \ref{rechArch} beschrieben.
 Dort findet die Preisermittlung mit den dazugehörigen kundenindividuellen Abhängigkeiten, wie zum Beispiel Rabatte, statt.
 Anschließend werden die Daten wieder zurück an den Batch-Ablauf übertragen.
 Hier werden die Rechnungsnettobeträge geprüft, ob diese über einem bestimmten Rechnungslimitbetrag liegen.
-Falls dies nicht der Fall ist, werden die Berechnungssätze als BUL\footnote{Beratuer unter Limit} gekennzeichnet und in die folgende Rechnungsperiode vorgetragen.
+Falls dies nicht der Fall ist, werden die Berechnungssätze als BUL\footnote{Berater unter Limit} gekennzeichnet und in die folgende Rechnungsperiode vorgetragen.
 Schließlich wird noch die Umsatzsteuer ermittelt.
 Abschließend werden die neu erzeugten Berechnungsdaten in die ARUBA-Db2-Datenbank eingepflegt und entsprechend gekennzeichnet.
 
@@ -85,8 +85,8 @@ Als letzter Schritt folgt die Rechnungsaufbereitung.
 Diese erfolgt am ersten Werktag im Monat.
 Mit Hilfe der ARUBA-Db2-Datenbank wird ermittelt, welchen Kunden eine Rechnung zugestellt werden muss.
 Außerdem wird dabei der Zustellungsweg, per Post oder E-Mail, bestimmt.
-Darauf folgt die Aufbereitung der Druckrohdaten und letztlich das versenden der Rechnungen an die Berater.
-Zusätzlich werden die Rechnungen noch im PDF Format archiviert.
+Darauf folgt die Aufbereitung der Druckrohdaten und letztlich das Versenden der Rechnungen an die Berater.
+Zusätzlich werden die Rechnungen noch im PDF-Format archiviert.
 
 \subsection{Architektur}\label{rechArch}
 In dieser Arbeit steht das automatisierte Provisionieren von Laufzeitumgebungen im Fokus.
@@ -103,7 +103,7 @@ In den restlichen drei Queues sind die Ergebnisse der Preisermittlung gespeicher
 Die Queuenamen werden nicht dynamisch generiert, da dies zu Performanceproblemen führt.
 Deshalb existieren für jede der vier Queues jeweils 100 vorgefertigte Namen.
 Somit können auch maximal nur 100 Aufträge gleichzeitig auf Weiterverarbeitung warten.
-Falls dieses Limit erreicht ist, wartet der Batch-Ablauf bis ein Auftrag fertig wird.
+Falls dieses Limit erreicht ist, wartet der Batch-Ablauf solange bis einer der Aufträge fertig gestellt wird.
 Sobald ein Auftrag in die allgemeinen Auftragsqueue geschrieben wird, wird eine CICS-Transaktionen gestartet.
 Diese führt die Preisermittlung durch und schreibt das Ergebnis auf die dazugehörigen Queues.
 Ist dies geschehen stehen die Queues wieder für einen neuen Auftrag zur Verfügung.
@@ -111,7 +111,7 @@ Es können maximal 30 Transaktionen zeitgleich arbeiten.
 
 Für die Preisermittlung wird auch eine Db2-Datenbank, in der die Einzelpreise der Artikel gespeichert sind, verwendet.
 Wenn alle Transaktionen direkt auf diese Datenbank zugreifen würden, hätte dies über 60 Millionen Datenbankzugriffe zur Folge.
-Dies führt zu massiven Performancenproblemen.
+Dies führt zu massiven Einbußen bei der Performance.
 Deshalb werden bevor die eigentliche Preisermittlung stattfindet, alle benötigten Einzelpreise und Preisabhängigkeiten ermittelt.
 Diese Informationen werden dann in einen sogenannten `SHARED GETMAIN`-Bereich gespeichert.
 Dabei handelt es sich im Prinzip um einen Hauptspeicherbereich des Großrechners.
