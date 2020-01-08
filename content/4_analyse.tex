@@ -2,11 +2,11 @@
 Im Folgendem erfolgt eine Beschreibung der Beispielanwendung `Rechnungsschreibung`.
 Die dafür benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 1 aus der Abteilung, die für die Rechnungsschreibung zuständig ist.
 Hierbei wird vor allem der technische Aspekt beleuchtet.
-Anschließend wird der aktuelle Bereiststellungsprozess für Laufzeitumgebungen, den dazugehörigen Datenbanksystem und einer Messaging Lösung dargestellt.
+Anschließend wird der aktuelle Bereitstellungsprozess für Laufzeitumgebungen, den dazugehörigen Datenbanksystem und einer Messaging Lösung dargestellt.
 
 \section{Rechnungsschreibung}
-Für diese Arbeit wurde die Rechnungschreibung als Beispielanwendung herangezogen, weil diese folgende Anforderungen erfüllt.
-Es handelt sich zum einem um eine in sich abgeschosse Anwendung, die nur zu Beginn des Prozesses von anderen Anwendungen abhängig ist.
+Für diese Arbeit wurde die Rechnungsschreibung als Beispielanwendung herangezogen, weil sie folgenden Anforderungen entspricht.
+Es handelt sich zum einem um eine in sich abgeschlossene Anwendung, die nur zu Beginn des Prozesses von anderen Anwendungen abhängig ist.
 Zum anderen benötigt die Rechnungsschreibung ein CICS als Laufzeitumgebung, eine Db2-Datenbank und MQ als Messaginglösung.
 Somit kann ein umfangreicher Bereitstellungsmechanismus in dieser Arbeit untersucht werden.
 
@@ -21,14 +21,14 @@ Der Preis und der Rechnungsempfänger wird zu einem späteren Zeitpunkt innerhal
 \subsubsection{Einpflegung Berechnungssätze}
 Für das Einpflegen der Berechnungssätze in den Rechnungsschreibungsablauf stehen den Anwendungen drei Möglichkeiten zur Verfügung. \\
 Bei der Ersten Möglichkeit handelt es sich um die Verwendung des DMVINF\footnote{DatevMakroVerarbeitungsinformation}-Moduls und der dazugehörigen Schnittstelle.
-Dieses Modul ist in der Progammiersprache Assembler entwickelt worden.
-Das Ergebnis dieses Moduls ist eine sequentielle Datei am Großrechner, dieses Format lässt sich mit einer .txt Datei unter Windows vergleichen.
+Dieses Modul ist in der Programmiersprache Assembler entwickelt worden.
+Das Ergebnis dieses Moduls ist eine sequenzielle Datei am Großrechner, dieses Format lässt sich mit einer .txt Datei unter Windows vergleichen.
 Diese Datei, auch Berechnungsdatei genannt, hat folgenden Aufbau.
-Der erste Satz enthält Steuerinformationen wie zum Beispiel Datum/Uhrzeit, Produkt usw.
+Der erste Satz enthält Steuerinformationen, wie zum Beispiel Datum/Uhrzeit, Produkt usw.
 Danach kommen die eigentlichen Berechnungssätze.
 Schließlich folgt noch die Anzahl der Sätze und die Summe der einzelnen Artikel in einem Satz mit Kontrollinformationen.
 Diese Kontrollinformationen werden im weiteren Verlauf mit den eingelesenen Werten abgeglichen, dadurch wird Datenverlust und unkontrollierte Eingriffsmöglichkeiten von außen ausgeschlossen.
-Aus dem Aufbau einer solchen Datei lässt sich schließen, dass verschiedene Schritte für die Erzeugung innerhalb der Anwedung notwendig sind.
+Aus dem Aufbau einer solchen Datei lässt schließen, dass verschiedene Schritte für die Erzeugung innerhalb der Anwendung notwendig sind.
 
 Für die nachfolgenden Schritte stellt das DMVINF-Modul jeweils Schnittstellen zur Verfügung.
 Zuerst wird beim sogenannten Open die Datei erstellt und der Steuersatz geschrieben.
@@ -50,7 +50,7 @@ Dieses Verfahren wird kaum von produktiven Anwendungen sondern hauptsächlich f�
 
 Mittels dieser drei Möglichkeiten werden insgesamt monatlich circa 30 Millionen Datensätze bereitgestellt und weiterverarbeitet.
 Diese Datensätze stehen innerhalb der durch das DMVINF-Modul erzeugten Berechnungsdateien dem weiteren Verlauf als Input zur Verfügung.
-Um sicher zu stellen, das all diese Dateien auch verarbeitet werden, wird bei Erstellung einer solchen ein Eintrag in eine Kontrolldatei vorgenommen.
+Um sicher zu stellen, dass all diese Dateien auch verarbeitet werden, wird bei Erstellung einer solchen ein Eintrag in eine Kontrolldatei vorgenommen.
 In dieser Kontrolldatei wird jedes Lesen und somit auch das Lesen im weiteren Verlauf gekennzeichnet.
 Eine monatliche Überprüfung führt die zuständige Abteilung durch.
 
