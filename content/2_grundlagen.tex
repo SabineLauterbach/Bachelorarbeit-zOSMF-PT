@@ -106,12 +106,42 @@ Zusätzlich kann noch eine Beschreibung des Templates hinzugefügt werden.
 
 Somit bildet ein Template einen Rahmen um mehrere Workflows und ermöglich so schnellere De-/provisionierung.
 Zudem können die Variablen nur an einer Stelle geändert werden.
-Außerdem besteht die Möglichkeit, den Variablen zum Zeitpunkt der Provisionierung als Anwendereingabe einen Wert zuzuweißen.
+Außerdem besteht die Möglichkeit, den Variablen zum Zeitpunkt der Provisionierung als Anwendereingabe einen Wert zuzuweisen.
 Somit ist ein Template flexibler als ein Workflow.
 \cite{IBM.2019}
 
-\subsection{z/OS Provisioning Toolkit}
-z/OS PT bietet ein Kommandozeileninterface zum bereitstellen und verwalten von Laufzeitumgebungen zur Verfügung
+\subsubsection{Instance}
+Hierbei handelt es ich um das Ergebnis nach der Provisionierung eines Templates.
+Zum Beispiel eines funktionsfähigen CICS.
+
+\subsection{IBM Cloud Provisioning and Management for z/OS}
+Das IBM Cloud Provisioning and Management for z/OS bietet die Möglichkeit mehrere Systeme innerhalb eines z/OS Betriebssystems zu provisionieren, unter anderem Laufzeitumgebungen wie CICS.
+Jedoch nicht die Bereitstellung eines kompletten z/OS Betriebssystems.
+Für diese Aufgaben stehen zwei Schnittstellen zur Verfügung.
+Zum einem z/OS Provisioning Toolkit, im Weiteren z/OSPT genannt, und zum anderen z/OS Management Facility, im Weiteren z/OSMF genannt.
+\cite{http://www.redbooks.ibm.com/abstracts/redp5416.html?Open noch in Citavi aufnehmen ging nicht vom Surface aus}
+
+\subsubsection{z/OS Provisioning Toolkit}
+z/OSPT bietet ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Laufzeitumgebungen.
+In Abbildung \ref{fig:zospt_help} werden die möglichen Kommandozeilenbefehle mittels des Befehls `zospt -h` in einem Kommandofenster angezeigt.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{figures/zospt_help_putty.png}
+	\caption{z/OSPT mögliche Kommandozeilenbefehle}
+	\label{fig:zospt_help}
+\end{figure}
+Mit z/OSPT werden noch zwei weitere Begriffe eingeführt.\\
+Zum einen sogenannte `images`.
+Dabei handelt es sich grundsätzlich um ein Template, jedoch kann dieses Template über eine weitere Inputfile verändert werden.
+Dadurch kann ein Template mit kleineren Änderungen provisioniert werden, ohne dass ein neues Template erzeugt werden muss.
+Dies erhöht die Flexibilität weiter.\\
+Des anderen die sogenannten `container`.
+Dabei handelt es sich eins zu eins um eine Instance.
+
+\subsubsection{z/OS Management Facility}
+Der Hauptaugenmerk dieser Arbeit liegt jedoch bei z/OSMF.
+Da dieses die Verwaltung von Workflows und Templates über eine browserbasierende Schnittstelle ermöglicht.
+Durch diese Oberfläche ist es einfacher zu bedienen und übersichtlicher.
 \cite{IBM.2019}
 
 Technische Begriffe erklären / Mainframe Begriffe erklären
