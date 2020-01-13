@@ -119,7 +119,7 @@ Das IBM Cloud Provisioning and Management for z/OS bietet die Möglichkeit mehre
 Jedoch nicht die Bereitstellung eines kompletten z/OS Betriebssystems.
 Für diese Aufgaben stehen zwei Schnittstellen zur Verfügung.
 Zum einem z/OS Provisioning Toolkit, im Weiteren z/OSPT genannt, und zum anderen z/OS Management Facility, im Weiteren z/OSMF genannt.
-\cite{http://www.redbooks.ibm.com/abstracts/redp5416.html?Open noch in Citavi aufnehmen ging nicht vom Surface aus}
+\cite{KeithWinnardGaryPuchkoffHirenShah.2016}
 
 \subsubsection{z/OS Provisioning Toolkit}
 z/OSPT bietet ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Laufzeitumgebungen.
@@ -137,12 +137,33 @@ Dadurch kann ein Template mit kleineren Änderungen provisioniert werden, ohne d
 Dies erhöht die Flexibilität weiter.\\
 Des anderen die sogenannten `container`.
 Dabei handelt es sich eins zu eins um eine Instance.
+\cite{IBM.2019b}
 
-\subsubsection{z/OS Management Facility}
+\subsubsection{z/OS Management Facility}\label{sssec:zosmf}
 Der Hauptaugenmerk dieser Arbeit liegt jedoch bei z/OSMF.
 Da dieses die Verwaltung von Workflows und Templates über eine browserbasierende Schnittstelle ermöglicht.
-Durch diese Oberfläche ist es einfacher zu bedienen und übersichtlicher.
-\cite{IBM.2019}
+Durch diese Oberfläche, in Abbildung \ref{fig:zosmf_welcome} dargestellt, ist es einfacher zu bedienen und somit wird der Einstieg in die Provisionierung erleichtert.
 
-Technische Begriffe erklären / Mainframe Begriffe erklären
+//hier zosmf welcomepage screenshot
 
+Wie auf der rechten Seite der Abbildung \ref{fig:zosmf_welcome} zu sehen ist, bietet z/OSMF viele Funktionen an.
+Für diese Arbeit besitzt nur der Menüpunkt `Cloud Provisioning` Relevanz.
+Unter diesem Punkt sind die Funktionalitäten für die automatisierte Bereitstellung von Templates zu finden.
+\cite{Rotthove.2018}
+
+Dabei handelt es sich zunächst um das `Resource Management`.
+Darunter werden sogenannte `Domains` und die dazugehörigen `Tenants` verwaltet.
+Unter einer `Domain` ist ein System, das Systemressourcen in Ressourcenpools gliedert, zu verstehen.
+`Tenants` sind die dazugehörigen Rechtegruppen, die dem Anwender den Zugriff und die Nutzung von zugeordneten Templates ermöglicht.
+Einem Template muss sowohl eine `Domain` als auch ein `Tenant` zugewiesen werden.
+\cite{Rotthove.2018}
+
+Zur Verwaltung der Templates und Instances kommen die `Software Services` zum Einsatz.
+Dort können neue Templates über Manifest Datei hinzugefügt werden.
+Dann muss, wie oben beschrieben, eine `Domain` und ein `Tenant` zugwiesen werden.
+Anschließend kann das Template, falls es keine Fehler beinhaltet, veröffentlicht werden.
+Es ist zu empfehlen vorher einen `Test Run` durchzuführen.
+Dabei wird eine Instance testweise provisioniert.
+Diese Instance verhält sich genauso wie eine Instance, die aus einem veröffentlichten Template erzeugt wurde.
+Somit kann damit das Template und die in der Aktion-Definitions-Datei definierten Aktionen getestet werden.
+\cite{Rotthove.2018}
