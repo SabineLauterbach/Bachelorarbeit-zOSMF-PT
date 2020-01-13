@@ -1,9 +1,28 @@
 \chapter{Vorgehensweise}\label{ch:vorgehensweise}
+Zu Beginn dieser Arbeit war eine Einarbeitung nicht nur in das verwendete Toolkit notwendig.
+Sondern es musste sich viel mit den verschiedenen Systemen, also CICS, Db2 und MQ, im Hinblick auf administrative Aufgaben auseinander gesetzt werden.
+Nachdem eine Beispielanwendung gefunden wurde, folgte die Analyse des Ist-Zustandes inklusive die Beschreibung dieser Anwendung.
+Während der Analyse wurde der momentane Bereitstellungsprozess untersucht.
 
-Einarbeitung in die Thematik
-Analyse Ist-Zustand (inkl. Beschreibung der Anwendung)
-(evtl. erster Workshop erwähnen)
-Tool im Testplex (Testumgebung derAdmins) zuerst nur die Laufzeitumgebung, dann die Anforderungen der Anwendung nach und nach mit einbauen (HIER KEINE DATEN VORHANDEN), wirklich nur die Umgebung 
-Tool in der Entwicklungsumgebung (Testumgebung der Entwickler) wie auf dem Testplex versuchen und dann noch die Daten und die eigentliche Anwendung mit einbeziehen
-Am Ende Nutzwertanalyse mit Admins und Entwicklern
-(Evtl. noch einen Workshop bzw. Vorstellung der Ergebnisse)
+(evtl. Workshop erwähnen)
+
+Die Installation des Toolkits geschah bereits vor dem Beginn dieser Arbeit.
+Somit ist es möglich auf dem Testplex, einer Systemumgebung für Test von neuen Betriebssystemversionen oder ähnlichem, zu beginnen.
+Dieser wird hauptsächlich von Administratoren genutzt.
+Zusätzlich ist dieser komplett von anderen Systemumgebungen abgekapselt um unvorhersehbare Fehler zu vermeiden.
+In dieser Umgebung wird zunächst untersucht, wie es möglich ist ein CICS zu provisionieren.
+Anschließend wird dieses Template an die Anforderungen der Anwendung angepasst.
+Da im Testplex jedoch keine Anwendungsdaten vorhanden sind, wird vorerst nur die benötigten Systeme und Grundvoraussetzungen geschaffen.
+
+Nachdem eine CICS Instanz, eine Db2 Datenbank und MQ Queues auf dem Testplex sowohl provisioniert als auch deprovisioniert werden können, folgt der nächste Schritt.
+Dabei handelt es sich um den Wechsel der Systemumgebung vom Testplex auf die Entwicklungssystemumgebung.
+Letzteres ist die Testumgebung für alle Mainframe Entwickler.
+Hier werden vor allem neue Programmversionen entwickelt und damit kleinere Tests durchgeführt.
+Außerdem sind in der Entwicklungssystemumgebung alle Anwendungsdaten, die für diese Tests notwendig sind vorhanden.
+Somit kann die Integrierung der Beispielanwendung in das provisionierte CICS stattfinden.
+
+Zu letzt wird eine Diskussionsrunde stattfinden.
+Hierbei werden Kollegen aus allen beteiligten Gruppen teilnehmen.
+Dazu zählen CICS-Administratoren, Db2-Administratoren, MQ-Administratoren, Entwickler der Beispielanwendung und Architekten.
+Zunächst wird das Ergebnis dieser Arbeit vorgestellt.
+An Hand dessen wird diskutiert, ob und wenn ja wie das `IBM Cloud and Management for z/OS Toolkit` verwendet werden soll.
