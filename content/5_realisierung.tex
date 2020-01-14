@@ -1,8 +1,33 @@
 \chapter{Realisierung}\label{ch:realisierung}
-
-Umsetzung mit Tool
+In diesem Kapitel wird beschrieben, wie die Aufgabe dieser Arbeit gelöst wurde.
+Dazu wird nach der im Kapitel \ref{ch:vorgehensweise} beschriebenen Reihenfolge, der Arbeitsschritte vorgegangen.
 
 \section{Testplex}
+Vor Beginn der eigentlichen Untersuchung mussten zunächst alle benötigten Rechte beantragt werden.
+Hierzu zählen unter anderem die Rechte für die Nutzung des Testplexes, die Nutzung von z/OSMF und z/OSPT und die Rechte für die Templateverwaltung innerhalb von z/OSMF.
+Außerdem war es auf dem Testplex möglich die Rechte für das Erstellen der CICS Dateien, das Recht um ein CICS starten zu dürfen und die Rechte für die Administration von Db2 und MQ einer persönlichen UserID zu geben.
+Dies stellt kein Problem da, weil es sich bei dem Testplex um eine reine Systemtestumgebung handelt.
+Außerdem benötigt das IBM Cloud and Management for z/OS lesenden Zugriff auf den Speicherpfad der Template Dateien.
+Schließlich konnte mit dem ersten Versuch ein bei der Installation von z/OSMF mittgeliefertes minimales CICS Template zu provisionieren begonnen werden.
+
+\subsection{IBM Standard CICS Template}
+Trotz der Vorteile durch die Weboberfläche von z/OSMF wurde zunächst auf z/OSPT gesetzt.
+Diese Entscheidung fiel auf Grund der höheren Flexibilität, durch Images.
+Da es sich um ein mitgeliefertes Template handelt, sind alle benötigten Workflow Definitions Dateien und Template Dateien vorhanden.
+Somit konnte der Konsolenbefehl `zospt build` auf dieses Template durchgeführt werden.
+Dadurch sollte ein Image erzeugt werden.
+Jedoch zeigte sich ein weiterer Nachteil des Kommandozeileninterfaces, es ist nicht möglich Templates eine Domain und einen Tenant zuzuweisen.
+Dies hatte zur Folge das der Befehl `zospt build` fehlschlug.
+Zusätzlich führte es dazu, dass für alle folgenden Aufgaben z/OSMF genutzt wird.
+
+Das Template konnte ohne weitere Probleme in die Software Services aufgenommen werden.
+Dabei wurden ihm eine Domain und ein Tenant zugewiesen.
+Bevor das Template provisioniert werden kann, müssen Änderungen in der Eingabevariablen Datei vorgenommen werden.
+Dazu mussten die Werte der in Tabelle \ref{tab:cgsvars} angepasst werden.
+
+
+
+
 
 \section{Entwicklungsumgebung}
 
