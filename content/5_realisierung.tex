@@ -20,7 +20,8 @@ Jedoch zeigte sich ein weiterer Nachteil des Kommandozeileninterfaces, es ist ni
 Dies hatte zur Folge das der Befehl `zospt build` fehlschlug.
 Zusätzlich führte es dazu, dass für alle folgenden Aufgaben z/OSMF genutzt wird.
 
-Das Template konnte ohne weitere Probleme in die Software Services aufgenommen werden.
+Das z/OSMF auf die Template und Workflow Dateien zugreifen kann, sind diese in einem Unix Dateisystem auf dem Großrechner gespeichert.
+Das Template konnte dann ohne weitere Probleme in die Software Services aufgenommen werden.
 Dabei wurden ihm eine Domain und ein Tenant zugewiesen.
 Bevor das Template provisioniert werden kann, müssen Änderungen in der Eingabevariablen Datei vorgenommen werden.
 Dazu mussten die Werte, der in Tabelle \ref{tab:cgsvars} genannten Variablen angepasst werden.
@@ -48,7 +49,7 @@ DFH\_REGION\_DFLTUSER & Default User ID für das CICS. \\
 \hline
 DFH\_REGION\_VTAMNODE & Name des VTAM Knotens, wenn das CICS hochfährt. \\
 \hline
-DFH\_REGION\_MEMLIMIT & teststtesadfklj \\
+DFH\_REGION\_MEMLIMIT & Dem CICS maximal zur Verfügung stehender Speicherplatz. \\
 \hline
 DFH\_ZOS\_PROCLIB & Datei auf dem Großrechner, die den Job enthält, der für das Erzeugen der CICS Instanz zuständig ist. \\
 \hline
@@ -61,8 +62,20 @@ DFH\_CICS\_HLQ & High-level qualifier von dem CICS Installationsort. \\
 \caption{Zu verändernde Variablen im minimalen CICS Template}
 \label{tab:cgsvars}
 \end{table}
+Das diese Änderungungen greifen, muss das Template aktualisiert werden.
+Dies ist in der Oberfläche per Knopfdruck durchgeführt worden.
 
+Als nächster Schritt wurde ein Testlauf und somit ein erster Versuch das Template zu provisionieren durchgeführt.
+Hierbei tratt beim ersten Step, der einen Job starten wollte, ein Fehler auf.
+Nämlich um einen Rechte Verstoß bezüglich des Jobnames.
+Bei der DATEV eG benötigt eine User ID die Rechte um Jobs mit bestimmten Namen starten zu dürfen.
+Da im Template von der IBM vorgeschlagene Jobnamen verwendet werden, kommt es zum Verstoß.
+Um diese Problem zu Lösen wurden die Jobnamen innerhalb des gesamten Templates an DATEV eG Standards angepasst.
+Nachdem das Template aktualisiert wurde, wurde erneut versucht zu provisionieren.
+Dabei stellte sich heraus, dass der Befehl um ein CICS zu starten innerhalb der DATEV eG einen weiteren Parameter benötigt.
+Dieser wurde hinzugefügt und danach funktionierte das Provisionieren des minimalen IBM Standard CICS Templates.
 
+\subsubsection{DATEV spezifischen Template}
 
 
 \section{Entwicklungsumgebung}
