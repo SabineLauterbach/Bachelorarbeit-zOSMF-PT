@@ -1,6 +1,8 @@
 \chapter{Realisierung}\label{ch:realisierung}
 In diesem Kapitel wird beschrieben, wie die Aufgabe dieser Arbeit gelöst wurde.
 Dazu wird nach der im Kapitel \ref{ch:vorgehensweise} beschriebenen Reihenfolge, der Arbeitsschritte vorgegangen.
+Es ist nochmal zu erwähnen, dass zunächst die Provisionierung einer CICS Instanz untersucht wird.
+Danach wird in weiteren Schritten zuerst eine Db2 Datenbank und schließlich MQ Queues dem Bereitstellungsprozess hinzugefügt.
 
 \section{Testplex}
 Vor Beginn der eigentlichen Untersuchung mussten zunächst alle benötigten Rechte beantragt werden.
@@ -73,9 +75,22 @@ Da im Template von der IBM vorgeschlagene Jobnamen verwendet werden, kommt es zu
 Um diese Problem zu Lösen wurden die Jobnamen innerhalb des gesamten Templates an DATEV eG Standards angepasst.
 Nachdem das Template aktualisiert wurde, wurde erneut versucht zu provisionieren.
 Dabei stellte sich heraus, dass der Befehl um ein CICS zu starten innerhalb der DATEV eG einen weiteren Parameter benötigt.
-Dieser wurde hinzugefügt und danach funktionierte das Provisionieren des minimalen IBM Standard CICS Templates.
+Dieser wurde hinzugefügt und danach funktionierte das Provisionieren und alle definierten Aktionen des minimalen IBM Standard CICS Templates.
 
-\subsubsection{DATEV spezifischen Template}
+\subsubsection{DATEV eG spezifischen CICS Template}
+Nachdem das minimale IBM Standard CICS Template funktionsfähig war und erste Erfahrungen mit z/OSMF gesammelt wurden, wurde ein allgemeines mitgeliefertes Template untersucht.
+Wie in der Tabelle \ref{vglTemps} dargestellt ist, ist dieses Template mit insgesamt 76 verwendeten Dateien sehr umfangreich.
+Zu diesen Dateien zählen alle, die direkt mit dem Template in Verbindung stehen.
+Das Template beinhaltet nicht nur die Möglichkeit verschiedene CICS Typen zu provisioneren, sondern auch ob dies mit Scripten oder mit der REST-Api geschieht.
+Dadurch verliert das Template an Übersichtlichkeit.
+Zusätzlich kommt am ende bei der Provisionierung keine CICS Instanz heraus, die einer DATEV eG spezifischen Instanz entspricht.
+Auf Grund dessen wurden alle für ein DATEV eG spezifischen CICS nicht notwendigen Dateien entfernt.
+Wie in der Tabelle \ref{vglTemps} zu sehen ist, hatte das unter anderem die Löschung von knapp der Hälfte der Dateien zur Folge.
+Des weiteren wurden auch viele nicht benötigte Variablen und Steps entfernt.
+Dadurch schrumpft die provision.xml um circa ein Drittel.
+Zusammenfassend lässt sich sagen, dass das Template an Übersichtlichkeit gewonnen hat.
+
+Anschließend wurden die 
 
 
 \section{Entwicklungsumgebung}
