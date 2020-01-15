@@ -27,22 +27,35 @@ Dazu mussten die Werte, der in Tabelle \ref{tab:cgsvars} genannten Variablen ang
 Die Kurzbeschreibungen und die Beschreibungen aller Variablen, die im Standard Template vorhanden sind, ist in \cite{IBM.2019} zu finden.
 \begin{table}
 \centering
-\begin{tabularx}[h]{l|l}
+\begin{tabularx}{\textwidth}{X|X}
 Variablenname & Kurzbeschreibung \\
 \hline
 DFH\_REGION\_SEC & Legt fest, ob für das CICS Sicherheit im Allgemeinen aktiviert ist. \\
+\hline
 DFH\_REGION\_SECPRFX & Wenn DFH\_REGION\_SEC gesetzt ist, legt den Namen Perfix bei Authentificationanfragen für Ressourcen fest. \\
+\hline
 DFH\_REGION\_APPLID & Applikations ID der zu provisionierenden CICS Instance. \\
+\hline
 DFH\_LE\_HLQ & High-level qualifier\footnote{Erste Zeichen eines Dateinames, wird zum Filtern genutzt} für die Sprachumgebung\footnote{Grundeinstellungen der Programmiersprachen COBOL, PL1 und C. Mitgelieferte IBM Grundmodule} \\
+\hline
 DFH\_REGION\_HLQ & High-level qualifier für die CICS Dateien.\\
+\hline
 DFH\_REGION\_LOGSTREAM & Legt fest, wie die Log Dateien für das provisionierte CICS erstellt werden sollen. \\
+\hline
 DFH\_STC\_ID & User ID mit dem die CICS Instanz startet. \\
+\hline
 DFH\_REGION\_DFLTUSER & Default User ID für das CICS. \\
+\hline
 DFH\_REGION\_VTAMNODE & Name des VTAM Knotens, wenn das CICS hochfährt. \\
+\hline
 DFH\_REGION\_MEMLIMIT & teststtesadfklj \\
+\hline
 DFH\_ZOS\_PROCLIB & Datei auf dem Großrechner, die den Job enthält, der für das Erzeugen der CICS Instanz zuständig ist. \\
+\hline
 DFH\_ZOS\_VSAM\_VOLUME & Speichersystem auf welchem die Dateien gespeichert werden sollen. Entscheidung kann auch an das System abgeben werden. \\
+\hline
 DFH\_CICS\_USSHOME & Installationspfad des Unix-Subsystems \\
+\hline
 DFH\_CICS\_HLQ & High-level qualifier von dem CICS Installationsort. \\
 \end{tabularx}
 \caption{Zu verändernde Variablen im minimalen CICS Template}
