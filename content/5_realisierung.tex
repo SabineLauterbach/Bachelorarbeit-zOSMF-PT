@@ -57,7 +57,7 @@ DFH\_ZOS\_PROCLIB & Datei auf dem Großrechner, die den Job enthält, der für d
 \hline
 DFH\_ZOS\_VSAM\_VOLUME & Speichersystem auf welchem die Dateien gespeichert werden sollen. Entscheidung kann auch an das System abgeben werden. \\
 \hline
-DFH\_CICS\_USSHOME & Installationspfad des Unix-Subsystems \\
+DFH\_CICS\_USSHOME & Homeverzeichnes des Unix System Services \\
 \hline
 DFH\_CICS\_HLQ & High-level qualifier von dem CICS Installationsort. \\
 \end{tabularx}
@@ -103,9 +103,32 @@ Dadurch dass die Datei, die von den Kollegen gepflegt wird als Grundlage verwend
 Um dies Umzusetzen musste ein JCL Job geschrieben werden, der den Kopiervorgang abbildet.
 Anschließend wurde dieser mittels eines neuen Steps in den Worfklow eingebunden.
 
+Ein spezieller Augenmerk lag auf der Editierung der `createCICS.jcl`-Datei.
+In dieser befindet sich die Definition des STC Jobs für das provisionierte CICS.
+Im Standard IBM Template beinhaltet diese zunächst ein Makro für die Validierung von den SIT Parametern.
+Noch bevor die Jobdefinition beginnt, werden alle aus der Datei für die Eingabevariablen benötigten Variablenwerte in temporäre Zwischenvariablen eingefügt.
+Dadurch ist eine Änderung nur an einer Stelle notwendig, falls sich etwas an der Variablen ändert.
+Danach folgt die Definition des Jobs, diese setzt sich aus folgenden Hauptbestandteilen zusammen:\\
+\begin{itemize}
+\item Einbindung der benötigten Bibliotheken
+\item Einbindung der zuvor angelegten CICS spezifischen Dateien
+\item Definition der SIT Parameter
+\end{itemize}
+In Abbildung \ref{HIER ABBILDUNG mit einlese von sitparams} ist zu sehen, dass es vor allem bei der Definition der SIT Parameter zu tief verschachtelten if-Bedingungen kommen kann.
+Es handelt sich um den Code, der für das Einlesen der Variable `DFH\_REGION\_SITPARAMS` aus der Eingabedatei zuständig ist.
+In dieser Variablen werden die SIT Parameter als Komma separierter String angegeben.
+Für die Erzeugung eines DATEV eG spezifischen CICS, wurde das Makro für die Validierung von SIT Parametern beibehalten.
+Alles danach wurde zunächst durch eine zur Verfügung gestellten DATEV eG Standard JCL, für die Erzeugung eines CICS, ersetzt.
+Nach und nach ist die Logik, wie die aus Abbildung \ref{gleiche abbildung wie oben}, hinzugefügt worden.
+Zusätzlich wurden die vorher statische DATEV eG Standard JCL durch Verwendung der Templatevariablen dynamisiert.
 
-
-
+Zu der Definition der SIT Parameter ist zu sagen, dass hier nur die wirklich benötigten mit aufgenommen wurden.
+Die anzunehmenden Werte wurden einzeln mit den CICS Administratorenteam besprochen und festgelegt.
+Es ist zu beachten, dass es im IBM Standard Template zwei Möglichkeiten gibt, die Paramter zusetzen.
+Für bestimmte SIT Parameter besteht eine Variable innerhalb des Templates.
+Für alle anderen ist die Variable `DFH\_REGION\_SITPARAMS` vorgesehen.
+In dieser Arbeit wurde hauptsächlich auf letztere Möglichkeit gesetzt.
+Dadurch sind die SIT Parameter nur an einer Stelle im Template zu verwalten beziehungsweise die Verwaltung wird nicht auf zwei Arbeitsweisen verteilt.
 
 \section{Entwicklungsumgebung}
 
