@@ -102,6 +102,9 @@ Ein weiterer Vorteil ist, dass bei der Deprovisionierung diese Kopie der Standar
 Dadurch dass die Datei, die von den Kollegen gepflegt wird als Grundlage verwendet wird, sind alle provisionierten Instanzen immer auf dem aktuellsten Stand.
 Um dies Umzusetzen musste ein JCL Job geschrieben werden, der den Kopiervorgang abbildet.
 Anschließend wurde dieser mittels eines neuen Steps in den Worfklow eingebunden.
+Außerdem mussten bestimmte Gruppen zu der CSD Liste der CICS Instanz hinzugefügt werden.
+Die JCL ist in Abbildung \ref{code:addCSD} abgebildet.
+Die Reihenfolge ist relevant, da es der Initialisierungsreihenfolge entspricht.
 
 Ein spezieller Augenmerk lag auf der Editierung der `createCICS.jcl`-Datei.
 In dieser befindet sich die Definition des STC Jobs für das provisionierte CICS.
@@ -129,6 +132,22 @@ Für bestimmte SIT Parameter besteht eine Variable innerhalb des Templates.
 Für alle anderen ist die Variable `DFH\_REGION\_SITPARAMS` vorgesehen.
 In dieser Arbeit wurde hauptsächlich auf letztere Möglichkeit gesetzt.
 Dadurch sind die SIT Parameter nur an einer Stelle im Template zu verwalten beziehungsweise die Verwaltung wird nicht auf zwei Arbeitsweisen verteilt.
+
+Schließlich hat die Provisionierung eines DATEV eG spezifischen CICS Instanz funktioniert.
+Dies wurde mit einem Anmeldevorgang an diese CICS sichergestellt.
+Außerdem sind alle Standard DATEV eG Transaktionen funktionsfähig.
+Es wurden alle Dateien wieder pflichtgerecht gelöscht.
+
+\subsubsection{Bereitstellung Db2}
+In diesem Absatz wird die Provisionierung deiner Db2 Datenbank beschrieben.
+Da die Systemumgebung noch der Testplex ist, nur die Datenbank ohne Tabelle, ohne Daten.
+
+Für die Erstellung einer Db2 Datenbank existiert innerhalb der DATEV eG eine REST-API.
+Wie im Absatz \ref{sssec:workflow} beschrieben, ist es möglich innerhalb eines Workflow Steps einen REST-Request abzusenden.
+Der Code ist in Abbildung \ref{code:db2prov} zu sehen.
+Der Code für das Löschen der Datenbank sieht ähnlich aus, nur handelt es sich um einen DELETE-Request.
+So wurden zwei neue Steps erzeugt und dem Workflow eingebunden.
+
 
 \section{Entwicklungsumgebung}
 
