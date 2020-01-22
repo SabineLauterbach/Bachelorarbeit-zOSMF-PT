@@ -43,6 +43,9 @@ Eine weitere Datei ist dafür zuständig, dass ein Debugger innerhalb der Instan
 In der CICS system defintion, kurz CSD, Datei muss jede Ressource, die dem System zur Verfügung stehen soll, definiert werden.
 Eine CSD Datei kann für mehrere CICS Instanzen verwendet werden.
 Eine solche allgemeine CSD Datei hat ca. 22.600 Einträge.
+Ein Eintrag besteht aus einer Gruppe und einer Liste.
+Die Gruppe ist hierbei die Definition einer Systemressource und muss händisch angelegt werden.
+Bei der Liste handelt es sich um das System, welches diese Ressource benötigt.
 Dort ist unter anderem für jede CICS Instanz hinterlegt, zu welchem Db2 Datenbanksystem und welchem MQ Messagingsystem sich diese Instanz verbinden soll.
 
 \subsubsection{STC Job}

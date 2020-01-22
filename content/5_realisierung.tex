@@ -7,7 +7,7 @@ Danach wird in weiteren Schritten zuerst eine Db2 Datenbank und schließlich MQ 
 \section{Testplex}
 Vor Beginn der eigentlichen Untersuchung mussten zunächst alle benötigten Rechte beantragt werden.
 Hierzu zählen unter anderem die Rechte für die Nutzung des Testplexes, die Nutzung von z/OSMF und z/OSPT und die Rechte für die Templateverwaltung innerhalb von z/OSMF.
-Außerdem war es auf dem Testplex möglich die Rechte für das Erstellen der CICS Dateien, das Recht um ein CICS starten zu dürfen und die Rechte für die Administration von Db2 und MQ einer persönlichen UserID zu geben.
+Außerdem war es auf dem Testplex möglich, die Rechte für das Erstellen der CICS Dateien, das Recht um ein CICS starten zu dürfen und die Rechte für die Administration von Db2 und MQ einer persönlichen UserID zu geben.
 Dies stellt kein Problem da, weil es sich bei dem Testplex um eine reine Systemtestumgebung handelt.
 Außerdem benötigt das IBM Cloud and Management for z/OS lesenden Zugriff auf den Speicherpfad der Template Dateien.
 Schließlich konnte mit dem ersten Versuch ein bei der Installation von z/OSMF mittgeliefertes minimales CICS Template zu provisionieren begonnen werden.
@@ -160,6 +160,7 @@ Diese werden in der Eingabedatei des Templates gesetzt.
 In diesem Absatz wird die Provisionierung einer MQ Queue beschrieben.
 Es ist auch möglich einen MQ Queuemanager zu provisionieren, der Fokus dieser Arbeit liegt aber auf der Bereitstellung von Queues.
 Bei einem Queuemanager handelt es sich um ein Subsystem, deshalb wird vorerst von einer automatischen Bereitstellung abgesehen.
+Auf dem Testplex wird desweiteren die benötigte Funktion, dass eine CICS Transaktionen über eine Queue gestartet wird, nicht untersucht.
 
 Da, wie im Absatz \ref{rechArch} beschrieben, sehr viele gleichartige Queues benötigt werden, wurde für die Erstellung dieser von den MQ Administratorenteam ein Rexx Script angefertig.
 Dieses Script steht dieser Arbeit zur Verfügung.
@@ -172,6 +173,43 @@ Hierfür wurde auf Grundlage des Provisionierungsscriptes ein Eigenständiges er
 Dadurch hat die CICS Instanz auf alle Queues, die sich innerhalb dieses Managers befinden, Zugriff.
 Desweiteren ist die Aufnahme weiterer Bibliotheken in der `createCICS.jcl` notwendig.
 
-\section{Entwicklungsumgebung}
+\section{Entwicklungssystemumgebung}
+Innerhalb der Entwicklungssystemumgebung sind die Sicherheits- und Rechtevorschriften schärfer als auf dem Testplex.
+So wäre es zwar möglich alle für die administrativen Aufgaben notwendigen Rechte einer persönlichen UserID zu geben.
+Dies würde bedeuten, dass alle Anwender dieses Templates diese Rechte auch benötigen.
+Dies würde zu einem Chaos auf dem System führen, da sie auch außerhalb des Templates diese Rechte besitzen würden.
+Somit wurde in Absprache mit den Administratorenteams für CICS und MQ festgelegt hierfür jeweils einen technischen User\footnote{User ID mit zunächst keinen Berechtigungen} zu beantragen.
+Diesem werden nur die benötigten Rechte übergeben und ist somit sehr anwendungsspezifisch.
+Um als Anwender das Template nutzen zu können, werden nur die Rechte benötigt Jobs mit diesen technischen Usern ausführen zu dürfen.
+Für Db2 ist ein solcher User nicht notwendig, da das Datenbanksystem hinter der REST-API für alle zugänglich ist und jeder darauf Datenbanken erstellen darf.
+
+Bei der Übertragung des Templates von der Testsystemumgebung auf die Entwicklungssystemumgebung waren in allen drei Bereichen des Templates notwendig.
+
+\subsection{CICS Anpassung}
+Zunächst wurden alle Steps modifiziert, so dass sie den CICS spezifischen technischen User verwenden.
+Als nächstes musste ein Parameter bei der Erstellung der CICS spezifischen Dateien hinzugefügt werden.
+Es handelt sich um den Massageclass Parameter mit dem Wert `NONE'.
+Dadurch sind die Daten von täglichen Datensicherung der Entwicklungssystemumgebung ausgenommen.
+Da die Dateien bei einem Deprovisioning gelöscht werden, ist keine Sicherung notwendig.
+Außerdem ändert sich die CSD Datei, die als Vorlage gilt, auf die Standard Entwicklungssystemumgebung CSD Datei.
+Die Db2 und MQ Bibliotheken, die das CICS anzieht, besitzen einen anderen Namen.
+So musste dies in der `createCICS.jcl` angepasst werden.
+Zusätzlich musste ein SIT Parameter angepasst werden, so dass die Log Dateien funktionisfähig sind.
+
+\subsection{Db2 Anpassung}
+Für die Datenbank Provisionierung waren keine Änderungen am Template notwendig.
+TABELLEN UND DATEN ABER SCHON
+
+\subsection{MQ Anpassung}
+Bei der grundsätzlichen Provisionierung der Queues gab es keine Veränderung.
+Jedoch wird ein anderer Queuemanager benötigt, dies zieht eine Änderung der Gruppe in der CSD nach sich.
+Da eine der Queues, jedoch die Transaktion und somit die Anwendung starten soll, sind sogenannte MQ Prozesse notwendig.
+Diese wurden in das Script aufgenommen.
+
+Das diese funktionieren, muss CICS seitig eine Queue vorhanden sein, die sich um diese speziellen Fälle kümmert.
+Jede CICS Instanz benötigt somit eine spezifische Queue, dies muss in der MQ CSD Gruppe hinterlegt werden.
+In diesem Schritt wurde beschlossen, die Verwaltung der MQ CSD Gruppe komplett dem Template zu übergeben.
+Diese Entscheidung hatte eine Änderung des in Abbildung \ref{code:addCSD} gezeigten Codes zu Folge.
+So wird, wie in Abbildung \ref{code:createGrp} abgebildet, zunächst eine Gruppe angelegt und erst anschließend dem CSD hinzugefügt.
 
 \section{Nutzwertanalyse}
