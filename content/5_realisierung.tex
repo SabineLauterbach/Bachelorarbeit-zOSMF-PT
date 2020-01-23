@@ -7,22 +7,22 @@ Danach wird in weiteren Schritten zuerst eine Db2 Datenbank und schließlich MQ 
 \section{Testplex}
 Vor Beginn der eigentlichen Untersuchung mussten zunächst alle benötigten Rechte beantragt werden.
 Hierzu zählen unter anderem die Rechte für die Nutzung des Testplexes, die Nutzung von z/OSMF und z/OSPT und die Rechte für die Templateverwaltung innerhalb von z/OSMF.
-Außerdem war es auf dem Testplex möglich, die Rechte für das Erstellen der CICS Dateien, das Recht um ein CICS starten zu dürfen und die Rechte für die Administration von Db2 und MQ einer persönlichen UserID zu geben.
-Dies stellt kein Problem da, weil es sich bei dem Testplex um eine reine Systemtestumgebung handelt.
+Außerdem war es auf dem Testplex möglich, die Rechte für das Erstellen der CICS Dateien, das Recht, um ein CICS starten zu dürfen und die Rechte für die Administration von Db2 und MQ einer persönlichen UserID zu geben.
+Dies stellt kein Problem dar, weil es sich bei dem Testplex um eine reine Systemtestumgebung handelt.
 Außerdem benötigt das IBM Cloud and Management for z/OS lesenden Zugriff auf den Speicherpfad der Template Dateien.
 Schließlich konnte mit dem ersten Versuch ein bei der Installation von z/OSMF mittgeliefertes minimales CICS Template zu provisionieren begonnen werden.
 
 \subsection{IBM Standard CICS Template}
 Trotz der Vorteile durch die Weboberfläche von z/OSMF wurde zunächst auf z/OSPT gesetzt.
 Diese Entscheidung fiel auf Grund der höheren Flexibilität, durch Images.
-Da es sich um ein mitgeliefertes Template handelt, sind alle benötigten Workflow Definitions Dateien und Template Dateien vorhanden.
+Da es sich um ein mitgeliefertes Template handelt, sind alle benötigten Workflow Definitionsdateien und Template Dateien vorhanden.
 Somit konnte der Konsolenbefehl `zospt build` auf dieses Template durchgeführt werden.
 Dadurch sollte ein Image erzeugt werden.
 Jedoch zeigte sich ein weiterer Nachteil des Kommandozeileninterfaces, es ist nicht möglich Templates eine Domain und einen Tenant zuzuweisen.
 Dies hatte zur Folge das der Befehl `zospt build` fehlschlug.
 Zusätzlich führte es dazu, dass für alle folgenden Aufgaben z/OSMF genutzt wird.
 
-Das z/OSMF auf die Template und Workflow Dateien zugreifen kann, sind diese in einem Unix Dateisystem auf dem Großrechner gespeichert.
+Das z/OSMF auf die Template- und Workflow-Dateien zugreifen kann, sind diese in einem Unix Dateisystem auf dem Großrechner gespeichert.
 Das Template konnte dann ohne weitere Probleme in die Software Services aufgenommen werden.
 Dabei wurden ihm eine Domain und ein Tenant zugewiesen.
 Bevor das Template provisioniert werden kann, müssen Änderungen in der Eingabevariablen Datei vorgenommen werden.
@@ -64,29 +64,29 @@ DFH\_CICS\_HLQ & High-level qualifier von dem CICS Installationsort. \\
 \caption{Zu verändernde Variablen im minimalen CICS Template}
 \label{tab:cgsvars}
 \end{table}
-Das diese Änderungungen greifen, muss das Template aktualisiert werden.
+Das diese Änderungen greifen, muss das Template aktualisiert werden.
 Dies ist in der Oberfläche per Knopfdruck durchgeführt worden.
 
 Als nächster Schritt wurde ein Testlauf und somit ein erster Versuch das Template zu provisionieren durchgeführt.
-Hierbei tratt beim ersten Step, der einen Job starten wollte, ein Fehler auf.
+Hierbei trat beim ersten Step, der einen Job starten wollte, ein Fehler auf.
 Nämlich um einen Rechte Verstoß bezüglich des Jobnames.
-Bei der DATEV eG benötigt eine User ID die Rechte um Jobs mit bestimmten Namen starten zu dürfen.
+Bei der DATEV eG benötigt eine User ID die Rechte, um Jobs mit bestimmten Namen starten zu dürfen.
 Da im Template von der IBM vorgeschlagene Jobnamen verwendet werden, kommt es zum Verstoß.
-Um diese Problem zu Lösen wurden die Jobnamen innerhalb des gesamten Templates an DATEV eG Standards angepasst.
+Um dieses Problem zu lösen, wurden die Jobnamen innerhalb des gesamten Templates an DATEV eG Standards angepasst.
 Nachdem das Template aktualisiert wurde, wurde erneut versucht zu provisionieren.
-Dabei stellte sich heraus, dass der Befehl um ein CICS zu starten innerhalb der DATEV eG einen weiteren Parameter benötigt.
+Dabei stellte sich heraus, dass der Befehl, um ein CICS zu starten innerhalb der DATEV eG einen weiteren Parameter benötigt.
 Dieser wurde hinzugefügt und danach funktionierte das Provisionieren und alle definierten Aktionen des minimalen IBM Standard CICS Templates.
 
 \subsubsection{DATEV eG spezifischen CICS Template}
 Nachdem das minimale IBM Standard CICS Template funktionsfähig war und erste Erfahrungen mit z/OSMF gesammelt wurden, wurde ein allgemeines mitgeliefertes Template untersucht.
 Wie in der Tabelle \ref{vglTemps} dargestellt ist, ist dieses Template mit insgesamt 76 verwendeten Dateien sehr umfangreich.
 Zu diesen Dateien zählen alle, die direkt mit dem Template in Verbindung stehen.
-Das Template beinhaltet nicht nur die Möglichkeit verschiedene CICS Typen zu provisioneren, sondern auch, ob dies mit Scripten oder mit der REST-Api geschieht.
+Das Template beinhaltet nicht nur die Möglichkeit verschiedene CICS Typen zu provisionieren, sondern auch, ob dies mit Skripten oder mit der REST-Api geschieht.
 Dadurch verliert das Template an Übersichtlichkeit.
 Zusätzlich kommt am Ende bei der Provisionierung keine CICS Instanz heraus, die einer DATEV eG spezifischen Instanz entspricht.
 Auf Grund dessen wurden alle für ein DATEV eG spezifischen CICS nicht notwendigen Dateien entfernt.
 Wie in der Tabelle \ref{vglTemps} zu sehen ist, hatte das unter anderem die Löschung von knapp der Hälfte der Dateien zur Folge.
-Des weiteren wurden auch viele nicht benötigte Variablen und Steps entfernt.
+Des Weiteren wurden auch viele nicht benötigte Variablen und Steps entfernt.
 Dadurch schrumpft die provision.xml um circa ein Drittel.
 Zusammenfassend lässt sich sagen, dass das Template an Übersichtlichkeit gewonnen hat.
 
@@ -95,18 +95,20 @@ Als Ziel davon steht eine funktionsfähige DATEV eG spezifische CICS Instanz.
 Zunächst wurden die Namen der CICS Dateien\footnote{Beschreibung in Absatz \ref{sssec:speziDat}} an die DATEV eG internen Namenskonventionen angepasst.
 
 In Zusammenarbeit mit den CICS Administratorenteam wurde festgelegt, dass eine jede provisionierte CICS Instanz ihre eigene CSD Datei zur Verfügung gestellt bekommen soll.
-Hierfür soll die bestehende von den Kollegen gepfelgte Datei kopiert und mit bestimmten Namenkonventionen gespeichert werden.
-Somit ist sichergestellt, dass durch die neu provisionierte Instanzen die Alten nicht beeinflusst werden.
+Hierfür soll die bestehende von den Kollegen gepflegte Datei kopiert und mit bestimmten Namenkonventionen gespeichert werden.
+Somit ist sichergestellt, dass durch die neu provisionierten Instanzen die Alten nicht beeinflusst werden.
 Außerdem kann jeder Anwender so ohne Seiteneffekte seine CSD bearbeiten.
 Ein weiterer Vorteil ist, dass bei der Deprovisionierung diese Kopie der Standard Datei ohne Nebenwirkungen gelöscht werden kann.
 Dadurch dass die Datei, die von den Kollegen gepflegt wird als Grundlage verwendet wird, sind alle provisionierten Instanzen immer auf dem aktuellsten Stand.
 Um dies Umzusetzen musste ein JCL Job geschrieben werden, der den Kopiervorgang abbildet.
-Anschließend wurde dieser mittels eines neuen Steps in den Worfklow eingebunden.
+Anschließend wurde dieser mittels eines neuen Steps in den Workflow eingebunden.
 Außerdem mussten bestimmte Gruppen zu der CSD Liste der CICS Instanz hinzugefügt werden.
 Die JCL ist in Abbildung \ref{code:addCSD} abgebildet.
 Die Reihenfolge ist relevant, da es der Initialisierungsreihenfolge entspricht.
 
-Ein spezieller Augenmerk lag auf der Editierung der `createCICS.jcl`-Datei.
+die JCL genau erkären..... bzw job im grundlagen teil erkären
+
+Ein spezielles Augenmerk lag auf der Editierung der `createCICS.jcl`-Datei.
 In dieser befindet sich die Definition des STC Jobs für das provisionierte CICS.
 Im Standard IBM Template beinhaltet diese zunächst ein Makro für die Validierung von den SIT Parametern.
 Noch bevor die Jobdefinition beginnt, werden alle aus der Datei für die Eingabevariablen benötigten Variablenwerte in temporäre Zwischenvariablen eingefügt.
@@ -127,7 +129,7 @@ Zusätzlich wurden die vorher statische DATEV eG Standard JCL durch Verwendung d
 
 Zu der Definition der SIT Parameter ist zu sagen, dass hier nur die wirklich benötigten mit aufgenommen wurden.
 Die anzunehmenden Werte wurden einzeln mit den CICS Administratorenteam besprochen und festgelegt.
-Es ist zu beachten, dass es im IBM Standard Template zwei Möglichkeiten gibt, die Paramter zusetzen.
+Es ist zu beachten, dass es im IBM Standard Template zwei Möglichkeiten gibt, die Parameter zu setzen.
 Für bestimmte SIT Parameter besteht eine Variable innerhalb des Templates.
 Für alle anderen ist die Variable `DFH\_REGION\_SITPARAMS` vorgesehen.
 In dieser Arbeit wurde hauptsächlich auf letztere Möglichkeit gesetzt.
@@ -152,26 +154,28 @@ So wurden zwei neue Steps erzeugt und in den Workflow eingebunden.
 Die API ist nur dazu fähig Datenbanken auf einem bestimmten Datenbanksystem zu erzeugen.
 Um die Datenbank aus der CICS Instanz heraus nutzen zu können, muss dem CICS dieses Datenbanksystem mitgeteilt werden.
 Hierfür ist, wie in Abbildung \ref{code:addCSD} bereits zu sehen ist, das Hinzufügen einer weiteren CSD Gruppe notwendig.
-Desweiteren müssen weitere Bibliotheken in der `createCICS.jcl` aufgenommen werden.
+Des Weiteren müssen weitere Bibliotheken in der `createCICS.jcl` aufgenommen werden.
 Um den Aufruf möglichst dynamisch zu gestalten wurden, zusätzlich neue Variablen im Template definiert.
 Diese werden in der Eingabedatei des Templates gesetzt.
+
+In Abilldung zeile SOUNSSO
 
 \subsubsection{Bereitstellung MQ}
 In diesem Absatz wird die Provisionierung einer MQ Queue beschrieben.
 Es ist auch möglich einen MQ Queuemanager zu provisionieren, der Fokus dieser Arbeit liegt aber auf der Bereitstellung von Queues.
 Bei einem Queuemanager handelt es sich um ein Subsystem, deshalb wird vorerst von einer automatischen Bereitstellung abgesehen.
-Auf dem Testplex wird desweiteren die benötigte Funktion, dass eine CICS Transaktionen über eine Queue gestartet wird, nicht untersucht.
+Auf dem Testplex wird des Weiteren die benötigte Funktion, dass eine CICS Transaktionen über eine Queue gestartet wird, nicht untersucht.
 
-Da, wie im Absatz \ref{rechArch} beschrieben, sehr viele gleichartige Queues benötigt werden, wurde für die Erstellung dieser von den MQ Administratorenteam ein Rexx Script angefertig.
-Dieses Script steht dieser Arbeit zur Verfügung.
+Da, wie im Absatz \ref{rechArch} beschrieben, sehr viele gleichartige Queues benötigt werden, wurde für die Erstellung dieser von den MQ Administratorenteam ein Rexx Skript angefertigt.
+Dieses Skript steht dieser Arbeit zur Verfügung.
 Es wurde mit Hilfe von neu erstellten Templatevariablen dynamisiert.
-Anschließend wurde es in den Provisionierungs Workflow mit Hilfe eines neuen Steps aufgenommen.
+Anschließend wurde es in den Provisionierungsworkflow mit Hilfe eines neuen Steps aufgenommen.
 Für die Deprovisionierung besteht noch kein Script.
-Hierfür wurde auf Grundlage des Provisionierungsscriptes ein Eigenständiges erzeugt und ebenfalls in das Template aufgenommen.
+Hierfür wurde auf Grundlage des Provisionierungsskriptes ein Eigenständiges erzeugt und ebenfalls in das Template aufgenommen.
 
 Ähnlich wie in Absatz \ref{sssec:db2tpl} für die Datenbank beschrieben, muss der CSD Datei eine weitere Gruppe für den Queuemanager angegeben werden.
 Dadurch hat die CICS Instanz auf alle Queues, die sich innerhalb dieses Managers befinden, Zugriff.
-Desweiteren ist die Aufnahme weiterer Bibliotheken in der `createCICS.jcl` notwendig.
+Des Weiteren ist die Aufnahme weiterer Bibliotheken in der `createCICS.jcl` notwendig.
 
 \section{Entwicklungssystemumgebung}
 Innerhalb der Entwicklungssystemumgebung sind die Sicherheits- und Rechtevorschriften schärfer als auf dem Testplex.
