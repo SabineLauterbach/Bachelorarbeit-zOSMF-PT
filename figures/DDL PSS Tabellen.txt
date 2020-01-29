@@ -1,0 +1,597 @@
+  CREATE TABLE PSSSCHEMA.TPAUSPSSBASELBART                      
+      (PARTITIONID INTEGER                                    
+                                                      NOT NULL
+WITH DEFAULT 1                                                
+      ,PID INTEGER                                            
+                                                      NOT NULL
+      ,AUSPRAEGUNG SMALLINT                                   
+                                                      NOT NULL
+      ,GUELTIGAB DATE                                         
+                                                      NOT NULL
+      ,LFDNR INTEGER                                          
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,GUELTIGBIS DATE                                        
+                                                      NOT NULL
+WITH DEFAULT '9999-12-31'                                     
+      ,PSSID INTEGER                                          
+WITH DEFAULT NULL                                             
+      ,ZUSATZID CHARACTER(4) FOR SBCS DATA                    
+WITH DEFAULT NULL                                             
+      ,BEZEICHNUNG VARCHAR(100) FOR SBCS DATA                 
+WITH DEFAULT NULL                                             
+      ,MWSTANTEILFREI DECIMAL(5, 2)                           
+WITH DEFAULT NULL                                             
+      ,MWSTANTEILREDUZIERT DECIMAL(5, 2)                      
+WITH DEFAULT NULL                                             
+      ,MWSTANTEILVOLL DECIMAL(5, 2)                           
+WITH DEFAULT NULL                                             
+      ,CONSTRAINT PID PRIMARY KEY                             
+      (PARTITIONID                                            
+      ,PID                                                    
+      ,AUSPRAEGUNG                                            
+      ,GUELTIGAB                                              
+      ,LFDNR                                                  
+	       )                           
+     )                           
+     IN DATABASE PSSBAPRV           
+APPEND NO                        
+NOT VOLATILE CARDINALITY         
+DATA CAPTURE NONE                
+AUDIT NONE                       
+CCSID EBCDIC                     
+PARTITION BY RANGE               
+     (PARTITIONID NULLS LAST ASC 
+     )                           
+     ( PARTITION 1               
+        ENDING ( 1               
+     ) INCLUSIVE                 
+     , PARTITION 2               
+        ENDING ( 2               
+     ) INCLUSIVE                 
+     );                          
+	 
+CREATE UNIQUE INDEX PSSSCHEMA.PPAUSPSSBASELBART
+       ON PSSSCHEMA.TPAUSPSSBASELBART          
+      (PARTITIONID ASC                       
+      ,PID ASC                               
+      ,AUSPRAEGUNG ASC                       
+      ,GUELTIGAB ASC                         
+      ,LFDNR ASC                             
+      )                                      
+       INCLUDE NULL KEYS                     
+       CLUSTER                               
+       PARTITIONED                           
+       DEFINE YES                            
+       COMPRESS NO                           
+       BUFFERPOOL BP2                        
+       CLOSE YES                             
+       DEFER NO                              
+       COPY NO                               
+       PARTITION BY RANGE                    
+      (PARTITION 1                           
+                 USING STOGROUP STAPSA01     
+                                PRIQTY -1    
+                                SECQTY -1    
+                                ERASE NO     
+                 FREEPAGE 0                  
+                 PCTFREE 10                  
+                 GBPCACHE CHANGED            
+      ,PARTITION 2                           
+                 USING STOGROUP STAPSA01     
+                                PRIQTY -1    
+                                SECQTY -1    
+                                ERASE NO     
+                 FREEPAGE 0                  
+                 PCTFREE 10                  
+                 GBPCACHE CHANGED);          
+				 
+  CREATE TABLE PSSSCHEMA.TMAXNUM                                
+      (MAXNUMID INTEGER                                       
+                                                      NOT NULL
+      ,MAXNUM INTEGER                                         
+                                                      NOT NULL
+      ,MAXNUBEZ CHARACTER(42) FOR SBCS DATA                   
+                                                      NOT NULL
+WITH DEFAULT 'X'                                              
+      ,BEZEICHNUNG VARCHAR(100) FOR SBCS DATA                 
+                                                      NOT NULL
+WITH DEFAULT 'X'                                              
+      ,CONSTRAINT MAXNUMID PRIMARY KEY                        
+      (MAXNUMID                                               
+      )                                                       
+      )                                                       
+      IN DATABASE PSSBAPRV
+ APPEND NO                                                    
+ NOT VOLATILE CARDINALITY                                     
+ DATA CAPTURE NONE                                            
+ AUDIT NONE                                                   
+ CCSID EBCDIC;                                                
+ 
+    COMMENT ON TABLE PSSSCHEMA.TMAXNUM             
+        IS 'maximale Nummer';                   
+                                                
+                                                
+SET CURRENT SQLID = 'DB2SADM';                  
+                                                
+                                                
+   COMMENT ON COLUMN PSSSCHEMA.TMAXNUM.MAXNUMID   
+        IS 'ID für maximalen Nummer';           
+                                                
+                                                
+SET CURRENT SQLID = 'DB2SADM';                  
+                                                
+                                                
+   COMMENT ON COLUMN PSSSCHEMA.TMAXNUM.MAXNUM     
+        IS 'maximale Nummer';                   
+                                                
+                                                
+SET CURRENT SQLID = 'DB2SADM';                  
+                                                
+                                                
+   COMMENT ON COLUMN PSSSCHEMA.TMAXNUM.MAXNUBEZ   
+        IS 'Bezeichnung für maximale Nummer';   
+                                                
+                                                
+SET CURRENT SQLID = 'DB2SADM';                  
+                                                
+                                                
+   COMMENT ON COLUMN PSSSCHEMA.TMAXNUM.BEZEICHNUNG
+        IS 'Bezeichnung für maximale Nummer';   
+		
+CREATE UNIQUE INDEX PSSSCHEMA.PMAXNUM
+       ON PSSSCHEMA.TMAXNUM          
+      (MAXNUMID ASC                
+      )                            
+       INCLUDE NULL KEYS           
+       CLUSTER                     
+       DEFINE YES                  
+       COMPRESS NO                 
+       BUFFERPOOL BP2              
+       CLOSE YES                   
+       DEFER NO                    
+       COPY NO                     
+       USING STOGROUP STALDL01     
+           PRIQTY -1               
+           SECQTY -1               
+           ERASE NO                
+       FREEPAGE 0                  
+       PCTFREE 99                  
+       GBPCACHE CHANGED            
+       PIECESIZE 2097152K;         
+	   
+CREATE FUNCTION PSS.WHICH_PARTITIONID      
+  (                                        
+   MAXID INTEGER )                         
+  RETURNS INTEGER                          
+  VERSION V1                               
+  DISALLOW DEBUG MODE                      
+  ASUTIME NO LIMIT                         
+  INHERIT SPECIAL REGISTERS                
+  WLM ENVIRONMENT FOR DEBUG MODE DB0TWLM   
+  APPLICATION ENCODING SCHEME EBCDIC       
+  QUALIFIER UGPSENT                        
+  DYNAMICRULES RUN                         
+  WITH EXPLAIN                             
+  WITHOUT IMMEDIATE WRITE                  
+  ISOLATION LEVEL UR                       
+  OPTHINT ''                               
+  REOPT NONE                               
+  VALIDATE RUN                             
+  ROUNDING DEC_ROUND_HALF_EVEN             
+  DATE FORMAT ISO                          
+  DECIMAL( 31 )                            
+  FOR UPDATE CLAUSE REQUIRED               
+  TIME FORMAT ISO                          
+  CURRENT DATA NO                          
+  DEGREE 1                                 
+  PACKAGE OWNER UGPSENT                    
+  BUSINESS_TIME SENSITIVE NO               
+  SYSTEM_TIME SENSITIVE NO                 
+  ARCHIVE SENSITIVE NO                     
+  APPLCOMPAT V10R1                         
+  LANGUAGE SQL                             
+  NO EXTERNAL ACTION                       
+  PARAMETER CCSID EBCDIC                   
+  DETERMINISTIC                            
+        NOT SECURED               
+      CALLED ON NULL INPUT      
+      READS SQL DATA            
+      SPECIFIC WHICH_PARTITIONID
+BEGIN                           
+       DECLARE MAXNUM INTEGER;  
+       SELECT MAXNUM            
+            INTO MAXNUM         
+         FROM AVADMIN.AMAXNUM   
+        WHERE MAXNUMID = MAXID; 
+       RETURN MAXNUM;           
+END;     
+
+SET PATH = "PSS","SYSIBM","SYSFUN","SYSPROC","SYSIBMADM","PSSSCHEMA";
+                       
+CREATE VIEW PSSSCHEMA.VPAUSPSS_BASELBART                   
+        ( PARTITIONID                                    
+        , PID                                            
+        , AUSPRAEGUNG                                    
+        , GUELTIGAB                                      
+        , LFDNR                                          
+        , GUELTIGBIS                                     
+        , PSSID                                          
+        , ZUSATZID                                       
+        , BEZEICHNUNG                                    
+        , MWSTANTEILFREI                                 
+        , MWSTANTEILREDUZIERT                            
+        , MWSTANTEILVOLL                                 
+        ) AS                                             
+SELECT B.* FROM TPAUSPSSBASELBART B WHERE B.PARTITIONID =
+  PSS.WHICH_PARTITIONID ( 3011 )                         
+;
+
+  CREATE TABLE PSSSCHEMA.TPAUSPSSPREISE                         
+      (PARTITIONID INTEGER                                    
+                                                      NOT NULL
+WITH DEFAULT 1                                                
+      ,ARTNR INTEGER                                          
+                                                      NOT NULL
+      ,PREISTYPID SMALLINT                                    
+                                                      NOT NULL
+      ,GUELTIGAB DATE                                         
+                                                      NOT NULL
+      ,STAFFELNR INTEGER                                      
+                                                      NOT NULL
+      ,PID INTEGER                                            
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,PREISREGEL CHARACTER(2) FOR SBCS DATA                  
+                                                      NOT NULL
+WITH DEFAULT 'X'                                              
+      ,GUELTIGBIS DATE                                        
+                                                      NOT NULL
+WITH DEFAULT '9999-12-31'                                     
+      ,PRODUKTPREIS DECIMAL(11, 3)                            
+WITH DEFAULT NULL                                             
+      ,EINZELPREIS DECIMAL(8, 3)                              
+WITH DEFAULT NULL                                             
+      ,PREISINTERVALL DECIMAL(11, 3)                          
+WITH DEFAULT NULL                                             
+      ,PREISEINHEIT DECIMAL(8, 3)                             
+WITH DEFAULT NULL                                             
+      ,STAFFELVERTEILUNG CHARACTER(1) FOR SBCS DATA           
+WITH DEFAULT NULL                                             
+      ,INTERVALLVON INTEGER                                   
+WITH DEFAULT NULL                                             
+      ,INTERVALLBIS INTEGER
+WITH DEFAULT NULL                                             
+      ,PREISTYPBEZ VARCHAR(100) FOR SBCS DATA                 
+                                                      NOT NULL
+WITH DEFAULT 'X'                                              
+      ,PREISAB DECIMAL(8, 3)                                  
+WITH DEFAULT NULL                                             
+      ,PREISABRELEVANZ CHARACTER(1) FOR SBCS DATA             
+                                                      NOT NULL
+WITH DEFAULT 'K'                                              
+      ,EINHEIT INTEGER                                        
+WITH DEFAULT NULL                                             
+      ,CONSTRAINT PPAUSPSSPREISE PRIMARY KEY                  
+      (PARTITIONID                                            
+      ,ARTNR                                                  
+      ,PREISTYPID                                             
+      ,GUELTIGAB                                              
+      ,STAFFELNR                                              
+      )                                                       
+      )                                                       
+      IN DATABASE PSSBAPRV
+ APPEND NO                                                    
+ NOT VOLATILE CARDINALITY                                     
+ DATA CAPTURE NONE                                            
+ AUDIT NONE                                                   
+ CCSID EBCDIC;                                                
+ 
+ CREATE INDEX PSSSCHEMA.IPAUSPSSPREISE
+       ON PSSSCHEMA.TPAUSPSSPREISE   
+      (PARTITIONID ASC             
+      ,PID ASC                     
+      )                            
+       INCLUDE NULL KEYS           
+       NOT CLUSTER                 
+       DEFINE YES                  
+       COMPRESS NO                 
+       BUFFERPOOL BP2              
+       CLOSE YES                   
+       DEFER NO                    
+       COPY NO                     
+       USING STOGROUP STAPSA01     
+           PRIQTY -1               
+           SECQTY -1               
+           ERASE NO                
+       FREEPAGE 0                  
+       PCTFREE 10                  
+       GBPCACHE CHANGED            
+       PIECESIZE 2097152K;         
+	   
+CREATE INDEX PSSSCHEMA.IPAUSPSSPREISE2
+       ON PSSSCHEMA.TPAUSPSSPREISE    
+      (PARTITIONID ASC              
+      ,ARTNR ASC                    
+      ,PREISTYPID ASC               
+      ,GUELTIGAB ASC                
+      ,INTERVALLVON ASC             
+      )                             
+       INCLUDE NULL KEYS            
+       NOT CLUSTER                  
+       DEFINE YES                   
+       COMPRESS NO                  
+       BUFFERPOOL BP2               
+       CLOSE YES                    
+       DEFER NO                     
+       COPY NO                      
+       USING STOGROUP STAPSA01      
+           PRIQTY -1                
+           SECQTY -1                
+           ERASE NO                 
+       FREEPAGE 0                   
+       PCTFREE 10                   
+       GBPCACHE CHANGED             
+       PIECESIZE 2097152K;          
+	   
+CREATE UNIQUE INDEX PSSSCHEMA.PPAUSPSSPREISE
+       ON PSSSCHEMA.TPAUSPSSPREISE          
+      (PARTITIONID ASC                    
+      ,ARTNR ASC                          
+      ,PREISTYPID ASC                     
+      ,GUELTIGAB ASC                      
+      ,STAFFELNR ASC                      
+      )                                   
+       INCLUDE NULL KEYS                  
+       CLUSTER                            
+       DEFINE YES                         
+       COMPRESS NO                        
+       BUFFERPOOL BP2                     
+       CLOSE YES                          
+       DEFER NO                           
+       COPY NO                            
+       USING STOGROUP STAPSA01            
+           PRIQTY -1                      
+           SECQTY -1                      
+           ERASE NO                       
+       FREEPAGE 0                         
+       PCTFREE 10                         
+       GBPCACHE CHANGED                   
+       PIECESIZE 2097152K;                
+	   
+  CREATE TABLE PSSSCHEMA.TPAUSPSSBART                           
+      (PARTITIONID INTEGER                                    
+                                                      NOT NULL
+WITH DEFAULT 1                                                
+      ,PID INTEGER                                            
+                                                      NOT NULL
+      ,ARTNR INTEGER                                          
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,ANDAT DATE                                             
+                                                      NOT NULL
+WITH DEFAULT '1966-02-14'                                     
+      ,OPDATBEN CHARACTER(1) FOR SBCS DATA                    
+                                                      NOT NULL
+WITH DEFAULT 'J'                                              
+      ,AUSDIENSTREL CHARACTER(1) FOR SBCS DATA                
+                                                      NOT NULL
+WITH DEFAULT 'N'                                              
+      ,VERTRIEBSREL CHARACTER(1) FOR SBCS DATA                
+                                                      NOT NULL
+WITH DEFAULT 'N'                                              
+      ,VERTRELDAT DATE                                        
+WITH DEFAULT NULL                                             
+      ,KOMMASTELLEN INTEGER                                   
+WITH DEFAULT NULL                                             
+      ,ERTRNR INTEGER                                         
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,GFEDNR INTEGER                                         
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,UPLONR INTEGER                                         
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,MWSTEUERSATZ INTEGER                                   
+WITH DEFAULT NULL                                             
+      ,POLINR INTEGER                                         
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,EXPGNR INTEGER                                         
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,EXPONR INTEGER                                         
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,ARTIKELTYPID INTEGER                                   
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,ARTIKELTYPALT CHARACTER(4) FOR SBCS DATA               
+                                                      NOT NULL
+WITH DEFAULT '0000'                                           
+      ,BERBESTEINHID INTEGER                                  
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,BERBESTEINHALT CHARACTER(4) FOR SBCS DATA              
+                                                      NOT NULL
+WITH DEFAULT '0000'                                           
+      ,LEISTGRUPID INTEGER                                    
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,LEISTGRUPALT CHARACTER(4) FOR SBCS DATA                
+                                                      NOT NULL
+WITH DEFAULT '0000'                                           
+      ,BERFREQID INTEGER                                      
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,NUTZERID INTEGER                                       
+WITH DEFAULT                                                  
+      ,LEISTARTID INTEGER                                     
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,BERFREQALT CHARACTER(4) FOR SBCS DATA                  
+                                                      NOT NULL
+WITH DEFAULT '0000'                                           
+      ,LEISTARTALT CHARACTER(4) FOR SBCS DATA                 
+                                                      NOT NULL
+WITH DEFAULT '99'                                             
+      ,NUTZERALT CHARACTER(1) FOR SBCS DATA                   
+                                                      NOT NULL
+WITH DEFAULT 'K'                                              
+      ,BARTBEZ_20 CHARACTER(20) FOR SBCS DATA                 
+                                                      NOT NULL
+WITH DEFAULT 'X'                                              
+      ,ARTIKELTYPBEZ CHARACTER(50) FOR SBCS DATA              
+                                                      NOT NULL
+WITH DEFAULT 'Keine Zuordnung'                                
+      ,BERBESTEINHBEZ CHARACTER(50) FOR SBCS DATA             
+                                                      NOT NULL
+WITH DEFAULT 'Keine Zuordnung'                                
+      ,LEISTGRUPBEZ CHARACTER(50) FOR SBCS DATA               
+                                                      NOT NULL
+WITH DEFAULT 'Keine Zuordnung'                                
+      ,BERFREQBEZ CHARACTER(50) FOR SBCS DATA                 
+                                                      NOT NULL
+WITH DEFAULT 'Keine Zuordnung'                                
+      ,NUTZERBEZ CHARACTER(50) FOR SBCS DATA                  
+                                                      NOT NULL
+WITH DEFAULT 'Keine Zuordnung'                                
+      ,LEISTARTBEZ CHARACTER(50) FOR SBCS DATA                
+                                                      NOT NULL
+WITH DEFAULT 'Keine Zuordnung'                                
+      ,BARTBEZ_100 VARCHAR(100) FOR SBCS DATA                 
+                                                      NOT NULL
+WITH DEFAULT 'X'                                              
+      ,ERTRBEZ VARCHAR(100) FOR SBCS DATA                     
+                                                      NOT NULL
+WITH DEFAULT 'X'                                              
+      ,GFEDBEZ VARCHAR(100) FOR SBCS DATA                     
+                                                      NOT NULL
+WITH DEFAULT 'X'                                              
+      ,UPLOBEZ VARCHAR(100) FOR SBCS DATA                     
+                                                      NOT NULL
+WITH DEFAULT 'X'                                              
+      ,POLIBEZ VARCHAR(100) FOR SBCS DATA                     
+                                                      NOT NULL
+WITH DEFAULT 'X'                                              
+      ,EXPGBEZ VARCHAR(100) FOR SBCS DATA                     
+                                                      NOT NULL
+WITH DEFAULT 'X'                                              
+      ,EXPOBEZ VARCHAR(100) FOR SBCS DATA                     
+                                                      NOT NULL
+WITH DEFAULT 'X'                                              
+      ,HAKONR INTEGER                                         
+WITH DEFAULT NULL                                             
+      ,HAKOBEZ VARCHAR(100) FOR SBCS DATA                     
+WITH DEFAULT NULL                                             
+      ,INPGNR INTEGER                                         
+                                                      NOT NULL
+WITH DEFAULT                                                  
+      ,INPGBEZ VARCHAR(100) FOR SBCS DATA                     
+                                                      NOT NULL
+WITH DEFAULT 'X'                                              
+      ,BEZ035 CHARACTER(35) FOR SBCS DATA                     
+                                                      NOT NULL
+WITH DEFAULT 'X'                                              
+      ,CONSTRAINT PPAUSPSSBART PRIMARY KEY                    
+      (PARTITIONID                                            
+      ,PID                                                    
+      )                                                       
+      ,CONSTRAINT UPAUSPSSBART UNIQUE                         
+      (PARTITIONID                                            
+      ,ARTNR                                                  
+      )                                                       
+      )                                                       
+      IN DATABASE PSSBAPRV
+ APPEND NO                                                    
+ NOT VOLATILE CARDINALITY                                     
+ DATA CAPTURE NONE                                            
+ AUDIT NONE                                                   
+ CCSID EBCDIC                                                 
+ PARTITION BY RANGE                                           
+      (PARTITIONID NULLS LAST ASC                             
+      )                                                       
+      ( PARTITION 1                                           
+         ENDING ( 1                                           
+      ) INCLUSIVE                                             
+      , PARTITION 2                                           
+         ENDING ( 2                                           
+      ) INCLUSIVE                                             
+      );    
+	  
+CREATE UNIQUE INDEX PSSSCHEMA.PPAUSPSSBART 
+       ON PSSSCHEMA.TPAUSPSSBART           
+      (PARTITIONID ASC                   
+      ,PID ASC                           
+      )                                  
+       INCLUDE NULL KEYS                 
+       CLUSTER                           
+       PARTITIONED                       
+       DEFINE YES                        
+       COMPRESS NO                       
+       BUFFERPOOL BP2                    
+       CLOSE YES                         
+       DEFER NO                          
+       COPY NO                           
+       PARTITION BY RANGE                
+      (PARTITION 1                       
+                 USING STOGROUP STAPSA01 
+                                PRIQTY -1
+                                SECQTY -1
+                                ERASE NO 
+                 FREEPAGE 0              
+                 PCTFREE 10              
+                 GBPCACHE CHANGED        
+      ,PARTITION 2                       
+                 USING STOGROUP STAPSA01 
+                                PRIQTY -1
+                                SECQTY -1
+                                ERASE NO 
+                 FREEPAGE 0              
+                 PCTFREE 10              
+                 GBPCACHE CHANGED);      
+
+CREATE UNIQUE INDEX PSSSCHEMA.UPAUSPSSBART
+       ON PSSSCHEMA.TPAUSPSSBART          
+      (PARTITIONID ASC                  
+      ,ARTNR ASC                        
+      )                                 
+       INCLUDE NULL KEYS                
+       NOT CLUSTER                      
+       DEFINE YES                       
+       COMPRESS NO                      
+       BUFFERPOOL BP2                   
+       CLOSE YES                        
+       DEFER NO                         
+       COPY NO                          
+       USING STOGROUP STAPSA01          
+           PRIQTY -1                    
+           SECQTY -1                    
+           ERASE NO                     
+       FREEPAGE 0                       
+       PCTFREE 10                       
+       GBPCACHE CHANGED                 
+       PIECESIZE 2097152K;
+	   
+CREATE UNIQUE INDEX PSSSCHEMA.UPAUSPSSBART
+       ON PSSSCHEMA.TPAUSPSSBART          
+      (PARTITIONID ASC                  
+      ,ARTNR ASC                        
+      )                                 
+       INCLUDE NULL KEYS                
+       NOT CLUSTER                      
+       DEFINE YES                       
+       COMPRESS NO                      
+       BUFFERPOOL BP2                   
+       CLOSE YES                        
+       DEFER NO                         
+       COPY NO                          
+       USING STOGROUP STAPSA01          
+           PRIQTY -1                    
+           SECQTY -1                    
+           ERASE NO                     
+       FREEPAGE 0                       
+       PCTFREE 10                       
+       GBPCACHE CHANGED                 
+       PIECESIZE 2097152K;              

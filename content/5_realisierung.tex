@@ -141,7 +141,7 @@ Außerdem sind alle Standard DATEV eG Transaktionen funktionsfähig.
 Es wurden alle Dateien wieder pflichtgerecht gelöscht.
 
 \subsubsection{Bereitstellung Db2}\label{sssec:db2tpl}
-In diesem Absatz wird die Provisionierung deiner Db2 Datenbank beschrieben.
+In diesem Absatz wird die Provisionierung einer Db2 Datenbank beschrieben.
 Da die Systemumgebung noch der Testplex ist, nur die Datenbank ohne Tabelle, ohne Daten.
 
 Für die Erstellung einer Db2 Datenbank existiert innerhalb der DATEV eG eine REST-API.
@@ -187,22 +187,42 @@ Diesem werden nur die benötigten Rechte übergeben und ist somit sehr anwendung
 Um als Anwender das Template nutzen zu können, werden nur die Rechte benötigt Jobs mit diesen technischen Usern ausführen zu dürfen.
 Für Db2 ist ein solcher User nicht notwendig, da das Datenbanksystem hinter der REST-API für alle zugänglich ist und jeder darauf Datenbanken erstellen darf.
 
-Bei der Übertragung des Templates von der Testsystemumgebung auf die Entwicklungssystemumgebung waren in allen drei Bereichen des Templates notwendig.
+Bei der Übertragung des Templates von der Testsystemumgebung auf die Entwicklungssystemumgebung waren Anpassungen in allen drei Bereichen des Templates notwendig.
 
 \subsection{CICS Anpassung}
 Zunächst wurden alle Steps modifiziert, so dass sie den CICS spezifischen technischen User verwenden.
 Als nächstes musste ein Parameter bei der Erstellung der CICS spezifischen Dateien hinzugefügt werden.
 Es handelt sich um den Massageclass Parameter mit dem Wert `NONE'.
-Dadurch sind die Daten von täglichen Datensicherung der Entwicklungssystemumgebung ausgenommen.
+Dadurch sind die Daten von der täglichen Datensicherung der Entwicklungssystemumgebung ausgenommen.
 Da die Dateien bei einem Deprovisioning gelöscht werden, ist keine Sicherung notwendig.
 Außerdem ändert sich die CSD Datei, die als Vorlage gilt, auf die Standard Entwicklungssystemumgebung CSD Datei.
 Die Db2 und MQ Bibliotheken, die das CICS anzieht, besitzen einen anderen Namen.
 So musste dies in der `createCICS.jcl` angepasst werden.
 Zusätzlich musste ein SIT Parameter angepasst werden, so dass die Log Dateien funktionisfähig sind.
+Außerdem kam noch ein Ordner neu hinzu.
+Diese dient als später als Ablageort der kompilierten Programme.
 
-\subsection{Db2 Anpassung}
+\subsection{Db2 Anpassung}\label{ssec:db2entw}
 Für die Datenbank Provisionierung waren keine Änderungen am Template notwendig.
-TABELLEN UND DATEN ABER SCHON
+Eine erste Grobanalyse, der Rechnungsschreibungsdatenbank, kam zum Ergebnis, dass es zwar möglich wäre diese Datenbank zu provisionieren, aber es den zeitlichen Rahmen dieser Arbeit sprengen würde.
+Der Grund hierfür ist die Komplexität, der benötigten Tabellen.
+So wird auf drei Tabellen für die Ermittlung der Produktstammdaten lesend zugegriffen, auf neun weitere bei der Bestimmung der Preisabhänigkeiten.
+Des Weiteren wird auf die Tabellen nicht direkt zugegriffen, sondern über Views.
+Dabei werden nur bei drei Tabellen eins zu eins Views verwendet.
+Bei allen anderen werden innerhalb der View noch weitere Tabellen, teilweise aus anderen Datenbanken, gejoint.
+Insgesamt besteht das System aus 14 Tabellen, die auf vier Datenbanken aufgeteilt sind, und 12 Views für den Zugriff auf diese Tabellen.
+
+Es wurde begonnen für die drei Produktstammdatentabellen, mit den Views und den dadurch zusätzlichen Datenbanken und Tabellen, die Definition in der Data Definition Language zu erstellen.
+Es gibt keine Referenzen zwischen diesen Tabellen.
+Es stellte sich heraus, dass diese Datei aus annähernd 600 Zeilen Code besteht.
+Dieser ist im Anhang \ref{app:ddl} zu finden.
+Dabei handelt es sich um ungetesteten Code.
+Nachdem dieser Code getesten und die restlichen Tabellen, Views und Datenbanken ebenfalls aufgenommen wurden, müsste das ganze System noch mit den eigentlichen Daten befüllt werden.
+Durch die Nutzung von Templates wäre dieser Aufwand einmalig zubewältigen, trotzdem überschreitet er diese Arbeit.
+
+Für die weitere Arbeit werden, die in einem anderen Datenbanksystem bereits vorhanden, Datenbanken genutzt.
+Hierfür musste der Wert, der dafür vorgesehenen Variablen in der Eingabedatei des Templates, geändert werden.
+Außerdem wurden sowohl in der Provisionierungs- als auch in der Deprovisionierungsdatei die Datenbanksteps auskommentiert und somit kommen diese nicht mehr zum Einsatz.
 
 \subsection{MQ Anpassung}
 Bei der grundsätzlichen Provisionierung der Queues gab es keine Veränderung.
