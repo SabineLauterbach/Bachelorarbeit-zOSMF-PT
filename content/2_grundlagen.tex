@@ -64,6 +64,44 @@ Dies ist über das `STOP`-Konsolenkommando von z/OS möglich.
 Anschließend müssen alle im Absatz \ref{subsec:createCICS} beschriebene Schritte rückgängig gemacht werden.
 Also müssen die für diese Instanz spezifischen Dateien, die Einträge für die CICS Instanz aus der CSD Datei und schließlich auch der STC Job gelöscht werden.
 
+\section{IBM MQ}
+IBM MQ ist eine Messaging-Lösung der IBM.
+Diese ermöglicht den asynchronen Datenaustausch zwischen Anwendungen mittels sogenannter Queues.
+Alle IBM MQ Begrifflichkeiten, die in dieser Arbeit verwendet werden, werden im Folgenden erläutert.
+\cite{Aranha.2013}
+
+\subsection{Queue Manager}
+Bei einem Queue Manager handelt es sich um die zentrale Ressource eines IBM MQ Systems.
+So verwaltet er alle anderen IBM MQ Ressourcen.
+Ausgenommen hiervon ist die Queue-sharing Group, diese ist für diese Arbeit aber nicht von relevanz.
+Zur Verwaltung gehören unter anderem die Speichersteuerung der Daten und die Wiederherstellung dieser im Falle eines Fehlers.
+Desweiteren koordiniert den Zugriff aller Anwendungen auf die Nachrichten in von ihm verwalteten Queues.
+Um hierbei die Konsistenz sicherzustellen sorgt er für Locking und die notwendige Isolation.
+\cite{Aranha.2013}
+
+\subsection{Queues}
+In Queues werden die Nachrichten, die von Programmen gesendet werden gespeichert.
+Es gibt verschiedene Arten von Queues.
+
+Die für diese Arbeit notwendigen sind zum einen die Local Queue.
+Dabei handelt es sich um die einzige Queue Art, bei der die Nachrichten physikalisch gespeichert werden.
+Alle anderen anderen müssen auf eine Local Queue zeigen.
+
+Die andere ist eine spezielle Art von Local Queues, die sogenannten Initiation Queue.
+Diese dient dem Queue Manager dazu unter bestimmten Bedingungen eine Trigger-Nachricht auf diese zu schreiben.
+So kann eine andere Local Queue so definiert sein, dass sobald eine Nachricht auf sie geschrieben wird eine solche Trigger-Nachricht erzeugt werden.
+Dies ermöglicht das Anwendungen nur starten, wenn wirklich Daten zum Verarbeiten vorhanden sind.
+\cite{Aranha.2013}
+
+\subsection{Process}
+Für das Auslösen von Anwendungen wird nicht nur die Initiation Queue benötigt, sondern auch sogenannte Processes.
+So muss der Local Queue, die eine Start einer Anwendung auslösen soll, bei der Definition nicht nur die Initiation Queue bekannt gemacht werden, sondern auch ein Process.
+Ein Process legt den Type und den Namen der zu startenden Anwendung fest.
+Als Type ist beispielhaft CICS oder auch WINDOWSNT für Windows unterstütze Platformen zu nennen.
+Bei der Anwendung im Fall des CICS Types muss der Name der Transaktion angegeben werden.
+Für Windows Platformen der Dateipfad der auszuführenden exe.
+\cite{Aranha.2013}
+
 \section{IBM Cloud Provisioning and Management for z/OS}\label{sec:zosmf}
 In diesem Absatz wird zunächst auf die für dieses Kapitel grundlegenden Begriffe eingegangen.
 Anschließend wird IBM Cloud Provisioning and Management for z/OS, kurz z/OSMF, erläutert.
