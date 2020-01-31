@@ -165,13 +165,17 @@ In diesem Absatz wird die Provisionierung einer MQ Queue beschrieben.
 Es ist auch möglich einen MQ Queuemanager zu provisionieren, der Fokus dieser Arbeit liegt aber auf der Bereitstellung von Queues.
 Bei einem Queuemanager handelt es sich um ein Subsystem, deshalb wird vorerst von einer automatischen Bereitstellung abgesehen.
 Auf dem Testplex wird des Weiteren die benötigte Funktion, dass eine CICS Transaktionen über eine Queue gestartet wird, nicht untersucht.
+Außerdem wird zunächst nicht auf die Anforderungen der Anwendung eingegangen, sondern es wird geprüft wie es möglich ist eine einzelne Queue zu provisionieren.
+Alles weitere wird erst in der Entwicklungssystemumgebung umgesetzt.
+Dies ist im Absatz \ref{ssec:mqentw} beschrieben.
 
-Da, wie im Absatz \ref{rechArch} beschrieben, sehr viele gleichartige Queues benötigt werden, wurde für die Erstellung dieser von den MQ Administratorenteam ein Rexx Skript angefertigt.
-Dieses Skript steht dieser Arbeit zur Verfügung.
-Es wurde mit Hilfe von neu erstellten Templatevariablen dynamisiert.
-Anschließend wurde es in den Provisionierungsworkflow mit Hilfe eines neuen Steps aufgenommen.
-Für die Deprovisionierung besteht noch kein Script.
-Hierfür wurde auf Grundlage des Provisionierungsskriptes ein Eigenständiges erzeugt und ebenfalls in das Template aufgenommen.
+Die IBM stellt für die Verwaltung und das Nutzen von Queues Programme zur Verfügung.
+Diese können mittels eines Jobs und bestimmten Parametern gestartet werden.
+In Abbildung \ref{code:defq} ist die JCL des Jobs für das Erstellen einer Queue zu sehen.
+Das auszuführende Programm ist `CSQUTIL` und als Parameter wird der Queuemanager übergeben.
+Unter dem DD Namen `MQSCIN` ist der MQ Befehl für das Erzeugen einer Queue zu sehen.
+Um zu Prüfen, ob die Queue auch funktionsfähig ist, wurde nach dem Erstellen auch mit Hilfe eines Jobs, eine Messages auf die Queue geschrieben und wieder abgeholt.
+Der Job für das Löschen der Queues ist ähnlich aufgebaut.
 
 Ähnlich wie in Absatz \ref{sssec:db2tpl} für die Datenbank beschrieben, muss der CSD Datei eine weitere Gruppe für den Queuemanager angegeben werden.
 Dadurch hat die CICS Instanz auf alle Queues, die sich innerhalb dieses Managers befinden, Zugriff.
@@ -194,7 +198,7 @@ Zunächst wurden alle Steps modifiziert, so dass sie den CICS spezifischen techn
 Als nächstes musste ein Parameter bei der Erstellung der CICS spezifischen Dateien hinzugefügt werden.
 Es handelt sich um den Massageclass Parameter mit dem Wert `NONE'.
 Dadurch sind die Daten von der täglichen Datensicherung der Entwicklungssystemumgebung ausgenommen.
-Da die Dateien bei einem Deprovisioning gelöscht werden, ist keine Sicherung notwendig.
+Da die Dateien bei der Deprovisionierung gelöscht werden, ist keine Sicherung notwendig.
 Außerdem ändert sich die CSD Datei, die als Vorlage gilt, auf die Standard Entwicklungssystemumgebung CSD Datei.
 Die Db2 und MQ Bibliotheken, die das CICS anzieht, besitzen einen anderen Namen.
 So musste dies in der `createCICS.jcl` angepasst werden.
@@ -203,8 +207,7 @@ Außerdem kam noch ein Ordner neu hinzu.
 Diese dient als später als Ablageort der kompilierten Programme.
 
 \subsection{Db2 Anpassung}\label{ssec:db2entw}
-Für die Datenbank Provisionierung waren keine Änderungen am Template notwendig.
-Eine erste Grobanalyse, der Rechnungsschreibungsdatenbank, kam zum Ergebnis, dass es zwar möglich wäre diese Datenbank zu provisionieren, aber es den zeitlichen Rahmen dieser Arbeit sprengen würde.
+Eine erste Grobanalyse, der Rechnungsschreibungsdatenbank, kam zum Ergebnis, dass es zwar möglich wäre diese Datenbank zu provisionieren, aber es den zeitlichen Rahmen dieser Arbeit übersteigen würde.
 Der Grund hierfür ist die Komplexität, der benötigten Tabellen.
 So wird auf drei Tabellen für die Ermittlung der Produktstammdaten lesend zugegriffen, auf neun weitere bei der Bestimmung der Preisabhänigkeiten.
 Des Weiteren wird auf die Tabellen nicht direkt zugegriffen, sondern über Views.
@@ -224,7 +227,14 @@ Für die weitere Arbeit werden, die in einem anderen Datenbanksystem bereits vor
 Hierfür musste der Wert, der dafür vorgesehenen Variablen in der Eingabedatei des Templates, geändert werden.
 Außerdem wurden sowohl in der Provisionierungs- als auch in der Deprovisionierungsdatei die Datenbanksteps auskommentiert und somit kommen diese nicht mehr zum Einsatz.
 
-\subsection{MQ Anpassung}
+\subsection{MQ Anpassung}\label{ssec:mqentw}
+Da, wie im Absatz \ref{rechArch} beschrieben, sehr viele gleichartige Queues benötigt werden, wurde für die Erstellung dieser von den MQ Administratorenteam ein Rexx Skript angefertigt.
+Dieses Skript steht dieser Arbeit zur Verfügung.
+Es wurde mit Hilfe von neu erstellten Templatevariablen dynamisiert.
+Anschließend wurde es in den Provisionierungsworkflow mit Hilfe eines neuen Steps aufgenommen.
+Für die Deprovisionierung besteht noch kein Script.
+Hierfür wurde auf Grundlage des Provisionierungsskriptes ein Eigenständiges erzeugt und ebenfalls in das Template aufgenommen.
+
 Bei der grundsätzlichen Provisionierung der Queues gab es keine Veränderung.
 Jedoch wird ein anderer Queuemanager benötigt, dies zieht eine Änderung der Gruppe in der CSD nach sich.
 Da eine der Queues, jedoch die Transaktion und somit die Anwendung starten soll, sind sogenannte MQ Prozesse notwendig.
