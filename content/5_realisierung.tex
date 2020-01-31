@@ -207,7 +207,7 @@ Außerdem kam noch ein Ordner neu hinzu.
 Diese dient als später als Ablageort der kompilierten Programme.
 
 \subsection{Db2 Anpassung}\label{ssec:db2entw}
-Eine erste Grobanalyse, der Rechnungsschreibungsdatenbank, kam zum Ergebnis, dass es zwar möglich wäre diese Datenbank zu provisionieren, aber es den zeitlichen Rahmen dieser Arbeit übersteigen würde.
+Eine genauere technische Analyse, der Rechnungsschreibungsdatenbank, kam zum Ergebnis, dass es zwar möglich wäre diese Datenbank zu provisionieren, aber es den zeitlichen Rahmen dieser Arbeit übersteigen würde.
 Der Grund hierfür ist die Komplexität, der benötigten Tabellen.
 So wird auf drei Tabellen für die Ermittlung der Produktstammdaten lesend zugegriffen, auf neun weitere bei der Bestimmung der Preisabhänigkeiten.
 Des Weiteren wird auf die Tabellen nicht direkt zugegriffen, sondern über Views.
@@ -229,7 +229,14 @@ Außerdem wurden sowohl in der Provisionierungs- als auch in der Deprovisionieru
 
 \subsection{MQ Anpassung}\label{ssec:mqentw}
 Da, wie im Absatz \ref{rechArch} beschrieben, sehr viele gleichartige Queues benötigt werden, wurde für die Erstellung dieser von den MQ Administratorenteam ein Rexx Skript angefertigt.
+Dies geschah unabhänig dieser Arbeit zum Zeitpunkt der Einführung des Rechnungsschreibungsprozesses.
 Dieses Skript steht dieser Arbeit zur Verfügung.
+Es wurde auf die Bedürfnisse des Templates angepasst.
+
+Hierfür wurden zunächst die Eingabeparameter durch vorher angelegte Templatevariablen ersetzt.
+Diese steuern, wie viele Queues jeweils angelegt werden, auf welchen Queuemanager die Queues angelegt werden und den ersten Qualifier des Queuenamens.
+
+
 Es wurde mit Hilfe von neu erstellten Templatevariablen dynamisiert.
 Anschließend wurde es in den Provisionierungsworkflow mit Hilfe eines neuen Steps aufgenommen.
 Für die Deprovisionierung besteht noch kein Script.
