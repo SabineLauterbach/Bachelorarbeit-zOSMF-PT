@@ -160,7 +160,7 @@ Diese werden in der Eingabedatei des Templates gesetzt.
 
 In Abilldung zeile SOUNSSO
 
-\subsubsection{Bereitstellung MQ}
+\subsubsection{Bereitstellung MQ}\label{sssec:mqtplx}
 In diesem Absatz wird die Provisionierung einer MQ Queue beschrieben.
 Es ist auch möglich einen MQ Queuemanager zu provisionieren, der Fokus dieser Arbeit liegt aber auf der Bereitstellung von Queues.
 Bei einem Queuemanager handelt es sich um ein Subsystem, deshalb wird vorerst von einer automatischen Bereitstellung abgesehen.
@@ -235,19 +235,27 @@ Es wurde auf die Bedürfnisse des Templates angepasst.
 
 Hierfür wurden zunächst die Eingabeparameter durch vorher angelegte Templatevariablen ersetzt.
 Diese steuern, wie viele Queues jeweils angelegt werden, auf welchen Queuemanager die Queues angelegt werden und den ersten Qualifier des Queuenamens.
-
-
-Es wurde mit Hilfe von neu erstellten Templatevariablen dynamisiert.
+Für den restlichen Queuenamen existiert auch eine Variable, in dieser werden die Namen als Komma separierte Liste angeben und ausgelesen.
+An hand dieser Namen wird dann die maximale Queuetiefe und die maximale Länge einer einzelnen Nachricht festgelegt.
+Im alten Skript wurden die Queues mit Hilfe einer Queue, die als Vorlage dient, angelegt.
+Im Fall einer Provisionierung kann nicht davon ausgegangen werden, dass diese Vorlagen zur Verfügung stehen.
+Deshalb wurden die benötigten Parameter händisch angegeben.
+Um die so eben erstellten Queues zu testen, wurde eine Routine entwicklelt, die eine Nachricht auf die Queue schreibt und diese wieder abholt.
 Anschließend wurde es in den Provisionierungsworkflow mit Hilfe eines neuen Steps aufgenommen.
-Für die Deprovisionierung besteht noch kein Script.
-Hierfür wurde auf Grundlage des Provisionierungsskriptes ein Eigenständiges erzeugt und ebenfalls in das Template aufgenommen.
 
-Bei der grundsätzlichen Provisionierung der Queues gab es keine Veränderung.
-Jedoch wird ein anderer Queuemanager benötigt, dies zieht eine Änderung der Gruppe in der CSD nach sich.
-Da eine der Queues, jedoch die Transaktion und somit die Anwendung starten soll, sind sogenannte MQ Prozesse notwendig.
-Diese wurden in das Script aufgenommen.
+Für die Deprovisionierung besteht noch kein Skript.
+Als Grundlage dient das vorher angepasste Provisionierungsskript.
+Hierfür musste der `Define`-Befehl für die Erstellung von Queues durch den `Delete`-Befehl ausgetauscht werden.
+Die Logik für die Ermittlung der maximalen Queuetiefe und der maximalen Nachrichtenlänge wurde nicht mehr benötigt und konnte entfernt werden.
 
-Das diese funktionieren, muss CICS seitig eine Queue vorhanden sein, die sich um diese speziellen Fälle kümmert.
+Diese beiden Skripte sind nur für den Datenaustausch zwischen der CICS Transaktion für die Preisermittlung und dem Batch Ablauf zuständig.
+Wie in Absatz \ref{recharch} beschrieben, benötigt der Ablauf noch weitere Queues.
+Da es sich hierbei um spezielle Queues handelt, wurde auf die im Absatz \ref{sssec:mqtplx} gezeigte Technik zurückgegriffen.
+Bei der Antwort-Queue für die Ermittlung der Listenpreise handelt es sich um eine Queue ohne besondere Parameter.
+Es werden noch zwei Trigger-Queues benötigt.
+Die über Prozesse eine Transaktion im CICS starten.
+
+Das diese funktionieren, muss CICS seitig eine weitere Queue vorhanden sein, die sich um diese speziellen Fälle kümmert.
 Jede CICS Instanz benötigt somit eine spezifische Queue, dies muss in der MQ CSD Gruppe hinterlegt werden.
 In diesem Schritt wurde beschlossen, die Verwaltung der MQ CSD Gruppe komplett dem Template zu übergeben.
 Diese Entscheidung hatte eine Änderung des in Abbildung \ref{code:addCSD} gezeigten Codes zu Folge.

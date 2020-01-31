@@ -88,13 +88,21 @@ Außerdem wird dabei der Zustellungsweg, per Post oder E-Mail, bestimmt.
 Darauf folgt die Aufbereitung der Druckrohdaten und letztlich das Versenden der Rechnungen an die Berater.
 Zusätzlich werden die Rechnungen noch im PDF-Format archiviert.
 
-\subsection{Architektur}\label{rechArch}
+\subsection{Architektur der Preisermittlung}\label{rechArch}
 In dieser Arbeit steht das automatisierte Provisionieren von Laufzeitumgebungen im Fokus.
-In diesem Fall handelt es sich um die Laufzeitumgebung CICS.
+In diesem Fall handelt es sich um die Laufzeitumgebung CICS mit den dazugehörigen Elementen.
 Deshalb wird im Folgenden nur darauf eingegangen.
 
 Das System muss an Lasttagen bis zu 180.000 Geschäftspartner verarbeiten können.
 Um all diese an das CICS zu übertragen stehen dem System mehrere IBM MQ Queues zur Verfügung.
+Bevor die eigentliche Bestimmung der Preise stattfindet, werden zunächst die Listenpreise ermittelt.
+Hierfür werden zwei Queues verwendet.
+Eine startet eine Transaktion im CICS, die andere wartet auf deren Antwort.
+In diesem Ablauf werden die benötigten Listenpreise aus einer Datenbank ausgelesen und in einen Hauptspeicherbereich der CICS Instanz gespeichert.
+Dies ist auf Grund der Last auf dem System notwendig, da ein Hauptspeicherzugriff schneller als ein Datenbankzugriff ist.
+Somit gab es bei der Laufzeit eine Einsparung um circa XXXX Prozent.
+
+Für die Bestimmung der Preise mit den Preisabhängigkeiten bestehen weitere Queues.
 Darunter ist eine allgemeine Queue in der alle Aufträge, die für die Weiterverarbeitung zur Verfügung stehen, geschrieben werden.
 Pro Geschäftspartner wird ein Auftrag angelegt.
 In diesem Auftrag befinden sich die Namen vier weiterer Queues.
