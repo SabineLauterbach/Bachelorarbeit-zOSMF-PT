@@ -254,11 +254,15 @@ Da es sich hierbei um spezielle Queues handelt, wurde auf die im Absatz \ref{sss
 Bei der Antwort-Queue für die Ermittlung der Listenpreise handelt es sich um eine Queue ohne besondere Parameter.
 Es werden noch zwei Trigger-Queues benötigt.
 Die über Prozesse eine Transaktion im CICS starten.
+Als letzter Baustein, dass das Triggering der Transaktion funktioniert, wird noch eine Initiation Queue benötigt.
+Diese muss im CICS hinterlegt sein.
 
-Das diese funktionieren, muss CICS seitig eine weitere Queue vorhanden sein, die sich um diese speziellen Fälle kümmert.
-Jede CICS Instanz benötigt somit eine spezifische Queue, dies muss in der MQ CSD Gruppe hinterlegt werden.
-In diesem Schritt wurde beschlossen, die Verwaltung der MQ CSD Gruppe komplett dem Template zu übergeben.
-Diese Entscheidung hatte eine Änderung des in Abbildung \ref{code:addCSD} gezeigten Codes zu Folge.
+Jeder CICS Instanz kann nur eine Initiation Queue zugewiesen sein.
+Dadurch benötigt jedes CICS eine eigene Initiation Queue.
+Die Zuweisung geschieht in der MQ CSD Gruppe.
+Somit müsste für jede provisionierte CICS Instanz im Voraus eine solche CSD Gruppe angelegt werden.
+Daraus folgt, dass in diesem Schritt beschlossen wurde, die Verwaltung der MQ CSD Gruppe komplett dem Template zu übergeben.
+Diese Entscheidung hatte eine Änderung des in Abbildung \ref{code:addCSD} gezeigten Codes zur Folge.
 So wird, wie in Abbildung \ref{code:createGrp} abgebildet, zunächst eine Gruppe angelegt und erst anschließend dem CSD hinzugefügt.
 
-\section{Nutzwertanalyse}
+\section{Fazit Realisierung}
