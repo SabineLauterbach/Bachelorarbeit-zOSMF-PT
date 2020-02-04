@@ -3,6 +3,7 @@ In diesem Kapitel wird beschrieben, wie die Aufgabe dieser Arbeit gelöst wurde.
 Dazu wird nach der im Kapitel \ref{ch:vorgehensweise} beschriebenen Reihenfolge, der Arbeitsschritte vorgegangen.
 Es ist nochmal zu erwähnen, dass zunächst die Provisionierung einer CICS Instanz untersucht wird.
 Danach wird in weiteren Schritten zuerst eine Db2 Datenbank und schließlich MQ Queues dem Bereitstellungsprozess hinzugefügt.
+Die Funktionsfähigkeit der so generierten Laufzeitumgebung wird mittels eines Testablaufes sichergestellt.
 
 \section{Testplex}
 Vor Beginn der eigentlichen Untersuchung mussten zunächst alle benötigten Rechte beantragt werden.
@@ -265,4 +266,26 @@ Daraus folgt, dass in diesem Schritt beschlossen wurde, die Verwaltung der MQ CS
 Diese Entscheidung hatte eine Änderung des in Abbildung \ref{code:addCSD} gezeigten Codes zur Folge.
 So wird, wie in Abbildung \ref{code:createGrp} abgebildet, zunächst eine Gruppe angelegt und erst anschließend dem CSD hinzugefügt.
 
+\subsection{Testablauf}
+Für die Prüfung der Funktionsfähigkeit der so generierten Laufzeitumgebung steht dieser Arbeit ein Testablauf zur Verfügung.
+Dieser wurde von den Mitarbeitern der Rechnungsschreibung beigesteuert.
+Dabei handelt es sich um einen Teilablauf des gesamten Rechnungsschreibungsprozesses.
+In diesem Ablauf wird nur die Preisermittlung, die die Laufzeitumgebung benötigt, getestet.
+Als Eingabe dienen vordefinierte Dateien und die Ergebnisse werden ebenfalls in Dateien geschrieben.
+Der Ablauf liegt in Form von zwei Jobs vor.
+Beide sind in der gleichen JCL Datei definiert, somit starten beide zeitgleich.
+Dies ist notwendig, da der erste Job die Verarbeitung im CICS über die Queues startet und der Zweite lauscht auf die Ergebnisqueues.
+
+Um den Ablauf auch auf der vorher provisionierten Laufzeitumgebung zu starten, musste lediglich der verwendete QueueManager angepasst werden.
+Über die Queues und das verwendete Triggering wird die Transaktion im richtigen CICS gestartet.
+Bei ersten Versuch den Ablauf zu starten kam es MQ-seitig zum Fehler.
+Hier mussten noch zwei Queueparameter angepasst werden.
+Danach ist der Testablauf ohne Fehler und mit der richtigen Ausgabe gelaufen.
+Um die Ausgabe zu prüfen wurde der gleiche Testablauf mit den gleichen Eingabedateien auf der für Testzwecke üblichen Laufzeitumgebung durchgeführt.
+Anschließend wurden die Ausgabedateien beider Läufe verglichen.
+
 \section{Fazit Realisierung}
+Am Ende der Realisierung steht ein funktionsfähiges Template.
+Dieses Template provisioniert ein CICS und die benötigten MQ Queues.
+Wie in Absatz \ref{ssec:db2entw} beschrieben, wurde eine Db2 Datenbank wegen hoher Komplexität außen vorgelassen.
+Es hat sich aber herausgestellt, dass dies theoretisch auch möglich wäre.
