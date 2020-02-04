@@ -78,7 +78,7 @@ Nachdem das Template aktualisiert wurde, wurde erneut versucht zu provisionieren
 Dabei stellte sich heraus, dass der Befehl, um ein CICS zu starten innerhalb der DATEV eG einen weiteren Parameter benötigt.
 Dieser wurde hinzugefügt und danach funktionierte das Provisionieren und alle definierten Aktionen des minimalen IBM Standard CICS Templates.
 
-\subsubsection{DATEV eG spezifischen CICS Template}
+\subsubsection{DATEV eG spezifischen CICS Template}\label{sssec:datevcics}
 Nachdem das minimale IBM Standard CICS Template funktionsfähig war und erste Erfahrungen mit z/OSMF gesammelt wurden, wurde ein allgemeines mitgeliefertes Template untersucht.
 Wie in der Tabelle \ref{vglTemps} dargestellt ist, ist dieses Template mit insgesamt 76 verwendeten Dateien sehr umfangreich.
 Zu diesen Dateien zählen alle, die direkt mit dem Template in Verbindung stehen.
@@ -284,8 +284,50 @@ Danach ist der Testablauf ohne Fehler und mit der richtigen Ausgabe gelaufen.
 Um die Ausgabe zu prüfen wurde der gleiche Testablauf mit den gleichen Eingabedateien auf der für Testzwecke üblichen Laufzeitumgebung durchgeführt.
 Anschließend wurden die Ausgabedateien beider Läufe verglichen.
 
+\section{Bereitstellungsprozess aktuelles Template}
+Use-Cases Entwickler möchte neue Instanz
+Use-Case Admin möchte Änderung vornehmen
+
 \section{Fazit Realisierung}
 Am Ende der Realisierung steht ein funktionsfähiges Template.
 Dieses Template provisioniert ein CICS und die benötigten MQ Queues.
 Wie in Absatz \ref{ssec:db2entw} beschrieben, wurde eine Db2 Datenbank wegen hoher Komplexität außen vorgelassen.
 Es hat sich aber herausgestellt, dass dies theoretisch auch möglich wäre.
+Zudem ist es möglich damit einen Testablauf der Rechnungsschreibung korrekt durchzuführen.
+
+Jedoch gibt es auch Probleme.
+Hier sind die nicht sprechenden Fehlermeldung, Abbildung \ref{fig:zosmffehler} als Beispiel, von zOSMF zu nennen.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{figures/zosmffehlermeldung.png}
+	\caption{Beispiel einer Fehlermeldung von zOSMF}
+	\label{fig:zosmffehler}
+\end{figure}
+So wird bei dem Hinzufügen und Aktualisieren eines Templates in zOSMF das Template und damit alle davon benötigten Dateien auf Syntaxfehler geprüft.
+Die in Abbildung \ref{fig:zosmffehler} gezeigte Meldung tritt dann ein, wenn ein solcher Syntaxfehler vorhanden ist.
+Es ist aber nicht zu erkennen, welcher Fehler genau vorliegt, noch nicht einmal in welcher Datei dieser auftritt.
+Zudem auch keine genaue Anzahl an auftretenden Fehlern.
+Dieser Umstand kombiniert mit 36 bestehenden Dateien gestaltet die Fehlersuche zeitaufwendig.
+Im Gegensatz dazu wird im Fehlerfall beim Ausführen eines Steps immer der Fehlercode und der genaue Ort des Fehlers ausgegeben.
+Zum Beispiel wird bei einem Step, in dem ein REST Aufruf gemacht wird, und ein Fehler auftritt, der Requestcode und die hinterlegte Fehlermeldung an der zOSMF Oberfläche angezeigt.
+
+Ein weiteres Problem ist, die verwendete Programmiersprache, die für die dynamische Generierung von Skripten sorgt.
+So ermöglicht diese die dynamische Wertzuweisung von zum Beispiel Rexxvariablen durch Templatevariablen.
+Des Weiteren besteht eine Art von String Verarbeitung.
+Zu beachten ist, dass wenn am Zeilenanfang ein `\#` steht, kann diese Programmiersprache verwendet werden.
+In Abbildung \ref{Hier defineqrexx split} ist ein Beispiel zu sehen.
+Dort werden die Queuenamen, die als kommaseparierte Liste in der Templatevariable `DFH\_MQ\_QUEUENAMES` angegeben sind, ausgelesen und in eigenen REXX Variablen gespeichert.
+Zusehen ist zunächst eine `set` Anweisung mit der Variablen zugewiesen werden können.
+Des Weiteren sind If-Bedingungen und eine foreach-Schleife zu sehen.
+In Abbildung \ref{ergebnis split} wird das Ergebnis, welches zur Laufzeit ausgeführt wird, dargestellt.
+Es ist zu erkennen, dass nur noch die für das REXX Skript notwendigen Codeabschnitte vorhanden sind.
+Dadurch können sehr dynamische Templates erstellt werden.
+Jedoch wurde weder eine Dokumentation zu dieser Sprache noch um welche Sprache es sich genau handelt gefunden.
+Somit liegt dem Wissen über diese Sprache nur der Code aus Beispielen der IBM zu Grunde.
+
+Je weiter das Projekt dem Abschluss näher kam desto mehr kristalierte sich ein Hauptproblem heraus.
+Dieses Template ist sehr auf die Rechnungsschreibung spezialisiert, dass heißt es ist funktionsfähig, aber kann nicht ohne zeitaufwendige Eingriffe in das Template, in die Workflowdefinitionsdateien und die eigentlichen REXX Skripte und Jobs, an eine andere Anwendung angepasst werden.
+Bei der Betrachtung des Falles, wenn zwei Anwender jeweils eine eigene Instanz des gleichen Templates benötigen, muss dieses kopiert werden und neu in zOSMF aufgenommen werden.
+Dies verlangt Wissen über die zOSMF Oberfläche und den Speicherort des Templates, um es schließlich auch zu ändern.
+Eine Herangehensweise an dieses Problem wird im Ausblick, Kapitel \ref{ch:ausblick}, dargestellt.
+
