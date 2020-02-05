@@ -285,6 +285,34 @@ Um die Ausgabe zu prüfen wurde der gleiche Testablauf mit den gleichen Eingabed
 Anschließend wurden die Ausgabedateien beider Läufe verglichen.
 
 \section{Bereitstellungsprozess aktuelles Template}
+Betrachtet wird der Fall eins, dass das Template dem Entwicklerteam im zOSMF zur Verfügung steht.
+Es gibt noch keine Instanz dieses Templates.
+Entwickler eins möchte einen neuen Programmstand testen und benötigt somit eine Instanz des Templates.
+Der Mitarbeiter meldet sich an der zOSMF Oberfläche an und klickt auf den Menüleistenpunkt `Cloud Provisioing`.
+Anschließend öftner er die `Software Services` und wählt dort das oben genannte Template aus.
+Er kann es ohne Änderungen provisionieren und damit seine Programmabläufe testen.
+
+Als nächstes wird der Fall zwei dargestellt bei dem bereits eine Instanz des Templates besteht.
+Entwickler zwei möchte ebenfalls einen neuen Programmstand prüfen, unabhängig von den Änderungen aus Fall eins.
+Somit benötigt er eine weitere Instanz des Templates.
+Mit dem aktuellen Stand muss er wissen an welchem Speicherort das Template abgelegt ist.
+Da er die Template- nicht die Workflowdateien kopieren muss.
+Dann sind Änderungen an den Eingabevariablen des Templates notwendig.
+Unter anderem ist eine andere CICS Application Id zu wählen.
+Das die Queues und MQ Prozesse aus Fall eins nicht überschrieben werden, muss ebenfalls ein anderer Queue Manager gesetzt werden.
+Anschließend muss mit den veränderten Dateien ein neues Template in zOSMF aufgenommen werden.
+Schließlich kann Mitarbeiter zwei eine Instanz erzeugen.
+Diese ist unabhängig von der Instanz aus Fall eins.
+
+In Fall drei wird der Prozess, bei dem ein Administrator eine Änderung an einer Workflowdatei druchführt, betrachtet.
+Zunächst muss der Speicherort der zu bearbeiteten Dateien bekannt sein.
+Anschließend kann die Änderung mit einem Editor nach Wahl durchgeführt werden.
+Jetzt sind noch zwei weitere Fälle zu betrachten.
+Zunächst der Fall bei dem das Template noch nicht veröffentlicht wurde, dass heißt es steht noch keinem weiteren Team zur Verfügung.
+Hier kann das Template in der zOSMF Oberfläche per Mausklick aktualisiert werden.
+Bei dem nächsten Fall ist das Template bereits veröffentlicht.
+Um die Funktionsfähigkeit der veralteten Instanzen weiterhin sicherzustellen, muss eine neue Version des Templates erzeugt werden.
+
 Use-Cases Entwickler möchte neue Instanz
 Use-Case Admin möchte Änderung vornehmen
 
