@@ -2,11 +2,39 @@
 In diesem Kapitel werden für diese Arbeit wichtige Begriffe und Systeme erläutert.
 
 \section{Mainframe / Großrechner}
-asldfjldskjfö
+Mainframe und Großrechner werden in dieser Arbeit gleichbedeutend verwendet.
+Im modernen Sprachgebraucht kann ein Großrechner als größte zur Verfügung stehende Serverart betrachtet werden.
+So wird er von Unternehmen verwendet, um dort kommerzielle Datenbanken, Transaktionsserver und Anwendungen, die einen hohen Grad an Sicherheit und Verfügbarkeit benötigten, zu hosten.
+Im Gegensatz zu verteilten Serversystemen, bei dem die Funktionalitäten auf einzelne Server, wie zum Beispeil einen E-Mail-Server, einen Datenbank-Server, einen Web-Server usw. aufgeteilt sind, handelt es sich bei einem Mainframe um ein zentralisiertes System.
+\cite{Ebbers.2011}
 
 \subsection{Batch}
+Batch beziehungsweise Batch-Verarbeitung ist eine Art einer Stapelverarbeitung.
+Das heißt, dass Programme mit minimalem menschlichen Eingreifen nacheinander abgearbeitet werden.
+Dies geschieht meist zu einer vorher festgelegten Zeit.
+Zum Beispiel wird einmal am Tag zu einer ganz bestimmten Uhrzeit die Tägliche Bewertung der Rechnungsschreibung durchgeführt.
+Die auszuführenden Programme sind in sogenannten Batch-Jobs definiert. 
+\cite{Ebbers.2011}
 
-\subsection{Jobs}
+\subsection{Batch-Job / Job}
+In einem Batch-Job, in dieser Arbeit wird Job gleichbedeutend verwendet, wird dem System mitgeteilt welches Programm mit welchen Eingaben und Ausgaben gestartet werden soll.
+Dafür wird die `Job Control Language`, kurz JCL, genutzt.
+Die drei Grundbausteine, die JCL breitstellt, werden im Folgendem beschrieben.
+
+Zunächst ist `JOB` zu nennen.
+Hier wird der Name des Jobs, Berechnungsinformationen, maximal zur Verfügung stehende CPU-Zeit und weitere Job weite Parameter gesetzt.
+
+Innerhalb eines Jobs wird mit Hilfe des `EXEC` Befehls dem System mitgeteilt, welches Programm gestartet werden soll.
+Es können mehrere `EXEC` Befehle in einem Job vorkommen, dabei wird jedes als einzelner sogenannter `Job step` bezeichnet.
+Dabei können dem Programm neben den Eingabedateien auch weitere Parameter übergeben werden.
+
+Als letztes ist der `DD` Baustein zu nennen.
+`DD` steht für Data Definition.
+Es verknüpft den Namen des Bausteins zum Beispiel an eine Datei, an ein I/O Gerät oder Funktionen, die im eigentlichen Programm enthalten sind.
+So steuert es die Ein- und Ausgaben des Programmes.
+Ein `DD` Baustein ist immer an ein `EXEC` Befehl gebunden.
+Ein `EXEC` kann aber mehrere `DD` Bausteine enthalten.
+\cite{Ebbers.2011}
 
 \section{Customer Information Control System}\label{cics}
 Das Customer Information Control System, kurz CICS, ist ein Applikationsserver für einen IBM-Großrechner.
@@ -117,8 +145,9 @@ Im Anschluss darauf wird das auf Kommandozeilenbefehle basierende z/OS Provision
 \subsection{Begrifferklärung}
 Im folgenden werden einige allgemeine Begriffe, die im Umfeld von IBM Cloud Provisioning and Management for z/OS vorkommen, erläutert.
 
-\subsubsection{Provisionierung}
-askldfjsldfja
+\subsubsection{Provisioning}
+Ins Deutsche übersetzt bedeutet es Bereitstellung, in dieser Arbeit wird auch Provisionierung verwendet.
+In dieser Arbeit umfasst dieser Begriff die Bereitstellung einer Laufzeitumgebung beziehungsweise den Prozess, der hierfür benötigt wird.
 
 \subsubsection{Workflow}\label{sssec:workflow}
 Ein Workflow ist eine beliebig komplexe eindeutige Aneinanderreihung von sogenannten Steps.
