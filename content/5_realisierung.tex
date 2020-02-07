@@ -196,6 +196,8 @@ Bei der Übertragung des Templates von der Testsystemumgebung auf die Entwicklun
 
 \subsection{CICS Anpassung}
 Zunächst wurden alle Steps modifiziert, so dass sie den CICS spezifischen technischen User verwenden.
+Hierfür musste der `JOB` Baustein jeder JCL angepasst werden.
+Dafür bietet zOSMF beim Zuweisen des `Tenants` eine Standard Jobkarte, die vor jeden Job des Templates eingefügt wird, hinterlegt werden.
 Als nächstes musste ein Parameter bei der Erstellung der CICS spezifischen Dateien hinzugefügt werden.
 Es handelt sich um den Massageclass Parameter mit dem Wert `NONE'.
 Dadurch sind die Daten von der täglichen Datensicherung der Entwicklungssystemumgebung ausgenommen.
@@ -265,6 +267,8 @@ Somit müsste für jede provisionierte CICS Instanz im Voraus eine solche CSD Gr
 Daraus folgt, dass in diesem Schritt beschlossen wurde, die Verwaltung der MQ CSD Gruppe komplett dem Template zu übergeben.
 Diese Entscheidung hatte eine Änderung des in Abbildung \ref{code:addCSD} gezeigten Codes zur Folge.
 So wird, wie in Abbildung \ref{code:createGrp} abgebildet, zunächst eine Gruppe angelegt und erst anschließend dem CSD hinzugefügt.
+
+Außerdem musste für jeden MQ bezogenen Job die Jobkarte angepasst werden, so wurden hier der technische User durch den technischen User, der für die administrativen MQ Aufgaben berechtigt ist, ausgetauscht.
 
 \subsection{Testablauf}
 Für die Prüfung der Funktionsfähigkeit der so generierten Laufzeitumgebung steht dieser Arbeit ein Testablauf zur Verfügung.
@@ -351,9 +355,27 @@ Dadurch können sehr dynamische Templates erstellt werden.
 Jedoch wurde weder eine Dokumentation zu dieser Sprache noch um welche Sprache es sich genau handelt gefunden.
 Somit liegt dem Wissen über diese Sprache nur der Code aus Beispielen der IBM zu Grunde.
 
-Je weiter das Projekt dem Abschluss näher kam desto mehr kristalierte sich ein Hauptproblem heraus.
+Ein weiterer Problempunkt ist das mit zOSMF und dem Template einhergehende Zugriffsrechtekonzept.
+Die zOSMF Berechtigungsgruppen sind nicht an die DATEV eG internen Richtlinien angepasst.
+Die Aufnahme in eine solche Gruppe, um zum Beispiel die zOSMF Oberfläche nutzen zu dürfen, geschieht auf Zuruf und händisches Hinzufügen einer User Id durch einen Mitarbeiter.
+Außerdem ist der Einsatz einer für das ganze Template gültigen Standard Jobkarte, um technische User verwenden zu können, nicht optimal.
+zOSMF bietet hier eigentlich eine Möglichkeit in der Stepdefinition einen `runAsUser` anzugeben.
+Unter diesem User würde der Step dann ausgeführt werden, also die Stelle an der zum Beispiel für CICS Steps der technische User für administrative CICS Aufgaben angegeben werden müsste.
+So wird das Gewehren der expliziten Rechte zum Starten eines Jobs mit der technischen User Id eingespart.
+Dieses Gewehren ist wiederrum eine manuelle Arbeit, die mittels eines Formulares beantragt wird.
+Jedoch um einen `runAsUser` in der Stepdefinition angeben zu können, muss in der dem Template zugewiesen `Domain` ein sogenannter `Cloud Security Admin` hinterlegt sein.
+Dieser würde sicherstellen, dass nur die für ein Template zugelassenen User diesen Template auch provisionieren dürfen.
+In dieser Arbeit wird die mitgelieferte `Default Domain` genutzt, in dieser ist kein `Cloud Security Admin` angegeben.
+Da es sich um die Standard `Domain` handelt, darf diese nicht geändert werden.
+Somit müsste eine eigene `Domain` angelegt werden um einen `Cloud Security Admin` hinterlegen zu können.
+Dadurch dass sich zOSMF bei der DATEV eG noch in einem Teststadium befindet, wird von der Erstellung einer eigenen `Domain` abgesehen.
+Dies ist der Grund für den nicht optimalen Einsatz von den oben genannten Jobkarten.
+An diesen beiden Gründen ist zu erkennen, dass das Rechtekonzept noch nicht für einen firmenweiten Einsatz ausgelegt ist und noch überarbeitet und angepasst werden muss.
+Dies ist nicht Bestandteil dieser Arbeit.
+
+Je weiter das Projekt dem Abschluss näher kam desto mehr kristallisierte sich ein Hauptproblem heraus.
 Dieses Template ist sehr auf die Rechnungsschreibung spezialisiert, dass heißt es ist funktionsfähig, aber kann nicht ohne zeitaufwendige Eingriffe in das Template, in die Workflowdefinitionsdateien und die eigentlichen REXX Skripte und Jobs, an eine andere Anwendung angepasst werden.
 Bei der Betrachtung des Falles, wenn zwei Anwender jeweils eine eigene Instanz des gleichen Templates benötigen, muss dieses kopiert werden und neu in zOSMF aufgenommen werden.
 Dies verlangt Wissen über die zOSMF Oberfläche und den Speicherort des Templates, um es schließlich auch zu ändern.
 Da die Bereitstellung eines Queue Managers nicht im Template enthalten ist, müsste dafür ebenfalls ein Neuer angelegt werden.
-Eine Herangehensweise an dieses Problem wird im Ausblick, Kapitel \ref{ch:ausblick}, dargestellt.
+Eine Herangehensweise an dieses Problem wird im Ausblick im Kapitel \ref{sec:techaus} dargestellt.
