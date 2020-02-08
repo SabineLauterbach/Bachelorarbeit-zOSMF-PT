@@ -1,1 +1,51 @@
 \section{Interviews}
+In diesem Absatz wird zunächst erläutert, auf welcher Grundlage die Interviews geführt worden sind.
+Anschließend werden die Ergebnisse der einzelnen Interviews nach Gruppen aufgeteilt, ausgewertet und interpretiert.
+Schließlich wird daraus ein allgemeines Stimmungsbild abgeleitet.
+
+\subsection{Durchführung}
+Interviewt wurden jeweils zwei Mitarbeiter der Gruppen, CICS Administration, Db2 Administration, MQ Administration und Entwicklerteam der Rechnungsschreibung.
+Zusätzlich wurde ein Mitarbeiter aus dem Architekturstrategieteam befragt.
+Sowohl der Fragenkatalog als auch die ausgefüllten und digitalisierten Fragebögen sind im Anhang \ref{app:fragen} zu finden.
+Bevor die Interviews durchgeführt worden sind, wurde den Teams in getrennten Terminen die Ergebnisse dieser Arbeit vorgestellt.
+Der Schwerpunkt wurde an das jeweilige Team angepasst.
+So wurde bei den Administratorenteams vor allem auf den Teil des Templates, der für ihr Arbeitsgebiet zuständig ist, eingegangen.
+Außerdem wurden neben den im Absatz \ref{sec:akttemp} dargestellten Lösung, auch die Lösung aus Absatz \ref{sec:techaus} vorgestellt.
+An Hand des durch diese Arbeit bereit gestellte Template wurde die zOSMF Oberfläche erläutert.
+
+\subsubsection{CICS Administratoren}
+\subsubsection{Db2 Administratoren}
+\subsubsection{MQ Administratoren}
+MQ Administrator 1 sieht bereits im aktuell funktionsfähigen Template einen Mehrwert.
+Zum einen weil mehr Verantwortung im Entwicklerteam liegt und zum anderen sin weniger händische Eingriffe notwendig.
+Jedoch ist die Lösung, die im Ausblick gezeigt wurde, flexiber und damit etwas besser geeignet.
+Zudem seien die momentan bereits vorhanden Features durchaus gut, jedoch kam die Frage auf, ob die IBM das `IBM Cloud Provisioning and Management for z/OS`-Toolkit noch weiterentwickelt.
+Die Benutzerfreundlichkeit der zOSMF Oberfläche wurde als mittelmäßig bis gut eingestuft.
+Bezüglich des Arbeiten, Verwalten und Ändern von Workflow Definitionsdateien und den dazugehörigen Skripten konnte keine Bewertung abgegeben werden, da noch nicht selbst damit gearbeitet wurde.
+Dies hat auch Einfluss auf den ersten Eindruck.
+So wird zu bedenken gegeben, dass der Zeitaufwand und die zu leistenden Vorarbeiten mit einzubeziehen sind.
+Vor allem, wenn die Provisionierung von einem MQ Queue Manager hinzu kommt.
+Jedoch kann sich MQ Administrator 1 vorstellen mit dem Toolkit täglich zu arbeiten, da letztenendlich die Werkzeugwahl keine Rolle spielt.
+Diese Entscheidung wird dadurch begünstigt, dass der aktuell etablierte Prozess schlecht beurteilt wird.
+Aufgrund des hohen manuellen Aufwands und der dadurch erzeugten Rückfragen.
+Zuletzt wird noch darauf hingewiesen, dass das Toolkit generell noch Neuland sei.
+So müssten erst die Grundlagen gelernt und damit Erfahrung gesammelt werden bevor eine qualitativere Bewertung möglich sei.
+Dies beinhaltet wahrscheinlich eine starke Lernkurve.
+
+Im Vergleich zu MQ Administrator 1 fehlt MQ Administrator 2 noch weitere Automatismen.
+So sind trotz des Einsatzen von zOSPT noch Absprachen mit Dritten, wie dem RACF-Team und dem Speicher-Team, notwendig.
+zOSPT sei zudem nur Docker ähnlich, ist jedoch keine vollumfängliche Containerlösung.
+So könnte sich MQ Administrator 2 zwar vorstellen mit dem Toolkit täglich zu arbeiten, aber es müsste ohne manuelle Eingriffe funktionieren.
+Die Erstellung der Skripte muss mit einem einmaligen Aufwand verbunden sein, so dass sie keine ständigen Anpassungen benötigen.
+Davon wird auch der erste Eindruck beeinflusst.
+So sind zwar viele gute Ansätze vorhanden, aber es fehlen Analogien und eine Ähnlichkeit zu Jenkins und anderen PaaS Lösungen.
+Dies geht soweit, dass XML nicht mehr als zeitgemäß betrachtet wird, sondern auf Umsetzungen in groovy, yaml oder mit ansible playbooks zu setzen sei.
+
+Zusammenfassend lässt sich sagen, dass sich beide MQ Administratoren einig sind, dass der momentan etablierte Bereitstellungsprozess schlecht ist und ein neuer Prozess durchaus notwendig wäre.
+Der durch diese Arbeit gezeigte Prozess als Ablöse wird prinzipiell als möglich erachtet.
+Jedoch nur der Einsatz mit zOSPT.
+Außerdem wird vor einer starken Lernkurve und noch fehlender Automation und der damit einhergehenden Ähnlichkeit zu Jenkins oder anderen PaaS Lösungen gewarnt.
+
+\subsubsection{Entwicklerteam der Rechnungsschreibung}
+
+\subsubsection{Architekturstrategieteam}
