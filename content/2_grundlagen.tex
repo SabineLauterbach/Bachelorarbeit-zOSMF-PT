@@ -1,7 +1,7 @@
 \chapter{Grundlagen}\label{ch:grundlagen}
 In diesem Kapitel werden für diese Arbeit wichtige Begriffe und Systeme erläutert.
 
-\section{Mainframe / Großrechner}
+\section{Mainframe / Großrechner}\label{sec:mainframe}
 Mainframe und Großrechner werden in dieser Arbeit gleichbedeutend verwendet.
 Im modernen Sprachgebraucht kann ein Großrechner als größte zur Verfügung stehende Serverart betrachtet werden.
 So wird er von Unternehmen verwendet, um dort kommerzielle Datenbanken, Transaktionsserver und Anwendungen, die einen hohen Grad an Sicherheit und Verfügbarkeit benötigten, zu hosten.
@@ -16,7 +16,7 @@ Zum Beispiel wird einmal am Tag zu einer ganz bestimmten Uhrzeit die Tägliche B
 Die auszuführenden Programme sind in sogenannten Batch-Jobs definiert. 
 \cite{Ebbers.2011}
 
-\subsection{Batch-Job / Job}
+\subsection{Batch-Job / Job}\label{ssec:job}
 In einem Batch-Job, in dieser Arbeit wird Job gleichbedeutend verwendet, wird dem System mitgeteilt welches Programm mit welchen Eingaben und Ausgaben gestartet werden soll.
 Dafür wird die `Job Control Language`, kurz JCL, genutzt.
 Die drei Grundbausteine, die JCL breitstellt, werden im Folgendem beschrieben.
@@ -99,7 +99,7 @@ Dies ist über das `STOP`-Konsolenkommando von z/OS möglich.
 Anschließend müssen alle im Absatz \ref{subsec:createCICS} beschriebene Schritte rückgängig gemacht werden.
 Also müssen die für diese Instanz spezifischen Dateien, die Einträge für die CICS Instanz aus der CSD Datei und schließlich auch der STC Job gelöscht werden.
 
-\section{IBM MQ}
+\section{IBM MQ}\label{sec:mq}
 IBM MQ ist eine Messaging-Lösung der IBM.
 Diese ermöglicht den asynchronen Datenaustausch zwischen Anwendungen mittels sogenannter Queues.
 Alle IBM MQ Begrifflichkeiten, die in dieser Arbeit verwendet werden, werden im Folgenden erläutert.
