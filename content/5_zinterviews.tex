@@ -5,7 +5,7 @@ Schließlich wird daraus ein allgemeines Stimmungsbild abgeleitet.
 
 \subsection{Durchführung}
 Interviewt wurden jeweils zwei Mitarbeiter der Gruppen, CICS Administration, Db2 Administration, MQ Administration und Entwicklerteam der Rechnungsschreibung.
-Zusätzlich wurde ein Mitarbeiter aus dem Architekturstrategieteam befragt.
+Zusätzlich wurde eine Fachberaterin im Bereich Technologiestrategie befragt.
 Sowohl der Fragenkatalog als auch die ausgefüllten und digitalisierten Fragebögen sind im Anhang \ref{app:fragen} zu finden.
 Bevor die Interviews durchgeführt worden sind, wurde den Teams in getrennten Terminen die Ergebnisse dieser Arbeit vorgestellt.
 Der Schwerpunkt wurde an das jeweilige Team angepasst.
@@ -89,4 +89,22 @@ Außerdem wird vor einer starken Lernkurve und noch fehlender Automation und der
 
 \subsubsection{Entwicklerteam der Rechnungsschreibung}
 
-\subsubsection{Architekturstrategieteam}
+\subsubsection{Fachberaterin im Bereich Technologiestrategie}
+Nach der Fachberaterin im Bereich Technologiestrategie ist der gezeigte Ablauf beziehungsweise die zOSMF Oberfläche für eine solche Aufgabe geeignet.
+Jedoch sei es besser wenn zOSMF in den bereits existierenden `Marketplace` für DATEV Cloud Lösungen integriert wäre.
+Der Prozess, der mit Hilfe von zOSPT ermöglicht wird, wird als gut angesehen.
+Da durch ihn die Entwicklung von z/OS Anwendungen an die Vorgehensweise der Cloud Native Entwicklung angenährt wird.
+Hier kommt die Rolle des Build Engineers auch für solche Anwendungen ins Spiel.
+Dieser kümmert sich um die Erstellung und Pflege der Build-Pipeline.
+Da sich die Fragen drei bis fünf auf die Nutzung und Verwaltung von Templates und somit auf die administrative Seite abzielen sind diese aus Entwicklersicht nicht relevant.
+Große Nachteile im momentan etablierten Bereitstellungsprozess ist vorallem das eine Anzahl an Entwickler, die an einem Produkt arbeiten, die gleiche Entwicklungssystemumgebung teilen.
+So arbeiten alle mit der gleichen CICS Instanz, der gleichen Test-Datenbank und mit den gleichen MQ Queues.
+Dadurch beeinflussen Änderungen die Tests der anderen Kollegen und müssen koordiniert werden.
+Falls Änderungen an der Umgebung notwendig sind, kann während dieser Zeit kein Entwickler weiterarbeiten.
+Hier sei der Vorteil des Toolkits.
+Es ermöglicht aus Entwicklersicht eine sehr einfache, schnelle Möglichkeit eine isolierte Umgebung bereitzustellen, unabhängig von dem Administratorenteams.
+Zusätzlich dienen die Konfigurationsdateien auch als Dokumentation, welche Ressourcen für ein erneutes Erstellen der Umgebung notwendig sind.
+
+Abschließend lässt sich sagen, dass aus Sicht einer Fachberaterin im Bereich Technologiestrategie dieses Toolkit die Entwicklung beziehungsweise den Bereitstellungsprozess deutlich verbessern kann.
+So ist für den Entwickler ein an die Cloud Native Welt angenäherter Entwicklungsprozess möglich.
+Dadurch wird der Wechsel zwischen beiden Umgebungen immer fließender.
