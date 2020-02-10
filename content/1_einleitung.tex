@@ -1,5 +1,5 @@
 \chapter{Einleitung}\label{ch:einleitung}
-`I recently predicted the last mainframe will be unplugged on March 15, 1996`\footnote{\cite{Alsop.1993}}, ein in der Großrechner-Welt bekannt gewordenes Zitat.
+\glqq I recently predicted the last mainframe will be unplugged on March 15, 1996\grqq \footnote{\cite{Alsop.1993}}, ein in der Großrechner-Welt bekannt gewordenes Zitat.\
 Es handelt sich um eine 1993 getroffene Vorhersage, nämlich dass der letzte Mainframe, auch Großrechner genannt, am 15 März 1996 abgeschaltet werden wird.
 Wieso wird sich im Jahre 2020 dennoch mit dieser Technologie beschäftigt?
 Bevor darauf eingegangen wird, wird erläutert was ein Großrechner ist.
@@ -7,16 +7,16 @@ In einem Satz ist ein Großrechner ein leistungsstarkes, zentralisiertes Servers
 Eine genauere Beschreibung ist im Absatz \ref{sec:mainframe} zu finden.
 In dieser Arbeit wird nur auf Mainframes aus dem Hause von IBM eingegangen.
 Damit wird sich auf einen Technologiestack festgelegt.
-Das verwendete Betriebssystem ist z/OS, als Anwendungsserver steht CICS\footnote{Beschreibung im Absatz \ref{cics} zu finden} und als Datenbanksystem Db2\footnote{eine relationale Datenbank}.
+Das verwendete Betriebssystem ist z/OS, als Anwendungsserver steht CICS\footnote{Beschreibung im Absatz \ref{cics} zu finden} und als Datenbanksystem Db2\footnote{eine relationale Datenbank} zur Verfügung.
 Die Messaging Lösung ist ebenfalls aus dem Hause IBM, dabei handelt es sich um MQ\footnote{Beschreibung im Absatz \ref{sec:mq} zu finden}.
 Um nur einige zu nennen.
-Unter anderem werden Programmiersprachen wie COBOL, IBM Assembler, C, aber seit einiger Zeit auch Java verwendet.
+Unter anderem werden Programmiersprachen wie COBOL, IBM Assembler, C und seit einiger Zeit auch Java verwendet.
 
 Diese Technologie hat auch eine lange Geschichte.
 So wurde vor mehr als fünfzig Jahren der allererste Großrechner vorgestellt.
 Bis in die 90iger Jahre war dieser unangefochten, jedoch verlor er zu dieser Zeit durch die verteilten Client-Server-Umgebungen an Bedeutung.
 Im Jahre 2020 ist allerdings die Cloud sein größter Konkurrent.
-Mittlerweile wird der Mainframe als `legacy`- veraltet - betrachtet.
+Mittlerweile wird der Mainframe als \glqq  legacy\grqq{}- veraltet - betrachtet.
 Wieso also wird sich mit dieser Technologie noch beschäftigt? - Als eine Antwort: Es wird weltweit genutzt.
 So verarbeiten heutzutage Großrechner weltweit circa 1,2 Millionen CICS Transaktionen pro Sekunde.\footnote{\cite{IBM.2019}}
 Im Vergleich hierzu werden 63.000 Google Suchanfragen pro Sekunde abgesetzt. \footnote{\cite{Sullivan.2016}}
@@ -51,20 +51,21 @@ Kurz bevor ich die Ausbildung begonnen hatte, wurde eine auf eclipse basierende 
 Zuvor wurde mit Hilfe der in Abbildung \ref{fig:3270} gezeigten Oberfläche, die nur ein Syntaxhighlighting zur Verfügung stellt, gearbeitet.
 Kurz vor Abschluss meiner Ausbildung wurde git auch für COBOL und IBM Assembler Sourcen als Sourceverwaltung eingeführt.
 Dadurch wurde die Sourceverwaltung durch Dateistrukturen oder durch ein von DATEV eG selbstenwickeltes Tool abgelöst.
-Nachdem eine Änderung eingebaut wurde, war eine Absprache mit den Kollegen bezüglich der Tests unvermeidlich.
-Dies hatte den Grund, dass für alle Tests die gleichen Test-CICS/Db2/MQ Ressourcen zur Verfügung stehen.
-Falls zum Beispiel eine neue Db2 Tabelle oder Datenbank benötigt wurde, musste ein manueller Prozess mit Kommunikation zwischen mehreren Abteilungen angestoßen werden.
-Dieser ist dadruch fehleranfällig und langsam.
+Das Tooling wurde zwar an einen modernen Entwicklungsprozess angepasst, jedoch nicht der Prozess selbst.
+Es wird in der sogenannten \glqq Entwicklungsstage \grqq{} \footnote{Beschreibung der Stages in Absatz \ref{sec:sysplex}} gearbeitet.
+So teilen sich zumindest die Entwickler einer Anwendung die gleiche Test-CICS/Db2/MQ Ressourcen.
+Dadurch ist eine Absprache bezüglich der Tests, teilweise auch abteilungsübergreifend, unvermeidlich.
+Ein weiterer Aspekt eines modernen Entwicklungsprozesses wäre, die automatisierte Bereitstellung von Systemumgebungen, zum Beipiel einer Datenbank.
+Hierfür muss im aktuellen Mainframeentwicklungsprozess ein manueller Ablauf mit mehreren beteiligten Abteilungen durchlaufen werden.
+Dadurch wird dieser fehleranfällig und langsam.
 
-Nach dem Abschluss meiner Ausbildung bin ich noch immer als Werkstudent bei der DATEV eG tätigt.
-Zwischen zeitlich habe ich auch bei einem `Cloud Native` Projekt mitarbeiten dürfen.
-Hier wurden mir die Vorteile dieser Umgebung bewusst.
+Im Vergleich hierzu durfte ich nach dem Abschluss meiner Ausbildung einen modernen Entwicklungsprozess in einem \glqq Cloud Native \grqq-Projekt selbst erleben.
 So hatte jeder Entwickler seine eigene Testumgebung und konnte ungestört von seinen Kollegen, ein neues Feature testen.
 Die Datenbank konnte per Knopfdruck ersetzt werden, ganze Laufzeitumgebungen konnten so erzeugt werden.
 Hier kam die Frage auf, ob es möglich wäre diese Prozesse auch für legacy z/OS Anwendungen einsetzen zu können.
-In Zusammenarbeit mit der Bereich der Technologiestrategie ergab sich das Thema dieser Arbeit.
+In Zusammenarbeit mit dem Bereich der Technologiestrategie ergab sich das Thema dieser Arbeit.
 
-Ist es generell technisch möglich mit dem `IBM Cloud Provisioning and Management for z/OS`-Toolkit Laufzeitumgebungen automatisiert bereitzustellen?
+Ist es generell technisch möglich mit dem \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit Laufzeitumgebungen automatisiert bereitzustellen?
 Wird dadurch der aktuelle Bereitstellungsprozess schneller und auch sicherer?
 Erzeugt die Nutzung einen Mehrwert bei den Stakeholdern, also den Entwicklerteams und den Administratorenteams.
 
