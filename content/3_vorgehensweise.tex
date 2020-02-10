@@ -1,27 +1,25 @@
 \chapter{Vorgehensweise}\label{ch:vorgehensweise}
-Zu Beginn dieser Arbeit wurde zunächst das `IBM Cloud Provisioning and Management for z/OS`-Toolkit mit seinen Varianten zOSMF und zOSPT analysiert.
+Zu Beginn dieser Arbeit wurde zunächst das \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit mit seinen Varianten zOSMF und zOSPT analysiert.
 Es folgte die Analyse und Darstellung des Ist-Zustandes für die  Provisionierung einer Beispielanwendung bei DATEV, inklusive der Beschreibung des momentan etablierten Bereitstellungsprozesses für CICS, Db2 und MQ.
-Anschließend wurde an Hand einer Beispielimplementierung geprüft, ob es technisch möglich ist eine Laufzeitumgebung mit benötigten MIddleware-Komponenten (Dateien, MQ, Db2) automatisiert mit dem oben genannten Toolkit für diese Beispielanwendung bereitzustellen.
-(Kommentar: für mich wäre Teil der Vorgehensweise und des wissenschaftlichen Auftrags auch eine Bewertung der Lösugn für die DATEV - kommt es zu den erwarteten Vorteilen, bzw. sehen die Admins und ENtwickler das so? ==> taucht unten zwar noch auf aber ist das ein Teil der Beispielimplementierung? Für mich wäre es ein extra Schritt.)
+Anschließend wurde an Hand einer Beispielimplementierung geprüft, ob es technisch möglich ist eine Laufzeitumgebung mit benötigten Middleware-Komponenten (Dateien, MQ, Db2) automatisiert mit dem oben genannten Toolkit für diese Beispielanwendung bereitzustellen.
+Zuletzt werden Interviews mit Vertretern aus dem Administratorenteam, Entwicklerteam und dem Team für die Technologiestrategie, durchgeführt.
+Dadurch erfolgt eine Bewertung bezüglich des möglichen Nutzwertes, sowie der Akzeptanz der Technologie durch die Stakeholdern bei DATEV e.G.
 
-Im Folgenden wird die Vorgehensweise für die Beispielimplementierung erläutert. 
-Begonnen wird auf dem sog. 'Testplex', einer Systemumgebung für Tests von neuen Betirebssystemversionen oder ähnlichem.
+Im Folgenden wird speziell auf die Vorgehensweise für die Beispielimplementierung eingegangen. 
+Begonnen wird auf dem Test-Plex, einer Systemumgebung für Tests von neuen Betirebssystemversionen oder ähnlichem.
 
 Dieser ist komplett von anderen Systemumgebungen abgekapselt, um die Auswirkungen von Fehlern in den Tests auf die Entwicklung und Produktion zu vermeiden.
-In dieser Umgebung wird zunächst untersucht, wie es möglich ist ein CICS zu provisionieren. (Kommentar: CICS als System, CICS Region ...CICS-Instanz... hier sauberer in der Nutzung ) 
+In dieser Umgebung wird zunächst untersucht, wie es möglich ist eine CICS-Instanz zu provisionieren.
 Hierfür wird vorerst ein von der IBM bei der Installation von z/OSMF mitgeliefertes minimales CICS Template verwendet.
 Anschließend wird ein umfangreicheres mitgeliefertes Template an die Anforderungen der Anwendung angepasst.
 Für die Provisionierung von Db2 Datenbanken existiert innerhalb der DATEV e.G. bereits eine REST-API.
 Es wird versucht diese innerhalb des Templates zu nutzen.
 MQ Queues werden mittels Standard IBM Jobs provisioniert.
-Da im Testplex keine Anwendungsdaten vorhanden sind, werden vorerst nur die benötigten Middleware-Systeme provisioniert, um so die Grundvoraussetzungen zu schaffen. (Kommentar: von Anwendungsdaten war vorher nie die REde...)
+Da es sich beim Test-Plex, wie im Absatz \ref{sec:sysplex} beschrieben, nur um eine Testumgebung für Systemtests handelt, werden vorerst nur die benötigten Middleware-Systeme provisioniert.
 
 Nachdem eine CICS Instanz, eine Db2 Datenbank und MQ Queues auf dem Testplex sowohl provisioniert als auch deprovisioniert werden können, folgt der nächste Schritt.
-Dabei handelt es sich um den Wechsel der Systemumgebung vom Testplex auf die Entwicklungssystemumgebung.
-Letzteres wird von allen Mainframe Entwicklern der DATEV genutzt.
-Hier werden vor allem neue Programmversionen entwickelt und erste Tests durchgeführt.
-In der Entwicklungssystemumgebung sind alle Anwendungsdaten, die für diese Tests notwendig sind, vorhanden.
+Dabei handelt es sich um den Wechsel des Sysplexes vom Test-Plex in den Qs-Plex und somit in die Entwicklungsstage.
+In der Entwicklungsstage sind alle Anwendungsdaten, die für diese Tests notwendig sind, vorhanden.
 Somit kann hier die Integration der Beispielanwendung in das provisionierte CICS stattfinden.
 
-Zuletzt werden Interviews mit Vertretern aus dem Administratorenteam, Entwicklerteam und dem Team für die Technologiestrategie, durchgeführt.
-Dadurch erfolgt eine Bewertung bezüglich des möglichen Nutzwertes, sowie der Akzeptanz der Technologie durch die Stakeholdern bei DATEV e.G.
+
