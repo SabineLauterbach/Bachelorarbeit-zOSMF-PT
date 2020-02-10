@@ -9,31 +9,30 @@ Im Gegensatz zu verteilten Serversystemen, bei denen die Funktionalitäten auf e
 \cite{Ebbers.2011}
 
 \subsection{Batch}
-Batch beziehungsweise Batch-Verarbeitung bezeichnet in der IT die sog. "Stapelverarbeitung".
+Batch beziehungsweise Batch-Verarbeitung bezeichnet in der IT die sog. \glqq Stapelverarbeitung\grqq.
 Das heißt, dass Programme mit minimalem menschlichen Eingreifen nacheinander abgearbeitet werden.
-Dies geschieht meist zu einer vorher festgelegten Zeit, gesteuert wird dies über sog. "Scheduling"-Systeme.
-Zum Beispiel wird einmal am Tag zu einer ganz bestimmten Uhrzeit die tägliche Bewertung (Kommentar SL, was ist die"Bewertung") der DATEV Rechnungsschreibung durchgeführt.
-Die auszuführenden Programme laufen in sogenannten "Batch-Jobs".
+Dies geschieht meist zu einer vorher festgelegten Zeit, gesteuert wird dies über sog. \glqq Scheduling\grqq-Systeme.
+Zum Beispiel wird einmal am Tag zu einer ganz bestimmten Uhrzeit die tägliche Bewertung\footnote{Beschreibung in Absatz \ref{sssec:täglbew}} der DATEV Rechnungsschreibung durchgeführt.
+Die auszuführenden Programme laufen in sogenannten \glqq Batch-Jobs\grqq.
 \cite{Ebbers.2011}
 
 \subsection{Batch-Job / Job}\label{ssec:job}
-In einem Batch-Job, in dieser Arbeit wird "Job" gleichbedeutend verwendet, wird dem System mitgeteilt welches Programm mit welchen Ein- und Ausgabedateien und Parametern gestartet werden soll.
-DIe Skriptsprache, die diese Jobs definiert, ist im IBM-Mainframe-Umfeld die sog. `Job Control Language`, kurz JCL.
+In einem Batch-Job, in dieser Arbeit wird \glqq Job\grqq{} gleichbedeutend verwendet, wird dem System mitgeteilt welches Programm mit welchen Ein- und Ausgabedateien und Parametern gestartet werden soll.
+DIe Skriptsprache, die diese Jobs definiert, ist im IBM-Mainframe-Umfeld die sog. \glqq Job Control Language\grqq, kurz JCL.
 Die drei Grundbausteine der JCL werden im Folgendem beschrieben.
 
 Zunächst ist `JOB` zu nennen, auch Jobkarte genannt.
 Hier wird der Name des Jobs, Berechnungsinformationen, maximal zur Verfügung stehende CPU-Zeit und weitere Job-weite Parameter gesetzt.
 
-Innerhalb eines Jobs wird mit Hilfe des `EXEC` Befehls dem System mitgeteilt, welches Programm gestartet werden soll.
-Es können mehrere `EXEC` Befehle in einem Job vorkommen, dabei wird jeder einzelne als sogenannter `Job step` bezeichnet.
+Innerhalb eines Jobs wird mit Hilfe des \glqq EXEC\grqq{} Befehls dem System mitgeteilt, welches Programm gestartet werden soll.
+Es können mehrere \glqq EXEC\dq  Befehle in einem Job vorkommen, dabei wird jeder einzelne als sogenannter \glqq Job step\grqq{} bezeichnet.
 Dabei können dem Programm neben den Ein-/Ausgabedateien auch weitere Parameter übergeben werden.
 
-Als letztes ist der `DD` Baustein zu nennen.
-`DD` steht für Data Definition.
-Ein DD-Statement verknüpft den sog. DD-Namen mit einer Datei, einem I/O Gerät oder Funktionen, die im eigentlichen Programm enthalten sind. (Kommentar: ...oder Funktionen... ??? was für Funktionen?)
-So steuert es die Ein- und Ausgaben des Programmes. (steuern tun DD-Statements nicht, sie sind nru ein Alias für physische Dateinamen, das würde eigentlich als Beschreibung reichen)
-Ein `DD` Baustein ist immer an ein `EXEC` Befehl gebunden.
-Einem `EXEC` können mehrere `DD` Bausteine zugeordnet sein. 
+Als letztes ist der \glqq DD\grqq{} Baustein zu nennen.
+\glqq DD\grqq{} steht für Data Definition.
+Ein DD-Statement verknüpft den sog. DD-Namen mit einer Datei oder einem I/O Gerät und ist somit ein Alias für diese.
+Ein \glqq DD\grqq{} Baustein ist immer an ein \glqq EXEC\grqq{} Befehl gebunden.
+Einem \glqq EXEC\grqq{} können mehrere \glqq DD\grqq{} Bausteine zugeordnet sein. 
 \cite{Ebbers.2011}
 
 \section{Customer Information Control System}\label{cics}
@@ -41,25 +40,24 @@ Das Customer Information Control System, kurz CICS, ist ein Applikationsserver f
 Ein Applikationsserver stellt eine Umgebung zur Verfügung, in der Anwendungen gehostet werden können.
 Dabei kümmert sich dieser unter anderem um Transaktionalität, Webkommunikation und Sicherheit.
 Hierfür stellen Applikationsserver eine API zur Verfügung.
-CICS hat einen weiteren (KOmmentar: welchen noch? Das andere sind Eigenschaften, keine Vorteile) Vorteil, es unterstützt verschiedene Programmiersprachen.
+CICS hat einen Vorteil gegenüber anderen Anwendungsservern, es unterstützt verschiedene Programmiersprachen.
 CICS ist ein Multi-Language Application Server und unterstützt z.B. COBOL, Assembler, Java und PLI.
 So können Programme innerhalb einer Anwendung in der für ihren Use-Case am besten geeigneten Sprache implementiert werden.
-Zu den unterstützten Sprachen zählen neben COBOL und IBM Assembler auch Java und Java EE. (Kommentar: Java EE nur im CICS Liberty Umfeld, und strenggenommen ist JEE keine "Sprache" würde ich weglassen und statt dessen Zeile 45 (s.o.) nehmen.
 \cite{Rayns.2011}
 
 \subsection{CICS Transaktion}\label{subsec:trans}
 Ein Businessablauf wird im CICS in einer Transaktion gekapselt.
-Eine Transaktion kann mehrere Programme unterschiedlicher Programmiersprachen umfassen und wird über eine eindeutige "TransaktionsID" identifiziert..
+Eine Transaktion kann mehrere Programme unterschiedlicher Programmiersprachen umfassen und wird über eine eindeutige \glqq TransaktionsID\grqq{} identifiziert..
 
 Über die TransaktionsID wird der Ablauf gestartet.
 Dies kann sowohl per Webanfrage oder per Messaging Queue als auch aus einem anderen Programm heraus oder manuell geschehen.
 In der Transaktion werden alle Änderungen, die Programme an Resourcen, wie zum Beispiel einer Datenbank oder Dateien tätigen, protokolliert.
-So wird im Fehlerfall sichergestellt, dass diese rückgängig gemacht werden können. (Kommentar: Meinst Du damit Commit/Rollback? - vlt. besser: setzt Transactionalitätspattern sicher....)
+So wird im Fehlerfall die Möglichkeit eines Rollbacks sichergestellt.
  \cite{Rayns.2011}
 
 \subsection{Voraussetzungen}\label{subsec:voraus}
-Im Umfeld der DATEV eG sind  die Hard- und Softwarevorausetzungen um ein CICS beziehungsweise eine CICS Instanz zu erstellen und zu starten vorhanden. (Kommentar: ist das nicht etwas zu selbstverständlich? vlt. besser: Bei DATEV kümmert sich ein Team, die "CICS Administration" um das Erstellen einer CICS-Instanz, startet CICS und kümmert sich generell um alles rund um die Administration des CICS Transaction Servers... )
-Der Fokus dieser Arbeit liegt auf Erstellen ("Provisionieren") einer CICS-Instanz. Es werden nur die dafür notwendigen Voraussetzungen dargelegt.
+Bei der DATEV eG kümmert sich ein Team, die \glqq CICS Administration\grqq{}um das Erstellen einer CICS-Instanz, starten dieser Instanz und ist generell für alles rund um die Administration des CICS Transactions Servers zuständig.
+Der Fokus dieser Arbeit liegt auf dem Erstellen (\glqq Provisionieren\grqq{}) einer CICS-Instanz. Es werden nur die dafür notwendigen Voraussetzungen dargelegt.
 Außerdem liegt der Fokus auf Entwicklungs-CICS-Systemen, auf der sog. Entwicklungs-Stage, nicht auf den produktiven CICS-Systemen der DATEV eG. 
 Aus diesem Grund werden nur Schritte, die für ein solches Testsystem benötigt werden, dargestellt.
 Eine weitere Rahmenbedingung besteht darin, dass nur die Arbeitsschritte, die mit z/OSMF\footnote{Beschreibung in Absatz \ref{sec:zosmf}} automatisiert werden, erläutert werden.
@@ -76,16 +74,16 @@ Diese Dateien benötigt die CICS Instanz um zum Beispiel Systemfehler zu protoko
 
 
 \subsubsection{CSD}
-In der Datei "CICS System Defintion", kurz CSD, muss jede Ressource, die dem System zur Verfügung stehen soll, definiert werden.
+In der Datei \glqq CICS System Defintion\grqq, kurz CSD, muss jede Ressource, die dem System zur Verfügung stehen soll, definiert werden.
 Eine CSD Datei kann für mehrere CICS Instanzen verwendet werden.
-Eine solche allgemeine CSD Datei hat ca. 22.600 Einträge. (Kommentar: hat das wirklich eine immer annährend gleich große Zahl??)
+Eine CSD Datei besteht aus mehreren Einträgen.
 Ein Eintrag besteht aus einer Gruppe und einer Liste.
 Die Gruppe ist hierbei die Definition einer Systemressource und muss manuell angelegt werden.
 Bei der Liste handelt es sich um das System, welches diese Ressource benötigt.
 Dort ist unter anderem für jede CICS Instanz hinterlegt, zu welchem Db2 Datenbanksystem und welchem MQ Messagingsystem sich diese Instanz verbinden soll.
 
 \subsubsection{STC Job}
-Bei einem Started Task Control-Job, kurz STC Job, handelt es sich um einen Batch Job, der mit Hilfe des `START`-Konsolenkommandos innerhalb von z/OS (Kommentar: wurde z/OS schon erklärt?) gestartet werden kann.
+Bei einem Started Task Control-Job, kurz STC Job, handelt es sich um einen Batch Job, der mit Hilfe des \glqq START\grqq-Konsolenkommandos innerhalb von z/OS gestartet werden kann.
 Dieser Batch Job wird deshalb auch als Started Task bezeichnet.\cite{Cassier.2007}
 Bei der DATEV eG existiert für jedes CICS ein solcher Job.
 In diesem werden zunächst einige zur Laufzeit benötigten Bibliotheken und Dateien eingebunden, unter anderem die CICS spezifischen Dateien\footnote{Beschreibung in Absatz \ref{sssec:speziDat}}.
@@ -96,12 +94,12 @@ Zu diesen Parameter zählen unter anderem der eindeutige Name der CICS Instanz, 
 
 \subsection{Entfernung CICS Instanz}
 Um eine CICS Instanz zu entfernen muss diese zunächst gestoppt werden.
-Dies ist über das `STOP`-Konsolenkommando von z/OS möglich.
+Dies ist über das \glqq STOP\grqq-Konsolenkommando von z/OS möglich.
 Anschließend müssen alle im Absatz \ref{subsec:createCICS} beschriebene Schritte rückgängig gemacht werden.
 Also müssen die für diese Instanz spezifischen Dateien, die Einträge für die CICS Instanz aus der CSD Datei und schließlich auch der STC Job gelöscht werden.
 
 \section{IBM MQ}\label{sec:mq}
-IBM MQ ist eine Messaging-Lösung der IBM. (Kommentar: das heißt doch "Websphere MQ, oder?)
+IBM MQ ist eine Messaging-Lösung der IBM.
 Diese ermöglicht den asynchronen Datenaustausch zwischen Anwendungen mittels sogenannter Queues.
 Alle IBM MQ Begrifflichkeiten, die in dieser Arbeit verwendet werden, werden im Folgenden erläutert.
 \cite{Aranha.2013}
@@ -109,10 +107,9 @@ Alle IBM MQ Begrifflichkeiten, die in dieser Arbeit verwendet werden, werden im 
 \subsection{Queue Manager}
 Bei einem Queue Manager handelt es sich um die zentrale Ressource eines IBM MQ Systems.
 Er verwaltet  alle anderen IBM MQ Ressourcen.
-Ausgenommen hiervon ist die Queue-sharing Group, diese ist für diese Arbeit aber nicht von Relevanz. (Kommentar Dann würd ich den Satz weglassen...)
 Dazu gehören unter anderem die Speichersteuerung der Daten und die Wiederherstellung dieser im Falle eines Fehlers.
 Desweiteren koordiniert er den Zugriff aller Anwendungen auf die Nachrichten in den von ihm verwalteten Queues.
-Um hierbei die Konsistenz sicherzustellen, sorgt er für Locking und die notwendige Isolation. (Kommentar: er isoliert was von was?  vermutlich "Isolation der QUeues")
+Um hierbei die Konsistenz sicherzustellen, sorgt er für Locking und die notwendige Isolation der Queues.
 \cite{Aranha.2013}
 
 \subsection{Queues}
@@ -121,29 +118,66 @@ Es gibt verschiedene Arten von Queues, die im Kontext dieser Arbeit relevanten Q
 
 Die Local Queue.
 Dabei handelt es sich um die einzige Queue Art, bei der die Nachrichten physikalisch gespeichert werden.
-Alle anderen (Kommentar: wer muss zeigen?)  müssen auf eine Local Queue zeigen.
+Die anderen Queue Arten nutzen als Basis immer eine Local Queue.
 
-Die sogenannte "Initiation Queue", eine spezielle Art von Local Queues.
+Die sogenannte \glqq Initiation Queue\grqq, eine spezielle Art von Local Queues.
 Diese dient dem Queue Manager dazu, um unter bestimmten Bedingungen eine Trigger-Nachricht darauf zu schreiben.
 So kann eine andere Local Queue so definiert sein, dass sobald eine Nachricht auf sie geschrieben wird eine solche Trigger-Nachricht erzeugt werden.
 Dies ermöglicht, dass Anwendungen nur starten, wenn wirklich Daten zum Verarbeiten vorhanden sind.
 \cite{Aranha.2013}
 
 \subsection{Process}
-Für das Auslösen von Anwendungen wird nicht nur die Initiation Queue benötigt, sondern auch sogenannte "Processes".
+Für das Auslösen von Anwendungen wird nicht nur die Initiation Queue benötigt, sondern auch sogenannte \glqq Processes\grqq.
 So muss der Local Queue, die den Start einer Anwendung auslösen soll, bei der Definition nicht nur die Initiation Queue bekannt gemacht werden, sondern auch ein Process.
-Ein Process legt den "Type" und den Namen der zu startenden Anwendung fest.
-Als "Type" können beispielhaft CICS oder auch WINDOWSNT für Windows unterstütze Platformen genannt werden.
-Ist der "Type" CICS,  muss der Name der Transaktion angegeben werden, für Windows Platformen der Dateipfad der auszuführenden exe.
+Ein Process legt den \glqq Type\grqq{} und den Namen der zu startenden Anwendung fest.
+Als \glqq Type\grqq{} können beispielhaft CICS oder auch WINDOWSNT für Windows unterstütze Platformen genannt werden.
+Ist der \glqq Type\grqq{} CICS,  muss der Name der Transaktion angegeben werden, für Windows Platformen der Dateipfad der auszuführenden exe.
 \cite{Aranha.2013}
+
+\section{Stages, Sysplexe und Logical Partitions}
+Innerhalb der DATEV eG existieren vier sogenannte \glqq Stages\grqq{} für die Entwicklung auf dem Mainframe.
+Dabei handelt es sich um abgekapselte Systemumgebungen.
+Eine Stage besteht aus einer oder mehreren \glqq Logical Partitions \grqq, kurz LPARs, mit eigenen Subsystemen und eigener Ressourcenverwaltung. 
+Zu den Subsystemen zählen unter anderem CICS \footnote{Beschreibung in Absatz \ref{cics}},  Db2\footnote{ein relationales Datenbanksystem für z/OS} und IBM MQ\footnote{Beschreibung in Absatz \ref{sec:mq}}.
+Dadurch wird eine strickte Trennung zwischen den Stages realisiert.
+Die vier Stages werden im Folgenden beschrieben.\\
+\glqq Entwicklung\grqq\\
+Stage auf der alle z/OS Entwickler an neuen Features arbeiten und erste kleinere Tests durchführen.
+
+\glqq Qualitätssicherung\grqq\\
+Hier werden vor allem Integrationstests mit extra dafür erstellen Testdaten durchgeführt.
+
+\glqq Vorproduktion\grqq\\
+Die Vorproduktion steht für weitere Integrationstests zur Verfügung.
+Jedoch produktionsnäher und auch mit Echtdaten, also Daten aus der Produktion.
+
+\glqq Produktion\grqq\\
+Hier befindet sich die Software, die von den Kunden verwendet wird.
+Ein Programm muss die Entwicklungs-, Qualitätssicherungs- und Vorproduktionsstages durchlaufen bevor es dem Kunden in der Produktion zur Verfügung gestellt wird.
+
+Die LPARs der vier Stages sind auf zwei sogenannte  \glqq Sysplexe\grqq{} aufgeteilt.
+Ein Sysplex kümmert sich um die Kommunikation zwischen den LPARs der einzelnen Stages und verwaltet Ressourcen LPAR übergreifend.
+\cite{Kyne.2016}
+
+Neben den oben erwähnten zwei Sysplexen existiert noch ein weiterer Sysplex.
+Diese werden alle im Folgenden beschrieben.
+
+\glqq LAB/Test-Plex\grqq\\
+Der Testplex ist als Labor für Änderungen am System zu betrachten.
+So werden zum Beispiel neue Betriebssystemsversionen auf diesem geprüft.
+
+\glqq QS-Plex\grqq\\
+Enthält unter anderem die LPARs der Entwicklung und der Qualitätssicherung.
+
+\glqq Prod-Plex\grqq\\
+Im Prod-Plex sind die LPARs der Vorproduktion und der Produktion enthalten.
 
 \section{IBM Cloud Provisioning and Management for z/OS}\label{sec:zosmf}
 In diesem Absatz wird zunächst auf die für dieses Kapitel grundlegenden Begriffe eingegangen.
-Anschließend wird das Produkt "IBM Cloud Provisioning and Management for z/OS" erläutert. (Kommentar: z/OSMF ist nicht die Kurzbezeichnung, sondern steht für z/OS Management Facility , ich würde es hier noch nicht einführen)
-Im Anschluss darauf wird das auf Kommandozeilenbefehle basierende z/OS Provisioning Toolkit, kurz z/OS PT, und dessen Möglichkeiten dargestellt.
+Anschließend wird das Produkt \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} erläutert.
 
 \subsection{Begrifferklärung}
-Im Folgenden werden einige allgemeine Begriffe, die im Umfeld des Tools "IBM Cloud Provisioning and Management for z/OS" vorkommen, erläutert.
+Im Folgenden werden einige allgemeine Begriffe, die im Umfeld des Tools \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} vorkommen, erläutert.
 
 \subsubsection{Provisioning}
 Ins Deutsche übersetzt bedeutet es Bereitstellung, in dieser Arbeit wird auch Provisionierung verwendet.
@@ -158,7 +192,6 @@ Innerhalb eines Steps können sowohl interne und externe Scripte als auch JCLs u
 Darüber hinaus besteht die Möglichkeit REST-Calls auszuführen.
 Es können Bedingungen für die Durchführung eines Steps definiert werden.
 So ist es zum Beispiel möglich, einen Step nur durchzuführen, wenn eine bestimmte Variable einen bestimmten Wert besitzt.
-Ein weiteres Beispiel ist, es können erforderliche Steps definiert werden, so dass bevor ein Step auf eine Datei zugreift, mittels eines vorherigen Steps geprüft wird ob diese vorhanden ist und wenn nicht diese erzeugt. (Kommentar: Den Satz würde ich weglassen)
 Es wird ein XML Schema verwendet um sicherzustellen, dass in dem XML-Skript zur Laufzeit keine syntaktischen Fehler vorhanden sind.
 \cite{Rotthove.2018}
 
@@ -185,64 +218,63 @@ Da ein Template immer provisioniert werden kann, wird hier auch der Speicherort 
 Zusätzlich kann noch eine Beschreibung des Templates hinzugefügt werden.
 
 Somit bildet ein Template einen Rahmen um mehrere Workflows und ermöglich eine schnellere De-/provisionierung.
-Das hat den VOrteil, dass Variablen nur an einer Stelle geändert werden.
+Das hat den Vorteil, dass Variablen nur an einer Stelle geändert werden.
 Daüber hinaus besteht die Möglichkeit, per Awendereingabe den Variablen zum Zeitpunkt der Provisionierung einen Wert zuzuweisen.
 Somit ist ein Template deutlich flexibler als ein Workflow.
 \cite{IBM.2019}
 
-\subsubsection{Instance}
+\subsubsection{Instance}\label{sssec:instance}
 Hierbei handelt es ich um das Ergebnis nach der Provisionierung eines Templates,
 zum Beispiel um ein funktionsfähiges CICS.
 
 \subsection{IBM Cloud Provisioning and Management for z/OS}
 Das IBM Cloud Provisioning and Management for z/OS bietet die Möglichkeit, mehrere Systeme (sog. Middleware) innerhalb eines z/OS Betriebssystems zu provisionieren, unter anderem Laufzeitumgebungen wie CICS. 
-jedoch nicht die Bereitstellung eines kompletten z/OS Betriebssystems. (Kommentar: besser weglassen, ist klar durch den Satz vorher)
 Für diese Aufgaben stehen zwei Schnittstellen zur Verfügung.
 Zum einen das z/OS Provisioning Toolkit, (z/OSPT) und zum anderen z/OS Management Facility (z/OSMF).
 \cite{KeithWinnardGaryPuchkoffHirenShah.2016}
 
 \subsubsection{z/OS Provisioning Toolkit}\label{sssec:zospt}
 z/OSPT bietet ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Laufzeitumgebungen.
-In Abbildung \ref{fig:zospt_help} werden die möglichen Kommandozeilenbefehle mittels des Befehls `zospt -h` in einem Kommandofenster angezeigt.
+In Abbildung \ref{fig:zospt_help} werden die möglichen Kommandozeilenbefehle mittels des Befehls \glqq zospt -h\grqq{} in einem Kommandofenster angezeigt.
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\textwidth]{ffigures/zospt_help_putty.png}
+	\includegraphics[width=\textwidth]{figures/zospt_help_putty.png}
 	\caption{z/OSPT mögliche Kommandozeilenbefehle}
 	\label{fig:zospt_help}
 \end{figure}
 Mit z/OSPT werden noch zwei weitere Begriffe eingeführt.\\
-"Images".
+\glqq Images\grqq{}.
 Dabei handelt es sich grundsätzlich um ein Template, jedoch kann dieses Template über eine weitere Inputdatei verändert werden.
 Dadurch kann ein Template mit spezifischen Änderungen provisioniert werden, ohne dass ein neues Template erzeugt werden muss.
-Dies erhöht die Flexibilität der Templates weiter.\\
+Dies erhöht die Flexibilität der Templates weiter.
 
-"Container".
-Dabei handelt es sich eins zu eins um eine 'Instance' (Kommentar: Instance von was? beschreiben...).
+\glqq Container\grqq{}.
+Dabei handelt es sich eins zu eins um eine \glqq Instance\grqq \footnote{Beschreibung in Absatz \ref{sssec:instance}}.
 \cite{IBM.2019b}
 
 \subsubsection{z/OS Management Facility}\label{sssec:zosmf}
 Der Hauptaugenmerk dieser Arbeit liegt  bei z/OSMF, da damit die Verwaltung von Workflows und Templates über eine browserbasierende Schnittstelle möglich ist.
-Durch diese Oberfläche, in Abbildung \ref{fig:zosmf_welcome} dargestellt, ist es einfacher zu bedienen (Kommentar: als was?? ==> z/OSPT - erwähnen)  und somit wird der Einstieg in die Provisionierung erleichtert.
+Durch diese Oberfläche, in Abbildung \ref{fig:zosmf_welcome} dargestellt, ist es einfacher zu bedienen als das Kommandozeileninterface von z/OSPT  und somit wird der Einstieg in die Provisionierung erleichtert.
 
 //hier zosmf welcomepage screenshot
 
-Die rechten Seite der Abbildung \ref{fig:zosmf_welcome} zeigt den Umfang der z/OSMF  Funktionen.
-Für diese Arbeit besitzt nur der Menüpunkt `Cloud Provisioning` Relevanz.
+Die linke Seite der Abbildung \ref{fig:zosmf_welcome} zeigt den Umfang der z/OSMF  Funktionen.
+Für diese Arbeit besitzt nur der Menüpunkt \glqq Cloud Provisioning\grqq{} Relevanz.
 Unter diesem Punkt sind die Funktionalitäten für die automatisierte Bereitstellung von Templates zu finden.
 \cite{Rotthove.2018}
 
-Dabei (Kommentar: wobei?? ZUerst ist das 'Resource Management` zu nennen..
-Darunter werden sogenannte `Domains` und die dazugehörigen `Tenants` verwaltet.
-Unter einer `Domain` ist ein System zu verstehen, das Systemressourcen in Ressourcenpools gliedert.
-`Tenants` sind die dazugehörigen Rechtegruppen, die dem Anwender den Zugriff auf und die Nutzung von zugeordneten Templates ermöglicht.
-Einem Template muss sowohl eine `Domain` als auch ein `Tenant` zugewiesen werden.
+Zuerst ist das \glqq Resource Management\grqq{} zu nennen..
+Darunter werden sogenannte \glqq Domains\grqq{} und die dazugehörigen \glqq Tenants\grqq{} verwaltet.
+Unter einer \glqq Domain\grqq{} ist ein System zu verstehen, das Systemressourcen in Ressourcenpools gliedert.
+\glqq Tenants\grqq{} sind die dazugehörigen Rechtegruppen, die dem Anwender den Zugriff auf und die Nutzung von zugeordneten Templates ermöglicht.
+Einem Template muss sowohl eine\glqq Domain\grqq{} als auch ein \glqq Tenant\grqq{} zugewiesen werden.
 \cite{Rotthove.2018}
 
-Zur Verwaltung der Templates und Instances kommen die `Software Services` zum Einsatz.
-Dort können neue Templates über die 'Manifest Datei' hinzugefügt werden.
-Dann muss, wie oben beschrieben, eine `Domain` und ein `Tenant` zugwiesen werden.
+Zur Verwaltung der Templates und Instances kommen die \glqq Software Services\grqq{} zum Einsatz.
+Dort können neue Templates über die \glqq Manifest Datei\grqq{} hinzugefügt werden.
+Dann muss, wie oben beschrieben, eine \glqq Domain\dq und ein \glqq Tenant\grqq{} zugwiesen werden.
 Anschließend kann das Template, falls es keine Fehler beinhaltet, veröffentlicht werden.
-Es ist zu empfehlen vorher einen `Test Run` durchzuführen.
+Es ist zu empfehlen vorher einen \glqq Test Run\grqq{} durchzuführen.
 Dabei wird eine Instance testweise provisioniert.
 Diese Instance verhält sich genauso wie eine Instance, die aus einem veröffentlichten Template erzeugt wurde.
 Somit können damit das Template und die in der Aktion-Definitions-Datei definierten Aktionen getestet werden.
