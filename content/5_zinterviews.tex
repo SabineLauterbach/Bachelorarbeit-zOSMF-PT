@@ -4,8 +4,9 @@ Anschließend werden die Ergebnisse der einzelnen Interviews nach Gruppen aufget
 Schließlich wird daraus ein allgemeines Stimmungsbild abgeleitet.
 
 \subsection{Durchführung}
-Interviewt wurden jeweils zwei Mitarbeiter der Gruppen, CICS Administration, Db2 Administration, MQ Administration und Entwicklerteam der Rechnungsschreibung.
-Zusätzlich wurde eine Fachberaterin im Bereich Technologiestrategie befragt.
+Interviewt wurden jeweils zwei Mitarbeiter der Gruppen, CICS Administration, Db2 Administration, MQ Administration.
+Zusätzlich wurde eine Fachberaterin im Bereich Technologiestrategie und ein Mitarbeiter des Entwicklerteams der DATEV Rechnungsschreibung befragt.
+Für die beiden letztgenannten Interviews waren nur die Fragen 1.,2. und 6. bis 10. des Fragebogens von Relevanz.
 Sowohl der Fragenkatalog als auch die ausgefüllten und digitalisierten Fragebögen sind im Anhang \ref{app:fragen} zu finden.
 Bevor die Interviews durchgeführt worden sind, wurde den Teams in getrennten Terminen die Ergebnisse dieser Arbeit vorgestellt.
 Der Schwerpunkt wurde an das jeweilige Team angepasst.
@@ -29,7 +30,7 @@ Zusammen mit den verschiedenen Sprachen hat dies auf CICS Administrator 1 eine a
 Dennoch können sich beide Befragten vorstellen, nachdem der Einarbeitungsaufwand erbracht wurde, täglich mit dem Toolkit zu arbeiten.
 Da bei dem aktuell etablierte Prozess ein hoher manueller Aufwand zu erbringen ist und eine Abstimmung zwischen den Administratoren und dem Entwicklerteam notwendig ist.
 
-Zusammenfassend lässt sich sagen, dass die CICS Administratoren eine Chance im Toolkit sehen.
+Zusammenfassend lässt sich sagen, dass die CICS Administratoren eine Chance auf Verbesserung des Prozesses durch das Toolkit sehen.
 Allerdings schreckt der hohe Einarbeitungsaufwand und die Mischung aus verschiedenen Sprachen und fehlendem Syntaxhighlighting ab.
 
 \subsubsection{Db2 Administratoren}
@@ -84,10 +85,24 @@ Dies geht soweit, dass XML nicht mehr als zeitgemäß betrachtet wird, sondern a
 
 Zusammenfassend lässt sich sagen, dass sich beide MQ Administratoren einig sind, dass der momentan etablierte Bereitstellungsprozess schlecht ist und ein neuer Prozess durchaus notwendig wäre.
 Der durch diese Arbeit gezeigte Prozess als Ablöse wird prinzipiell als möglich erachtet.
-Jedoch nur der Einsatz mit zOSPT.
+Jedoch nur der Einsatz mit z/OSPT.
 Außerdem wird vor einer starken Lernkurve und noch fehlender Automation und der damit einhergehenden Ähnlichkeit zu Jenkins oder anderen PaaS Lösungen gewarnt.
 
-\subsubsection{Entwicklerteam der Rechnungsschreibung}
+\subsubsection{Entwicklerteam der DATEV Rechnungsschreibung}
+Aus Sicht des Entwicklers wird für den gezeigten Bereitstellungsprozess viel Wissen über die z/OSMF Oberfläche und das Template selbst benötigt.
+Dieses Wissen müsse auch bei geringer Nutzung über einen längeren Zeitraum erhalten werden.
+Der Prozess sei zwar schon ganz gut, jedoch ist weiterhin viel Absprache mit den Administratoren notwendig.
+Hier wird auch der Nachteil des momentan etablierter Bereitstellungsprozesses gesehen.
+Jedoch sobald der Erstaufwand geleistet wurde, muss sich nur im Ausnahmefall noch darum gekümmert werden.
+Diese Verantwortung würde im Fall der Umsetzung mit z/OSPT bei dem Entwicklerteam selbst liegen.
+Durch die eingesparten Absprachen wird sich eine höhere Effizienz erhofft.
+Es wurde noch die Nutzung in der Qualitätssicherungs- und Produktionsstage genannt.
+Hier werden Vorteile einer einfache Skalierbarkeit gesehen.
+Vor allem auf Grund der Eigenverantwortung über die Subsysteme könnte sich die tägliche Arbeit mit dem Toolkit vorgestellt werden.
+Allerdings nur im Hinblick auf eine Integration in eine Jenkins Build Pipeline und sammeln von Erfahrungen bezüglich des Prozesses und des Toolings.
+
+Das Hauptaugenmerk des Entwicklers liegt bei der höheren Eigenverantwortung beziehungsweise der Eigenverwaltung von benötigten Subsystemen.
+Eine einfache und intuitive Bedienung des Toolkits ist außerdem wichtig.
 
 \subsubsection{Fachberaterin im Bereich Technologiestrategie}
 Nach der Fachberaterin im Bereich Technologiestrategie ist der gezeigte Ablauf beziehungsweise die zOSMF Oberfläche für eine solche Aufgabe geeignet.
@@ -108,3 +123,27 @@ Zusätzlich dienen die Konfigurationsdateien auch als Dokumentation, welche Ress
 Abschließend lässt sich sagen, dass aus Sicht einer Fachberaterin im Bereich Technologiestrategie dieses Toolkit die Entwicklung beziehungsweise den Bereitstellungsprozess deutlich verbessern kann.
 So ist für den Entwickler ein an die Cloud Native Welt angenäherter Entwicklungsprozess möglich.
 Dadurch wird der Wechsel zwischen beiden Umgebungen immer fließender.
+
+\subsection{Meinungsbild}
+Über alle Gruppen hinweg lassen sich folgende Punkte zusammenfassen:
+
+\begin{samepage}
+\begin{itemize}
+\item neuer Prozess notwendig
+\item z/OSPT Lösung bevorzugt
+\item erste Erfahrungen sammlen
+\end{itemize}
+\end{samepage}
+
+Es stimmen alle Gruppen überein, dass der momentan etablierte Bereitstellungsprozess für Mainframesubsysteme durch viele Absprachen und Abstimmungs-Aufwand zeitäufwandig ist.
+Sie würden einen neuen schnelleren Prozess begrüßen.
+
+Jedoch muss dieser Prozess aus Entwicklersicht mit minimalen Konfigurationsaufwand verbunden sein.
+Dies ermöglicht eine Umsetzung mittels z/OSPT und einer möglichen Integration in eine Jenkins Build Pipeline oder durch die Einbindung in den \glqq DATEV Marktplatz\grqq{} mittels eines entwickelten \glqq Service Brokers\grqq.
+Aus Sicht der Administratoren sind mit dieser Umsetzung nur wenige allgemeine Templates zu verwalten.
+Da die Entwickler mit z/OSPT Images und keine weiteren Templates erzeugen.
+Um diese Punkte zu ermöglichen, muss das Template umgestaltet werden.
+Der dadurch in den Administratorenteams entstehende Aufwand und die damit verbundene steile Lernkurve hat eine abschreckende Wirkung.
+
+Trotz dieser abschreckenden Wirkung sind auch die Administratorenteams bereit, falls die Kapazitäten vorhanden sind, den Bereitstellungsprozess mit Hilfe des \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} zu verbessern.
+Aus Sicht der Technologiestrategie ist das ein wichtiger und notwendiger Schritt in zu einem Cloud Native ähnlichen Prozess.
