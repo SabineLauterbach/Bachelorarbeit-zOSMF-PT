@@ -19,14 +19,14 @@ Die auszuführenden Programme laufen in sogenannten \glqq Batch-Jobs\grqq.
 
 \subsection{Batch-Job / Job}\label{ssec:job}
 In einem Batch-Job, in dieser Arbeit wird \glqq Job\grqq{} gleichbedeutend verwendet, wird dem System mitgeteilt welches Programm mit welchen Ein- und Ausgabedateien und Parametern gestartet werden soll.
-DIe Skriptsprache, die diese Jobs definiert, ist im IBM-Mainframe-Umfeld die sog. \glqq Job Control Language\grqq, kurz JCL.
+Die Skriptsprache, die diese Jobs definiert, ist im IBM-Mainframe-Umfeld die sog. \glqq Job Control Language\grqq, kurz JCL.
 Die drei Grundbausteine der JCL werden im Folgendem beschrieben.
 
-Zunächst ist `JOB` zu nennen, auch Jobkarte genannt.
+Zunächst ist \glqq JOB\grqq{} zu nennen, auch Jobkarte genannt.
 Hier wird der Name des Jobs, Berechnungsinformationen, maximal zur Verfügung stehende CPU-Zeit und weitere Job-weite Parameter gesetzt.
 
 Innerhalb eines Jobs wird mit Hilfe des \glqq EXEC\grqq{} Befehls dem System mitgeteilt, welches Programm gestartet werden soll.
-Es können mehrere \glqq EXEC\dq  Befehle in einem Job vorkommen, dabei wird jeder einzelne als sogenannter \glqq Job step\grqq{} bezeichnet.
+Es können mehrere \glqq EXEC\grqq{}  Befehle in einem Job vorkommen, dabei wird jeder einzelne als sogenannter \glqq Job step\grqq{} bezeichnet.
 Dabei können dem Programm neben den Ein-/Ausgabedateien auch weitere Parameter übergeben werden.
 
 Als letztes ist der \glqq DD\grqq{} Baustein zu nennen.
@@ -37,7 +37,7 @@ Einem \glqq EXEC\grqq{} können mehrere \glqq DD\grqq{} Bausteine zugeordnet sei
 \cite{Ebbers.2011}
 
 \subsection{Resource Access Control Facility}
-Die Resource Access Control Facility, kurz RACF, ist ein externer Sicherheits Manager für z/OS.
+Die Resource Access Control Facility, kurz RACF, ist ein externer Sicherheitsmanager für z/OS.
 Dieser bietet eine Rechteverwaltung für das z/OS Betriebssystem an.
 Damit werden unter anderem Zugriffsrechte auf Dateien und Subsysteme gesteuert.
 \cite{InternationalBusinessMachinesCorporation.2008}
@@ -49,12 +49,12 @@ Mittlerweile existieren jedoch auch REXX-Compiler.
 \cite{Parziale.2007}
 
 REXX versteht sich als Skriptsprache und kommt nicht nur am Mainframe zum Einsatz.
-Also als Bindeglied für Betriebssystembefehle, grafischen Interfaces, Objekten, Funktionen und Serviceroutinen.
+So kann es als Bindeglied für Betriebssystembefehle, grafischen Interfaces, Objekten, Funktionen und Serviceroutinen gesehen werden.
 So wird es, wie auch in dieser Arbeit, unter anderem für die Automation von sich wiederholenden Systemadministrations Aufgaben eingesetzt.
 \cite{Fosdick.2005}
 
 \section{IBM Mainframe Architektur bei der DATEV eG}
-Folgende Begriffe werden in diesem Absatz erläutert:
+Folgende Begriffe werden in diesem Absatz im Umfeld der DATEV eG erläutert:
 
 \begin{samepage}
 \begin{itemize}
@@ -96,7 +96,7 @@ Neben den oben erwähnten zwei Sysplexen existiert noch ein weiterer Sysplex.
 Diese werden alle im Folgenden beschrieben.
 
 \subparagraph{\glqq LAB/Test-Plex\grqq}~\\
-Der Testplex ist als Labor für Änderungen am System zu betrachten.
+Der Test-Plex ist als Labor für Änderungen am System zu betrachten.
 So werden zum Beispiel neue Betriebssystemsversionen auf diesem geprüft.
 
 \subparagraph{\glqq QS-Plex\grqq}~\\
@@ -122,7 +122,7 @@ So können Programme innerhalb einer Anwendung in der für ihren Use-Case am bes
 Das CICS Subsystem einer Stage umfasst mehrere CICS Instanzen.
 
 \paragraph{CICS Instanz} ~\\
-Unter einer CICS Instanz ist ein einzelner Bereich, der auf dem z/OS Kernel aufsetzt.
+Unter einer CICS Instanz ist ein einzelner Bereich, der auf dem z/OS Kernel aufsetzt, zu verstehen.
 Dieser Bereich ist mittels einer eindeutigen CICS ApplicationID gekennzeichnet und kann darüber explizit angesprochen werden.
 Eine CICS Instanz verwaltet mehrere CICS Transaktionen.
 
@@ -132,12 +132,12 @@ Eine Transaktion kann mehrere Programme unterschiedlicher Programmiersprachen um
 
 Über die TransaktionsID wird der Ablauf gestartet.
 Dies kann sowohl per Webanfrage oder per Messaging Queue als auch aus einem anderen Programm heraus oder manuell geschehen.
-In der Transaktion werden alle Änderungen, die Programme an Resourcen, wie zum Beispiel einer Datenbank oder Dateien tätigen, protokolliert.
+In der Transaktion werden alle Änderungen, die Programme an Ressourcen, wie zum Beispiel einer Datenbank oder Dateien tätigen, protokolliert.
 So wird im Fehlerfall die Möglichkeit eines Rollbacks sichergestellt.
  \cite{Rayns.2011}
 
 \paragraph{Voraussetzungen}\label{subsec:voraus} ~\\
-Bei der DATEV eG kümmert sich ein Team, die \glqq CICS Administration\grqq{}um das Erstellen einer CICS-Instanz, starten dieser Instanz und ist generell für alles rund um die Administration des CICS Transactions Servers zuständig.
+Bei der DATEV eG kümmert sich ein Team, die \glqq CICS Administration\grqq{} um das Erstellen einer CICS-Instanz, starten dieser Instanz und ist generell für alles rund um die Administration des CICS Transactions Servers zuständig.
 Der Fokus dieser Arbeit liegt auf dem Erstellen (\glqq Provisionieren\grqq{}) einer CICS-Instanz. Es werden nur die dafür notwendigen Voraussetzungen dargelegt.
 Außerdem liegt der Fokus auf Entwicklungs-CICS-Systemen, auf der sog. Entwicklungs-Stage, nicht auf den produktiven CICS-Systemen der DATEV eG. 
 Aus diesem Grund werden nur Schritte, die für ein solches Testsystem benötigt werden, dargestellt.
@@ -160,12 +160,12 @@ Eine CSD Datei besteht aus mehreren Einträgen.
 Ein Eintrag besteht aus einer Gruppe und einer Liste.
 Die Gruppe ist hierbei die Definition einer Systemressource und muss manuell angelegt werden.
 Bei der Liste handelt es sich um das System, welches diese Ressource benötigt.
-Dort ist unter anderem für jede CICS Instanz hinterlegt, zu welchem Db2 Datenbanksystem und welchem MQ Messagingsystem sich diese Instanz verbinden soll.
+Dort ist unter anderem für jede CICS Instanz hinterlegt, zu welchem Db2 Datenbanksystem und welchem IBM MQ Messagingsystem sich diese Instanz verbinden soll.
 
 \subparagraph{STC Job} ~\\
 Bei einem Started Task Control-Job, kurz STC Job, handelt es sich um einen Batch Job, der mit Hilfe des \glqq START\grqq-Konsolenkommandos innerhalb von z/OS gestartet werden kann.
 Dieser Batch Job wird deshalb auch als Started Task bezeichnet.\cite{Cassier.2007}
-Bei der DATEV eG existiert für jedes CICS ein solcher Job.
+Bei der DATEV eG existiert für jede Instanz eines Subsystems ein solcher Job, so also auch für CICS.
 In diesem werden zunächst einige zur Laufzeit benötigten Bibliotheken und Dateien eingebunden, unter anderem die CICS spezifischen Dateien\footnote{Beschreibung in Absatz \ref{sssec:speziDat}}.
 Außerdem werden hier die SIT \footnote{CICS system initialization table} Parameter definiert.
 Zunächst wird festgelegt welche Standard SIT verwendet werden soll.
@@ -204,13 +204,14 @@ Um hierbei die Konsistenz sicherzustellen, sorgt er für Locking und die notwend
 In Queues werden die Nachrichten, die von Programmen gesendet und gelesen werden gespeichert.
 Es gibt verschiedene Arten von Queues, die im Kontext dieser Arbeit relevanten Queues sind folgende:
 
-Die Local Queue.
+\subparagraph{Die Local Queue.}~\\
 Dabei handelt es sich um die einzige Queue Art, bei der die Nachrichten physikalisch gespeichert werden.
 Die anderen Queue Arten nutzen als Basis immer eine Local Queue.
 
-Die sogenannte \glqq Initiation Queue\grqq, eine spezielle Art von Local Queues.
+\subparagraph{Initiation Queue}~\\
+Die sogenannte \glqq Initiation Queue\grqq{} ist eine spezielle Art der Local Queue.
 Diese dient dem Queue Manager dazu, um unter bestimmten Bedingungen eine Trigger-Nachricht darauf zu schreiben.
-So kann eine andere Local Queue so definiert sein, dass sobald eine Nachricht auf sie geschrieben wird eine solche Trigger-Nachricht erzeugt werden.
+So kann eine andere Local Queue so definiert sein, dass sobald eine Nachricht auf sie geschrieben wird eine solche Trigger-Nachricht erzeugt wird.
 Dies ermöglicht, dass Anwendungen nur starten, wenn wirklich Daten zum Verarbeiten vorhanden sind.
 \cite{Aranha.2013}
 
