@@ -6,6 +6,7 @@ Mainframe und Großrechner werden in dieser Arbeit gleichbedeutend verwendet.
 Im modernen Sprachgebrauch kann ein Großrechner als größte zur Verfügung stehende Serverart betrachtet werden.
 Er wird von Unternehmen verwendet, um  kommerzielle Datenbanken, Transaktionsserver und Anwendungen, die einen hohen Grad an Sicherheit und Verfügbarkeit benötigten, zu hosten.
 Im Gegensatz zu verteilten Serversystemen, bei denen die Funktionalitäten auf einzelne Server, wie zum Beispiel einen E-Mail-Server, einen Datenbank-Server, einen Web-Server usw. aufgeteilt sind, handelt es sich bei einem Mainframe um ein zentralisiertes System.
+Unter anderem sind Datenbanksysteme und Anwendungsserver sogenannte \glqq Subsysteme\grqq.
 \cite{Ebbers.2011}
 
 \subsection{Batch}
@@ -34,6 +35,12 @@ Ein DD-Statement verknüpft den sog. DD-Namen mit einer Datei oder einem I/O Ger
 Ein \glqq DD\grqq{} Baustein ist immer an ein \glqq EXEC\grqq{} Befehl gebunden.
 Einem \glqq EXEC\grqq{} können mehrere \glqq DD\grqq{} Bausteine zugeordnet sein. 
 \cite{Ebbers.2011}
+
+\subsection{Resource Access Control Facility}
+Die Resource Access Control Facility, kurz RACF, ist ein externer Sicherheits Manager für z/OS.
+Dieser bietet eine Rechteverwaltung für das z/OS Betriebssystem an.
+Damit werden unter anderem Zugriffsrechte auf Dateien und Subsysteme gesteuert.
+\cite{InternationalBusinessMachinesCorporation.2008}
 
 \subsection{REXX}
 Die Restructures Extenden Executer Programmiersprache, kurz REXX, ist eine prozedurale Programmiersprache.
@@ -102,7 +109,7 @@ Im Prod-Plex sind die LPARs der Vorproduktion und der Produktion enthalten.
 In diesem Absatz wird die verwendete Middleware beziehungsweise die verwendeten Subsysteme beschrieben.
 Diese setzen auf dem IBM Mainframe Betriebssystem z/OS auf.
 
-\subsubsection{Customer Information Control System}\label{cics} Appl ID aufnehmen.
+\subsubsection{Customer Information Control System}\label{cics}
 Das Customer Information Control System, kurz CICS, ist ein Applikationsserver für einen IBM-Großrechner mit Betriebssystem z/OS und damit eine IBM Middleware.
 Ein Applikationsserver stellt eine Umgebung zur Verfügung, in der Anwendungen gehostet werden können.
 Dabei kümmert sich dieser unter anderem um Transaktionalität, Webkommunikation und Sicherheit.
@@ -143,7 +150,7 @@ Diese werden im Folgendem beschrieben.
 
 \subparagraph{CICS spezifische Dateien}\label{sssec:speziDat} ~\\
 Zunächst müssen CICS spezifische Dateien im z/OS angelegt werden.
-Im Fall des dieser Arbeit zugrunde liegende Beispiels handelt es sich um 17 verschiedene Dateien. (Kommentar VSAM? QSAM?)
+Im Fall des dieser Arbeit zugrunde liegende Beispiels handelt es sich um 17 verschiedene VSAM\footnote{Virtual Storage Access Method, spezielle Dateiart, die schnelle I/O-Zugriffe ermöglicht.\cite{Lovelace.2013}} Dateien.
 Diese Dateien benötigt die CICS Instanz um zum Beispiel Systemfehler zu protokollieren oder den Debugger aktivieren zu können.
 
 \subparagraph{CSD} ~\\
