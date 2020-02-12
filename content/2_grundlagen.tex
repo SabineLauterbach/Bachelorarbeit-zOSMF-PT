@@ -221,7 +221,10 @@ Als Grundbaustein dient allen der z/OS Kernel.
 
 \section{IBM Cloud Provisioning and Management for z/OS}\label{sec:zosmf}
 In diesem Absatz wird zunächst auf die für dieses Kapitel grundlegenden Begriffe eingegangen.
-Anschließend wird das Produkt \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} erläutert.
+Das IBM Cloud Provisioning and Management for z/OS bietet die Möglichkeit, mehrere Systeme (sog. Middleware) innerhalb eines z/OS Betriebssystems zu provisionieren, unter anderem Laufzeitumgebungen wie CICS. 
+Für diese Aufgaben stehen zwei Schnittstellen zur Verfügung.
+Zum einen das z/OS Provisioning Toolkit, (z/OSPT) und zum anderen z/OS Management Facility (z/OSMF).
+\cite{KeithWinnardGaryPuchkoffHirenShah.2016}
 
 \subsection{Begrifferklärung}
 Im Folgenden werden einige allgemeine Begriffe, die im Umfeld des Tools \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} vorkommen, erläutert.
@@ -251,8 +254,8 @@ Bei dem Nachteil von Workflows als Wegwerfprodukt setzen die sogenannten Templat
 Ein Template besteht aus drei Dateien.
 
 \begin{enumerate}
-\item Datei für Eingabevariablen.
-In dieser Datei kann Workflowvariablen Werte zugewiesen werden.\\
+\item Datei für Eingabevariablen.\\
+In dieser Datei kann Workflowvariablen Werte zugewiesen werden.
 Diese Variablen müssen bei ihrer Definition im Workflow entsprechend gekennzeichnet sein.
 
 \item Die sogenannte Aktion-Definitions-Datei.\\
@@ -276,13 +279,7 @@ Somit ist ein Template deutlich flexibler als ein Workflow.
 Hierbei handelt es ich um das Ergebnis nach der Provisionierung eines Templates, zum Beispiel um ein funktionsfähiges CICS.
 Als Abgrenzung zu einer Instanz eines Subsystems, kann eine Template Instance auch Instanzen mehrer Subsystemen enthalten.
 
-\subsection{IBM Cloud Provisioning and Management for z/OS}
-Das IBM Cloud Provisioning and Management for z/OS bietet die Möglichkeit, mehrere Systeme (sog. Middleware) innerhalb eines z/OS Betriebssystems zu provisionieren, unter anderem Laufzeitumgebungen wie CICS. 
-Für diese Aufgaben stehen zwei Schnittstellen zur Verfügung.
-Zum einen das z/OS Provisioning Toolkit, (z/OSPT) und zum anderen z/OS Management Facility (z/OSMF).
-\cite{KeithWinnardGaryPuchkoffHirenShah.2016}
-
-\subsubsection{z/OS Provisioning Toolkit}\label{sssec:zospt}
+\subsection{z/OS Provisioning Toolkit}\label{sssec:zospt}
 z/OSPT bietet ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Laufzeitumgebungen.
 In Abbildung \ref{fig:zospt_help} werden die möglichen Kommandozeilenbefehle mittels des Befehls \glqq zospt -h\grqq{} in einem Kommandofenster angezeigt.
 \begin{figure}[h]
@@ -301,7 +298,7 @@ Dies erhöht die Flexibilität der Templates weiter.
 Dabei handelt es sich eins zu eins um eine \glqq Instance\grqq \footnote{Beschreibung in Absatz \ref{sssec:instance}}.
 \cite{IBM.2019b}
 
-\subsubsection{z/OS Management Facility}\label{sssec:zosmf}
+\subsection{z/OS Management Facility}\label{sssec:zosmf}
 Der Hauptaugenmerk dieser Arbeit liegt  bei z/OSMF, da damit die Verwaltung von Workflows und Templates über eine browserbasierende Schnittstelle möglich ist.
 Durch diese Oberfläche, in Abbildung \ref{fig:zosmf_welcome} dargestellt, ist es einfacher zu bedienen als das Kommandozeileninterface von z/OSPT  und somit wird der Einstieg in die Provisionierung erleichtert.
 
