@@ -77,7 +77,7 @@ Diese stellte z.B. nur ein Syntaxhighlighting zur Verfügung.
 Kurz vor Abschluss meiner Ausbildung wurde git, das Standard-Sourcverwaltung für verteilte Systeme und Cloud Entwicklung, auch für COBOL und IBM Assembler Sourcen eingeführt.
 Dadurch wurde ein bis dato verwendetes eigenentwickeltes Tool für die Sourceverwaltung der z/OS Sourcen abgelöst.
 Jedoch wurde damit zwar das Tooling modernisiert, jedoch nicht der Entwicklungsprozess selbst.
-ENtwickelt wird in einer sogenannten \glqq Entwicklungsstage\grqq{}\footnote{Beschreibung der Stages in Absatz \ref{sec:sysplex}} gearbeitet. 
+Entwickelt wird in einer sogenannten \glqq Entwicklungsstage\grqq{}\footnote{Beschreibung der Stages in Absatz \ref{sec:sysplex}}. 
 So teilen sich zumindest die Entwickler einer Anwendung die gleiche Test-CICS/Db2/MQ Ressourcen.
 Das heißt auch, dass Parallelentwicklung an unterschiedlichen Features nur mit viel Abstimmungs-Aufwand und Absprachen innerhalb eines Entwicklungsteams, teilweise auch abteilungsübergreifend, möglich ist.
 Die Verantwortung der Systemressourcen, unter anderem auch der Test Ressourcen, liegt bei extra dafür entstandenen Administratorenteams.
@@ -85,7 +85,7 @@ Werden Änderungen an bestehenden Ressourcen durchgeführt oder werden neue Syst
 Dadurch wird der Prozess fehleranfällig und langsam.
 In der Cloud Entwicklung sind dagegen moderne Prozesse, bei denen eine automatisierte Bereitstellung von Systemumgebungen, zum Beipiel einer Datenbank, über einen \glqq Marktplatz\grqq, Standard. 
 
-Moderne Entwicklungsprozesse durfte ich nach dem Abschluss meiner Ausbildung einen modernen Entwicklungsprozess in einem \glqq Cloud Native\grqq-Projekt selbst erleben.
+Moderne Entwicklungsprozesse durfte ich nach dem Abschluss meiner Ausbildung in einem \glqq Cloud Native\grqq-Projekt selbst erleben.
 Hier hatte jeder Entwickler seine eigene Testumgebung und konnte isoliert und ungestört von seinen Kollegen, ein neues Feature testen.
 Die Datenbank konnte per Knopfdruck bereitgestellt werden, ganze Laufzeitumgebungen konnten so erzeugt werden.
 Solche Prozesse unterstützen die bei DATEV e.G. eingesetzte agile Softwareentwicklung, und von den zuständigen Abteilungen, die sich mit der Modernisierung von z/OS Anwendungen und -prozessen beschäftigen,  kam die Frage auf, ob es möglich wäre, solche Mechanismen auch für legacy z/OS Anwendungen aufbauen zu können.
@@ -96,5 +96,5 @@ Wird dadurch der aktuelle Bereitstellungsprozess schneller und auch sicherer?
 Erzeugt die Nutzung einen Mehrwert bei den Stakeholdern, also den Entwicklerteams und den Administratorenteams.
 
 Um diese Fragen zu beantworten wird die Provisionierung einer z/OS Laufzeitumgebung für eine speziellen Anwendung untersucht.
-Die Anwendung sollte ein CICS als Anwendungsserver, eine Db2 Datenbank und MQ als Messaginglösung benötigen, um für diese 3 Haupt-Technologien (Middleware-Komponenten) eine Aussage treffen zu können.
+Die Anwendung sollte ein CICS als Anwendungsserver, eine Db2 Datenbank und IBM MQ als Messaginglösung benötigen, um für diese 3 Haupt-Technologien (Middleware-Komponenten) eine Aussage treffen zu können.
 Die genaue Vorgehensweise wird im Kapitel \ref{ch:vorgehensweise} beschrieben.
