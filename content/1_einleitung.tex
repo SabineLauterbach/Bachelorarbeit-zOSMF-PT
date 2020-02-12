@@ -8,10 +8,10 @@ In einem Satz ist ein Großrechner\footnote{Beschreibung im Absatz \ref{sec:main
 In dieser Arbeit wird nur auf Mainframes aus dem Hause von IBM eingegangen.
 Damit ist auch der Technologiestack festgelegt.
 Das verwendete Betriebssystem ist z/OS, darauf werden Middleware Produkte wie CICS\footnote{Anwendungsserver, CICS Beschreibung Absatz \ref{cics}}, das Datenbanksystem Db2\footnote{ Beschreibung Absatz \ref{sssec:db2}} sowie die Messaging Lösung \glqq IBM MQ\grqq{}\footnote{Beschreibung im Absatz \ref{sec:mq} zu finden} betrieben.
-Als Programmiersprachen werden COBOL, IBM Assembler, C, C++ verwendet, seit ca. 23 Jahren Java\footnote{\cite{Steegmans.2003}}.
+Als Programmiersprachen werden COBOL, IBM Assembler, C, C++ verwendet, seit ca. 23 Jahren auch Java\footnote{\cite{Steegmans.2003}}.
 
 Der IBM Mainframe hat eine lange Geschichte.
-Vor mehr als fünfzig Jahren der allererste Großrechner, der sog.(Kommentar: Bezeichnung such ich noch raus) vorgestellt.
+Vor mehr als fünfzig Jahren wurde der allererste Großrechner, der sog.(Kommentar: Bezeichnung such ich noch raus) vorgestellt.
 Bis in die 90iger Jahre spielte der IBM Mainframe eine Hauptrolle auf dem Computermarkt, dann gewannen zunehmend verteilte Client-Server-Systeme an Bedeutung.\footnote{\cite{Ceruzzi.2003}}
 Seitdem gilt der Mainframe bereits als \glqq  legacy\grqq{}- veraltet -.
 Im Jahre 2020 ist der größte Konkurrent für den Mainframe die Cloud.
@@ -25,8 +25,7 @@ Es wird immer schwieriger Nachwuchs in diesem Bereich zu finden.
 Zum einem,  da es kaum noch an Universitäten gelehrt wird.
 Die Seite des Hochschulkomasses\footnote{\cite{internetagenturKolnFrankfurtsunzinetTYPO3Programmmierung.}} liefert sogar weder für \glqq Mainframe\grqq{} noch für \glqq Großrechner\grqq{} einen Treffer.
 Zum anderen ist der demographische Faktor, der Wissensträger nicht zu vernachlässigen.
-Ein weiteres Problem ist, dass eine Firma, die einen IBM Großrechner mit z/OS betreibt, von dem oben genannten proprietären Technologiestack abhängig ist. 
-D.h. es entsteht eine starke Herstellerabhänigkeit.
+Ein weiteres Problem ist, dass eine Firma, die einen IBM Großrechner mit z/OS betreibt, von dem oben genannten proprietären Technologiestack abhängig ist, dass heißt es entsteht eine starke Herstellerabhänigkeit.
 
 Offentsichlich betreiben dennoch einige Firmen einen IBM Großrechner.
 Darunter zählen hauptsächlich Banken, das Gesundheitswesen, Versicherungen, Fluggesellschaften usw.
@@ -43,6 +42,32 @@ So werden pro Tag circa 150.000 Batch Jobs\footnote{Beschreibung in Absatz \ref{
 Diese Last wird von circa 14.000 aktiven Modulen erzeugt.
 Wie in der Abbildung \ref{fig:Programmiersprachen} zu sehen ist, ist COBOL mit circa 46\% Prozent die am häufigsten verwendete Programmiersprache am Großrechner bei der DATEV eG.
 Durch diese Module werden unteranderem im Monat circa 11 Millionen Lohnabrechnungen erstellt und circa 1 Millionen Umsatzsteuer-Voranmeldungen durchgeführt.
+
+\begin{figure}
+\begin{tikzpicture}
+\begin{axis}[
+             width=14cm,
+             height=8cm,
+             symbolic x coords={COBOL,IBM Assembler,C,Java, Sonstige},
+             x tick label style={font=\small,text width=1.7cm,align=center},
+             xtick=data,
+             nodes near coords,
+      	  nodes near coords align={vertical}, 
+             ymin=0,
+             ymax=65,
+             ylabel=\%,
+             ylabel style={rotate=-90},
+             ybar,
+             enlarge x limits=.2,
+             bar width=45pt,
+             ]
+\addplot coordinates{(COBOL,46) (IBM Assembler,33) (C,13) (Java,2) (Sonstige,6)};
+\end{axis}
+\end{tikzpicture}
+\centering
+\caption{Anteil der verwendeten Programmiersprachen auf dem Mainframe bei DATEV eG in Prozent}
+\label{fig:Programmiersprachen}
+\end{figure}
 
 Ich persönlich habe eine Ausbildung zum Fachinformatiker der Anwendungsentwicklung im Großrechnerbereich bei der DATEV eG abgeschlossen und parallel dazu ein Studium der Informatik begonnen.
 Während dieser Ausbildung lernte ich unter anderem die Entwicklungsprozesse für den Mainframe kennen.
