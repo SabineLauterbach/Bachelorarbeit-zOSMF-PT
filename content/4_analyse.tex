@@ -7,7 +7,7 @@ Anschließend wird der aktuelle Bereitstellungsprozess für die Laufzeitumgebung
 \section{DATEV-Rechnungsschreibung}
 Für diese Arbeit wurde die DATEV-Rechnungsschreibung als Beispielanwendung herangezogen, weil sie folgenden Anforderungen entspricht.
 Es handelt sich zum einem um eine in sich abgeschlossene Anwendung, die nur zu Beginn des Prozesses von anderen Anwendungen abhängig ist.
-Zum anderen benötigt die Rechnungsschreibung ein CICS als Laufzeitumgebung, eine Db2-Datenbank und MQ als Messaginglösung.
+Zum anderen benötigt die DATEV-Rechnungsschreibung ein CICS als Laufzeitumgebung, eine Db2-Datenbank und MQ als Messaginglösung.
 Somit kann ein umfangreicher Bereitstellungsmechanismus in dieser Arbeit untersucht werden.
 
 \subsection{Beschreibung}\label{rechBesch}
@@ -25,7 +25,7 @@ Für das Einpflegen der Berechnungssätze in den Rechnungsschreibungsablauf steh
 \item CSV-Datei
 \end{itemize}
 
-Bei der Ersten Möglichkeit handelt es sich um die Verwendung des DMVINF\footnote{DatevMakroVerarbeitungsinformation}-Schnittstelle.
+Bei der Ersten Möglichkeit handelt es sich um die Verwendung der DMVINF\footnote{DatevMakroVerarbeitungsinformation}-Schnittstelle.
 Die Schnittstelle ist in der Programmiersprache Assembler entwickelt.
 Somit ist diese nur auf dem Mainframe verfügbar.
 Das Ergebnis der Schnittstelle ist eine sequentielle Datei am Großrechner, vergleichbar mit einer .txt Datei unter Windows.
@@ -73,17 +73,17 @@ Diese Datensätze beinhalten alle Informationen für die endgültige Erzeugung d
 Der erste Schritt der Täglichen Bewertung ist das Zusammenführen der Berechnungsdateien aus dem vorherigen Schritt und aus den bereits vorhandenen Daten des laufenden Monats aus der ARUBA-Db2-Datenbank.
 Zusätzlich werden während dieser Zusammenführung den Berechnungssätzen auf Basis der abgebenden Anwendung die entsprechenden Rechnungsstellungsrythmen (täglich oder monatlich) zugewiesen.
 Anschließend wird mit Hilfe der Beraternummer die zugehörigen Betriebsstätte-, Rechnungsempfänger-, Hauptberater- und Mitglieds- bzw. Geschäftspartnernummer ermittelt.
-Die Beraternummer ist als oberster Ordnungsbegriff in den Berechnungssätzen enthalten.
+Die Beraternummer ist als oberster Kundenbegriff in den Berechnungssätzen enthalten.
 Außerdem wird die Debitorenkontonummer entweder durch die Mitglieds- oder durch die Geschäftspartnernummer zugeordnet.
 Für die Preisermittlung werden die Datensätze nach Geschäftspartner gruppiert.
-Im DATEV eG Umfeld ist ein Geschäftspartner entweder eine Kanzlei oder ein einzelner Mandant.
+Im DATEV e.G. Umfeld ist ein Geschäftspartner entweder eine Kanzlei oder ein einzelner Mandant.
 
 Dann werden die gruppierten Daten in eine CICS-Anwendung übertragen. Die Entscheidung, die Anwendung in CICS zu hosten hatte die zuständige Abteilung aus Performancegründen getroffen.
 Die Architektur der CICS-Anwendung wird in \ref{rechArch} beschrieben.
 Dort findet die Preisermittlung mit den dazugehörigen kundenindividuellen Abhängigkeiten, wie zum Beispiel Rabatten, statt.
 Anschließend werden die Daten wieder zurück an den Batch-Ablauf übertragen.
 Hier werden die Rechnungsnettobeträge geprüft, z.B. ob diese über einem bestimmten Rechnungslimitbetrag liegen.
-Ist alles in Ordnung werden die Berechnungssätze als BUL\footnote{Berater unter Limit} gekennzeichnet und in die folgende Rechnungsperiode vorgetragen.
+Wird dieser Rechnungslimitbetrag unterschritten werden die Berechnungssätze als BUL\footnote{Berater unter Limit} gekennzeichnet und in die folgende Rechnungsperiode vorgetragen.
 Schließlich wird noch die Umsatzsteuer ermittelt.
 Abschließend werden die neu erzeugten Berechnungsdaten in die ARUBA-Db2-Datenbank eingepflegt und entsprechend gekennzeichnet.
 
@@ -98,7 +98,7 @@ Zusätzlich werden die Rechnungen noch im PDF-Format archiviert.
 \subsection{Architektur der Preisermittlung}\label{rechArch}
 In dieser Arbeit steht das automatisierte Provisionieren von Laufzeitumgebungen im Fokus.
 In diesem Fall handelt es sich um die Laufzeitumgebung CICS mit den dazugehörigen Elementen.
-Deshalb wird im Folgenden nur auf die Anforderungen der Rechnungsschreibung an das CICS-System eingegangen.
+Im Folgenden wird nur auf den Aufbau dieser Umgebung und dessen Gründe eingegangen.
 
 Das System muss an Lasttagen bis zu 180.000 Geschäftspartner verarbeiten können.
 Die Verarbeitung eines Geschäftspartners wird von einer Transaktion durchgeführt.
@@ -134,7 +134,7 @@ Es können maximal 30 Transaktionen zeitgleich arbeiten.
  \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{figures/swimlaneMQ.pdf}
-\caption{Bereistellungsprozess von MQ}
+\caption{Bereistellungsprozess von IBM MQ Queues}
 \label{fig:aktmq}
 \end{figure}
 Wie in den drei Diagrammen zu erkennen ist, ist der aktuelle Bereitstellungsprozess noch mit vielen manuellen Schritten verbunden.
@@ -143,12 +143,12 @@ Das Entwicklerteam ist der Initiator des Ablaufs.
 So kümmert es sich um Formulare und die erste Kontaktaufnahme zum Administratorenteam.
 Bei dem Bereitstellungsprozess einer Db2 Datenbank muss es außerdem Projekt Informationen, unter anderem Daten der Voruntersuchung, bereitstellen.
 Hinzu komm das Erstellen eines Datenbankmodells.
-Hierfür wird Datenbankwissen benötigt. (Kommentar: das wird doch normalerweise in Zusammenarbeit mit der DBA gemacht, oder?
+Hierfür wird Datenbankwissen benötigt, hierzu wird gegenfalls die Unterstützung eines Administrator benötigt.
 
 Zusätzlich zu den vielen manuellen Schritten sind die vielen Absprachen zwischen mehreren Abteilungen zu nennen.
-Steht ein beteiligtes Team nicht zu Verfügung steht, kommt es zu Verzögerungen, das Team muss warten, der komplette Zeitplan kann sich dadurch nach hinten verschieben.
-Der Prozess für die Bereitstellung eines CICS Systems, mit einer Db2 Datenbank und MQ Queues dauert in der Summe circa sechs Arbeitstage.
-Es setzt sich aus der Dauer der Einzelnenprozesse zusammen, für jedes Subsystem wird mit circa zwei Arbeitstage gerechnet.
+Steht ein beteiligtes Team nicht zu Verfügung, kommt es zu Verzögerungen, das Team muss warten, der komplette Zeitplan kann sich dadurch nach hinten verschieben.
+Der Prozess für die Bereitstellung einer CICS-Instanz, mit einer Db2 Datenbank und IBM MQ Queues dauert in der Summe circa sechs Arbeitstage.
+Es setzt sich aus der Dauer der Einzelprozesse zusammen, für jedes Subsystem wird mit circa zwei Arbeitstage gerechnet.
 Diese Einschätzung beruht auf der Annahmen, dass zum einen jedes beteiligte Team nur diese Aufgabe zu erledigen hat und zum anderen jeweils ein Tag für die Beratung durch das jeweilige Administratorenteam veranschlagt wird.
 Natürlich ist ein parallelisierter Ablauf der einzelnen Teilprozesse möglich, so kann die Gesamtdauer im besten Fall auf circa zwei bis drei Arbeitstage verkürzt werden.
 
