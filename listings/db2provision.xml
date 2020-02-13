@@ -1,0 +1,35 @@
+<step name="db2_create_database">
+        <title>db2_create_database.</title>
+        <description>Erzeugt mit der Hilfe des DB2 
+		Service Brokers eine Datenbank</description>
+        <instructions substitution="false">
+		Erzeugt DB2 Datenbank.</instructions>
+        <weight>10</weight>
+        <skills>REST</skills>
+		<autoEnable>true</autoEnable>
+		<rest>
+		<httpMethod>PUT</httpMethod>
+		<schemeName substitution="false">http</schemeName>
+		<hostname substitution="false">hostname</hostname>
+		<uriPath>uriPath</uriPath>
+		<requestBody substitution="true">
+{
+  "service_id": "${instance-DFH_DB2_SERVICEID}",
+  "plan_id": "${instance-DFH_DB2_PLANID}",
+ "organization_guid": "DUMMY",
+  "space_guid": "DUMMY",
+  "parameters": {
+            "GROUP": "UGZTAL",
+            "VUSERID": "${_step-stepOwnerUpper}",
+            "DBNAME": "${instance-DFH_DB2_DATABASENAME}",
+            "UserID": "${_step-stepOwnerUpper}",
+            "Passwort": "DUMMY"
+  }
+}
+		</requestBody>
+		<expectedStatusCode>201</expectedStatusCode>
+		<requestHeaders substitution="false">
+		{"Authorization":"Basic VDMwMTkzQTpYZjN1I2RJNA=="}
+		</requestHeaders>
+		</rest>
+	</step> 
