@@ -1,19 +1,19 @@
 \chapter{Realisierung}\label{ch:realisierung}
 In diesem Kapitel wird beschrieben, wie die Aufgabe dieser Arbeit gelöst wurde.
 Dazu wird nach der im Kapitel \ref{ch:vorgehensweise} beschriebenen Reihenfolge der Arbeitsschritte vorgegangen.
-Es ist nochmal zu erwähnen, dass zunächst die Provisionierung einer CICS Instanz untersucht wird.
-Danach wird in weiteren Schritten zuerst eine Db2 Datenbank und schließlich MQ Queues dem Bereitstellungsprozess hinzugefügt.
-Die Funktionsfähigkeit der so generierten Laufzeitumgebung wird mittels eines Testablaufes am Beispiel der DATEV Rechnungsschreibung  sichergestellt. 
+Es ist nochmal zu erwähnen, dass zunächst die Provisionierung einer CICS-Instanz untersucht wird.
+Danach wird in weiteren Schritten zuerst eine Db2 Datenbank und schließlich IBM MQ Queues dem Bereitstellungsprozess hinzugefügt.
+Die Funktionsfähigkeit der so generierten Laufzeitumgebung wird mittels eines Testablaufes am Beispiel der DATEV-Rechnungsschreibung  sichergestellt. 
 Es folgt eine Bewertung der implementierten Provisionierungslösung durch die Stakeholder bei DATEV e.G. (Entwickeler, Administration, Technologiestrategie)
 Zuletzt wird noch ein Fazit zur Realisierung gezogen und ein Ausblick im Bezug auf die technischen Aspekte gegeben.
 
 \section{Test-Plex}
 Vor Beginn der eigentlichen Untersuchung mussten zunächst alle benötigten Rechte beantragt werden.
-Hierzu zählen unter anderem die Rechte für die Nutzung des Testplexes, die Nutzung von z/OSMF und z/OSPT und die Rechte für die Templateverwaltung innerhalb von z/OSMF.
-Außerdem war es auf dem Testplex möglich, die Rechte für das Erstellen der CICS Dateien, das Recht, um ein CICS starten zu dürfen und die Rechte für die Administration von Db2 und MQ einer persönlichen UserID zu geben.
-Dies stellt kein Problem dar, weil es sich bei dem Testplex um eine reine Systemtestumgebung handelt.
-Außerdem benötigt das IBM Cloud and Management for z/OS lesenden Zugriff auf den Speicherpfad der Template Dateien.
-Schließlich konnte mit dem ersten Versuch ein bei der Installation von z/OSMF mittgeliefertes minimales CICS Template zu provisionieren begonnen werden.
+Hierzu zählen unter anderem die Rechte für die Nutzung des Test-Plexes, die Nutzung von z/OSMF und z/OSPT und die Rechte für die Templateverwaltung innerhalb von z/OSMF.
+Außerdem war es auf dem Test-Plex möglich, die Rechte für das Erstellen der CICS Dateien, das Recht, um eine CICS-Instanz starten zu dürfen und die Rechte für die Administration von Db2 und IBM MQ einer persönlichen UserID zu geben.
+Dies stellt kein Problem dar, weil es sich bei dem Test-Plex um eine reine Systemtestumgebung handelt.
+Außerdem benötigt das IBM Cloud and Management for z/OS Toolkit lesenden Zugriff auf den Speicherpfad der Template Dateien.
+Schließlich konnte mit dem ersten Versuch, ein bei der Installation von z/OSMF mitgeliefertes minimales CICS Template zu provisionieren, begonnen werden.
 
 \subsection{IBM Standard CICS Template}
 Trotz der Vorteile durch die Weboberfläche von z/OSMF wurde zunächst auf z/OSPT gesetzt.
@@ -23,7 +23,7 @@ Somit konnte der Konsolenbefehl \glqq zospt build\grqq{} auf dieses Template dur
 Dadurch sollte ein Image erzeugt werden.
 Jedoch zeigte sich ein weiterer Nachteil des Kommandozeileninterfaces, es ist nicht möglich Templates eine Domain und einen Tenant zuzuweisen.
 Dies hatte zur Folge, dass der Befehl \glqq zospt build\grqq{} fehlschlug.
-Für alle folgenden Aufgaben wurde deshalb z/OSMF genutzt wird.
+Für alle folgenden Aufgaben wurde deshalb z/OSMF genutzt.
 
 Damit z/OSMF auf die Template- und Workflow-Dateien zugreifen kann, sind diese in einem Unix Dateisystem auf dem Großrechner gespeichert.
 Das Template konnte dann ohne weitere Probleme in die Software Services\footnote{Beschreibung in Absatz \ref{sssec:zosmf}} aufgenommen werden.
@@ -38,25 +38,25 @@ Variablenname & Kurzbeschreibung \\
 \hline
 DFH\_REGION\_SEC & Legt fest, ob für das CICS Sicherheit im Allgemeinen aktiviert ist. \\
 \hline
-DFH\_REGION\_SECPRFX & Wenn DFH\_REGION\_SEC gesetzt ist, legt den Namen Perfix bei Authentificationanfragen für Ressourcen fest. \\
+DFH\_REGION\_SECPRFX & Wenn DFH\_REGION\_SEC gesetzt ist, legt den Namen Prefix bei Authentificationanfragen für Ressourcen fest. \\
 \hline
-DFH\_REGION\_APPLID & Applikations ID der zu provisionierenden CICS Instance. \\
+DFH\_REGION\_APPLID & Applikations ID der zu provisionierenden CICS-Instance. \\
 \hline
 DFH\_LE\_HLQ & High-level qualifier\footnote{Erste Zeichen eines Dateinames, wird zum Filtern genutzt} für die Sprachumgebung\footnote{Grundeinstellungen der Programmiersprachen COBOL, PL1 und C. Mitgelieferte IBM Grundmodule} \\
 \hline
 DFH\_REGION\_HLQ & High-level qualifier für die CICS Dateien.\\
 \hline
-DFH\_REGION\_LOGSTREAM & Legt fest, wie die Log Dateien für das provisionierte CICS erstellt werden sollen. \\
+DFH\_REGION\_LOGSTREAM & Legt fest, wie die Log Dateien für die provisionierte CICS-Instanz erstellt werden sollen. \\
 \hline
-DFH\_STC\_ID & User ID mit dem die CICS Instanz startet. \\
+DFH\_STC\_ID & User ID mit dem die CICS-Instanz startet. \\
 \hline
-DFH\_REGION\_DFLTUSER & Default User ID für das CICS. \\
+DFH\_REGION\_DFLTUSER & Default User ID für die CICS-Instanz. \\
 \hline
-DFH\_REGION\_VTAMNODE & Name des VTAM Knotens, wenn das CICS hochfährt. \\
+DFH\_REGION\_VTAMNODE & Name des VTAM Knotens, wenn die CICS-Instanz hochfährt. \\
 \hline
 DFH\_REGION\_MEMLIMIT & Dem CICS maximal zur Verfügung stehender Speicherplatz. \\
 \hline
-DFH\_ZOS\_PROCLIB & Datei auf dem Großrechner, die den Job enthält, der für das Erzeugen der CICS Instanz zuständig ist. \\
+DFH\_ZOS\_PROCLIB & Datei auf dem Großrechner, die den Job enthält, der für das Erzeugen der CICS-Instanz zuständig ist. \\
 \hline
 DFH\_ZOS\_VSAM\_VOLUME & Speichersystem auf welchem die Dateien gespeichert werden sollen. Entscheidung kann auch an das System abgeben werden. \\
 \hline
@@ -74,10 +74,10 @@ Als nächster Schritt wurde ein Testlauf und somit ein erster Versuch das Templa
 Dabei kam es anfangs zu Rechteproblemen, da die Anfoderungen und Rahmenbedingungen der DATEV e.G. in dem standardisierten IBM Template natürlich nicht berücksichtigt waren, beispielsweise ist die Berechtigung für das Starten von Jobs von DATEV Vorgaben abhängig und CICS-Start-Mechanismen haben spezifische Anforderungen an die Eingabeparameter.
 Nach den notwendigen Anpassungen funktionierte das Provisonieren und die definierten Aktionen des IBM Standard CICS Templates im DATEV Umfeld.
 
-\subsubsection{DATEV eG spezifischen CICS Template}\label{sssec:datevcics}
+\subsubsection{DATEV e.G. spezifischen CICS Template}\label{sssec:datevcics}
 Nachdem das minimale IBM Standard CICS Template funktionsfähig war und erste Erfahrungen mit z/OSMF gesammelt worden waren, wurde ein allgemeines, mitgeliefertes Template untersucht.
-Ziel dieses nächsten Schritts war die Provisionierung einer funktionsfähigen DATEV eG spezifische CICS Instanz.
-Um dieses Template an die DATEV Umgebung anzupassen und letztendlich eine \glqq DATEV CICS Instanz \grqq{} zu provisionieren, wurden folgende Schritte durchgeführt.
+Ziel dieses nächsten Schritts war die Provisionierung einer funktionsfähigen DATEV e.G. spezifische CICS-Instanz.
+Um dieses Template an die DATEV Umgebung anzupassen und letztendlich eine \glqq DATEV CICS-Instanz \grqq{} zu provisionieren, wurden folgende Schritte durchgeführt.
 
 \begin{samepage}
 \begin{itemize}
@@ -94,9 +94,22 @@ In dieser sind alle Steps, die bei einer Provisionierung durchgeführt werden, d
 Das Template beinhaltet nicht nur die Möglichkeit, CICS-Instanzen mit unterschiedlichen Konfigurationen zu provisionieren, sondern auch, ob dies mit Skripten oder mit der REST-Api geschieht.
 Zu diesen unterschiedliche Konfigurationen zählt unter anderem die Unterscheidung, ob die CICS-Instanz einem Sysplex hinzugefügt werden soll oder nicht.
 Dadurch verliert das allgemeine Template allerdings deutlich an Übersichtlichkeit.
-So wurden neben allen für ein DATEV eG spezifischen CICS nicht notwendigen Dateien auch nicht benötigte Variablen und Steps entfernt.
-Wie in der Tabelle \ref{vglTemps} zu sehen ist, konnten dadurch circa die Hälfte der Dateien gelöscht werden und bei der provision.xml wurde ein Drittel an Quellcode eingespart werden.
+So wurden neben allen für ein DATEV e.G. spezifischen CICS nicht notwendigen Dateien auch nicht benötigte Variablen und Steps entfernt.
+Wie in der Tabelle \ref{tab:vglTemps} zu sehen ist, konnten dadurch circa die Hälfte der Dateien gelöscht werden und bei der provision.xml wurde ein Drittel an Quellcode eingespart werden.
 Diese Version dient dem weiteren Vorgehen als Grundlage
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{r|X|X}
+& IBM Standard CICS Template & DATEV e.G. spezifisches Template \\
+\hline
+Verwendete Dateien & 76 & 36 \\
+\hline
+provision.xml & circa 583 Codezeilen & circa 199 Codezeilen. \\
+\end{tabularx}
+\caption{Verlgeich des beiden Templates im Bezug auf deren Umfang}
+\label{tab:vglTemps}
+\end{table}
 
 Als nächster Schritt wurde in Zusammenarbeit mit den CICS Administratorenteam festgelegt, wie im Umfeld der automatisierten Bereitstellung die CSD Dateien verwaltet werden soll.
 So wurde festgelegt, dass jede provisionierte CICS Instanz ihre eigene CSD Datei zur Verfügung gestellt bekommen soll.
