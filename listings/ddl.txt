@@ -116,7 +116,7 @@ SET CURRENT SQLID = "DB2SADM";
                                                 
                                                 
    COMMENT ON COLUMN PSSSCHEMA.TMAXNUM.MAXNUMID   
-        IS "ID für maximalen Nummer";           
+        IS "ID fuer maximalen Nummer";           
                                                 
                                                 
 SET CURRENT SQLID = "DB2SADM";                  
@@ -130,14 +130,14 @@ SET CURRENT SQLID = "DB2SADM";
                                                 
                                                 
    COMMENT ON COLUMN PSSSCHEMA.TMAXNUM.MAXNUBEZ   
-        IS "Bezeichnung für maximale Nummer";   
+        IS "Bezeichnung fuer maximale Nummer";   
                                                 
                                                 
 SET CURRENT SQLID = "DB2SADM";                  
                                                 
                                                 
    COMMENT ON COLUMN PSSSCHEMA.TMAXNUM.BEZEICHNUNG
-        IS "Bezeichnung für maximale Nummer";   
+        IS "Bezeichnung fuer maximale Nummer";   
 		
 CREATE UNIQUE INDEX PSSSCHEMA.PMAXNUM
        ON PSSSCHEMA.TMAXNUM          
