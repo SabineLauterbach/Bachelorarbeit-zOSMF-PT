@@ -1,23 +1,25 @@
-\chapter{Firmenkontext}\label{ch:Firmenkontext}
-Die Informationen stammen aus Gesprächen mit einem Mitarbeiter aus dem Technologiestrategieteam und der im Anhang \ref{app:momappp} befindlichen Präsentation.
-Die in der Einleitung genannten Fragen werden aktuell im Rahmen des Querschnittsprojekts "Mainframestrategie" innerhalb der DATEV eG diskutiert. 
-Der DATEV eG sind die zunehmenden Risiken durch schwierige Bereitstellung von Skills und der Herstellerabhänigkeit, bewusst. 
+\chapter{Motivation der DATEV e.G.}\label{ch:Firmenkontext}
+Die in der Einleitung genannten Fragen werden aktuell im Rahmen des Querschnittsprojekts \glqq Mainframestrategie\grqq{} innerhalb der DATEV e.G. diskutiert. 
+Der DATEV e.G. sind die zunehmenden Risiken durch schwierige Bereitstellung von Skills und der Herstellerabhänigkeit bewusst. 
 Die Frage ist, wie wird mit den vielen Mainframebestandsanwendungen in Zukunft umgegangen?
-Die komplette Ablösung dieser Anwendungen durch cloud-native Lösungen ist eine Option, deren zeitlicher Rahmen und Machbarkeit aktuell nicht absehbar ist. (Kommentar: hier als Quelle das ppt angeben)
+Die komplette Ablösung dieser Anwendungen durch cloud-native Lösungen ist eine Option, deren zeitlicher Rahmen und Machbarkeit aktuell nicht absehbar ist.\footnote{\ref{app:momappp} }
 Für die Funktionsfähigkeit dieses Bestandsgeschäfts, das die Core-Business-Funktionalitäten der DATEV eG darstellt, muss also effiziente Weiterentwicklung und Wartung gewährleistet werden.
-Auch im Falle einer geplanten Ablöse von Anwendungen muss je nach Strategie (z.B. "Rewrite" / "Rearchitect")(Kommentar, Strategiepatterns lt. Gartner, ich schick DIr enien Link) das Alt-System parallel dazu über Jahre oder Jahrzente gepflegt und funktional aktuell gehalten werden.
-Daraus folgt, dass aus Sicht der DATEV eG weiter in die IBM Mainframe Plattform investiert werden muss. 
+Auch im Falle einer geplanten Ablöse von Anwendungen muss je nach Strategie (z.B. \glqq Rewrite\grqq / \glqq Rearchitect\grqq)\footnote{(Kommentar, Strategiepatterns lt. Gartner, ich schick DIr enien Link)} das Alt-System parallel dazu über Jahre oder Jahrzente gepflegt und funktional aktuell gehalten werden.
+Daraus folgt, dass aus Sicht der DATEV e.G. weiter in die IBM Mainframe Plattform investiert werden muss. 
 Dies bedeutet Investitionen in die bereitgestellte Infrastruktur (Hardware, Betriebssysteme, Lizenzen), aber insbesonders auch Investitionen, die die oben genannten Anforderungen an Weiterentwicklung, Wartung und Entwicklungseffizienz sowie Effizienz im Betrieb adressieren.
 
 Diese Arbeit beschäftigt sich im Schwerpunkt mit den Aspekten der Entwicklungs- und Betriebseffizienz. 
 Ziel ist es, diese zu steigern und eine Homogenisierung von Skills zwischen Mainframe-Entwicklern und Cloud-Entwicklern zu erreichen. 
 Zur Entwicklungseffizienz gehört z.B. die in der Einleitung genannte moderne, auf eclipse basierende Entwicklungsumgebung ID/z (Kommentar, irgendwie verlinken auf Glossar o.ä.).
 Diese wird bei DATEV eG schon seit ca. 10 Jahren firmenweit bereitgestellt.
-Relativ neu (Seit 2018) ist die Nutzung von GIT als Sourceverwaltung für z/OS Artefakte. Dieses weit verbreitete Standard-Tool in der Cloud und Open Source Entwicklung ist im z/OS Umfeld tatsächlich eine entscheidende Neuerung. (KOmmentar: hier könnten wir ein Zitat von mir einfügen, dass ich über Konferenzteilnahmen andere Kunden kenne und deshalb weiß, wie schwer sich Mainframe-Kunden mit GIT tun). 
-Aktuell (2019-2020) läuft bei DATEV eG ein Proof of Concept bezüglich automatisierter Builds auf Basis von Jenkins basierten Pipelines.
-Dies ist auch die Voraussetzung für automatisierte Tests (Unit-Tests, Modul-Tests) von z/OS Programmen im Rahmen des "Continuous Integration, Continuous Deployment" (CI/CD Pipeline) Ansatzes.  (Kommentar, muss vorher dargestellt werden, was das ist, in der Cloud Welt).
-Die dafür notwendige automatisierte Provisionierung einer z/OS Anwendungsumgebung, d.h Laufzeit, MIddleware etc., um die gebauten Komponenten (COBOL, ASM-Programme) dann auch automatisiert testen zu können ist aktuell noch weitgehend unerforscht. Hier sind die Prozesse bei DATEV und anderen Kunden oft noch proprietär, hoch spezialisiert,  manuell und  nicht modernisiert. 
-Gerade bei Mitarbeitern im Betrieb, die als Administratoren für die Middleware arbeiten, sind die Bedenken groß, ob man diese Cloud-Prozesse auf hochspezialisierte individuelle Komponenten wie CICS, DB2, MQ anwenden kann. Die von IBM hier angebotenen Lösungen (...Kommentar... die TOols die du nutzt) haben sich noch nicht flächendeckend durchgesetzt, aber es herrscht Interesse an ERfahrungen und Einschätzungen. (Kommentar: das ist wichtig, hier leistest Du Forschungsarbeit, das muss rein...)
+Relativ neu (Seit 2018) ist die Nutzung von GIT als Sourceverwaltung für z/OS Artefakte. 
+Dieses weit verbreitete Standard-Tool in der Cloud und Open Source Entwicklung ist im z/OS Umfeld tatsächlich eine entscheidende Neuerung. (KOmmentar: hier könnten wir ein Zitat von mir einfügen, dass ich über Konferenzteilnahmen andere Kunden kenne und deshalb weiß, wie schwer sich Mainframe-Kunden mit GIT tun). 
+Aktuell (2019-2020) läuft bei DATEV e.G. ein Proof of Concept bezüglich automatisierter Builds auf Basis von Jenkins basierten Pipelines.
+Dies ist auch die Voraussetzung für automatisierte Tests (Unit-Tests, Modul-Tests) von z/OS Programmen im Rahmen des \glqq Continuous Integration, Continuous Deployment\grqq{}\footnote{Beschreibung in Absatz \ref{Grundlagen}} Ansatzes.
+Die dafür notwendige automatisierte Provisionierung einer z/OS Anwendungsumgebung, d.h Laufzeit, Middleware etc., um die gebauten Komponenten (COBOL, IBM Assembler-Programme) dann auch automatisiert testen zu können ist aktuell noch weitgehend unerforscht. 
+Hier sind die Prozesse bei DATEV und anderen Kunden oft noch proprietär, hoch spezialisiert,  manuell und  nicht modernisiert. 
+Gerade bei Mitarbeitern im Betrieb, die als Administratoren für die Middleware arbeiten, sind die Bedenken groß, ob man diese Cloud-Prozesse auf hochspezialisierte individuelle Komponenten wie CICS, DB2, IBM MQ anwenden kann.
+Die von IBM hier angebotenen Lösungen, die durch das \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit ermöglicht werden, haben sich noch nicht flächendeckend durchgesetzt, aber es herrscht Interesse an Erfahrungen und Einschätzungen.
 Hier setzt diese Arbeit an und klärt die in der Einleitung genannten Fragen.
 
 
