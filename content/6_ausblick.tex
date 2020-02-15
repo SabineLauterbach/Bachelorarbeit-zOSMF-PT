@@ -1,6 +1,6 @@
 \chapter{Ausblick}\label{ch:ausblick}
-Je weiter das Projekt dem Abschluss näher kam desto mehr kristallisierte sich ein Hauptproblem heraus.
-Dieses Template ist sehr auf die DATEV Rechnungsschreibung spezialisiert, dass heißt es ist funktionsfähig, aber kann nicht ohne zeitaufwendige Eingriffe in das Template, in die Workflowdefinitionsdateien und die eigentlichen REXX Skripte und Jobs, an eine andere Anwendung angepasst werden.
+Je weiter sich das Projekt dem Abschluss näherte desto mehr kristallisierte sich ein Hauptproblem heraus.
+Dieses Template ist sehr auf die DATEV Rechnungsschreibung spezialisiert, das heißt es ist funktionsfähig, aber kann nicht ohne zeitaufwändige Eingriffe in das Template, in die Workflowdefinitionsdateien und die eigentlichen REXX Skripte und Jobs, an eine andere Anwendung angepasst werden.
 Zusätzlich ist der durch den momentanen Stand des Templates ermöglichte Bereitstellungsprozess nicht optimal.
 Bei der Betrachtung des Falles, wenn zwei Anwender jeweils eine eigene Instanz des gleichen Templates benötigen, muss dieses kopiert werden und neu in z/OSMF aufgenommen werden.
 Dies verlangt Wissen über die z/OSMF Oberfläche und den Speicherort des Templates, um es schließlich auch ändern zu können.
@@ -9,29 +9,27 @@ So müsste dafür ebenfalls ein neuer IBM Queue Manager manuell angelegt werden.
 Eine Herangehensweise an dieses Problem wird im Folgenden beschrieben.
 Diese ist als Ausblick zu verstehen, die Umsetzung ist kein Bestandteil dieser Arbeit.
 
-Angenommen das Template beinhaltet die Provisionierung eines IBM Queue Managers.
-So könnte jeder Mitarbeitern seine eigene Instanz des Templates besitzen und beispielsweise für eigene Tests nutzen.
-Da die Application Id einer CICS-Instanz eindeutig sein muss, müsste dennoch jeder Mitarbeiter ein eigenes Template dahingehend anpassen, dass dies gewehrleistet ist.
-Eine Möglichkeit wäre eine Definition eines Pools mit verfügbaren Application Ids und dann mittels eines Programmes eine ungenutzte zu bestimmen.
+Angenommen das Template beinhaltet die Provisionierung eines IBM Queue Managers, so könnte jeder Mitarbeiter seine eigene Instanz des Templates besitzen und beispielsweise für eigene Tests nutzen.
+Da die Application Id einer CICS-Instanz eindeutig sein muss, müsste dennoch jeder Mitarbeiter ein eigenes Template dahingehend anpassen, dass dies gewährleistet ist.
+Eine Möglichkeit wäre eine Definition eines Pools mit verfügbaren Application IDs und dann mittels eines Programms eine ungenutzte Application ID zu bestimmen.
 Dieses Programm kann dann in das Template mittels eines Steps aufgenommen werden.
-Das würde das Problem mit der eindeutigen Application Id lösen.
+Das würde das Problem mit der eindeutigen Application ID lösen.
 Jedoch müsste immer noch für jede kleine Änderung an der Konfiguration des Templates ein neues erzeugt werden.
 Hier schafft z/OSPT Abhilfe.
 Damit kann, wie in Absatz \ref{sssec:zospt} beschrieben, mit Hilfe einer Konfigurationsdatei das Template von außerhalb gesteuert werden.
 Dadurch fällt das Kopieren des Template für den Mitarbeiter weg, dieser muss mittels des Kommandozeileninterfaces ein Image bauen und daraus einen Container erzeugen.
 Das Kommandozeileninterface hat einen weiteren Vorteil.
-Mit Hilfe von diesem können diese Arbeitsschritte in eine Jenkins-Ablauf aufgenommen werden.
+Mit dessen Hilfe können diese Arbeitsschritte in einen Jenkins-Ablauf aufgenommen werden.
 Somit läuft der Prozess automatisiert ab und nähert sich modernen Entwicklungsabläufen an.
 
 Die Arbeitsweise und der Bereitstellungsprozess für die Laufzeitumgebung, die der DATEV Rechnungsschreibungs-Ablauf benötigt, ist dadurch vereinfacht und es werden weniger Absprachen benötigt.
 Allerdings ist das Template weit von einer Nutzung außerhalb der DATEV Rechnungsschreibung entfernt.
 Während der Realisierung dieser Arbeit wurde klar, dass anwendungsspezifische Templates nicht optimal sind und nicht den vollständigen Funktionsumfang von `IBM Cloud Provisioning and Management for z/OS` ausreizen.
 So ist zu empfehlen, dass für jedes Subsystem, also CICS, Db2 und IBM MQ, ein eigenständiges Template zu realisieren ist.
-Für die Realisierung davon müssten die Template dynamischer implementiert sein.
+Für die Realisierung müssten das Template dynamischer implementiert sein.
 Um dies zu verdeutlichen wird als Beispiel die Provisionierung von IBM MQ Queues herangezogen.
 Momentan werden die Prozesse und die Trigger Queues sehr statisch angelegt.
-Das heißt, dass sowohl Namen als auch die damit verknüpften Queueparameter fest hinterlegt sind.
-Um nur ein Beispiel zu nennen.
+Das heißt, dass sowohl Namen als auch die damit verknüpften Queueparameter fest hinterlegt sind, um nur ein Beispiel zu nennen.
 Dies müsste dahingehend angepasst werden, dass alle Parameter in einer Konfigurationsdatei angeben werden können.
 Es ist auch in Betracht zu ziehen, ob für den User nur bestimmte vorgefertigte Profile, wie \glqq klein\grqq, \glqq mittel\grqq{} und \glqq groß\grqq, auswählbar sind.
 Dies müsste alles in dem Template implementiert werden.
