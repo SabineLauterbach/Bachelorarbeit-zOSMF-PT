@@ -245,8 +245,12 @@ Außerdem wird die CSD Datei, die als Vorlage gilt, durch die Standard Entwicklu
 Für die Db2 und IBM MQ Bibliotheken, die das CICS anzieht, wurden die spezifischen Namen auf der Entwicklungsstage angegeben.
 So musste dies in der \glqq createCICS.jcl\grqq{} angepasst werden.
 Zusätzlich musste ein SIT Parameter angepasst werden, so dass die Log Dateien funktionisfähig sind.
-Außerdem kam noch eine neune Bibliothek hinzu.
-Diese dient später als Ablageort der kompilierten Programme.
+Eine weitere CSD Gruppe musste hinzugefügt werden.
+Siehe Zeile 16 im Codeabschnitt \ref{code:createGrp}.
+Diese sorgt dafür, dass die Bibliotheken, die die kompilierten Programme der kompletten Entwicklungsstage beinhalten, zur Verfügung stehen.
+Außerdem kam noch eine neue Bibliothek hinzu.
+Diese dient später als Ablageort der kompilierten Programme, die explizit nur in diese CICS-Instanz vorhanden sind.
+Dies ist ein Standardvorgehen innerhalb der DATEV e.G. um neue Programmversionen zu testen.
 
 \subsection{Db2 Anpassung}\label{ssec:db2entw}
 Eine genauere technische Analyse der DATEV-Rechnungsschreibungsdatenbank kam zu dem  Ergebnis, dass es zwar möglich wäre diese Datenbank zu provisionieren, dies aber den zeitlichen Rahmen dieser Arbeit übersteigen würde.
@@ -260,8 +264,9 @@ Die Db2 Administration muss dafür Vorarbeit leisten.
 Mit dieser wurde begonnen, jedoch stellte sich heraus, dass die Komplexität (circa 600 Zeilen Code\footnote{Data Definition Language im Anhang \ref{aoo:ddl} zufinden} für einen kleinen Teil an Tabellen) der Anwendung DATEV Rechnungsschreibung im Rahmen dieser Arbeit als zu umfangreich angesehen wurde.
 Sollte sich die Provisionierung generell als zielführend erweisen wird dieser Einmalaufwand erbracht werden
 
-Für die weitere Arbeit werden, die in einem anderen Datenbanksystem bereits vorhanden, Datenbanken genutzt.
+Für die weitere Arbeit werden Datenbanken, die in einem anderen Datenbanksystem bereits vorhanden sind, genutzt.
 Hierfür mussten die dafür vorgesehenen Variablen in der Eingabedatei des Templates angepasst werden.
+Dadurch ändert sich die Gruppe in Zeile acht im Codeabschnitt \ref{code:addCSD} von \glqq DB0C \grqq{} auf \glqq DB0T \grqq.
 Außerdem wurden sowohl in der Provisionierungs- als auch in der Deprovisionierungsdatei die Datenbanksteps auskommentiert und somit kommen diese nicht mehr zum Einsatz.
 
 \subsection{IBM MQ Anpassung}\label{ssec:mqentw}
@@ -308,6 +313,10 @@ Somit müsste für jede provisionierte CICS-Instanz im Voraus eine solche CSD Gr
 In Absprache mit der IBM MQ-Administrations  wurde entschieden, die Verwaltung der IBM MQ CSD Gruppe komplett dem Template zu übergeben.
 Diese Entscheidung hatte eine Änderung des in Abbildung \ref{code:addCSD} gezeigten Codes zur Folge.
 So wird, wie in Abbildung \ref{code:createGrp} dargestellt, zunächst eine Gruppe angelegt und erst anschließend dem CSD hinzugefügt.
+
+\begin{minipage}{\linewidth}
+\lstinputlisting[caption={Erstellung einer neuen CSD Gruppe},captionpos=b,label={code:createGrp}]{listings/InitAdditionalCSD.jcl}
+\end{minipage}
 
 Für jeden IBM MQ bezogenen Job wurde zuguterletzt die Jobkarte angepasst und der technische User der CICS-Administration durch den technischen User der IBM MQ-Admninistration, der für administrative Aufgaben berechtigt ist, ausgetauscht.
 
