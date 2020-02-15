@@ -124,12 +124,16 @@ Außerdem mussten bestimmte Gruppen zu der CSD Liste der CICS-Instanz hinzugefü
 Die JCL ist in Abbildung \ref{code:addCSD} abgebildet.
 Die Reihenfolge ist relevant, da es der Initialisierungsreihenfolge entspricht.
 
+\begin{minipage}{\linewidth}
+\lstinputlisting[caption={Hinzufügen weiterer CSD Gruppen zur Liste der provisionierten CICS-Instanz mittels eines Jobs},captionpos=b,label={code:addCSD}]{listings/initaddCSDalt.jcl}
+\end{minipage}
+
 Im nächsten Schritt wurden die Jobs und Skripte angepasst.
 Zunächst wurden die Namen der CICS Dateien\footnote{Beschreibung in Absatz \ref{sssec:speziDat}} an die DATEV e.G. internen Namenskonventionen angepasst.
 Ein spezielles Augenmerk lag auf der Anpassung der \glqq createCICS.jcl\grqq-Datei.
 In dieser befindet sich die Definition des STC Jobs für das provisionierte CICS.
 Im Standard IBM Template beinhaltet diese zunächst ein Makro für die Validierung der SIT Parameter.
-Noch bevor die Jobdefinition beginnt, werden alle aus der Datei für die Eingabevariablen benötigten Variablenwerte in temporäre Zwischenvariablen eingefügt.
+Zusätzlich werden noch bevor die Jobdefinition beginnt alle aus der Datei für die Eingabevariablen benötigten Variablenwerte in temporäre Zwischenvariablen eingefügt.
 Danach folgt die Definition des Jobs, diese setzt sich aus folgenden Hauptbestandteilen zusammen:
 
 \begin{samepage}
@@ -139,6 +143,8 @@ Danach folgt die Definition des Jobs, diese setzt sich aus folgenden Hauptbestan
 \item Definition der SIT Parameter
 \end{itemize}
 \end{samepage}
+
+Sowohl bei die Einbindung der benötigten Bibliotheken als auch das Einbinden der zuvor angelegten CICS spezifischen Dateien beschränkte sich auf das Hinzufügen weiterer DD-Statements.
 
 In Abbildung \ref{HIER ABBILDUNG mit einlese von sitparams} ist zu sehen, dass es vor allem bei der Definition der SIT Parameter zu tief verschachtelten if-Bedingungen kommen kann.
 Es handelt sich um den Code, der für das Einlesen der Variable \glqq DFH\_REGION\_SITPARAMS\grqq{} aus der Eingabedatei zuständig ist.
@@ -174,11 +180,9 @@ Die zwei notwendigen Steps wurden erzeugt und in den Workflow eingebunden.
 
 Die API ist nur dazu fähig, Datenbanken auf einem bestimmten Datenbanksystem zu erzeugen.
 Um die Datenbank aus der CICS-Instanz heraus nutzen zu können, muss dem CICS dieses Datenbanksystem mitgeteilt werden.
-Hierfür ist, wie in Abbildung \ref{code:addCSD} bereits zu sehen ist, das Hinzufügen einer weiteren CSD Gruppe notwendig ist, sowie die Aufnahme weitere Bibliotheken in der \glqq createCICS.jcl\grqq.
+Hierfür ist, wie in Abbildung \ref{code:addCSD} in Zeile acht bereits zu sehen ist, das Hinzufügen einer weiteren CSD Gruppe notwendig ist, sowie die Aufnahme weitere Bibliotheken in der \glqq createCICS.jcl\grqq.
 Um den Aufruf möglichst dynamisch zu gestalten,  wurden zusätzlich neue Variablen im Template definiert.
 Diese werden in der Eingabedatei des Templates gesetzt.
-
-In Abilldung zeile SOUNSSO
 
 \subsubsection{Bereitstellung IBM MQ}\label{sssec:mqtplx}
 In diesem Absatz wird die Provisionierung einer IBM MQ Queue im Test-Plex beschrieben. 
@@ -190,11 +194,12 @@ Die IBM stellt Programme für die Verwaltung und das Nutzen von Queues  zur Verf
 Diese können mittels eines Jobs und bestimmten Parametern gestartet werden.
 In Abbildung \ref{code:defq} ist die JCL des Jobs für das Erstellen einer Queue zu sehen.
 Das auszuführende Programm ist \glqq CSQUTIL\grqq{} und als Parameter wird der Queuemanager übergeben.
-Unter dem DD Namen \glqq MQSCIN\grqq{} ist der MQ Befehl für das Erzeugen einer Queue zu sehen.
+Unter dem DD Namen \glqq MQSCIN\grqq{} ist der IBM MQ Befehl für das Erzeugen einer Queue zu sehen.
 Um zu Prüfen, ob die Queue auch funktionsfähig ist, wurde nach dem Erstellen auch mit Hilfe eines Jobs, eine Messages auf die Queue geschrieben und wieder abgeholt.
 Der Job für das Löschen der Queues ist analog aufgebaut.
 
 Ähnlich wie in Absatz \ref{sssec:db2tpl} für die Datenbank-Provisionierung beschrieben, muss der CSD Datei eine weitere Gruppe für den Queuemanager angegeben werden.
+Zu sehen in Abbildung \ref{code:addCSD} in Zeile 11.
 Dadurch hat die CICS-Instanz Zugriff auf alle Queues, die sich innerhalb dieses Managers befinden.
 Des Weiteren ist die Aufnahme weiterer Bibliotheken in der \glqq createCICS.jcl\grqq{} notwendig.
 
