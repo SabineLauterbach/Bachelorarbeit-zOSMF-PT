@@ -4,7 +4,7 @@ In diesem Kapitel werden für diese Arbeit wichtige Begriffe erläutert.
 \section{Mainframe / Großrechner}\label{sec:mainframe}
 Mainframe und Großrechner werden in dieser Arbeit gleichbedeutend verwendet.
 Im modernen Sprachgebrauch kann ein Großrechner als größte zur Verfügung stehende Serverart betrachtet werden.
-Er wird von Unternehmen verwendet, um  kommerzielle Datenbanken, Transaktionsserver und Anwendungen, die einen hohen Grad an Sicherheit und Verfügbarkeit benötigten, zu hosten.
+Er wird von Unternehmen verwendet, um  kommerzielle Datenbanken, Transaktionsserver und Anwendungen, die einen hohen Grad an Sicherheit und Verfügbarkeit benötigen, zu hosten.
 Im Gegensatz zu verteilten Serversystemen, bei denen die Funktionalitäten auf einzelne Server, wie zum Beispiel einen E-Mail-Server, einen Datenbank-Server, einen Web-Server usw. aufgeteilt sind, handelt es sich bei einem Mainframe um ein zentralisiertes System.
 Unter anderem sind Datenbanksysteme und Anwendungsserver sogenannte \glqq Subsysteme\grqq.
 \cite{Ebbers.2011}
@@ -12,7 +12,7 @@ Unter anderem sind Datenbanksysteme und Anwendungsserver sogenannte \glqq Subsys
 \subsection{Batch}
 Batch beziehungsweise Batch-Verarbeitung bezeichnet in der IT die sog. \glqq Stapelverarbeitung\grqq.
 Das heißt, dass Programme mit minimalem menschlichen Eingreifen nacheinander abgearbeitet werden.
-Dies geschieht meist zu einer vorher festgelegten Zeit, gesteuert wird dies über sog. \glqq Scheduling\grqq-Systeme.
+Beispielsweise meist zu einer vorher festgelegten Zeit, gesteuert wird dies über sog. \glqq Scheduling\grqq-Systeme.
 Zum Beispiel wird einmal am Tag zu einer ganz bestimmten Uhrzeit die tägliche Bewertung\footnote{Beschreibung in Absatz \ref{sssec:täglbew}} der DATEV Rechnungsschreibung durchgeführt.
 Die auszuführenden Programme laufen in sogenannten \glqq Batch-Jobs\grqq.
 \cite{Ebbers.2011}
@@ -20,10 +20,10 @@ Die auszuführenden Programme laufen in sogenannten \glqq Batch-Jobs\grqq.
 \subsection{Batch-Job / Job}\label{ssec:job}
 In einem Batch-Job, in dieser Arbeit wird \glqq Job\grqq{} gleichbedeutend verwendet, wird dem System mitgeteilt welches Programm mit welchen Ein- und Ausgabedateien und Parametern gestartet werden soll.
 Die Skriptsprache, die diese Jobs definiert, ist im IBM-Mainframe-Umfeld die sog. \glqq Job Control Language\grqq, kurz JCL.
-Die drei Grundbausteine der JCL werden im Folgendem beschrieben.
+Die drei Grundbausteine der JCL werden im Folgenden beschrieben.
 
 Zunächst ist \glqq JOB\grqq{} zu nennen, auch Jobkarte genannt.
-Hier wird der Name des Jobs, Berechnungsinformationen, maximal zur Verfügung stehende CPU-Zeit und weitere Job-weite Parameter gesetzt.
+Hier werden der Name des Jobs, Berechnungsinformationen, maximal zur Verfügung stehende CPU-Zeit und weitere Job-weite Parameter gesetzt.
 Im Beispiel \ref{fig:jclBsp} Zeilennummer eins bis drei.
 
 Innerhalb eines Jobs wird mit Hilfe des \glqq EXEC\grqq{} Befehls dem System mitgeteilt, welches Programm gestartet werden soll.
@@ -54,18 +54,18 @@ Damit werden unter anderem Zugriffsrechte auf Dateien und Subsysteme gesteuert.
 \cite{InternationalBusinessMachinesCorporation.2008}
 
 \subsection{REXX}
-Die Restructures Extenden Executer Programmiersprache, kurz REXX, ist eine prozedurale Programmiersprache.
+Die Restructured Extended Executor Programmiersprache, kurz REXX, ist eine prozedurale Programmiersprache.
 Die Sprache wird interpretiert.
 Mittlerweile existieren jedoch auch REXX-Compiler.
 \cite{Parziale.2007}
 
 REXX versteht sich als Skriptsprache und kommt nicht nur am Mainframe zum Einsatz.
 So kann es als Bindeglied für Betriebssystembefehle, grafischen Interfaces, Objekten, Funktionen und Serviceroutinen gesehen werden.
-So wird es, wie auch in dieser Arbeit, unter anderem für die Automation von sich wiederholenden Systemadministrations Aufgaben eingesetzt.
+So wird es, wie auch in dieser Arbeit, unter anderem für die Automation von sich wiederholenden Systemadministrationsaufgaben eingesetzt.
 \cite{Fosdick.2005}
 
-\section{IBM Mainframe Architektur bei der DATEV eG}
-Folgende Begriffe werden in diesem Absatz im Umfeld der DATEV eG erläutert:
+\section{IBM Mainframe Architektur bei der DATEV e.G.}
+Folgende Begriffe werden in diesem Absatz im Umfeld der DATEV e.G. erläutert:
 
 \begin{samepage}
 \begin{itemize}
@@ -89,7 +89,7 @@ Die vier Stages werden im Folgenden beschrieben.
 Stage auf der alle z/OS Entwickler an neuen Features arbeiten und erste kleinere Tests durchführen.
 
 \subparagraph{\glqq Qualitätssicherung\grqq} ~\\
-Hier werden vor allem Integrationstests mit extra dafür erstellen Testdaten durchgeführt.
+Hier werden vor allem Integrationstests mit extra dafür erstellten Testdaten durchgeführt.
 
 \subparagraph{\glqq Vorproduktion\grqq}~\\
 Die Vorproduktion steht für weitere Integrationstests zur Verfügung.
@@ -146,30 +146,29 @@ Eine Transaktion kann mehrere Programme unterschiedlicher Programmiersprachen um
 Über die TransaktionsID wird der Ablauf gestartet.
 Dies kann sowohl per Webanfrage oder per Messaging Queue als auch aus einem anderen Programm heraus oder manuell geschehen.
 In der Transaktion werden alle Änderungen, die Programme an Ressourcen, wie zum Beispiel einer Datenbank oder Dateien tätigen, protokolliert.
-So wird im Fehlerfall die Möglichkeit eines Rollbacks sichergestellt.
+So wird im Falle eines Fehlers die Möglichkeit eines Rollbacks sichergestellt.
  \cite{Rayns.2011}
 
 \paragraph{Voraussetzungen}\label{subsec:voraus} ~\\
-Bei der DATEV eG kümmert sich ein Team, die \glqq CICS Administration\grqq{} um das Erstellen einer CICS-Instanz, starten dieser Instanz und ist generell für alles rund um die Administration des CICS Transactions Servers zuständig.
+Bei der DATEV e.G. kümmert sich ein Team, die \glqq CICS Administration\grqq{} um das Erstellen einer CICS-Instanz, starten dieser Instanz und ist generell für alles rund um die Administration des CICS Transactions Servers zuständig.
 Der Fokus dieser Arbeit liegt auf dem Erstellen (\glqq Provisionieren\grqq{}) einer CICS-Instanz. Es werden nur die dafür notwendigen Voraussetzungen dargelegt.
-Außerdem liegt der Fokus auf Entwicklungs-CICS-Systemen, auf der sog. Entwicklungs-Stage, nicht auf den produktiven CICS-Systemen der DATEV eG. 
+Außerdem liegt der Fokus auf Entwicklungs-CICS-Systemen, auf der sog. Entwicklungs-Stage, nicht auf den produktiven CICS-Systemen der DATEV e.G.. 
 Aus diesem Grund werden nur Schritte, die für ein solches Testsystem benötigt werden, dargestellt.
 Eine weitere Rahmenbedingung besteht darin, dass nur die Arbeitsschritte, die mit z/OSMF\footnote{Beschreibung in Absatz \ref{sec:zosmf}} automatisiert werden, erläutert werden.
 
 \paragraph{Einrichtung CICS Instanz}\label{subsec:createCICS}~\\
 Die in diesem Absatz benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 2 aus der Abteilung, die für die CICS Administration zuständig ist.
-Um eine lauffähige CICS Instanz den Vorausetzungen aus dem Absatz \ref{subsec:voraus} entsprechend einzurichten, sind mehrere Schritte notwendig.
-Diese werden im Folgendem beschrieben.
+Um eine lauffähige CICS Instanz den Voraussetzungen aus dem Absatz \ref{subsec:voraus} entsprechend einzurichten, sind mehrere Schritte notwendig.
+Diese werden im Folgenden beschrieben.
 
 \subparagraph{CICS spezifische Dateien}\label{sssec:speziDat} ~\\
 Zunächst müssen CICS spezifische Dateien im z/OS angelegt werden.
-Im Fall des dieser Arbeit zugrunde liegende Beispiels handelt es sich um 17 verschiedene VSAM\footnote{Virtual Storage Access Method, spezielle Dateiart, die schnelle I/O-Zugriffe ermöglicht.\cite{Lovelace.2013}} Dateien.
+Im Fall des dieser Arbeit zugrunde liegenden Beispiels handelt es sich um siebzehn verschiedene VSAM\footnote{Virtual Storage Access Method, spezielle Dateiart, die schnelle I/O-Zugriffe ermöglicht.\cite{Lovelace.2013}} Dateien.
 Diese Dateien benötigt die CICS Instanz um zum Beispiel Systemfehler zu protokollieren oder den Debugger aktivieren zu können.
 
 \subparagraph{CSD} ~\\
-In der Datei \glqq CICS System Defintion\grqq, kurz CSD, muss jede Ressource, die dem System zur Verfügung stehen soll, definiert werden.
-Eine CSD Datei kann für mehrere CICS Instanzen verwendet werden.
-Eine CSD Datei besteht aus mehreren Einträgen.
+In der Datei \glqq CICS System Definition\grqq, kurz CSD, muss jede Ressource, die dem System zur Verfügung stehen soll, definiert werden.
+Eine CSD Datei kann für mehrere CICS Instanzen verwendet werden und besteht aus mehreren Einträgen.
 Ein Eintrag besteht aus einer Gruppe und einer Liste.
 Die Gruppe ist hierbei die Definition einer Systemressource und muss manuell angelegt werden.
 Bei der Liste handelt es sich um das System, welches diese Ressource benötigt.
@@ -183,18 +182,18 @@ In diesem werden zunächst einige zur Laufzeit benötigten Bibliotheken und Date
 Außerdem werden hier die SIT \footnote{CICS system initialization table} Parameter definiert.
 Zunächst wird festgelegt welche Standard SIT verwendet werden soll.
 Anschließend können diese Standardwerte überschrieben werden.
-Zu diesen Parameter zählen unter anderem der eindeutige Name der CICS Instanz, der Speicherort der dazugehören CSD und die Information, ob eine Verbindung zu einem Db2 Datenbanksystem hergestellt werden soll.
+Zu diesen Parametern zählen unter anderem der eindeutige Name der CICS-Instanz, der Speicherort der dazugehörenden CSD und die Information, ob eine Verbindung zu einem Db2 Datenbanksystem hergestellt werden soll.
 
 \paragraph{Entfernung CICS Instanz} ~\\
 Um eine CICS Instanz zu entfernen muss diese zunächst gestoppt werden.
 Dies ist über das \glqq STOP\grqq-Konsolenkommando von z/OS möglich.
-Anschließend müssen alle im Absatz \ref{subsec:createCICS} beschriebene Schritte rückgängig gemacht werden.
-Also müssen die für diese Instanz spezifischen Dateien, die Einträge für die CICS Instanz aus der CSD Datei und schließlich auch der STC Job gelöscht werden.
+Schließlich müssen alle im Absatz \ref{subsec:createCICS} beschriebenen Schritte rückgängig gemacht werden.
+Also müssen die für diese Instanz spezifischen Dateien, die Einträge für die CICS-Instanz aus der CSD Datei und schließlich auch der STC Job gelöscht werden.
 
 \subsubsection{Db2}\label{sssec:db2}
 Db2 ist ein relationales Datenbanksystem, welches unter anderem als Subsystem eines z/OS Betriebssystems läuft.
-Einer Stage können mehrere Datenbanksysteme, auch Instanz genannt, zugeordnet werden.
-In diesem befinden sich die Datenbanken und Tabellen.
+Einer Stage können mehrere Datenbanksysteme, auch Instanzen genannt, zugeordnet werden.
+In einer Instanz befinden sich die Datenbanken und Tabellen.
 
 \subsubsection{IBM MQ}\label{sec:mq}
 IBM MQ ist eine Messaging-Lösung der IBM.
@@ -203,7 +202,7 @@ Alle IBM MQ Begrifflichkeiten, die in dieser Arbeit verwendet werden, werden im 
 \cite{Aranha.2013}
 
 Das IBM MQ Subsystem einer Stage setzt sich aus einem oder mehreren Queue Managern zusammen.
-Ein Queue Manager kann so als IBM MQ Instanz gesehen werden.
+Ein Queue Manager kann daher als IBM MQ Instanz gesehen werden.
 
 \paragraph{Queue Manager}~\\
 Bei einem Queue Manager handelt es sich um die zentrale Ressource eines IBM MQ Systems.
@@ -223,8 +222,8 @@ Die anderen Queue Arten nutzen als Basis immer eine Local Queue.
 
 \subparagraph{Initiation Queue}~\\
 Die sogenannte \glqq Initiation Queue\grqq{} ist eine spezielle Art der Local Queue.
-Diese dient dem Queue Manager dazu, um unter bestimmten Bedingungen eine Trigger-Nachricht darauf zu schreiben.
-So kann eine andere Local Queue so definiert sein, dass sobald eine Nachricht auf sie geschrieben wird eine solche Trigger-Nachricht erzeugt wird.
+Diese dient dem Queue Manager dazu, unter bestimmten Bedingungen eine Trigger-Nachricht darauf zu schreiben.
+Daher kann eine andere Local Queue so definiert sein, dass sobald eine Nachricht auf sie geschrieben wird eine solche Trigger-Nachricht erzeugt wird.
 Dies ermöglicht, dass Anwendungen nur starten, wenn wirklich Daten zum Verarbeiten vorhanden sind.
 \cite{Aranha.2013}
 
@@ -232,8 +231,8 @@ Dies ermöglicht, dass Anwendungen nur starten, wenn wirklich Daten zum Verarbei
 Für das Auslösen von Anwendungen wird nicht nur die Initiation Queue benötigt, sondern auch sogenannte \glqq Processes\grqq.
 So muss der Local Queue, die den Start einer Anwendung auslösen soll, bei der Definition nicht nur die Initiation Queue bekannt gemacht werden, sondern auch ein Process.
 Ein Process legt den \glqq Type\grqq{} und den Namen der zu startenden Anwendung fest.
-Als \glqq Type\grqq{} können beispielhaft CICS oder auch WINDOWSNT für Windows unterstütze Platformen genannt werden.
-Ist der \glqq Type\grqq{} CICS,  muss der Name der Transaktion angegeben werden, für Windows Platformen der Dateipfad der auszuführenden exe.
+Als \glqq Type\grqq{} können beispielhaft CICS oder auch WINDOWSNT für Windows unterstütze Plattformen genannt werden.
+Ist der \glqq Type\grqq{} CICS,  muss der Name der Transaktion angegeben werden, für Windows Plattformen der Dateipfad der auszuführenden exe.
 \cite{Aranha.2013}
 
 \subsection{Architekturüberblick}
@@ -258,7 +257,7 @@ Zum einen das z/OS Provisioning Toolkit, (z/OSPT) und zum anderen z/OS Managemen
 Im Folgenden werden einige allgemeine Begriffe, die im Umfeld des Tools \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} vorkommen, erläutert.
 
 \subsubsection{Provisioning}
-Ins Deutsche übersetzt bedeutet es Bereitstellung, in dieser Arbeit wird auch Provisionierung verwendet.
+Ins Deutsche übersetzt bedeutet es Bereitstellung,vorliegend wird auch Provisionierung verwendet.
 In dieser Arbeit umfasst dieser Begriff die Bereitstellung einer Laufzeitumgebung, beziehungsweise den Prozess, der hierfür benötigt wird.
 
 \subsubsection{Workflow}\label{sssec:workflow}
@@ -269,11 +268,11 @@ Ein Step beschreibt einen Teilablauf eines Workflows.
 Innerhalb eines Steps können sowohl interne und externe Scripte als auch JCLs und somit Programme ausgeführt werden.
 Darüber hinaus besteht die Möglichkeit REST-Calls auszuführen.
 Es können Bedingungen für die Durchführung eines Steps definiert werden.
-So ist es zum Beispiel möglich, einen Step nur durchzuführen, wenn eine bestimmte Variable einen bestimmten Wert besitzt.
+So ist es beispielsweise möglich, einen Step nur durchzuführen, wenn eine bestimmte Variable einen bestimmten Wert besitzt.
 Es wird ein XML Schema verwendet um sicherzustellen, dass in dem XML-Skript zur Laufzeit keine syntaktischen Fehler vorhanden sind.
 \cite{Rotthove.2018}
 
-Ein Nachteil von Workflows ist, dass diese statisch sind, das heißt, dass die Variablenzuweisungen immer zum Zeitpunkt der Erstellung stattfindet.
+Ein Nachteil von Workflows ist, dass diese statisch sind, das heißt, dass die Variablenzuweisungen immer zum Zeitpunkt der Erstellung stattfinden.
 Dadurch ergibt sich, dass für jede kleine Änderung ein eigener Workflow erzeugt werden muss.
 Somit ist ein Workflow eher ein Einmal- bzw. Wegwerfprodukt.
 
@@ -293,19 +292,19 @@ Darin ist die Datei für die Eingabevariablen und die Festlegung, welche Variabl
 
 \item Die Manifest-Datei.\\
 In dieser wird dem Template mitgeteilt, an welchem Speicherort sich die oben genannten Dateien befinden.
-Da ein Template immer provisioniert werden kann, wird hier auch der Speicherort des Bereitstellungsworkflows angeben.
+Da ein Template immer provisioniert werden kann, wird hier auch der Speicherort des Bereitstellungsworkflows angegeben.
 Zusätzlich kann noch eine Beschreibung des Templates hinzugefügt werden.
 \end{enumerate}
 
-Somit bildet ein Template einen Rahmen um mehrere Workflows und ermöglich eine schnellere De-/provisionierung.
+Somit bildet ein Template einen Rahmen um mehrere Workflows und ermöglicht eine schnellere De-/provisionierung.
 Das hat den Vorteil, dass Variablen nur an einer Stelle geändert werden.
-Daüber hinaus besteht die Möglichkeit, per Awendereingabe den Variablen zum Zeitpunkt der Provisionierung einen Wert zuzuweisen.
+Darüber hinaus besteht die Möglichkeit, per Anwendereingabe den Variablen zum Zeitpunkt der Provisionierung einen Wert zuzuweisen.
 Somit ist ein Template deutlich flexibler als ein Workflow.
 \cite{IBM.2019}
 
 \subsubsection{Instance}\label{sssec:instance}
 Hierbei handelt es ich um das Ergebnis nach der Provisionierung eines Templates, zum Beispiel um ein funktionsfähiges CICS.
-Als Abgrenzung zu einer Instanz eines Subsystems, kann eine Template Instance auch Instanzen mehrer Subsystemen enthalten.
+Als Abgrenzung zu einer Instanz eines Subsystems, kann eine Template Instance auch Instanzen mehrere Subsysteme enthalten.
 
 \subsection{z/OS Provisioning Toolkit}\label{sssec:zospt}
 z/OSPT bietet ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Laufzeitumgebungen.
@@ -344,9 +343,9 @@ Unter diesem Punkt sind die Funktionalitäten für die automatisierte Bereitstel
 
 Zuerst ist das \glqq Resource Management\grqq{} zu nennen..
 Darunter werden sogenannte \glqq Domains\grqq{} und die dazugehörigen \glqq Tenants\grqq{} verwaltet.
-Unter einer \glqq Domain\grqq{} ist ein System zu verstehen, das Systemressourcen in Ressourcenpools gliedert.
+Unter einer \glqq Domain\grqq{} ist ein System zu verstehen, dass Systemressourcen in Ressourcenpools gliedert.
 \glqq Tenants\grqq{} sind die dazugehörigen Rechtegruppen, die dem Anwender den Zugriff auf und die Nutzung von zugeordneten Templates ermöglicht.
-Einem Template muss sowohl eine\glqq Domain\grqq{} als auch ein \glqq Tenant\grqq{} zugewiesen werden.
+Einem Template muss sowohl eine \glqq Domain\grqq{} als auch ein \glqq Tenant\grqq{} zugewiesen werden.
 \cite{Rotthove.2018}
 
 Zur Verwaltung der Templates und Instances kommen die \glqq Software Services\grqq{} zum Einsatz.
