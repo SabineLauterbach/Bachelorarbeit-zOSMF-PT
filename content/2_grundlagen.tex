@@ -24,17 +24,28 @@ Die drei Grundbausteine der JCL werden im Folgendem beschrieben.
 
 Zunächst ist \glqq JOB\grqq{} zu nennen, auch Jobkarte genannt.
 Hier wird der Name des Jobs, Berechnungsinformationen, maximal zur Verfügung stehende CPU-Zeit und weitere Job-weite Parameter gesetzt.
+Im Beispiel \ref{fig:jclBsp} Zeilennummer eins bis drei.
 
 Innerhalb eines Jobs wird mit Hilfe des \glqq EXEC\grqq{} Befehls dem System mitgeteilt, welches Programm gestartet werden soll.
 Es können mehrere \glqq EXEC\grqq{}  Befehle in einem Job vorkommen, dabei wird jeder einzelne als sogenannter \glqq Job step\grqq{} bezeichnet.
 Dabei können dem Programm neben den Ein-/Ausgabedateien auch weitere Parameter übergeben werden.
+Im Beispiel \ref{fig:jclBsp} Zeilennummer zehn.
 
 Als letztes ist der \glqq DD\grqq{} Baustein zu nennen.
 \glqq DD\grqq{} steht für Data Definition.
 Ein DD-Statement verknüpft den sog. DD-Namen mit einer Datei oder einem I/O Gerät und ist somit ein Alias für diese.
 Ein \glqq DD\grqq{} Baustein ist immer an ein \glqq EXEC\grqq{} Befehl gebunden.
 Einem \glqq EXEC\grqq{} können mehrere \glqq DD\grqq{} Bausteine zugeordnet sein. 
+Im Beispiel \ref{fig:jclBsp} Zeilennummer 12 bis 15 und 19.
+Hier ist auch zu sehen, dass Daten auch Inline an ein DD-Statement übergeben werden kann.
 \cite{Ebbers.2011}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figures/dispq.PNG}
+\caption{Job Beispiel, Display einer IBM MQ}
+\label{fig:jclBsp}
+\end{figure}
 
 \subsection{Resource Access Control Facility}
 Die Resource Access Control Facility, kurz RACF, ist ein externer Sicherheitsmanager für z/OS.
@@ -319,7 +330,12 @@ Dabei handelt es sich eins zu eins um eine \glqq Instance\grqq \footnote{Beschre
 Der Hauptaugenmerk dieser Arbeit liegt  bei z/OSMF, da damit die Verwaltung von Workflows und Templates über eine browserbasierende Schnittstelle möglich ist.
 Durch diese Oberfläche, in Abbildung \ref{fig:zosmf_welcome} dargestellt, ist es einfacher zu bedienen als das Kommandozeileninterface von z/OSPT  und somit wird der Einstieg in die Provisionierung erleichtert.
 
-//hier zosmf welcomepage screenshot
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figures/zosmf.png}
+\caption{z/OSMF Willkomens Ansicht}
+\label{fig:zosmf_welcome}
+\end{figure}
 
 Die linke Seite der Abbildung \ref{fig:zosmf_welcome} zeigt den Umfang der z/OSMF  Funktionen.
 Für diese Arbeit besitzt nur der Menüpunkt \glqq Cloud Provisioning\grqq{} Relevanz.
