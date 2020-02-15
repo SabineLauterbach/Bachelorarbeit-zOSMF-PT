@@ -146,13 +146,17 @@ Danach folgt die Definition des Jobs, diese setzt sich aus folgenden Hauptbestan
 
 Sowohl bei die Einbindung der benötigten Bibliotheken als auch das Einbinden der zuvor angelegten CICS spezifischen Dateien beschränkte sich auf das Hinzufügen weiterer DD-Statements.
 
-In Abbildung \ref{HIER ABBILDUNG mit einlese von sitparams} ist zu sehen, dass es vor allem bei der Definition der SIT Parameter zu tief verschachtelten if-Bedingungen kommen kann.
+In Abbildung \ref{code:sitparams} ist zu sehen, dass es vor allem bei der Definition der SIT Parameter zu tief verschachtelten if-Bedingungen kommen kann.
 Es handelt sich um den Code, der für das Einlesen der Variable \glqq DFH\_REGION\_SITPARAMS\grqq{} aus der Eingabedatei zuständig ist.
 In dieser Variable werden die SIT Parameter als Komma separierter String angegeben.
 Für die Erzeugung eines DATEV e.G. spezifischen CICS wurde das Makro für die Validierung von SIT Parametern beibehalten.
 Alles danach wurde zunächst durch eine zur Verfügung gestellten DATEV e.G. Standard JCL, für die Erzeugung eines CICS, ersetzt.
 Nach und nach wurde damit die notwendige Logik, wie die aus Abbildung \ref{gleiche abbildung wie oben}, hinzugefügt .
 Damit wurde die vorher statische DATEV e.G. Standard JCL durch Verwendung von Template internen Variablen flexibilisiert.
+
+\begin{minipage}{\linewidth}
+\lstinputlisting[caption={Setzen der SIT Parameter durch Auslesen der \glqq DFH\_REGION\_SITPARAMS\grqq{} Variablen},captionpos=b,label={code:sitparams}]{listings/sitparams.jcl}
+\end{minipage}
 
 Es wurden nur die wirklich benötigten SIT Parameter aufgenommen.
 Die anzunehmenden Werte wurden einzeln mit den CICS Administratorenteam besprochen und festgelegt.
