@@ -1,5 +1,5 @@
 \chapter{Einleitung}\label{ch:einleitung}
-\glqq I recently predicted the last mainframe will be unplugged on March 15, 1996\grqq\footnote{\cite{Alsop.1993}}, ein in der Großrechner-Welt bekannt gewordenes Zitat.
+\glqq I recently predicted the last mainframe will be unplugged on March 15, 1996\grqq\footnote{\cite{Alsop.1993}} - ein in der Großrechner-Welt bekannt gewordenes Zitat.
 Es handelt sich um eine 1993 getroffene Vorhersage, nämlich dass der letzte Mainframe, auch Großrechner genannt, am 15 März 1996 abgeschaltet werden wird.
 Wieso wird sich im Jahre 2020 dennoch mit dieser Technologie beschäftigt? 
 Und was genau ist ein Großrechner?
@@ -8,7 +8,7 @@ In einem Satz ist ein Großrechner\footnote{Beschreibung im Absatz \ref{sec:main
 In dieser Arbeit wird nur auf Mainframes aus dem Hause von IBM eingegangen.
 Damit ist auch der Technologiestack festgelegt.
 Das verwendete Betriebssystem ist z/OS, darauf werden Middleware Produkte wie CICS\footnote{Anwendungsserver, CICS Beschreibung Absatz \ref{cics}}, das Datenbanksystem Db2\footnote{ Beschreibung Absatz \ref{sssec:db2}} sowie die Messaging Lösung \glqq IBM MQ\grqq{}\footnote{Beschreibung im Absatz \ref{sec:mq} zu finden} betrieben.
-Als Programmiersprachen werden COBOL, IBM Assembler, C, C++ verwendet, seit ca. 23 Jahren auch Java\footnote{\cite{Steegmans.2003}}.
+Als Programmiersprachen werden COBOL, IBM Assembler, C und C++ verwendet, sowie Java seit ca. 23 Jahren.\footnote{\cite{Steegmans.2003}}.
 
 Der IBM Mainframe hat eine lange Geschichte.
 Vor mehr als fünfzig Jahren wurde der allererste Großrechner, der sog.(Kommentar: Bezeichnung such ich noch raus) vorgestellt.
@@ -25,11 +25,12 @@ Es wird immer schwieriger Nachwuchs in diesem Bereich zu finden.
 Zum einem,  da es kaum noch an Universitäten gelehrt wird.
 Die Seite des Hochschulkomasses\footnote{\cite{internetagenturKolnFrankfurtsunzinetTYPO3Programmmierung.}} liefert sogar weder für \glqq Mainframe\grqq{} noch für \glqq Großrechner\grqq{} einen Treffer.
 Zum anderen ist der demographische Faktor, der Wissensträger nicht zu vernachlässigen.
-Ein weiteres Problem ist, dass eine Firma, die einen IBM Großrechner mit z/OS betreibt, von dem oben genannten proprietären Technologiestack abhängig ist, dass heißt es entsteht eine starke Herstellerabhänigkeit.
+Ein weiteres Problem ist, dass eine Firma, die einen IBM Großrechner mit z/OS betreibt, von dem oben genannten proprietären Technologiestack abhängig ist, dass heißt es entsteht eine starke Herstellerabhängigkeit.
 
-Offentsichlich betreiben dennoch einige Firmen einen IBM Großrechner.
+Offensichtlich betreiben dennoch einige Firmen einen IBM Großrechner.
 Darunter zählen hauptsächlich Banken, das Gesundheitswesen, Versicherungen, Fluggesellschaften usw.
-Der gemeinsame Nenner dieser Unternehmen ist, dass sich über die Jahre und Jahrzehnte enorme Investitionen auf dem Mainframe angesammelt haben. Die entstandenen Kernsysteme haben hohe Anforderung an Massendatenverarbeitung, Sicherheitsstandards und Hochverfügbarkeit.
+Der gemeinsame Nenner dieser Unternehmen ist, dass sich über die Jahre und Jahrzehnte enorme Investitionen auf dem Mainframe angesammelt haben.
+Die entstandenen Kernsysteme haben hohe Anforderungen an Massendatenverarbeitung, Sicherheitsstandards und Hochverfügbarkeit.
 All diese Punkte sprechen nach wie vor für die Nutzung eines Großrechners, auch bei der DATEV eG.
 \cite{IBM.2014}
 
@@ -41,7 +42,7 @@ Ein nicht unbeträchtlicher Teil dieser betriebswirtschaftlichen Anwendungen lä
 So werden pro Tag circa 150.000 Batch Jobs\footnote{Beschreibung in Absatz \ref{ssec:job}} und circa 90 Millionen CICS-Transaktionen verarbeitet.
 Diese Last wird von circa 14.000 aktiven Modulen erzeugt.
 Wie in der Abbildung \ref{fig:Programmiersprachen} zu sehen ist, ist COBOL mit circa 46\% Prozent die am häufigsten verwendete Programmiersprache am Großrechner bei der DATEV eG.
-Durch diese Module werden unteranderem im Monat circa 11 Millionen Lohnabrechnungen erstellt und circa 1 Millionen Umsatzsteuer-Voranmeldungen durchgeführt.
+Durch diese Module werden unter anderem im Monat circa 11 Millionen Lohnabrechnungen erstellt und circa eine Millionen Umsatzsteuer-Voranmeldungen durchgeführt.
 
 \begin{figure}
 \begin{tikzpicture}
@@ -87,7 +88,7 @@ Dadurch wurde ein bis dato verwendetes eigenentwickeltes Tool für die Sourcever
 Jedoch wurde damit zwar das Tooling modernisiert, jedoch nicht der Entwicklungsprozess selbst.
 Entwickelt wird in einer sogenannten \glqq Entwicklungsstage\grqq{}\footnote{Beschreibung der Stages in Absatz \ref{sec:sysplex}}. 
 So teilen sich zumindest die Entwickler einer Anwendung die gleiche Test-CICS/Db2/MQ Ressourcen.
-Das heißt auch, dass Parallelentwicklung an unterschiedlichen Features nur mit viel Abstimmungs-Aufwand und Absprachen innerhalb eines Entwicklungsteams, teilweise auch abteilungsübergreifend, möglich ist.
+Das heißt auch, dass eine Parallelentwicklung an unterschiedlichen Features nur mit viel Abstimmungs-Aufwand und Absprachen innerhalb eines Entwicklungsteams, teilweise auch abteilungsübergreifend, möglich ist.
 Die Verantwortung der Systemressourcen, unter anderem auch der Test Ressourcen, liegt bei extra dafür entstandenen Administratorenteams.
 Werden Änderungen an bestehenden Ressourcen durchgeführt oder werden neue Systemumgebungen benötigt, entsteht weiterer Abstimmungs-Aufwand und weitere Absprachen.
 Dadurch wird der Prozess fehleranfällig und langsam.
@@ -95,14 +96,14 @@ In der Cloud Entwicklung sind dagegen moderne Prozesse, bei denen eine automatis
 
 Moderne Entwicklungsprozesse durfte ich nach dem Abschluss meiner Ausbildung in einem \glqq Cloud Native\grqq-Projekt selbst erleben.
 Hier hatte jeder Entwickler seine eigene Testumgebung und konnte isoliert und ungestört von seinen Kollegen, ein neues Feature testen.
-Die Datenbank konnte per Knopfdruck bereitgestellt werden, ganze Laufzeitumgebungen konnten so erzeugt werden.
+Die Datenbank konnte per Knopfdruck bereitgestellt werden, ganze Laufzeitumgebungen konnten auf diese Weise erzeugt werden.
 Solche Prozesse unterstützen die bei DATEV e.G. eingesetzte agile Softwareentwicklung, und von den zuständigen Abteilungen, die sich mit der Modernisierung von z/OS Anwendungen und -prozessen beschäftigen,  kam die Frage auf, ob es möglich wäre, solche Mechanismen auch für legacy z/OS Anwendungen aufbauen zu können.
 In Zusammenarbeit mit dem Bereich IT-Services und Technologiestrategie ergab sich damit das Thema für diese Arbeit, in der folgende Fragen beantwortet und bewertet werden sollen.
 
 Ist es generell technisch möglich mit dem \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit Laufzeitumgebungen automatisiert bereitzustellen?
 Wird dadurch der aktuelle Bereitstellungsprozess schneller und auch sicherer?
-Erzeugt die Nutzung einen Mehrwert bei den Stakeholdern, also den Entwicklerteams und den Administratorenteams.
+Erzeugt die Nutzung einen Mehrwert bei den Stakeholdern, also den Entwicklerteams und den Administratorenteams?
 
-Um diese Fragen zu beantworten wird die Provisionierung einer z/OS Laufzeitumgebung für eine speziellen Anwendung untersucht.
+Um diese Fragen zu beantworten wird die Provisionierung einer z/OS Laufzeitumgebung für eine spezielle Anwendung untersucht.
 Die Anwendung sollte ein CICS als Anwendungsserver, eine Db2 Datenbank und IBM MQ als Messaginglösung benötigen, um für diese 3 Haupt-Technologien (Middleware-Komponenten) eine Aussage treffen zu können.
 Die genaue Vorgehensweise wird im Kapitel \ref{ch:vorgehensweise} beschrieben.
