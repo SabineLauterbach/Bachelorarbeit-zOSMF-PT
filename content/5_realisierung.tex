@@ -174,7 +174,7 @@ Die Deprovisionierung verlief nach Plan.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{figures/logonscreen.PNG}
-	\caption{Login Bildschrim der provisionierten DATEV spezifischen CICS-Instanz}
+	\caption{Login Bildschirm der provisionierten DATEV spezifischen CICS-Instanz}
 	\label{fig:cicslogin}
 \end{figure}
 
@@ -208,6 +208,13 @@ Das auszuführende Programm ist \glqq CSQUTIL\grqq{} und als Parameter wird der 
 Unter dem DD Namen \glqq MQSCIN\grqq{} ist der IBM MQ Befehl für das Erzeugen einer Queue zu sehen.
 Um zu Prüfen, ob die Queue auch funktionsfähig ist, wurde nach dem Erstellen auch mit Hilfe eines Jobs, eine Messages auf die Queue geschrieben und wieder abgeholt.
 Der Job für das Löschen der Queues ist analog aufgebaut.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{figures/defqjcl.PNG}
+	\caption{Define IBM Queue, am Beispiel einer Trigger Queue}
+	\label{code:defq}
+\end{figure}
 
 Ähnlich wie in Absatz \ref{sssec:db2tpl} für die Datenbank-Provisionierung beschrieben, muss der CSD Datei eine weitere Gruppe für den Queuemanager angegeben werden.
 Zu sehen in Abbildung \ref{code:addCSD} in Zeile 11.
