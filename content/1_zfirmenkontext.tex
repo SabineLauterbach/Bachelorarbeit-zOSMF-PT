@@ -1,17 +1,23 @@
 \chapter{Firmenkontext}\label{ch:Firmenkontext}
 Die Informationen stammen aus Gesprächen mit einem Mitarbeiter aus dem Technologiestrategieteam und der im Anhang \ref{app:momappp} befindlichen Präsentation.
-Die in der Einleitung genannten Fragen passen zur momentanen Mainframestrategiediskussion innerhalb der DATEV eG.
-Der DATEV eG sind die zunehmenden Risiken, durch schwierigere Bereitstellung von Skills und der Herstellerabhänigkeit, bewusst.
-Die Frage ist, wie wird mit den vielen Mainframebestandsanwendungen in Zukunft umgegangen.
-Die komplette Ablösung dieser Anwendungen durch cloud-native Lösungen ist aktuell nicht absehbar.
-Die Funktionsfähigkeit dieses Bestandsgeschäfts, welches eine große Einnahmequelle der DATEV eG ist, muss durch effiziente Weiterentwicklung und Wartung gewehrleistet werden.
-Auch im Falle einer Ablöse muss je nach Strategie das Alt-System weiterhin über Jahre oder Jahrzente gepflegt werden.
-Daraus folgt, dass aus Sicht der DATEV eG keine Investition in die IBM Mainframe Plattform keine Alternative darstellt.
+Die in der Einleitung genannten Fragen werden aktuell im Rahmen des Querschnittsprojekts "Mainframestrategie" innerhalb der DATEV eG diskutiert. 
+Der DATEV eG sind die zunehmenden Risiken durch schwierige Bereitstellung von Skills und der Herstellerabhänigkeit, bewusst. 
+Die Frage ist, wie wird mit den vielen Mainframebestandsanwendungen in Zukunft umgegangen?
+Die komplette Ablösung dieser Anwendungen durch cloud-native Lösungen ist eine Option, deren zeitlicher Rahmen und Machbarkeit aktuell nicht absehbar ist. (Kommentar: hier als Quelle das ppt angeben)
+Für die Funktionsfähigkeit dieses Bestandsgeschäfts, das die Core-Business-Funktionalitäten der DATEV eG darstellt, muss also effiziente Weiterentwicklung und Wartung gewährleistet werden.
+Auch im Falle einer geplanten Ablöse von Anwendungen muss je nach Strategie (z.B. "Rewrite" / "Rearchitect")(Kommentar, Strategiepatterns lt. Gartner, ich schick DIr enien Link) das Alt-System parallel dazu über Jahre oder Jahrzente gepflegt und funktional aktuell gehalten werden.
+Daraus folgt, dass aus Sicht der DATEV eG weiter in die IBM Mainframe Plattform investiert werden muss. 
+Dies bedeutet Investitionen in die bereitgestellte Infrastruktur (Hardware, Betriebssysteme, Lizenzen), aber insbesonders auch Investitionen, die die oben genannten Anforderungen an Weiterentwicklung, Wartung und Entwicklungseffizienz sowie Effizienz im Betrieb adressieren.
 
-In diesem Umfeld wurde die in der Einleitung bereits genannte Umstellung auf eine moderne auf eclipse basierende Entwicklungsumgebung und auf git als Sourceverwaltung umgesetzt.
-Des Weiterene läuft eine Untersuchung bezüglich automatisierter Builds mit Hilfe von Jenkins basierten Pipelines.
-Diese Maßnamen erleichtern Mainframe fremden Entwicklern den Einstieg in diese spezielle Welt.
-Dennoch ist der Prozess für die Bereitstellung von Middleware noch unverändert und noch nicht modernisiert.
+Diese Arbeit beschäftigt sich im Schwerpunkt mit den Aspekten der Entwicklungs- und Betriebseffizienz. 
+Ziel ist es, diese zu steigern und eine Homogenisierung von Skills zwischen Mainframe-Entwicklern und Cloud-Entwicklern zu erreichen. 
+Zur Entwicklungseffizienz gehört z.B. die in der Einleitung genannte moderne, auf eclipse basierende Entwicklungsumgebung ID/z (Kommentar, irgendwie verlinken auf Glossar o.ä.).
+Diese wird bei DATEV eG schon seit ca. 10 Jahren firmenweit bereitgestellt.
+Relativ neu (Seit 2018) ist die Nutzung von GIT als Sourceverwaltung für z/OS Artefakte. Dieses weit verbreitete Standard-Tool in der Cloud und Open Source Entwicklung ist im z/OS Umfeld tatsächlich eine entscheidende Neuerung. (KOmmentar: hier könnten wir ein Zitat von mir einfügen, dass ich über Konferenzteilnahmen andere Kunden kenne und deshalb weiß, wie schwer sich Mainframe-Kunden mit GIT tun). 
+Aktuell (2019-2020) läuft bei DATEV eG ein Proof of Concept bezüglich automatisierter Builds auf Basis von Jenkins basierten Pipelines.
+Dies ist auch die Voraussetzung für automatisierte Tests (Unit-Tests, Modul-Tests) von z/OS Programmen im Rahmen des "Continuous Integration, Continuous Deployment" (CI/CD Pipeline) Ansatzes.  (Kommentar, muss vorher dargestellt werden, was das ist, in der Cloud Welt).
+Die dafür notwendige automatisierte Provisionierung einer z/OS Anwendungsumgebung, d.h Laufzeit, MIddleware etc., um die gebauten Komponenten (COBOL, ASM-Programme) dann auch automatisiert testen zu können ist aktuell noch weitgehend unerforscht. Hier sind die Prozesse bei DATEV und anderen Kunden oft noch proprietär, hoch spezialisiert,  manuell und  nicht modernisiert. 
+Gerade bei Mitarbeitern im Betrieb, die als Administratoren für die Middleware arbeiten, sind die Bedenken groß, ob man diese Cloud-Prozesse auf hochspezialisierte individuelle Komponenten wie CICS, DB2, MQ anwenden kann. Die von IBM hier angebotenen Lösungen (...Kommentar... die TOols die du nutzt) haben sich noch nicht flächendeckend durchgesetzt, aber es herrscht Interesse an ERfahrungen und Einschätzungen. (Kommentar: das ist wichtig, hier leistest Du Forschungsarbeit, das muss rein...)
 Hier setzt diese Arbeit an und klärt die in der Einleitung genannten Fragen.
 
 
