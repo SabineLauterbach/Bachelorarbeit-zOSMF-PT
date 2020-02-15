@@ -6,7 +6,7 @@ Schließlich wird daraus ein allgemeines Stimmungsbild abgeleitet.
 \subsection{Durchführung}
 Interviewt wurden jeweils zwei Mitarbeiter der Gruppen, CICS Administration, Db2 Administration, IBM MQ Administration.
 Zusätzlich wurde eine Fachberaterin im Bereich Technologiestrategie und ein Mitarbeiter des Entwicklerteams der DATEV Rechnungsschreibung befragt.
-Für die beiden letztgenannten Interviews waren nur die Fragen 1.,2. und 6. bis 10. des Fragebogens von Relevanz.
+Für die beiden letztgenannten Interviews waren nur die Fragen 1., 2. und 6. bis 10. des Fragebogens von Relevanz.
 Sowohl der Fragenkatalog als auch die ausgefüllten und digitalisierten Fragebögen sind im Anhang \ref{app:fragen} zu finden.
 Bevor die Interviews durchgeführt worden sind, wurde den Teams in getrennten Terminen die Ergebnisse dieser Arbeit vorgestellt.
 Der Schwerpunkt wurde an das jeweilige Team angepasst.
@@ -15,9 +15,8 @@ Außerdem wurden neben den im Absatz \ref{sec:akttemp} dargestellten Lösung, au
 An Hand des durch diese Arbeit bereit gestellte Template wurde die z/OSMF Oberfläche erläutert.
 
 \subsubsection{CICS Administratoren}
-Die Meinung bezüglich des aktuell möglichen Ablauf mittels z/OSMF von CICS Administrator 1 ist mittelmäßig.
-So bietet es zwar eine flexible Versionierung und Veröffentlichung.
-Jedoch ist es durch die verschiedenen Sprachen und Dokumentarten mit Startschwierigkeiten versehen.
+Die Meinung bezüglich des aktuell möglichen Ablaufs mittels z/OSMF von CICS Administrator 1 ist mittelmäßig.
+So bietet es zwar eine flexible Versionierung und Veröffentlichung, jedoch ist es durch die verschiedenen Sprachen und Dokumentarten mit Startschwierigkeiten versehen.
 Im Gegensatz dazu sieht CICS Administrator 2 das momentane Template zumindest für CICS als ablauffähig und mehrfach einsetzbar.
 Den Vorteil der Konfigurierbarkeit von außerhalb des Templates durch z/OSPT nennen beide Administratoren.
 Als Nachteil sehen sie jedoch die Notwendigkeit eines sehr dynamischen Templates und der damit verbundenen Komplexität.
@@ -28,7 +27,7 @@ Hier fehlt beiden eine geeignete Toolunterstützung und das damit einhergehende 
 Der erste Eindruck wird von einem hohen Ersteinrichtungsaufwand und einer zeitaufwändigen Einarbeitungsphase geprägt.
 Zusammen mit den verschiedenen Sprachen hat dies auf CICS Administrator 1 eine abschreckende Wirkung.
 Dennoch können sich beide Befragten vorstellen, nachdem der Einarbeitungsaufwand erbracht wurde, täglich mit dem Toolkit zu arbeiten.
-Da bei dem aktuell etablierte Prozess ein hoher manueller Aufwand zu erbringen ist und eine Abstimmung zwischen den Administratoren und dem Entwicklerteam notwendig ist.
+Da bei dem aktuell etablierten Prozess ein hoher manueller Aufwand zu erbringen ist und eine Abstimmung zwischen den Administratoren und dem Entwicklerteam notwendig ist.
 
 Zusammenfassend lässt sich sagen, dass die CICS Administratoren eine Chance auf Verbesserung des Prozesses durch das Toolkit sehen.
 Allerdings schreckt der hohe Einarbeitungsaufwand und die Mischung aus verschiedenen Sprachen und fehlendem Syntaxhighlighting ab.
@@ -37,7 +36,7 @@ Allerdings schreckt der hohe Einarbeitungsaufwand und die Mischung aus verschied
 Sowohl Db2 Administrator 1 als auch Db2 Administrator 2 erkennen die Möglichkeit einer Verbesserung durch z/OSMF.
 Jedoch sind sie der Meinung, dass noch einiges an Forschung und Weiterentwicklung notwendig ist um es sinnvoll nutzen zu können.
 Sie stimmen auch bei ihrer Ansicht bezüglich z/OSPT überein.
-So sehen sie den Vorteil des Kommandozeileninterfaces vorallem bei einer Endausbaustufe mit automatisiertem Deployment innerhalb einer CI/DC-Pipline und dem Einsatz von Jenkins.
+So sehen sie den Vorteil des Kommandozeileninterfaces vor allem bei einer Endausbaustufe mit automatisiertem Deployment innerhalb einer CI/DC-Pipline und dem Einsatz von Jenkins.
 Db2 Administrator 2 stört sich an den Begriffen \glqq Container\grqq{} und \glqq Image\grqq, da diese teilweise vertauscht und synonym verwendet werden.
 Bezüglich der Benutzerfreundlichkeit der Oberfläche fällt die Bewertung bei beiden schlecht bis mittelmäßig aus.
 Db2 Administrator 1 empfindet die gezeigte Arbeitsweise für Änderungen an den Workflow Definitionsdateien als sehr schlecht, da es momentan ohne automatisches Deployment realisiert ist.
@@ -45,8 +44,8 @@ Die Bewertung von Db2 Administrator 2 ist mittelmäßig, da eine Entwicklungsumg
 Der erste Eindruck des Toolkits ist sehr positiv.
 Es wird als mächtiges Tool und als Zukunft des modernen Deployments auf dem Mainframe betitelt.
 Jedoch wird es als sehr komplex betrachtet.
-Im Vergleich dazu wird der aktuell etablierte Bereitstellungsporzess ebenfalls als komplex beschrieben.
-Dieser funktioniere zwar sehr gut, aber es sind viele Abhänigkeiten zu anderen Personen vorhanden, dadurch entstehen Wartezeiten.
+Im Vergleich dazu wird der aktuell etablierte Bereitstellungsprozess ebenfalls als komplex beschrieben.
+Dieser funktioniere zwar sehr gut, aber es sind viele Abhängigkeiten zu anderen Personen vorhanden, dadurch entstehen Wartezeiten.
 Außerdem sei ein sehr umfangreiches Wissen über alle beteiligten Subsysteme notwendig.
 Hinzu kommt ein hoher Konfigurationsaufwand und viel Vorarbeit, zum Beispiel Funktionsuser und ein Rechtekonzept.
 Beide Db2 Administratoren könnten sich um diese Probleme anzugehen, vorstellen mit dem Toolkit täglich zu arbeiten.
@@ -60,21 +59,20 @@ Als Hauptpunkt ist die Nutzung mit Jenkins und so die Einbindung und Etablierung
 \subsubsection{IBM MQ Administratoren}
 IBM MQ Administrator 1 sieht bereits im aktuell funktionsfähigen Template einen Mehrwert.
 Zum einen weil mehr Verantwortung im Entwicklerteam liegt und zum anderen sind weniger manuelle Eingriffe notwendig.
-Jedoch ist die Lösung, die im Ausblick gezeigt wurde, flexiber und damit etwas besser geeignet.
-Zudem seien die momentan bereits vorhanden Features durchaus gut, jedoch kam die Frage auf, ob die IBM das `IBM Cloud Provisioning and Management for z/OS`-Toolkit noch weiterentwickelt.
+Jedoch ist die Lösung, die im Ausblick gezeigt wurde, flexibler und damit etwas besser geeignet.
+Zudem seien die momentan bereits vorhandenen Features durchaus gut, jedoch kam die Frage auf, ob die IBM das `IBM Cloud Provisioning and Management for z/OS`-Toolkit noch weiterentwickelt.
 Die Benutzerfreundlichkeit der z/OSMF Oberfläche wurde als mittelmäßig bis gut eingestuft.
-Bezüglich des Arbeiten, Verwalten und Ändern von Workflow Definitionsdateien und den dazugehörigen Skripten konnte keine Bewertung abgegeben werden, da noch nicht selbst damit gearbeitet wurde.
+Bezüglich des Arbeiten, Verwalten und Ändern von Workflow Definitionsdateien und der dazugehörigen Skripte konnte keine Bewertung abgegeben werden, da noch nicht selbst damit gearbeitet wurde.
 Dies hat auch Einfluss auf den ersten Eindruck.
 So wird zu bedenken gegeben, dass der Zeitaufwand und die zu leistenden Vorarbeiten mit einzubeziehen sind.
-Vor allem, wenn die Provisionierung von einem IBM MQ Queuemanager hinzu kommt.
-Jedoch kann sich IBM MQ Administrator 1 vorstellen mit dem Toolkit täglich zu arbeiten, da letztenendlich die Werkzeugwahl keine Rolle spielt.
-Diese Entscheidung wird dadurch begünstigt, dass der aktuell etablierte Prozess schlecht beurteilt wird.
-Aufgrund des hohen manuellen Aufwands und der dadurch erzeugten Rückfragen.
+Vor allem, wenn die Provisionierung von einem IBM MQ Queue Manager hinzu kommt.
+Jedoch kann sich IBM MQ Administrator 1 vorstellen mit dem Toolkit täglich zu arbeiten, da letztendlich die Werkzeugwahl keine Rolle spielt.
+Diese Entscheidung wird dadurch begünstigt, dass der aktuell etablierte Prozess schlecht beurteilt wird, aufgrund des hohen manuellen Aufwands und der dadurch erzeugten Rückfragen.
 Zuletzt wird noch darauf hingewiesen, dass das Toolkit generell noch Neuland sei.
-So müssten erst die Grundlagen gelernt und damit Erfahrung gesammelt werden bevor eine qualitativere Bewertung möglich sei.
+So müssten erst die Grundlagen gelernt und damit Erfahrungen gesammelt werden bevor eine qualitativer Bewertung möglich sei.
 
-Im Vergleich zu IBM MQ Administrator 1 fehlt IBM MQ Administrator 2 noch weitere Automatismen.
-So sind trotz des Einsatzen von z/OSPT noch Absprachen mit Dritten, wie dem RACF-Team und dem Speicher-Team, notwendig.
+Im Vergleich zu IBM MQ Administrator 1 fehlen IBM MQ Administrator 2 noch weitere Automatismen.
+So sind trotz des Einsatzes von z/OSPT noch Absprachen mit Dritten, wie dem RACF-Team und dem Speicher-Team, notwendig.
 z/OSPT sei zudem nur Docker ähnlich, ist jedoch keine vollumfängliche Containerlösung.
 So könnte sich IBM MQ Administrator 2 zwar vorstellen mit dem Toolkit täglich zu arbeiten, aber es müsste ohne manuelle Eingriffe funktionieren.
 Die Erstellung der Skripte muss mit einem einmaligen Aufwand verbunden sein, so dass sie keine ständigen Anpassungen benötigen.
@@ -91,14 +89,14 @@ Außerdem wird vor einer starken Lernkurve und noch fehlender Automation und der
 Aus Sicht des Entwicklers wird für den gezeigten Bereitstellungsprozess viel Wissen über die z/OSMF Oberfläche und das Template selbst benötigt.
 Dieses Wissen müsse auch bei geringer Nutzung über einen längeren Zeitraum erhalten werden.
 Der Prozess sei zwar schon ganz gut, jedoch ist weiterhin viel Absprache mit den Administratoren notwendig.
-Hier wird auch der Nachteil des momentan etablierter Bereitstellungsprozesses gesehen.
+Hier wird auch der Nachteil des momentan etablierten Bereitstellungsprozesses gesehen.
 Jedoch sobald der Erstaufwand geleistet wurde, muss sich nur im Ausnahmefall noch darum gekümmert werden.
 Diese Verantwortung würde im Fall der Umsetzung mit z/OSPT bei dem Entwicklerteam selbst liegen.
 Durch die eingesparten Absprachen wird sich eine höhere Effizienz erhofft.
 Es wurde noch die Nutzung in der Qualitätssicherungs- und Produktionsstage genannt.
 Hier werden Vorteile einer einfache Skalierbarkeit gesehen.
 Vor allem auf Grund der Eigenverantwortung über die Subsysteme könnte sich die tägliche Arbeit mit dem Toolkit vorgestellt werden.
-Allerdings nur im Hinblick auf eine Integration in eine Jenkins Build Pipeline und sammeln von Erfahrungen bezüglich des Prozesses und des Toolings.
+Allerdings nur im Hinblick auf eine Integration in eine Jenkins Build Pipeline und Sammeln von Erfahrungen bezüglich des Prozesses und des Toolings.
 
 Das Hauptaugenmerk des Entwicklers liegt bei der höheren Eigenverantwortung beziehungsweise der Eigenverwaltung von benötigten Subsystemen.
 Eine einfache und intuitive Bedienung des Toolkits ist außerdem wichtig.
@@ -107,15 +105,15 @@ Eine einfache und intuitive Bedienung des Toolkits ist außerdem wichtig.
 Nach der Fachberaterin im Bereich Technologiestrategie ist der gezeigte Ablauf beziehungsweise die z/OSMF Oberfläche für eine solche Aufgabe geeignet.
 Jedoch sei es besser wenn z/OSMF in den bereits existierenden \glqq Marktplatz\grqq{} für DATEV Cloud Lösungen integriert wäre.
 Der Prozess, der mit Hilfe von z/OSPT ermöglicht wird, wird als gut angesehen.
-Da durch ihn die Entwicklung von z/OS Anwendungen an die Vorgehensweise der Cloud Native Entwicklung angenährt wird.
+Da durch ihn die Entwicklung von z/OS Anwendungen an die Vorgehensweise der Cloud Native Entwicklung angenähert wird.
 Hier kommt die Rolle des Build Engineers auch für solche Anwendungen ins Spiel.
 Dieser kümmert sich um die Erstellung und Pflege der Build-Pipeline.
-Große Nachteile im momentan etablierten Bereitstellungsprozess ist vorallem das eine Anzahl an Entwickler, die an einem Produkt arbeiten, die gleiche Entwicklungssystemumgebung teilen.
+Große Nachteil im momentan etablierten Bereitstellungsprozess ist vor allem das eine Anzahl an Entwicklern, die an einem Produkt arbeiten, die gleiche Entwicklungssystemumgebung teilen.
 So arbeiten alle mit der gleichen CICS-Instanz, der gleichen Test-Datenbank und mit den gleichen IBM MQ Queues.
 Dadurch beeinflussen Änderungen die Tests der anderen Kollegen und müssen koordiniert werden.
 Falls Änderungen an der Umgebung notwendig sind, kann während dieser Zeit kein Entwickler weiterarbeiten.
-Hier sei der Vorteil des Toolkits.
-Es ermöglicht aus Entwicklersicht eine sehr einfache, schnelle Möglichkeit eine isolierte Umgebung bereitzustellen, unabhängig von dem Administratorenteams.
+Hier liege der Vorteil des Toolkits.
+Es ermöglicht aus Entwicklersicht eine sehr einfache, schnelle Möglichkeit eine isolierte Umgebung bereitzustellen, unabhängig von den Administratorenteams.
 Zusätzlich dienen die Konfigurationsdateien auch als Dokumentation, welche Ressourcen für ein erneutes Erstellen der Umgebung notwendig sind.
 
 Abschließend lässt sich sagen, dass aus Sicht einer Fachberaterin im Bereich Technologiestrategie dieses Toolkit die Entwicklung beziehungsweise den Bereitstellungsprozess deutlich verbessern kann.
@@ -133,15 +131,14 @@ Dadurch wird der Wechsel zwischen beiden Umgebungen immer fließender.
 \end{itemize}
 \end{samepage}
 
-Es stimmen alle Gruppen überein, dass der momentan etablierte Bereitstellungsprozess für Mainframesubsysteme durch viele Absprachen und Abstimmungs-Aufwand zeitäufwandig ist.
+Es stimmen alle Gruppen überein, dass der momentan etablierte Bereitstellungsprozess für Mainframesubsysteme durch viele Absprachen und Abstimmungs-Aufwand zeitaufwändig ist.
 Sie würden einen neuen schnelleren Prozess begrüßen.
 
-Jedoch muss dieser Prozess aus Entwicklersicht mit minimalen Konfigurationsaufwand verbunden sein.
+Jedoch muss dieser Prozess aus Entwicklersicht mit minimalem Konfigurationsaufwand verbunden sein.
 Dies ermöglicht eine Umsetzung mittels z/OSPT und einer möglichen Integration in eine Jenkins Build Pipeline oder durch die Einbindung in den \glqq DATEV Marktplatz\grqq{} mittels eines entwickelten \glqq Service Brokers\grqq.
-Aus Sicht der Administratoren sind mit dieser Umsetzung nur wenige allgemeine Templates zu verwalten.
-Da die Entwickler mit z/OSPT Images und keine weiteren Templates erzeugen.
+Aus Sicht der Administratoren sind mit dieser Umsetzung nur wenige allgemeine Templates zu verwalten, da die Entwickler mit z/OSPT Images und keine weiteren Templates erzeugen.
 Um diese Punkte zu ermöglichen, muss das Template umgestaltet werden.
 Der dadurch in den Administratorenteams entstehende Aufwand und die damit verbundene steile Lernkurve hat eine abschreckende Wirkung.
 
 Trotz dieser abschreckenden Wirkung sind auch die Administratorenteams bereit, falls die Kapazitäten vorhanden sind, den Bereitstellungsprozess mit Hilfe des \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} zu verbessern.
-Aus Sicht der Technologiestrategie ist das ein wichtiger und notwendiger Schritt hin zu einem Cloud Native ähnlichen Prozess.
+Aus Sicht der Technologiestrategie ist dies ein wichtiger und notwendiger Schritt hin zu einem Cloud Native ähnlichen Prozess.
