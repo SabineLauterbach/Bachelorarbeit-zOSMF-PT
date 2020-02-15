@@ -167,9 +167,16 @@ In dieser Arbeit wurde hauptsächlich mit letzterer Variante gearbeitet.
 Dadurch sind die SIT Parameter nur an einer Stelle im Template zu verwalten, beziehungsweise wird die Verwaltung  nicht auf zwei Arbeitsweisen verteilt.
 
 Durch die beschriebene Vorgehensweie wurde erfolgreich die Provisionierung eines DATEV e.G. spezifischen CICS-Instanz umgesetzt.
-Sichergestetllt wurde dies mit einem Anmeldevorgang an dieses CICS, wie in Abbildung \ref{CICS Login Screen} zu sehen ist.
+Sichergestetllt wurde dies mit einem Anmeldevorgang an dieses CICS, wie in Abbildung \ref{fig:cicslogin} zu sehen ist.
 Außerdem sind alle Standard DATEV eG Transaktionen in dieser Instanz funktionsfähig.
 Die Deprovisionierung verlief nach Plan.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{figures/logonscreen.PNG}
+	\caption{Login Bildschrim der provisionierten DATEV spezifischen CICS-Instanz}
+	\label{fig:cicslogin}
+\end{figure}
 
 \subsubsection{Bereitstellung Db2}\label{sssec:db2tpl}
 In diesem Absatz wird die Provisionierung einer Db2 Datenbank beschrieben.
