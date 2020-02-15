@@ -420,15 +420,23 @@ Ein weiteres Problem ist eine nicht genau identifizierbare Programmiersprache, d
 So ermöglicht diese die dynamische Wertzuweisung von zum Beispiel REXX-Variablen durch Variablen des Templates.
 Außerdem besteht eine Art von String Verarbeitung.
 Zu beachten ist, dass wenn am Zeilenanfang ein \glqq\#\grqq{} steht, kann diese Programmiersprache verwendet werden.
-In Abbildung \ref{Hier defineqrexx split} ist ein Beispiel zu sehen.
+In Abbildung \ref{code:qsauslesen} ist ein Beispiel zu sehen.
 Dort werden die Queuenamen, die als kommaseparierte Liste in der Templatevariable \glqq DFH\_MQ\_QUEUENAMES\grqq{} angegeben sind, ausgelesen und in eigenen REXX Variablen gespeichert.
 Zu sehen ist zunächst eine \glqq set\grqq{} Anweisung, mit der Variablen zugewiesen werden können, If-Bedingungen und eine foreach-Schleife stehen außerdem zur Verfügung.
 
-In Abbildung \ref{ergebnis split} wird das Ergebnis, welches zur Laufzeit ausgeführt wird, dargestellt.
+\begin{minipage}{\linewidth}
+\lstinputlisting[caption={Auslesen der \glqq DFH\_MQ\_QUEUENAMES\grqq{} Variablen und schreiben in REXX Variablen},captionpos=b,label={code:qsauslesen}]{listings/qsauslesen.rexx}
+\end{minipage}
+
+In Abbildung \ref{code:qsauslesenlaufzeit} wird das Ergebnis, welches zur Laufzeit ausgeführt wird, dargestellt.
 Es ist zu erkennen, dass nur noch die für das REXX Skript notwendigen Codeabschnitte vorhanden sind.
 Dadurch können sehr dynamische Templates erstellt werden.
 Jedoch wurde weder eine Dokumentation zu dieser Sprache, noch um welche Sprache es sich genau handelt gefunden.
 Somit liegt dem Wissen über diese Sprache nur der Code aus Beispielen der IBM zu Grunde.
+
+\begin{minipage}{\linewidth}
+\lstinputlisting[language=Rexx,caption={Zur Laufzeit erzeugtes Skript, der Grundlage aus Codeabschnitt \ref{code:qsauslesen}},captionpos=b,label={code:qsauslesenlaufzeit}]{listings/qsauslesenlaufzeit.rexx}
+\end{minipage}
 
 Ein weiterer Problempunkt ist das mit z/OSMF und dem Template einhergehende Zugriffsrechtekonzept.
 Die z/OSMF Berechtigungsgruppen sind nicht an die DATEV e.G. internen Richtlinien angepasst.
