@@ -14,8 +14,6 @@ Der IBM Mainframe hat eine lange Geschichte.
 Vor mehr als fünfzig Jahren wurde der allererste Großrechner, der sog.(Kommentar: Bezeichnung such ich noch raus) vorgestellt.
 Bis in die 90iger Jahre spielte der IBM Mainframe eine Hauptrolle auf dem Computermarkt, dann gewannen zunehmend verteilte Client-Server-Systeme an Bedeutung.\footnote{\cite{Ceruzzi.2003}}
 Seitdem gilt der Mainframe bereits als \glqq  legacy\grqq{}- veraltet -.
-Im Jahre 2020 ist der größte Konkurrent für den Mainframe die Cloud.
-Laut einer Vorhersage aus dem Jahr 2018\footnote{Statistik im Anhang \ref{app:itworkload}} soll circa 79 Prozent des weltweiten Workloads in einer Cloud verarbeitet werden.
 
 Wieso also wird sich mit der Mainframe Technologie noch beschäftigt? - Eine Antwort: Der Mainframe wird weltweit genutzt.
 So verarbeiten Großrechner auch heutzutage weltweit circa 1,2 Millionen CICS Transaktionen pro Sekunde.\footnote{\cite{IBM.2019}}
@@ -38,7 +36,7 @@ All diese Punkte sprechen nach wie vor für die Nutzung eines Großrechners, auc
 Die DATEV eG wurde am 14.02.1966 von 65 Steuerbevollmächtigten gegründet.
 Sie verfolgten mit der Gründung das Ziel, Buchführungsaufgaben mit Hilfe der neu aufkommenden EDV zu bewältigen.
 Aufgrund hohen Mitgliederwachstums wurde hierfür bereits 1969 in einen firmeneigenen IBM-Großrechner investiert.\cite{DATEVeG.2017}
-Heute umfasst das Leistungsspektrum der DATEV eG unter anderen das Rechnungswesen, Personalwirtschaft, Consulting, IT-Sicherheit, Weiterbildung.
+Heute umfasst das Leistungsspektrum der DATEV e.G. unter anderen das Rechnungswesen, Personalwirtschaft, Consulting, IT-Sicherheit, Weiterbildung.
 Ein nicht unbeträchtlicher Teil dieser betriebswirtschaftlichen Anwendungen läuft bis heute auf einem IBM Großrechner im DATEV Rechenzentrum.
 So werden pro Tag circa 150.000 Batch Jobs\footnote{Beschreibung in Absatz \ref{ssec:job}} und circa 90 Millionen CICS-Transaktionen verarbeitet.
 Diese Last wird von circa 14.000 aktiven Modulen erzeugt.
@@ -71,39 +69,58 @@ Durch diese Module werden unter anderem im Monat circa 11 Millionen Lohnabrechnu
 \label{fig:Programmiersprachen}
 \end{figure}
 
-Ich persönlich habe eine Ausbildung zum Fachinformatiker der Anwendungsentwicklung im Großrechnerbereich bei der DATEV eG abgeschlossen und parallel dazu ein Studium der Informatik begonnen.
-Während dieser Ausbildung lernte ich unter anderem die Entwicklungsprozesse für den Mainframe kennen.
-Kurz bevor ich die Ausbildung begonnen hatte, wurde eine auf Eclipse basierende Entwicklungsumgebung für COBOL und IBM Assembler in der DATEV eG flächendeckend eingeführt.
+\section{Motivation}
+Im Jahre 2020 ist der größte Konkurrent für den Mainframe die Cloud.
+Laut einer Vorhersage aus dem Jahr 2018\footnote{Statistik im Anhang \ref{app:itworkload}} soll im Jahre 2020 circa 79 Prozent des weltweiten Workloads in einer Cloud verarbeitet werden.
+Für die Entwicklung von neuen Online-Anwendungen im cloud-native Stil wurde bei der DATEV e.G. eine Platform-as-a-Service (PaaS)-Lösung geschaffen.
+Mit dieser können Entwicklerteams unter anderem Datenbanken und Messaginglösungen entweder manuell über einen Marktplatz (siehe Abbildung \ref{fig:markt}) oder automatisiert per CI/CD-Pipeline\footnote{Glossar \ref{Glossarlink}} der Laufzeitumgebung ihrer Anwendung hinzufügen. (@Sabine: Stimmt das so?)
+Dadurch ergibt sich für jede einzelne Anwendung der in Abbildung \ref{fig:cloudentw} dargestellte Entwicklungsprozess.
+Wie zu sehen ist liegt der Fokus dabei auf der Entwicklereffizienz und der Verringerung der Zeit bis Änderungen beim Kunden ankommen.
+Diese CI/CD-Pipeline wurde mittels Jenkins realisiert.
+Den Entwicklern stehen moderne Entwicklungsumgebungen und git als Sourceverwaltung standardmäßig zur Verfügung.
+
+Der Entwicklungsprozess für z/OS Anwendungen bei DATEV e.G. erscheint im Vergleich zu dieser PaaS-Lösung veraltet.
+So wurde 2010 eine auf Eclipse basierende Entwicklungsumgebung für COBOL und IBM Assembler in der DATEV e.G. flächendeckend bereitgestellt.
 Zuvor wurde mit Hilfe der in Abbildung \ref{fig:3270} gezeigten Oberfläche, dem sog. ISPF gearbeitet.
 Diese stellte z.B. nur ein Syntaxhighlighting zur Verfügung.
-
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{figures/rexxintso.png}
 \caption{Auszug aus einem REXX Skript in der ISPF Oberfläche}
 \label{fig:3270}
 \end{figure}
-
-Kurz vor Abschluss meiner Ausbildung wurde git, das Standard-Sourcverwaltung für verteilte Systeme und Cloud Entwicklung, auch für COBOL und IBM Assembler Sourcen eingeführt.
+2018 wurde git auch für COBOL und IBM Assembler Sourcen eingeführt.
+Dieses weit verbreitete Standard-Tool ist im z/OS Umfeld tatsächlich eine entscheidende Neuerung.
 Dadurch wurde ein bis dato verwendetes eigenentwickeltes Tool für die Sourceverwaltung der z/OS Sourcen abgelöst.
-Jedoch wurde damit zwar das Tooling modernisiert, jedoch nicht der Entwicklungsprozess selbst.
-Entwickelt wird in einer sogenannten \glqq Entwicklungsstage\grqq{}\footnote{Beschreibung der Stages in Absatz \ref{sec:sysplex}}. 
-So teilen sich zumindest die Entwickler einer Anwendung die gleiche Test-CICS/Db2/MQ Ressourcen.
+Das Tooling wurde somit modernisiert, jedoch nicht der Entwicklungsprozess selbst.
+Es teilen sich sehr viele Anwendungen die gleichen Test-CICS/Db2/MQ Ressourcen.
 Das heißt auch, dass eine Parallelentwicklung an unterschiedlichen Features nur mit viel Abstimmungs-Aufwand und Absprachen innerhalb eines Entwicklungsteams, teilweise auch abteilungsübergreifend, möglich ist.
-Die Verantwortung der Systemressourcen, unter anderem auch der Test Ressourcen, liegt bei extra dafür entstandenen Administratorenteams.
 Werden Änderungen an bestehenden Ressourcen durchgeführt oder werden neue Systemumgebungen benötigt, entsteht weiterer Abstimmungs-Aufwand und weitere Absprachen.
 Dadurch wird der Prozess fehleranfällig und langsam.
-In der Cloud Entwicklung sind dagegen moderne Prozesse, bei denen eine automatisierte Bereitstellung von Systemumgebungen, zum Beipiel einer Datenbank, über einen \glqq Marktplatz\grqq, Standard. 
 
-Moderne Entwicklungsprozesse durfte ich nach dem Abschluss meiner Ausbildung in einem \glqq Cloud Native\grqq-Projekt selbst erleben.
-Hier hatte jeder Entwickler seine eigene Testumgebung und konnte isoliert und ungestört von seinen Kollegen, ein neues Feature testen.
-Die Datenbank konnte per Knopfdruck bereitgestellt werden, ganze Laufzeitumgebungen konnten auf diese Weise erzeugt werden.
-Solche Prozesse unterstützen die bei DATEV e.G. eingesetzte agile Softwareentwicklung, und von den zuständigen Abteilungen, die sich mit der Modernisierung von z/OS Anwendungen und -prozessen beschäftigen,  kam die Frage auf, ob es möglich wäre, solche Mechanismen auch für legacy z/OS Anwendungen aufbauen zu können.
-In Zusammenarbeit mit dem Bereich IT-Services und Technologiestrategie ergab sich damit das Thema für diese Arbeit, in der folgende Fragen beantwortet und bewertet werden sollen.
+Es bleibt die Frage, wie wird mit den vielen Mainframebestandsanwendungen bei der DATEV e.G. in Zukunft umgegangen?
+Die komplette Ablösung dieser Anwendungen durch cloud-native Lösungen ist eine Option, deren zeitlicher Rahmen und Machbarkeit aktuell nicht absehbar ist.\footnote{\ref{app:momappp} }
+Für die Funktionsfähigkeit dieses Bestandsgeschäfts, das die Core-Business-Funktionalitäten der DATEV e.G. darstellt, muss also effiziente Weiterentwicklung und Wartung gewährleistet werden.
+Auch im Falle einer geplanten Ablöse von Anwendungen muss je nach Strategie (z.B. \glqq Rewrite\grqq / \glqq Rearchitect\grqq)\footnote{(Kommentar, Strategiepatterns lt. Gartner, ich schick DIr enien Link)} das Alt-System parallel dazu über Jahre oder Jahrzehnte gepflegt und funktional aktuell gehalten werden.
+Daraus folgt, dass aus Sicht der DATEV e.G. weiter in die IBM Mainframe Plattform investiert werden muss. 
+Dies bedeutet Investitionen in die bereitgestellte Infrastruktur (Hardware, Betriebssysteme, Lizenzen), insbesondere auch Investitionen, die die oben genannten Anforderungen an Weiterentwicklung, Wartung und Entwicklungseffizienz sowie Effizienz im Betrieb adressieren.
 
-Ist es generell technisch möglich mit dem \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit Laufzeitumgebungen automatisiert bereitzustellen?
-Wird dadurch der aktuelle Bereitstellungsprozess schneller und auch sicherer?
-Erzeugt die Nutzung einen Mehrwert bei den Stakeholdern, also den Entwicklerteams und den Administratorenteams?
+In diesem Zusammenhang läuft aktuell  bei DATEV e.G. ein Proof of Concept bezüglich automatisierter Builds von z/OS Anwendungen auf Basis von Jenkins basierten Pipelines.
+Dies ist auch die Voraussetzung für automatisierte Tests von z/OS Programmen im Rahmen des \glqq Continuous Integration, Continuous Deployment\grqq{}\footnote{Beschreibung in Absatz \ref{Grundlagen}} Ansatzes.
+Ist dieser Rahmen gegeben ist eine Integration von z/OS Ressourcen in einen Marktplatz möglich.
+Die dafür notwendige automatisierte Provisionierung einer z/OS Anwendungsumgebung, d.h Laufzeit, Middleware etc., ist aktuell noch weitgehend unerforscht. 
+Hier sind die Prozesse bei DATEV und anderen Kunden oft noch proprietär, hoch spezialisiert,  manuell und nicht modernisiert. 
+Gerade bei Mitarbeitern im Betrieb, die als Administratoren für die Middleware arbeiten, sind die Bedenken groß, ob man diese Cloud-Prozesse auf hochspezialisierte individuelle Komponenten wie CICS, DB2, IBM MQ anwenden kann.
+Die von IBM hier angebotenen Lösungen, die durch das \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit ermöglicht werden, haben sich noch nicht flächendeckend durchgesetzt, aber es herrscht Interesse an Erfahrungen und Einschätzungen.
+Hier setzt diese Arbeit an und klärt folgende Fragen:
+
+\begin{samepage}
+\begin{itemize}
+\item Ist es generell technisch möglich mit dem \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit Laufzeitumgebungen automatisiert bereitzustellen?
+\item Wird dadurch der aktuelle Bereitstellungsprozess schneller und auch sicherer?
+\item Erzeugt die Nutzung einen Mehrwert bei den Stakeholdern, also den Entwicklerteams und den Administratorenteams?
+\end{itemize}
+\end{samepage}
 
 Um diese Fragen zu beantworten wird die Provisionierung einer z/OS Laufzeitumgebung für eine spezielle Anwendung untersucht.
 Die Anwendung sollte ein CICS als Anwendungsserver, eine Db2 Datenbank und IBM MQ als Messaginglösung benötigen, um für diese 3 Haupt-Technologien (Middleware-Komponenten) eine Aussage treffen zu können.
