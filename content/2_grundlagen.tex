@@ -2,125 +2,57 @@
 In diesem Kapitel werden für diese Arbeit wichtige Begriffe erläutert.
 
 \section{Mainframe / Großrechner}\label{sec:mainframe}
-Mainframe und Großrechner werden in dieser Arbeit gleichbedeutend verwendet.
-Im modernen Sprachgebrauch kann ein Großrechner als größte zur Verfügung stehende Serverart betrachtet werden.
+Im modernen Sprachgebrauch kann ein Großrechner oder auch Mainframe als größte zur Verfügung stehende Serverart betrachtet werden.
 Er wird von Unternehmen verwendet, um  kommerzielle Datenbanken, Transaktionsserver und Anwendungen, die einen hohen Grad an Sicherheit und Verfügbarkeit benötigen, zu hosten.
 Im Gegensatz zu verteilten Serversystemen, bei denen die Funktionalitäten auf einzelne Server, wie zum Beispiel einen E-Mail-Server, einen Datenbank-Server, einen Web-Server usw. aufgeteilt sind, handelt es sich bei einem Mainframe um ein zentralisiertes System.
-Unter anderem sind Datenbanksysteme und Anwendungsserver sogenannte \glqq Subsysteme\grqq.
+Die einzelnen Funktionalitäten werden von sogenannte \glqq Subsysteme\grqq, auch \glqq Middleware\grqq{} genannt, zur Verfügung gestellt.
+Darunter zählen unter anderem Datenbanksysteme und Anwendungsserver.
 \cite{Ebbers.2011}
 
-\subsection{Batch}
-Batch beziehungsweise Batch-Verarbeitung bezeichnet in der IT die sog. \glqq Stapelverarbeitung\grqq.
-Das heißt, dass Programme mit minimalem menschlichen Eingreifen nacheinander abgearbeitet werden.
-Beispielsweise meist zu einer vorher festgelegten Zeit, gesteuert wird dies über sog. \glqq Scheduling\grqq-Systeme.
-Zum Beispiel wird einmal am Tag zu einer ganz bestimmten Uhrzeit die tägliche Bewertung\footnote{Beschreibung in Absatz \ref{sssec:täglbew}} der DATEV Rechnungsschreibung durchgeführt.
-Die auszuführenden Programme laufen in sogenannten \glqq Batch-Jobs\grqq.
-\cite{Ebbers.2011}
+\section{Mainframe Anwendungen bei DATEV e.G.}
+Das Betriebssystem des IBM Mainframes ist z/OS.
+Darauf aufbauend benötigen klassische z/OS Anwendungen bestimmte Middleware.
+Bei der DATEV e.G. handelt es sich unter anderem um folgende Middlewarekomponenten:
 
-\subsection{Batch-Job / Job}\label{ssec:job}
-In einem Batch-Job, in dieser Arbeit wird \glqq Job\grqq{} gleichbedeutend verwendet, wird dem System mitgeteilt welches Programm mit welchen Ein- und Ausgabedateien und Parametern gestartet werden soll.
-Die Skriptsprache, die diese Jobs definiert, ist im IBM-Mainframe-Umfeld die sog. \glqq Job Control Language\grqq, kurz JCL.
-Die drei Grundbausteine der JCL werden im Folgenden beschrieben.
+\begin{itemize}
+\item Laufzeitumgebung: CICS oder Batch
+\item Datenhaltung: VSAM oder Db2
+\item Message Queuing: IBM MQ
+\end{itemize}
 
-Zunächst ist \glqq JOB\grqq{} zu nennen, auch Jobkarte genannt.
-Hier werden der Name des Jobs, Berechnungsinformationen, maximal zur Verfügung stehende CPU-Zeit und weitere Job-weite Parameter gesetzt.
-Im Beispiel \ref{fig:jclBsp} Zeilennummer eins bis drei.
-
-Innerhalb eines Jobs wird mit Hilfe des \glqq EXEC\grqq{} Befehls dem System mitgeteilt, welches Programm gestartet werden soll.
-Es können mehrere \glqq EXEC\grqq{}  Befehle in einem Job vorkommen, dabei wird jeder einzelne als sogenannter \glqq Job step\grqq{} bezeichnet.
-Dabei können dem Programm neben den Ein-/Ausgabedateien auch weitere Parameter übergeben werden.
-Im Beispiel \ref{fig:jclBsp} Zeilennummer zehn.
-
-Als letztes ist der \glqq DD\grqq{} Baustein zu nennen.
-\glqq DD\grqq{} steht für Data Definition.
-Ein DD-Statement verknüpft den sog. DD-Namen mit einer Datei oder einem I/O Gerät und ist somit ein Alias für diese.
-Ein \glqq DD\grqq{} Baustein ist immer an ein \glqq EXEC\grqq{} Befehl gebunden.
-Einem \glqq EXEC\grqq{} können mehrere \glqq DD\grqq{} Bausteine zugeordnet sein. 
-Im Beispiel \ref{fig:jclBsp} Zeilennummer 12 bis 15 und 19.
-Hier ist auch zu sehen, dass Daten auch Inline an ein DD-Statement übergeben werden kann.
-\cite{Ebbers.2011}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{figures/dispq.PNG}
-\caption{Job Beispiel, Display einer IBM MQ}
-\label{fig:jclBsp}
-\end{figure}
-
-\subsection{Resource Access Control Facility}
-Die Resource Access Control Facility, kurz RACF, ist ein externer Sicherheitsmanager für z/OS.
-Dieser bietet eine Rechteverwaltung für das z/OS Betriebssystem an.
-Damit werden unter anderem Zugriffsrechte auf Dateien und Subsysteme gesteuert.
-\cite{InternationalBusinessMachinesCorporation.2008}
-
-\subsection{REXX}
-Die Restructured Extended Executor Programmiersprache, kurz REXX, ist eine prozedurale Programmiersprache.
-Die Sprache wird interpretiert.
-Mittlerweile existieren jedoch auch REXX-Compiler.
-\cite{Parziale.2007}
-
-REXX versteht sich als Skriptsprache und kommt nicht nur am Mainframe zum Einsatz.
-So kann es als Bindeglied für Betriebssystembefehle, grafischen Interfaces, Objekten, Funktionen und Serviceroutinen gesehen werden.
-So wird es, wie auch in dieser Arbeit, unter anderem für die Automation von sich wiederholenden Systemadministrationsaufgaben eingesetzt.
-\cite{Fosdick.2005}
-
-\section{IBM Mainframe Architektur bei der DATEV e.G.}
-Folgende Begriffe werden in diesem Absatz im Umfeld der DATEV e.G. erläutert:
-
+Diese Subsysteme stehen in jeder Stage zur Verfügung.
+Eine Stage beschreibt eine isolierte Systemumgebung mit eigenen Subsystemen und Ressourcenverwaltung.
+Die DATEV e.G. unterscheidet vier Stages:
 \begin{samepage}
 \begin{itemize}
-\item Stages, Sysplexe und Logical Partitions
-\item Middleware / Subsysteme
-\item Architekturüberblick
+\item Testplex:\\
+Labor für Änderungen am System, beispielsweise einer neuen Betriebssystemsversion
+\item Entwicklung:\\
+Implementierung neuer Features und Durchführung kleiner Tests
+\item Qualitätssicherung:\\
+Durchführung von Integrationstests
+\item Produktion:\\
+Software, die für den Kunden bereitsteht
 \end{itemize}
 \end{samepage}
 
-Die DATEV eG bezogenen Informationen stammen aus Gesprächen mit Mitarbeitern der einzelnen Administratorenteams.
+Betreut werden die einzelnen Subsysteme über alle Stages hinweg von eigens dafür entstandenen Administratorenteams.
+Die \glqq CICS Administration\grqq{} kümmert sich um alles rund das CICS Subsystem.
+Die \glqq Db2 Administration\grqq{} stellt Datenbanken und Tabellen auf Anfrage der Entwickler bereit.
+Die \glqq IBM MQ Administration\grqq{} verwaltet die IBM MQ Ressourcen.
 
-\subsection{Stages, Sysplexe und Logical Partitions}\label{sec:sysplex}
-Innerhalb der DATEV eG existieren vier sogenannte \glqq Stages\grqq{} auf dem Mainframe.
-Dabei handelt es sich um abgekapselte Systemumgebungen.
-Eine Stage besteht aus einer oder mehreren \glqq Logical Partitions \grqq, kurz LPARs, mit eigenen Subsystemen und eigener Ressourcenverwaltung. 
-Zu den Subsystemen zählen unter anderem CICS \footnote{Beschreibung in Absatz \ref{cics}},  Db2\footnote{Beschreibung in Absatz \ref{sssec:db2}} und IBM MQ\footnote{Beschreibung in Absatz \ref{sec:mq}}.
-Dadurch wird eine strickte Trennung zwischen den Stages realisiert.
-Die vier Stages werden im Folgenden beschrieben.
+Für die Beantwortung der Forschungsfragen liegt der Fokus auf dem Erstellen (\glqq Provisionieren \grqq) einer anwendungsspezifischen Laufzeitumgebung mit einer Datenhaltung und Message Queuing innerhalb des Testplexes und der Entwicklung.
+Als Laufzeitumgebung wird \glqq CICS\grqq, als Datenhaltung \glqq Db2\grqq{} und für das Message Queuing \glqq IBM MQ\grqq{} verwendet.
+Diese werden im Folgenden erläutert, hierzu dient Abbildung \ref{fig:archüber} als Überblick.
 
-\subparagraph{\glqq Entwicklung\grqq}~\\
-Stage auf der alle z/OS Entwickler an neuen Features arbeiten und erste kleinere Tests durchführen.
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figures/architektur.pdf}
+\caption{Architekturübersicht über die Subsysteme bei DATEV eG}
+\label{fig:archüber}
+\end{figure}
 
-\subparagraph{\glqq Qualitätssicherung\grqq} ~\\
-Hier werden vor allem Integrationstests mit extra dafür erstellten Testdaten durchgeführt.
-
-\subparagraph{\glqq Vorproduktion\grqq}~\\
-Die Vorproduktion steht für weitere Integrationstests zur Verfügung.
-Jedoch produktionsnäher und auch mit Echtdaten, also Daten aus der Produktion.
-
-\subparagraph{\glqq Produktion\grqq}~\\
-Hier befindet sich die Software, die von den Kunden verwendet wird.
-Ein Programm muss die Entwicklungs-, Qualitätssicherungs- und Vorproduktionsstages durchlaufen bevor es dem Kunden in der Produktion zur Verfügung gestellt wird.
-
-Die LPARs der vier Stages sind auf zwei sogenannte  \glqq Sysplexe\grqq{} aufgeteilt.
-Ein Sysplex kümmert sich um die Kommunikation zwischen den LPARs der einzelnen Stages und verwaltet Ressourcen LPAR übergreifend.
-\cite{Kyne.2016}
-
-Neben den oben erwähnten zwei Sysplexen existiert noch ein weiterer Sysplex.
-Diese werden alle im Folgenden beschrieben.
-
-\subparagraph{\glqq LAB/Test-Plex\grqq}~\\
-Der Test-Plex ist als Labor für Änderungen am System zu betrachten.
-So werden zum Beispiel neue Betriebssystemsversionen auf diesem geprüft.
-
-\subparagraph{\glqq QS-Plex\grqq}~\\
-Enthält unter anderem die LPARs der Entwicklung und der Qualitätssicherung.
-
-\subparagraph{\glqq Prod-Plex\grqq}~\\
-Im Prod-Plex sind die LPARs der Vorproduktion und der Produktion enthalten.
-
-\subsection{Middleware / Subsysteme}
-In diesem Absatz wird die verwendete Middleware beziehungsweise die verwendeten Subsysteme beschrieben.
-Diese setzen auf dem IBM Mainframe Betriebssystem z/OS auf.
-
-\subsubsection{Customer Information Control System}\label{cics}
+\subsection{Customer Information Control System}\label{cics}
 Das Customer Information Control System, kurz CICS, ist ein Applikationsserver für einen IBM-Großrechner mit Betriebssystem z/OS und damit eine IBM Middleware.
 Ein Applikationsserver stellt eine Umgebung zur Verfügung, in der Anwendungen gehostet werden können.
 Dabei kümmert sich dieser unter anderem um Transaktionalität, Webkommunikation und Sicherheit.
@@ -132,14 +64,14 @@ So können Programme innerhalb einer Anwendung in der für ihren Use-Case am bes
 
 Das CICS Subsystem einer Stage umfasst mehrere CICS Instanzen.
 
-\paragraph{CICS Instanz} ~\\
+\subsubsection{CICS Instanz} 
 Unter einer CICS Instanz ist ein einzelner Bereich, der auf dem z/OS Kernel aufsetzt, zu verstehen.
 Dieser Bereich ist mittels einer eindeutigen CICS ApplicationID gekennzeichnet und kann darüber explizit angesprochen werden.
 Eine CICS Instanz verwaltet mehrere CICS Transaktionen.
 
 Wenn in dieser Arbeit von dem CICS gesprochen wird, ist die CICS-Instanz damit gemeint.
 
-\paragraph{CICS Transaktion}\label{subsec:trans} ~\\
+\subsubsection{CICS Transaktion}\label{subsec:trans}
 Ein Businessablauf wird im CICS in einer Transaktion gekapselt.
 Eine Transaktion kann mehrere Programme unterschiedlicher Programmiersprachen umfassen und wird über eine eindeutige \glqq TransaktionsID\grqq{} identifiziert..
 
@@ -149,53 +81,12 @@ In der Transaktion werden alle Änderungen, die Programme an Ressourcen, wie zum
 So wird im Falle eines Fehlers die Möglichkeit eines Rollbacks sichergestellt.
  \cite{Rayns.2011}
 
-\paragraph{Voraussetzungen}\label{subsec:voraus} ~\\
-Bei der DATEV e.G. kümmert sich ein Team, die \glqq CICS Administration\grqq{} um das Erstellen einer CICS-Instanz, starten dieser Instanz und ist generell für alles rund um die Administration des CICS Transactions Servers zuständig.
-Der Fokus dieser Arbeit liegt auf dem Erstellen (\glqq Provisionieren\grqq{}) einer CICS-Instanz. Es werden nur die dafür notwendigen Voraussetzungen dargelegt.
-Außerdem liegt der Fokus auf Entwicklungs-CICS-Systemen, auf der sog. Entwicklungs-Stage, nicht auf den produktiven CICS-Systemen der DATEV e.G.. 
-Aus diesem Grund werden nur Schritte, die für ein solches Testsystem benötigt werden, dargestellt.
-Eine weitere Rahmenbedingung besteht darin, dass nur die Arbeitsschritte, die mit z/OSMF\footnote{Beschreibung in Absatz \ref{sec:zosmf}} automatisiert werden, erläutert werden.
-
-\paragraph{Einrichtung CICS Instanz}\label{subsec:createCICS}~\\
-Die in diesem Absatz benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 2 aus der Abteilung, die für die CICS Administration zuständig ist.
-Um eine lauffähige CICS Instanz den Voraussetzungen aus dem Absatz \ref{subsec:voraus} entsprechend einzurichten, sind mehrere Schritte notwendig.
-Diese werden im Folgenden beschrieben.
-
-\subparagraph{CICS spezifische Dateien}\label{sssec:speziDat} ~\\
-Zunächst müssen CICS spezifische Dateien im z/OS angelegt werden.
-Im Fall des dieser Arbeit zugrunde liegenden Beispiels handelt es sich um siebzehn verschiedene VSAM\footnote{Virtual Storage Access Method, spezielle Dateiart, die schnelle I/O-Zugriffe ermöglicht.\cite{Lovelace.2013}} Dateien.
-Diese Dateien benötigt die CICS Instanz um zum Beispiel Systemfehler zu protokollieren oder den Debugger aktivieren zu können.
-
-\subparagraph{CSD} ~\\
-In der Datei \glqq CICS System Definition\grqq, kurz CSD, muss jede Ressource, die dem System zur Verfügung stehen soll, definiert werden.
-Eine CSD Datei kann für mehrere CICS Instanzen verwendet werden und besteht aus mehreren Einträgen.
-Ein Eintrag besteht aus einer Gruppe und einer Liste.
-Die Gruppe ist hierbei die Definition einer Systemressource und muss manuell angelegt werden.
-Bei der Liste handelt es sich um das System, welches diese Ressource benötigt.
-Dort ist unter anderem für jede CICS Instanz hinterlegt, zu welchem Db2 Datenbanksystem und welchem IBM MQ Messagingsystem sich diese Instanz verbinden soll.
-
-\subparagraph{STC Job} ~\\
-Bei einem Started Task Control-Job, kurz STC Job, handelt es sich um einen Batch Job, der mit Hilfe des \glqq START\grqq-Konsolenkommandos innerhalb von z/OS gestartet werden kann.
-Dieser Batch Job wird deshalb auch als Started Task bezeichnet.\cite{Cassier.2007}
-Bei der DATEV eG existiert für jede Instanz eines Subsystems ein solcher Job, so also auch für CICS.
-In diesem werden zunächst einige zur Laufzeit benötigten Bibliotheken und Dateien eingebunden, unter anderem die CICS spezifischen Dateien\footnote{Beschreibung in Absatz \ref{sssec:speziDat}}.
-Außerdem werden hier die SIT \footnote{CICS system initialization table} Parameter definiert.
-Zunächst wird festgelegt welche Standard SIT verwendet werden soll.
-Anschließend können diese Standardwerte überschrieben werden.
-Zu diesen Parametern zählen unter anderem der eindeutige Name der CICS-Instanz, der Speicherort der dazugehörenden CSD und die Information, ob eine Verbindung zu einem Db2 Datenbanksystem hergestellt werden soll.
-
-\paragraph{Entfernung CICS Instanz} ~\\
-Um eine CICS Instanz zu entfernen muss diese zunächst gestoppt werden.
-Dies ist über das \glqq STOP\grqq-Konsolenkommando von z/OS möglich.
-Schließlich müssen alle im Absatz \ref{subsec:createCICS} beschriebenen Schritte rückgängig gemacht werden.
-Also müssen die für diese Instanz spezifischen Dateien, die Einträge für die CICS-Instanz aus der CSD Datei und schließlich auch der STC Job gelöscht werden.
-
-\subsubsection{Db2}\label{sssec:db2}
+\subsection{Db2}\label{sssec:db2}
 Db2 ist ein relationales Datenbanksystem, welches unter anderem als Subsystem eines z/OS Betriebssystems läuft.
 Einer Stage können mehrere Datenbanksysteme, auch Instanzen genannt, zugeordnet werden.
 In einer Instanz befinden sich die Datenbanken und Tabellen.
 
-\subsubsection{IBM MQ}\label{sec:mq}
+\subsection{IBM MQ}\label{sec:mq}
 IBM MQ ist eine Messaging-Lösung der IBM.
 Diese ermöglicht den asynchronen Datenaustausch zwischen Anwendungen mittels sogenannter Queues.
 Alle IBM MQ Begrifflichkeiten, die in dieser Arbeit verwendet werden, werden im Folgenden erläutert.
@@ -204,7 +95,7 @@ Alle IBM MQ Begrifflichkeiten, die in dieser Arbeit verwendet werden, werden im 
 Das IBM MQ Subsystem einer Stage setzt sich aus einem oder mehreren Queue Managern zusammen.
 Ein Queue Manager kann daher als IBM MQ Instanz gesehen werden.
 
-\paragraph{Queue Manager}~\\
+\subsubsection{Queue Manager}
 Bei einem Queue Manager handelt es sich um die zentrale Ressource eines IBM MQ Systems.
 Er verwaltet  alle anderen IBM MQ Ressourcen.
 Dazu gehören unter anderem die Speichersteuerung der Daten und die Wiederherstellung dieser im Falle eines Fehlers.
@@ -212,39 +103,28 @@ Desweiteren koordiniert er den Zugriff aller Anwendungen auf die Nachrichten in 
 Um hierbei die Konsistenz sicherzustellen, sorgt er für Locking und die notwendige Isolation der Queues.
 \cite{Aranha.2013}
 
-\paragraph{Queues}~\\
+\subsubsection{Queues}
 In Queues werden die Nachrichten, die von Programmen gesendet und gelesen werden gespeichert.
 Es gibt verschiedene Arten von Queues, die im Kontext dieser Arbeit relevanten Queues sind folgende:
 
-\subparagraph{Die Local Queue.}~\\
+\paragraph{Die Local Queue.}~\\
 Dabei handelt es sich um die einzige Queue Art, bei der die Nachrichten physikalisch gespeichert werden.
 Die anderen Queue Arten nutzen als Basis immer eine Local Queue.
 
-\subparagraph{Initiation Queue}~\\
+\paragraph{Initiation Queue}~\\
 Die sogenannte \glqq Initiation Queue\grqq{} ist eine spezielle Art der Local Queue.
 Diese dient dem Queue Manager dazu, unter bestimmten Bedingungen eine Trigger-Nachricht darauf zu schreiben.
 Daher kann eine andere Local Queue so definiert sein, dass sobald eine Nachricht auf sie geschrieben wird eine solche Trigger-Nachricht erzeugt wird.
 Dies ermöglicht, dass Anwendungen nur starten, wenn wirklich Daten zum Verarbeiten vorhanden sind.
 \cite{Aranha.2013}
 
-\paragraph{Process}~\\
+\subsubsection{Process}
 Für das Auslösen von Anwendungen wird nicht nur die Initiation Queue benötigt, sondern auch sogenannte \glqq Processes\grqq.
 So muss der Local Queue, die den Start einer Anwendung auslösen soll, bei der Definition nicht nur die Initiation Queue bekannt gemacht werden, sondern auch ein Process.
 Ein Process legt den \glqq Type\grqq{} und den Namen der zu startenden Anwendung fest.
 Als \glqq Type\grqq{} können beispielhaft CICS oder auch WINDOWSNT für Windows unterstütze Plattformen genannt werden.
 Ist der \glqq Type\grqq{} CICS,  muss der Name der Transaktion angegeben werden, für Windows Plattformen der Dateipfad der auszuführenden exe.
 \cite{Aranha.2013}
-
-\subsection{Architekturüberblick}
-In Abbildung \ref{fig:archüber} sind die einzelnen Subsysteme mit ihren Instanzen dargestellt.
-Als Grundbaustein dient allen der z/OS Kernel.
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=\textwidth]{figures/architektur.pdf}
-\caption{Architekturübersicht über die Subsysteme bei DATEV eG}
-\label{fig:archüber}
-\end{figure}
 
 \section{IBM Cloud Provisioning and Management for z/OS}\label{sec:zosmf}
 In diesem Absatz wird zunächst auf die für dieses Kapitel grundlegenden Begriffe eingegangen.
