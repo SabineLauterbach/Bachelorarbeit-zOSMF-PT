@@ -36,11 +36,6 @@ Software, die für den Kunden bereitsteht
 \end{itemize}
 \end{samepage}
 
-Betreut werden die einzelnen Subsysteme über alle Stages hinweg von eigens dafür entstandenen Administratorenteams.
-Die \glqq CICS Administration\grqq{} kümmert sich um alles rund das CICS Subsystem.
-Die \glqq Db2 Administration\grqq{} stellt Datenbanken und Tabellen auf Anfrage der Entwickler bereit.
-Die \glqq IBM MQ Administration\grqq{} verwaltet die IBM MQ Ressourcen.
-
 Für die Beantwortung der Forschungsfragen liegt der Fokus auf dem Erstellen (\glqq Provisionieren \grqq) einer anwendungsspezifischen Laufzeitumgebung mit einer Datenhaltung und Message Queuing innerhalb des Testplexes und der Entwicklung.
 Als Laufzeitumgebung wird \glqq CICS\grqq, als Datenhaltung \glqq Db2\grqq{} und für das Message Queuing \glqq IBM MQ\grqq{} verwendet.
 Diese werden im Folgenden erläutert, hierzu dient Abbildung \ref{fig:archüber} als Überblick.
@@ -126,65 +121,56 @@ Als \glqq Type\grqq{} können beispielhaft CICS oder auch WINDOWSNT für Windows
 Ist der \glqq Type\grqq{} CICS,  muss der Name der Transaktion angegeben werden, für Windows Plattformen der Dateipfad der auszuführenden exe.
 \cite{Aranha.2013}
 
-\section{IBM Cloud Provisioning and Management for z/OS}\label{sec:zosmf}
-In diesem Absatz wird zunächst auf die für dieses Kapitel grundlegenden Begriffe eingegangen.
-Das IBM Cloud Provisioning and Management for z/OS bietet die Möglichkeit, mehrere Systeme (sog. Middleware) innerhalb eines z/OS Betriebssystems zu provisionieren, unter anderem Laufzeitumgebungen wie CICS. 
-Für diese Aufgaben stehen zwei Schnittstellen zur Verfügung.
-Zum einen das z/OS Provisioning Toolkit, (z/OSPT) und zum anderen z/OS Management Facility (z/OSMF).
-\cite{KeithWinnardGaryPuchkoffHirenShah.2016}
+\subsection{Bereitstellung von Subsystemen}
+Betreut werden die einzelnen Subsysteme über alle Stages hinweg von eigens dafür entstandenen Administratorenteams.
+Die \glqq CICS Administration\grqq{} kümmert sich um alles rund um das CICS Subsystem.
+Die \glqq Db2 Administration\grqq{} stellt Datenbanken und Tabellen auf Anfrage der Entwickler bereit.
+Die \glqq IBM MQ Administration\grqq{} verwaltet die IBM MQ Ressourcen.
+Um diese Aufgaben zu bewältigen sind aktuell viele proprietäre und veraltete Tools im Einsatz.
+Die Verwaltung von Subsystemen ist mit vielen manuellen Schritten verbunden.\footnote{Analyse des aktuellen Bereitstellungsprozesses, siehe in Absatz \ref{sec:aktbereit}}
+Für die Automation dieser Prozesse bietet die IBM das \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit an.
+Dies umfasst zwei Lösungen, \glqq z/OS Provisioning Toolkit\grqq\footnote{siehe Absatz \ref{sssec:zospt}} und \glqq z/OS Management Facility\grqq\footnote{siehe Absatz \ref{sssec:zosmf}}.
+Bei beiden Lösungen stehen die sogenannten \glqq Templates\grqq{} im Mittelpunkt.
 
-\subsection{Begrifferklärung}
-Im Folgenden werden einige allgemeine Begriffe, die im Umfeld des Tools \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} vorkommen, erläutert.
+Ein Template besteht aus drei Dateien:
 
-\subsubsection{Provisioning}
-Ins Deutsche übersetzt bedeutet es Bereitstellung,vorliegend wird auch Provisionierung verwendet.
-In dieser Arbeit umfasst dieser Begriff die Bereitstellung einer Laufzeitumgebung, beziehungsweise den Prozess, der hierfür benötigt wird.
+\paragraph{\glqq Aktiondefinitionfile\grqq} ~\\
+Hier werden die Aktionen, die ein Anwender mit einer Instanz eines Templates durchführen kann, festgelegt.
+Unter einer Instanz ist das Endergebnis der Bereitstellung eines Templates zu verstehen.
+Diese Instanz kann eine oder mehrere verschiedene Subsystem-Instanzen enthalten.
+Einer Aktion wird ein sogenannter \glqq Workflow\grqq{} zugewiesen.
 
-\subsubsection{Workflow}\label{sssec:workflow}
-Ein Workflow ist eine beliebig komplexe, eindeutige Aneinanderreihung von sogenannten Steps.
-Nach der Ausführung dieser Steps wird ein bestimmtes Ziel erreicht, zum Beispiel die erfolgreiche Bereitstellung eines CICS Systems.
-Für die Definition eines Workflows, der dazugehörigen Steps und ihrer Variablen wird XML genutzt.
+Ein Workflow ist über eine XML Datei, die sogenannte \glqq Workflowdefinitionfile\grqq, definiert.
+Diese lässt sich grob in zwei Teile untergliedern:
+\begin{itemize}
+\item Variablendefinition
+\item Steps
+\end{itemize}
+In der Variablendefinition werden, wie der Name schon sagt, alle Variablen, die für diesen Workflow notwendig sind definiert.
+
 Ein Step beschreibt einen Teilablauf eines Workflows.
+Ein Workflow kann aus mehreren Steps bestehen.
+Die Steps werden in Definitionsreihenfolge ausgeführt.
+Allerdings können Bedingungen für die Durchführung eines Steps definiert werden.
+So ist es beispielsweise möglich, einen Step nur durchzuführen, wenn eine bestimmte Variable einen bestimmten Wert besitzt.
 Innerhalb eines Steps können sowohl interne und externe Scripte als auch JCLs und somit Programme ausgeführt werden.
 Darüber hinaus besteht die Möglichkeit REST-Calls auszuführen.
-Es können Bedingungen für die Durchführung eines Steps definiert werden.
-So ist es beispielsweise möglich, einen Step nur durchzuführen, wenn eine bestimmte Variable einen bestimmten Wert besitzt.
-Es wird ein XML Schema verwendet um sicherzustellen, dass in dem XML-Skript zur Laufzeit keine syntaktischen Fehler vorhanden sind.
+Durch ein XML Schema wird sichergestellt, dass die Workflowdefinitionfile keine syntaktischen Fehler beinhaltet.
+Sowohl die Variablendefinition als auch die Steps können in externe XML Dateien ausgelagert werden.
+Dadurch können Variablen an einer Stelle im Template definiert und in alle Workflowdefinitionfiles aufgenommen werden.
 \cite{Rotthove.2018}
 
-Ein Nachteil von Workflows ist, dass diese statisch sind, das heißt, dass die Variablenzuweisungen immer zum Zeitpunkt der Erstellung stattfinden.
-Dadurch ergibt sich, dass für jede kleine Änderung ein eigener Workflow erzeugt werden muss.
-Somit ist ein Workflow eher ein Einmal- bzw. Wegwerfprodukt.
+Neben den Workflowdefinitionfiles muss in einer Aktion auch der Pfad der sogenannte \glqq Variableinputfile\grqq{} angegeben sein.
 
-\subsubsection{Template}
-Bei dem Nachteil von Workflows als Wegwerfprodukt setzen die sogenannten Templates an.
-Ein Template besteht aus drei Dateien.
+\paragraph{\glqq Variableinputfile\grqq} ~\\
+In dieser Datei werden den in der Workflowdefinitionfile definierten Variablen Werte zugewiesen.
+Somit kann das Template konfiguriert werden.
 
-\begin{enumerate}
-\item Datei für Eingabevariablen.\\
-In dieser Datei kann Workflowvariablen Werte zugewiesen werden.
-Diese Variablen müssen bei ihrer Definition im Workflow entsprechend gekennzeichnet sein.
-
-\item Die sogenannte Aktion-Definitions-Datei.\\
-Hier werden die Aktionen, die ein Anwender mit diesem Template durchführen kann, festgelegt.
-Einer Aktion wird eine Workflow Definitions Datei und somit ein Workflow zugewiesen.
-Darin ist die Datei für die Eingabevariablen und die Festlegung, welche Variablen davon verwendet werden, anzugeben.
-
-\item Die Manifest-Datei.\\
-In dieser wird dem Template mitgeteilt, an welchem Speicherort sich die oben genannten Dateien befinden.
-Da ein Template immer provisioniert werden kann, wird hier auch der Speicherort des Bereitstellungsworkflows angegeben.
+\paragraph{\glqq Manifest-File\grqq} ~\\
+Hier wird dem Template mitgeteilt, an welchem Speicherort sich die oben genannten Dateien befinden.
+Da ein Template immer provisioniert werden kann, wird hier auch der Speicherort des Provisionierungsworkflows angegeben.
 Zusätzlich kann noch eine Beschreibung des Templates hinzugefügt werden.
-\end{enumerate}
-
-Somit bildet ein Template einen Rahmen um mehrere Workflows und ermöglicht eine schnellere De-/provisionierung.
-Das hat den Vorteil, dass Variablen nur an einer Stelle geändert werden.
-Darüber hinaus besteht die Möglichkeit, per Anwendereingabe den Variablen zum Zeitpunkt der Provisionierung einen Wert zuzuweisen.
-Somit ist ein Template deutlich flexibler als ein Workflow.
 \cite{IBM.2019}
-
-\subsubsection{Instance}\label{sssec:instance}
-Hierbei handelt es ich um das Ergebnis nach der Provisionierung eines Templates, zum Beispiel um ein funktionsfähiges CICS.
-Als Abgrenzung zu einer Instanz eines Subsystems, kann eine Template Instance auch Instanzen mehrere Subsysteme enthalten.
 
 \subsection{z/OS Provisioning Toolkit}\label{sssec:zospt}
 z/OSPT bietet ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Laufzeitumgebungen.
@@ -195,14 +181,14 @@ In Abbildung \ref{fig:zospt_help} werden die möglichen Kommandozeilenbefehle mi
 	\caption{z/OSPT mögliche Kommandozeilenbefehle}
 	\label{fig:zospt_help}
 \end{figure}
-Mit z/OSPT werden noch zwei weitere Begriffe eingeführt.\\
-\glqq Images\grqq{}.
+Mit z/OSPT werden zwei weitere Begriffe eingeführt.\\
+\paragraph{\glqq Images\grqq}~\\
 Dabei handelt es sich grundsätzlich um ein Template, jedoch kann dieses Template über eine weitere Inputdatei verändert werden.
 Dadurch kann ein Template mit spezifischen Änderungen provisioniert werden, ohne dass ein neues Template erzeugt werden muss.
 Dies erhöht die Flexibilität der Templates weiter.
 
-\glqq Container\grqq{}.
-Dabei handelt es sich eins zu eins um eine \glqq Instance\grqq \footnote{Beschreibung in Absatz \ref{sssec:instance}}.
+\paragraph{\glqq Container\grqq}~\\
+Dabei handelt es sich um eine Template-Instanz \footnote{Beschreibung in Absatz \ref{sssec:instance}}.
 \cite{IBM.2019b}
 
 \subsection{z/OS Management Facility}\label{sssec:zosmf}
@@ -228,12 +214,12 @@ Unter einer \glqq Domain\grqq{} ist ein System zu verstehen, dass Systemressourc
 Einem Template muss sowohl eine \glqq Domain\grqq{} als auch ein \glqq Tenant\grqq{} zugewiesen werden.
 \cite{Rotthove.2018}
 
-Zur Verwaltung der Templates und Instances kommen die \glqq Software Services\grqq{} zum Einsatz.
-Dort können neue Templates über die \glqq Manifest Datei\grqq{} hinzugefügt werden.
+Zur Verwaltung der Templates und Template-Instanzen kommen die \glqq Software Services\grqq{} zum Einsatz.
+Dort können neue Templates über die \glqq Manifest File\grqq{} hinzugefügt werden.
 Dann muss, wie oben beschrieben, eine \glqq Domain\grqq{} und ein \glqq Tenant\grqq{} zugwiesen werden.
 Anschließend kann das Template, falls es keine Fehler beinhaltet, veröffentlicht werden.
 Es ist zu empfehlen vorher einen \glqq Test Run\grqq{} durchzuführen.
 Dabei wird eine Instance testweise provisioniert.
-Diese Instance verhält sich genauso wie eine Instance, die aus einem veröffentlichten Template erzeugt wurde.
-Somit können damit das Template und die in der Aktion-Definitions-Datei definierten Aktionen getestet werden.
+Diese Template-Instanz verhält sich genauso wie eine Instanz, die aus einem veröffentlichten Template erzeugt wurde.
+Somit können damit das Template und die in der Aktiondefintionfile definierten Aktionen getestet werden.
 \cite{Rotthove.2018}
