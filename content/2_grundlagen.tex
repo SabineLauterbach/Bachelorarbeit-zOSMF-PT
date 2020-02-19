@@ -36,6 +36,7 @@ Software, die für den Kunden bereitsteht
 \end{itemize}
 \end{samepage}
 
+\section{Subsysteme / Middleware}
 Für die Beantwortung der Forschungsfragen liegt der Fokus auf dem Erstellen (\glqq Provisionieren \grqq) einer anwendungsspezifischen Laufzeitumgebung mit einer Datenhaltung und Message Queuing innerhalb des Testplexes und der Entwicklung.
 Als Laufzeitumgebung wird \glqq CICS\grqq, als Datenhaltung \glqq Db2\grqq{} und für das Message Queuing \glqq IBM MQ\grqq{} verwendet.
 Diese werden im Folgenden erläutert, hierzu dient Abbildung \ref{fig:archüber} als Überblick.
@@ -121,7 +122,7 @@ Als \glqq Type\grqq{} können beispielhaft CICS oder auch WINDOWSNT für Windows
 Ist der \glqq Type\grqq{} CICS,  muss der Name der Transaktion angegeben werden, für Windows Plattformen der Dateipfad der auszuführenden exe.
 \cite{Aranha.2013}
 
-\subsection{Bereitstellung von Subsystemen}
+\section{Bereitstellung von Subsystemen}
 Betreut werden die einzelnen Subsysteme über alle Stages hinweg von eigens dafür entstandenen Administratorenteams.
 Die \glqq CICS Administration\grqq{} kümmert sich um alles rund um das CICS Subsystem.
 Die \glqq Db2 Administration\grqq{} stellt Datenbanken und Tabellen auf Anfrage der Entwickler bereit.
@@ -215,7 +216,7 @@ Einem Template muss sowohl eine \glqq Domain\grqq{} als auch ein \glqq Tenant\gr
 \cite{Rotthove.2018}
 
 Zur Verwaltung der Templates und Template-Instanzen kommen die \glqq Software Services\grqq{} zum Einsatz.
-Dort können neue Templates über die \glqq Manifest File\grqq{} hinzugefügt werden.
+Dort können neue Templates über die Manifest-File hinzugefügt werden.
 Dann muss, wie oben beschrieben, eine \glqq Domain\grqq{} und ein \glqq Tenant\grqq{} zugwiesen werden.
 Anschließend kann das Template, falls es keine Fehler beinhaltet, veröffentlicht werden.
 Es ist zu empfehlen vorher einen \glqq Test Run\grqq{} durchzuführen.
