@@ -1,12 +1,14 @@
 \chapter{Vorgehensweise}\label{ch:vorgehensweise}
-Zu Beginn dieser Arbeit wurde zunächst das \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit mit seinen Varianten z/OSMF und z/OSPT analysiert.
-Es folgte die Analyse und Darstellung des Ist-Zustandes für die  Provisionierung einer Beispielanwendung bei DATEV e.G., inklusive der Beschreibung des momentan etablierten Bereitstellungsprozesses für CICS, Db2 und IBM MQ.
-Anschließend wurde an Hand einer Beispielimplementierung geprüft, ob es technisch möglich ist eine Laufzeitumgebung mit benötigten Middleware-Komponenten (CICS, Db2, IBM MQ) automatisiert mit dem oben genannten Toolkit für diese Beispielanwendung bereitzustellen.
-Zuletzt werden Interviews mit Vertretern aus dem Administratorenteam, Entwicklerteam und dem Team für die Technologiestrategie, durchgeführt.
-Dadurch erfolgt eine Bewertung bezüglich des möglichen Nutzwertes, sowie der Akzeptanz der Technologie durch die Stakeholdern bei DATEV e.G.
+Um einen Überblick über die momentan in der DATEV e.G. etablierten Bereitstellungsprozesse für die Middlewarekomponenten CICS, Db2 und IBM MQ zu bekommen, wurden diese analysiert.
 
-Im Folgenden wird speziell auf die Vorgehensweise für die Beispielimplementierung eingegangen. 
-Begonnen wird auf dem Testplex.
+Wie in Absatz \ref{sec:mot} beschrieben wird für die Beantwortung der Forschungsfragen eine Beispielanwendung, die als Laufzeitumgebung CICS, als Datenbank Db2 und als Message Lösung IBM MQ verwendet, benötigt.
+Hier bietet sich die \glqq DATEV Rechnungsschreibung\grqq{} an.
+Dabei handelt es sich um eine legacy z/OS Anwendung, ein Teil dieser Anwendung erfüllt die oben genannten Kriterien.
+Um die genauen Anforderungen an die Middleware ausfindig zu machen, wurde dieser Teil analysiert.
+Anhand dieser Anforderungen wurde mittels z/OSPT und z/OSMF ein Template bereitgestellt.
+
+Im Folgenden wird speziell auf die Vorgehensweise bei der Implementierung dieses Templates eingegangen. 
+Begonnen wurde auf dem Testplex.
 Dieser ist komplett von anderen Systemumgebungen abgekapselt, um Auswirkungen von Fehlern in den Tests auf die Entwicklung und Produktion zu vermeiden.
 In dieser Umgebung wird zunächst untersucht, wie es möglich ist eine CICS-Instanz zu provisionieren.
 Hierfür wird vorerst ein von der IBM bei der Installation von z/OSMF mitgeliefertes minimales CICS Template verwendet.
@@ -14,11 +16,16 @@ Anschließend wird ein umfangreicheres mitgeliefertes Template an die Anforderun
 Für die Provisionierung von Db2 Datenbanken existiert innerhalb der DATEV e.G. bereits eine REST-API.
 Es wird versucht diese innerhalb des Templates zu nutzen.
 IBM MQ Queues werden mittels Standard IBM Jobs provisioniert.
-Da es sich beim Test-Plex, wie im Absatz \ref{sec:sysplex} beschrieben, nur um eine Testumgebung für Systemtests handelt, werden vorerst nur die benötigten Middleware-Systeme provisioniert.
+Da es sich beim Testplex, wie im Absatz \ref{sec:zosanw} beschrieben, nur um eine Testumgebung für Systemtests handelt, werden vorerst nur die benötigten Middleware-Systeme provisioniert.
 
-Nachdem eine CICS-Instanz, eine Db2 Datenbank und IBM MQ Queues auf dem Test-Plex sowohl provisioniert als auch deprovisioniert werden können, folgt der nächste Schritt.
-Dabei handelt es sich um den Wechsel des Sysplexes vom Test-Plex in den Qs-Plex und somit in die Entwicklungsstage.
+Nachdem eine CICS-Instanz, eine Db2 Datenbank und IBM MQ Queues auf dem Testplex sowohl provisioniert als auch deprovisioniert werden können, folgt der nächste Schritt.
+Dabei handelt es sich um den Wechsel vom Testplex in die Entwicklungsstage.
 In der Entwicklungsstage sind alle Anwendungsdaten, die für diese Tests notwendig sind, vorhanden.
 Somit kann hier die Integration der Beispielanwendung in die provisionierte CICS-Instanz stattfinden.
+
+Es folgten Interviews mit Vertretern aus dem Administratorenteam, Entwicklerteam und dem Team für die Technologiestrategie.
+Dadurch wird eine Bewertung bezüglich des möglichen Nutzwertes, sowie der Akzeptanz der Technologie durch die Stakeholdern bei DATEV e.G., erfasst.
+
+
 
 
