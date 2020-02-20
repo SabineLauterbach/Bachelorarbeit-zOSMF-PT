@@ -1,8 +1,124 @@
 \chapter{Analyse}\label{ch:analyse}
-Im Folgendem erfolgt eine Beschreibung der Beispielanwendung \glqq DATEV-Rechnungsschreibung\grqq.
+Im Folgendem wird der aktuelle Bereitstellungsprozess für die Laufzeitumgebung, dem dazugehörigen Datenbanksystem und einer Messaging Lösung getrennt voneinander dargestellt.
+Anschließend erfolgt eine Beschreibung der Beispielanwendung \glqq DATEV-Rechnungsschreibung\grqq.
 Die dafür benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 1 aus der Abteilung, die für die DATEV-Rechnungsschreibung zuständig ist.
 Es wird vor allem der technische Aspekt beleuchtet.
-Anschließend wird der aktuelle Bereitstellungsprozess für die Laufzeitumgebung, dem dazugehörigen Datenbanksystem und einer Messaging Lösung dargestellt.
+
+\section{Aktueller Bereitstellungsprozess}\label{sec:aktbereit}
+Die in diesem Absatz genannten Informationen stammen aus Gesprächen mit Mitarbeitern aus den jeweiligen Administratorenteams.
+Wie in Absatz \ref{sec:zosanw} beschrieben benötigt eine z/OS Anwendung zunächst eine Laufzeitumgebung, im Fall dieser Arbeit handelt es sich um CICS.
+
+\subsection{Bereitstellung einer CICS-Instanz}
+Um eine lauffähige CICS-Instanz einzurichten, sind mehrere Schritte notwendig.
+Der komplette Prozess wird in Abbildung \ref{fig:aktcics} dargestellt.
+Wie zu sehen ist, ist der Initiator des Prozesses das Entwicklerteam.
+Zunächst wird dort während der Entwicklungsphase festgestellt, dass ein neue CICS-Instanz benötigt wird.
+Hier hilft das CICS Administratorenteam mittels Beratung aus.
+Während einer Beratungsphase, die via Telefon, Emails oder Terminen stattfindet, wird sichergestellt, ob wirklich eine neue CICS-Instanz notwendig ist oder ob nicht eine bereits bestehende Instanz genutzt werden kann.
+Falls eine neue CICS-Instanz benötigt wird, wird ein RACF Eintrag für diese Instanz beantragt.
+Dieser Eintrag wird dann vom RACF Team erzeugt.
+Um sicherzustellen, dass die CICS-Instanz in den täglichen Sicherungen enthalten ist, muss das System Automations-Team benachrichtigt werden.
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=\paperwidth,angle=90]{figures/swimlaneCICS.pdf}
+\caption{Bereitstellungsprozess einer CICS-Instanz}
+\label{fig:aktcics}
+\end{figure}
+
+Nun kann mit dem eigentlichen Anlegen der CICS-Instanz begonnen werdem.
+Dabei müssen folgende Schritte manuell durchgeführt werden.
+Es werden nur die Schritte, die im Laufe dieser Arbeit durch das \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit automatisiert werden, dargestellt.
+Es handelt sich um das Anlegen von:
+
+\begin{itemize}
+\item CICS spezifische Dateien
+\item \glqq CICS System Definition\grqq
+\item Started Task Control-Job
+\end{itemize}
+
+\paragraph{CICS spezifische Dateien}\label{sssec:speziDat} ~\\
+Zunächst müssen CICS spezifische Dateien im z/OS angelegt werden.
+Im Fall des dieser Arbeit zugrunde liegenden Beispiels handelt es sich um siebzehn verschiedene VSAM\footnote{Virtual Storage Access Method, spezielle Dateiart, die schnelle I/O-Zugriffe ermöglicht.\cite{Lovelace.2013}} Dateien.
+Diese Dateien benötigt die CICS-Instanz um zum Beispiel Systemfehler zu protokollieren oder den Debugger aktivieren zu können.
+
+\paragraph{\glqq CICS System Definition\grqq} ~\\
+In der Datei \glqq CICS System Definition\grqq, kurz CSD, muss jede Ressource, die dem System zur Verfügung stehen soll, definiert werden.
+Eine CSD Datei kann für mehrere CICS-Instanzen verwendet werden und besteht aus mehreren Einträgen.
+Ein Eintrag besteht aus einer Gruppe und einer Liste.
+Die Gruppe ist hierbei die Definition einer Systemressource und muss manuell angelegt werden.
+Bei der Liste handelt es sich um das System, welches diese Ressource benötigt.
+Dort ist unter anderem für jede CICS-Instanz hinterlegt, zu welchem Db2 Datenbanksystem und welchem IBM MQ Messagingsystem sich diese Instanz verbinden soll.
+
+\paragraph{Started Task Control-Job} ~\\
+Bei einem Started Task Control-Job, kurz STC Job, handelt es sich um einen Batch Job, der mit Hilfe des \glqq START\grqq-Konsolenkommandos innerhalb von z/OS gestartet werden kann.
+Dieser Batch Job wird deshalb auch als Started Task bezeichnet.\cite{Cassier.2007}
+Bei der DATEV e.G. existiert für jede Instanz eines Subsystems ein solcher Job, so also auch für CICS.
+In diesem werden zunächst einige zur Laufzeit benötigten Bibliotheken und Dateien eingebunden, unter anderem die CICS spezifischen Dateien\footnote{Beschreibung in Absatz \ref{sssec:speziDat}}.
+Außerdem werden hier die SIT \footnote{CICS system initialization table} Parameter definiert.
+Zunächst wird festgelegt welche Standard SIT verwendet werden soll.
+Anschließend können diese Standardwerte überschrieben werden.
+Zu diesen Parametern zählen unter anderem der eindeutige Name der CICS-Instanz, der Speicherort der dazugehörenden CSD und die Information, ob eine Verbindung zu einem Db2 Datenbanksystem hergestellt werden soll.
+
+Nach der Durchführung dieser Schritte und einem erfolgreichen Startversuch, steht dem Entwickler eine neue CICS-Instanz zur Verfügung.
+Der komplette Ablauf dauert, unter der Annahme, dass alle Beteiligten verfügbar sind, nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
+
+\subsection{Bereitstellungsprozess einer Db2 Datenbank}
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=\paperwidth,angle=90]{figures/swimlaneDb2.pdf}
+\caption{Bereistellungsprozess einer Db2 Datenbank}
+\label{fig:aktdb2}
+\end{figure}
+
+\begin{figure}[ht!]
+\centering
+\includegraphics[width=\paperwidth,angle=90]{figures/swimlaneMQ.pdf}
+\caption{Bereistellungsprozess einer IBM MQ Queue}
+\label{fig:aktmq}
+\end{figure}
+
+Wie in den drei Diagrammen, Abbildungen \ref{fig:aktcics}, \ref{fig:aktdb2} und \ref{fig:aktmq}, zu erkennen ist, ist der aktuelle Bereitstellungsprozess noch mit vielen manuellen Schritten verbunden.
+Außerdem ist der Hauptaufwand in den Administratorenteams angesiedelt.
+Das Entwicklerteam ist der Initiator des Ablaufs.
+Folglich kümmert es sich um Formulare und die erste Kontaktaufnahme zum Administratorenteam.
+Bei dem Bereitstellungsprozess einer Db2 Datenbank muss es außerdem Projektinformationen, unter anderem Daten der Voruntersuchung, bereitstellen.
+Hinzu kommt das Erstellen eines Datenbankmodells.
+Hierfür wird Datenbankwissen benötigt, hierzu wird gegenfalls die Unterstützung eines Administrator benötigt.
+
+Zusätzlich zu den vielen manuellen Schritten sind die vielen Absprachen zwischen mehreren Abteilungen zu nennen.
+Steht ein beteiligtes Team nicht zu Verfügung, kommt es zu Verzögerungen, das Team muss warten, der komplette Zeitplan kann sich dadurch nach hinten verschieben.
+Der Prozess für die Bereitstellung einer CICS-Instanz, mit einer Db2 Datenbank und IBM MQ Queues dauert in der Summe circa sechs Arbeitstage.
+Es setzt sich aus der Dauer der Einzelprozesse zusammen, für jedes Subsystem wird mit circa zwei Arbeitstagen gerechnet.
+Diese Einschätzung beruht auf den Annahmen, dass zum einen jedes beteiligte Team nur diese Aufgabe zu erledigen hat und zum anderen jeweils ein Tag für die Beratung durch das jeweilige Administratorenteam veranschlagt wird.
+Natürlich ist ein parallelisierter Ablauf der einzelnen Teilprozesse möglich, so kann die Gesamtdauer im besten Fall auf circa zwei bis drei Arbeitstage verkürzt werden.
+
+Ein weiterer Punkt ist, dass die Kommunikation beziehungsweise der Initiator für den Start des gesamten Prozesses meist per Zuruf stattfindet.
+So existiert für die erste Kontaktaufnahme kein Formular, keine Automation oder ähnliches.
+Zur Kommunikation wird auf E-Mail, Telefon oder mittels Terminen zurückgegriffen.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \section{DATEV-Rechnungsschreibung}
 Für diese Arbeit wurde die DATEV-Rechnungsschreibung als Beispielanwendung herangezogen, weil sie folgenden Anforderungen entspricht.
@@ -130,87 +246,5 @@ Diese führt die Preisermittlung durch und schreibt das Ergebnis auf die dazugeh
 Ist dies geschehen, stehen die Queues wieder für einen neuen Auftrag zur Verfügung.
 Es können maximal 30 Transaktionen zeitgleich arbeiten.
 
-\section{Aktueller Bereitstellungsprozess}\ref{sec:aktbereit}
- \begin{figure}[ht!]
-\centering
-\includegraphics[width=\paperwidth,angle=90]{figures/swimlaneCICS.pdf}
-\caption{Bereistellungsprozess einer CICS-Instanz}
-\label{fig:aktcics}
-\end{figure}
 
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=\paperwidth,angle=90]{figures/swimlaneDb2.pdf}
-\caption{Bereistellungsprozess einer Db2 Datenbank}
-\label{fig:aktdb2}
-\end{figure}
-
-\begin{figure}[ht!]
-\centering
-\includegraphics[width=\paperwidth,angle=90]{figures/swimlaneMQ.pdf}
-\caption{Bereistellungsprozess einer IBM MQ Queue}
-\label{fig:aktmq}
-\end{figure}
-
-Wie in den drei Diagrammen, Abbildungen \ref{fig:aktcics}, \ref{fig:aktdb2} und \ref{fig:aktmq}, zu erkennen ist, ist der aktuelle Bereitstellungsprozess noch mit vielen manuellen Schritten verbunden.
-Außerdem ist der Hauptaufwand in den Administratorenteams angesiedelt.
-Das Entwicklerteam ist der Initiator des Ablaufs.
-Folglich kümmert es sich um Formulare und die erste Kontaktaufnahme zum Administratorenteam.
-Bei dem Bereitstellungsprozess einer Db2 Datenbank muss es außerdem Projektinformationen, unter anderem Daten der Voruntersuchung, bereitstellen.
-Hinzu kommt das Erstellen eines Datenbankmodells.
-Hierfür wird Datenbankwissen benötigt, hierzu wird gegenfalls die Unterstützung eines Administrator benötigt.
-
-Zusätzlich zu den vielen manuellen Schritten sind die vielen Absprachen zwischen mehreren Abteilungen zu nennen.
-Steht ein beteiligtes Team nicht zu Verfügung, kommt es zu Verzögerungen, das Team muss warten, der komplette Zeitplan kann sich dadurch nach hinten verschieben.
-Der Prozess für die Bereitstellung einer CICS-Instanz, mit einer Db2 Datenbank und IBM MQ Queues dauert in der Summe circa sechs Arbeitstage.
-Es setzt sich aus der Dauer der Einzelprozesse zusammen, für jedes Subsystem wird mit circa zwei Arbeitstagen gerechnet.
-Diese Einschätzung beruht auf den Annahmen, dass zum einen jedes beteiligte Team nur diese Aufgabe zu erledigen hat und zum anderen jeweils ein Tag für die Beratung durch das jeweilige Administratorenteam veranschlagt wird.
-Natürlich ist ein parallelisierter Ablauf der einzelnen Teilprozesse möglich, so kann die Gesamtdauer im besten Fall auf circa zwei bis drei Arbeitstage verkürzt werden.
-
-Ein weiterer Punkt ist, dass die Kommunikation beziehungsweise der Initiator für den Start des gesamten Prozesses meist per Zuruf stattfindet.
-So existiert für die erste Kontaktaufnahme kein Formular, keine Automation oder ähnliches.
-Zur Kommunikation wird auf E-Mail, Telefon oder mittels Terminen zurückgegriffen.
-
-\section{CICS Bereitstellungsablauf}
-
-\paragraph{Voraussetzungen}\label{subsec:voraus} ~\\
-Bei der DATEV e.G. kümmert sich ein Team, die \glqq CICS Administration\grqq{} um das Erstellen einer CICS-Instanz, starten dieser Instanz und ist generell für alles rund um die Administration des CICS Transactions Servers zuständig.
-Der Fokus dieser Arbeit liegt auf dem Erstellen (\glqq Provisionieren\grqq{}) einer CICS-Instanz. Es werden nur die dafür notwendigen Voraussetzungen dargelegt.
-Außerdem liegt der Fokus auf Entwicklungs-CICS-Systemen, auf der sog. Entwicklungs-Stage, nicht auf den produktiven CICS-Systemen der DATEV e.G.. 
-Aus diesem Grund werden nur Schritte, die für ein solches Testsystem benötigt werden, dargestellt.
-Eine weitere Rahmenbedingung besteht darin, dass nur die Arbeitsschritte, die mit z/OSMF\footnote{Beschreibung in Absatz \ref{sec:zosmf}} automatisiert werden, erläutert werden.
-
-\paragraph{Einrichtung CICS Instanz}\label{subsec:createCICS}~\\
-Die in diesem Absatz benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 2 aus der Abteilung, die für die CICS Administration zuständig ist.
-Um eine lauffähige CICS Instanz den Voraussetzungen aus dem Absatz \ref{subsec:voraus} entsprechend einzurichten, sind mehrere Schritte notwendig.
-Diese werden im Folgenden beschrieben.
-
-\subparagraph{CICS spezifische Dateien}\label{sssec:speziDat} ~\\
-Zunächst müssen CICS spezifische Dateien im z/OS angelegt werden.
-Im Fall des dieser Arbeit zugrunde liegenden Beispiels handelt es sich um siebzehn verschiedene VSAM\footnote{Virtual Storage Access Method, spezielle Dateiart, die schnelle I/O-Zugriffe ermöglicht.\cite{Lovelace.2013}} Dateien.
-Diese Dateien benötigt die CICS Instanz um zum Beispiel Systemfehler zu protokollieren oder den Debugger aktivieren zu können.
-
-\subparagraph{CSD} ~\\
-In der Datei \glqq CICS System Definition\grqq, kurz CSD, muss jede Ressource, die dem System zur Verfügung stehen soll, definiert werden.
-Eine CSD Datei kann für mehrere CICS Instanzen verwendet werden und besteht aus mehreren Einträgen.
-Ein Eintrag besteht aus einer Gruppe und einer Liste.
-Die Gruppe ist hierbei die Definition einer Systemressource und muss manuell angelegt werden.
-Bei der Liste handelt es sich um das System, welches diese Ressource benötigt.
-Dort ist unter anderem für jede CICS Instanz hinterlegt, zu welchem Db2 Datenbanksystem und welchem IBM MQ Messagingsystem sich diese Instanz verbinden soll.
-
-\subparagraph{STC Job} ~\\
-Bei einem Started Task Control-Job, kurz STC Job, handelt es sich um einen Batch Job, der mit Hilfe des \glqq START\grqq-Konsolenkommandos innerhalb von z/OS gestartet werden kann.
-Dieser Batch Job wird deshalb auch als Started Task bezeichnet.\cite{Cassier.2007}
-Bei der DATEV eG existiert für jede Instanz eines Subsystems ein solcher Job, so also auch für CICS.
-In diesem werden zunächst einige zur Laufzeit benötigten Bibliotheken und Dateien eingebunden, unter anderem die CICS spezifischen Dateien\footnote{Beschreibung in Absatz \ref{sssec:speziDat}}.
-Außerdem werden hier die SIT \footnote{CICS system initialization table} Parameter definiert.
-Zunächst wird festgelegt welche Standard SIT verwendet werden soll.
-Anschließend können diese Standardwerte überschrieben werden.
-Zu diesen Parametern zählen unter anderem der eindeutige Name der CICS-Instanz, der Speicherort der dazugehörenden CSD und die Information, ob eine Verbindung zu einem Db2 Datenbanksystem hergestellt werden soll.
-
-\paragraph{Entfernung CICS Instanz} ~\\
-Um eine CICS Instanz zu entfernen muss diese zunächst gestoppt werden.
-Dies ist über das \glqq STOP\grqq-Konsolenkommando von z/OS möglich.
-Schließlich müssen alle im Absatz \ref{subsec:createCICS} beschriebenen Schritte rückgängig gemacht werden.
-Also müssen die für diese Instanz spezifischen Dateien, die Einträge für die CICS-Instanz aus der CSD Datei und schließlich auch der STC Job gelöscht werden.
  
