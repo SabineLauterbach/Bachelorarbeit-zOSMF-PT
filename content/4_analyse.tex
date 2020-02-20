@@ -115,88 +115,22 @@ Ein weiterer Punkt ist, dass die Kommunikation beziehungsweise der Initiator fü
 So existiert für die erste Kontaktaufnahme kein Formular, keine Automation oder ähnliches.
 Zur Kommunikation wird auf E-Mail, Telefon oder mittels Terminen zurückgegriffen.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\section{DATEV-Rechnungsschreibung}
+\section{DATEV-Rechnungsschreibung}\label{rechBesch}
 Für diese Arbeit wurde die DATEV-Rechnungsschreibung als Beispielanwendung herangezogen, weil sie folgenden Anforderungen entspricht.
 Es handelt sich zum einem um eine in sich abgeschlossene Anwendung, die nur zu Beginn des Prozesses von anderen Anwendungen abhängig ist.
 Zum anderen benötigt die DATEV-Rechnungsschreibung ein CICS als Laufzeitumgebung, eine Db2-Datenbank und IBM MQ als Messaginglösung.
-Somit kann ein umfangreicher Bereitstellungsmechanismus in dieser Arbeit untersucht werden.
+Somit kann ein umfangreicher Bereitstellungsmechanismus untersucht werden.
 
-\subsection{Beschreibung}\label{rechBesch}
 Bei dem Gesamtablauf handelt es sich um einen Batch-Ablauf auf dem Großrechner der DATEV e.G.
-Ein wesentlicher Teil der Preisermittlung ist aus Grund einer besseren Performance als CICS-Anwendung implementiert.
-Zunächst wird nach jeder kostenpflichtigen Leistungserbringung durch die dazugehörige Anwendung ein Berechnungssatz erzeugt.
-Ein Berechnungssatz beinhaltet die Metainformationen der Berechnung unter anderem die Artikelnummer, Menge und den Kundenbegriff.
-Preis und die Kundenzuordnung werden zu einem späteren Zeitpunkt innerhalb der DATEV-Rechnungsschreibung ermittelt.
-
-\subsubsection{Einpflegung Berechnungssätze}
-Für das Einpflegen der Berechnungssätze in den DATEV Rechnungsschreibungsablauf stehen den Anwendungen drei Möglichkeiten zur Verfügung.
+Dieser setzt sich aus folgenden Teilen zusammen:
 \begin{itemize}
-\item DMVINF-Schnittstelle
-\item Webservice-Schnittstelle
-\item CSV-Datei
+\item Sammeln von Berechnungssätze
+\item Tägliche Bewertung
+\item Rechnungsaufbereitung
 \end{itemize}
+Für die Beantwortung der Forschungsfragen ist nur ein Teil der \glqq Tägliche Bewertung\grqq relevant, die Preisermittlung.
 
-Bei der Ersten Möglichkeit handelt es sich um die Verwendung der DMVINF\footnote{DatevMakroVerarbeitungsinformation}-Schnittstelle.
-Die Schnittstelle ist in der Programmiersprache Assembler entwickelt.
-Somit ist diese nur auf dem Mainframe verfügbar.
-Das Ergebnis der Schnittstelle ist eine sequentielle Datei am Großrechner, vergleichbar mit einer .txt Datei unter Windows.
-Diese Datei, auch Berechnungsdatei genannt, hat folgenden Aufbau.
-Der erste Satz enthält Steuerinformationen, wie zum Beispiel Datum/Uhrzeit, Produkt usw.
-Danach kommen die eigentlichen Berechnungssätze.
-Schließlich folgt noch die Anzahl der Sätze und die Summe der einzelnen Artikel in einem Satz mit Kontrollinformationen.
-Diese Kontrollinformationen werden im weiteren Verlauf mit den eingelesenen Werten abgeglichen, dadurch werden Fehler und mutwillige Änderungen der Daten von außen ausgeschlossen.
-Aus dem Aufbau einer solchen Datei lässt sich schließen, dass verschiedene Schritte für die Erzeugung innerhalb der Anwendung notwendig sind.
-
-Für die nachfolgenden Schritte stellt die DMVINF-Schnittstelle jeweils Funktionen zur Verfügung.
-Zuerst wird beim sogenannten \glqq Open\grqq{} die Datei erstellt und der Steuersatz geschrieben.
-Danach folgt das eigentliche Schreiben der Berechnungssätze, dabei dürfen nur bestimmte Felder (Kundenbegriffe und Mengen) verändert werden.
-Unzulässige Änderungen haben einen Abbruch des Ablaufs zur Folge.
-Schließlich folgt noch der \glqq Close\grqq{} bei dem die Kontrollinformationen geschrieben werden.
-Hinzuzufügen ist, dass die variablen Informationen einer Formalprüfung unterzogen werden.
-So entstehen je nach fachlicher Logik und Laufhäufigkeit der Anwendung mehrere Berechnungsdateien.
-
-Eine weitere Möglichkeit, die Berechnungsinformationen in den Ablauf einzupflegen ist, die Übergabe durch einen in der Programmiersprache Java realisierten SOAP-WebService.
-Hier werden die Berechnungsinformationen in XML-Format bereitgestellt.
-Dadurch ist eine plattformübergreifende Weitergabe der Daten möglich.
-Das Ergebnis der entsprechenden Plausibilitätsprüfungen, die in einem Onlineverfahren durchgeführt werden, wird direkt an die aufrufende Anwendung zurückgegeben.
-Sind die Daten korrekt werden diese vorerst in einer Datenbank gespeichert.
-Vor dem nächsten Schritt wird diese Datenbank ausgelesen und mit der ersten Möglichkeit in den Kernablauf eingespeist.
-
-Bei der letzten Möglichkeit handelt es sich um die Übergabe mittels einer CSV-Datei.
-Die Datei wird auf den Großrechner übertragen und dort mit der DMVINF-Schnittstelle verarbeitet.
-Dieses Verfahren wird kaum von produktiven Anwendungen sondern hauptsächlich für Test- oder Qualitätssicherungszwecke genutzt.
-
-Mittels dieser drei Möglichkeiten werden insgesamt monatlich circa 30 Millionen Datensätze bereitgestellt und weiterverarbeitet.
-Diese Datensätze stehen innerhalb der durch die DMVINF-Schnittstelle, den Webservice oder die CSV-Datei erzeugten Berechnungsdateien dem weiteren Verlauf als Input zur Verfügung.
-Um sicherzustellen, dass all diese Dateien auch verarbeitet werden, wird bei Erstellung einer solchen Berechnungsdatei ein Eintrag in eine Kontrolldatei vorgenommen.
-In dieser Kontrolldatei wird jedes Lesen und somit auch das Lesen im weiteren Verlauf gekennzeichnet.
-Eine monatliche Überprüfung führt die zuständige Abteilung manuell durch. 
-
-\subsubsection{Tägliche Bewertung}\label{sssec:täglbew}
-Der nächste Schritt des DATEV Rechnungsschreibungsprozesses ist die sogenannte \glqq Tägliche Bewertung\grqq.
+\subsection{Tägliche Bewertung}\label{sssec:täglbew}
 Dieser Ablauf läuft einmal täglich von Montag bis Freitag und ist für die Preisermittlung und Kundenzuordnung zuständig.
 Zur Realisierung wurden die Programmiersprachen Assembler, COBOL und Java genutzt.
 Am Ende dieses Ablaufes steht die ARUBA\footnote{Abrechnungs- und Umsatz-Basis}-Db2-Datenbank.
@@ -204,51 +138,28 @@ Dort werden die Berechnungsdaten der letzten 36 Monate aufbewahrt.
 Dabei handelt es ich um insgesamt circa 3,8 Milliarden Datensätze von einer Gesamtgröße von circa 400 GB mit Indizes.
 Diese Datensätze beinhalten alle Informationen für die endgültige Erzeugung der Rechnungen.
 
-Der erste Schritt der Täglichen Bewertung ist das Zusammenführen der Berechnungsdateien aus dem vorherigen Schritt und aus den bereits vorhandenen Daten des laufenden Monats aus der ARUBA-Db2-Datenbank.
-Zusätzlich werden während dieser Zusammenführung den Berechnungssätzen auf Basis der abgebenden Anwendung die entsprechenden Rechnungsstellungsrhythmen (täglich oder monatlich) zugewiesen.
-Anschließend wird mit Hilfe der Beraternummer die zugehörigen Betriebsstätte-, Rechnungsempfänger-, Hauptberater- und Mitglieds- bzw. Geschäftspartnernummer ermittelt.
-Die Beraternummer ist als oberster Kundenbegriff in den Berechnungssätzen enthalten.
-Außerdem wird die Debitorenkontonummer entweder durch die Mitglieds- oder durch die Geschäftspartnernummer zugeordnet.
-Für die Preisermittlung werden die Datensätze nach Geschäftspartner gruppiert.
+\subsection{Preisermittlung}
+Die Preisermittlung ist für die Berechnung der Preise mit den dazugehörigen kundenindividuellen Abhängigkeiten, beispielsweise Rabatte, zuständig.
+Die Eingabe beläuft sich an Lasttagen auf bis zu 180.000 Geschäftspartner.
 Im DATEV e.G. Umfeld ist ein Geschäftspartner entweder eine Kanzlei oder ein einzelner Mandant.
-
-Dann werden die gruppierten Daten in eine CICS-Anwendung übertragen. Die Entscheidung, die Anwendung in CICS zu hosten hatte die zuständige Abteilung aus Performancegründen getroffen.
-Die Architektur der CICS-Anwendung wird in \ref{rechArch} beschrieben.
-Dort findet die Preisermittlung mit den dazugehörigen kundenindividuellen Abhängigkeiten, wie zum Beispiel Rabatten, statt.
-Anschließend werden die Daten wieder zurück an den Batch-Ablauf übertragen.
-Hier werden die Rechnungsnettobeträge geprüft, z.B. ob diese über einem bestimmten Rechnungslimitbetrag liegen.
-Wird dieser Rechnungslimitbetrag unterschritten werden die Berechnungssätze als BUL\footnote{Berater unter Limit} gekennzeichnet und in die folgende Rechnungsperiode vorgetragen.
-Schließlich wird noch die Umsatzsteuer ermittelt.
-Abschließend werden die neu erzeugten Berechnungsdaten in die ARUBA-Db2-Datenbank eingepflegt und entsprechend gekennzeichnet.
-
-\subsubsection{Rechnungsaufbereitung}
-Als letzter Schritt folgt die Rechnungsaufbereitung.
-Diese erfolgt am ersten Werktag im Monat.
-Mit Hilfe der ARUBA-Db2-Datenbank wird ermittelt, welchen Kunden eine Rechnung zugestellt werden muss.
-Außerdem wird dabei der Zustellungsweg, beispielsweise Post oder E-Mail, bestimmt.
-Darauf folgt die Aufbereitung der Druckrohdaten und letztlich das Versenden der Rechnungen an die Berater.
-Zusätzlich werden die Rechnungen noch im PDF-Format archiviert.
-
-\subsection{Architektur der Preisermittlung}\label{ssec:recharch}
-In dieser Arbeit steht das automatisierte Provisionieren von Laufzeitumgebungen im Fokus.
-In diesem Fall handelt es sich um die Laufzeitumgebung CICS mit den dazugehörigen Elementen.
-Im Folgenden wird nur auf den Aufbau dieser Umgebung und dessen Gründe eingegangen.
-
-Das System muss an Lasttagen bis zu 180.000 Geschäftspartner verarbeiten können.
-Die Verarbeitung eines Geschäftspartners wird von einer Transaktion durchgeführt.
-So sind an Lasttagen 180.000 Transaktionen vom System zu verarbeiten.
-Um all diese an das CICS zu übertragen, stehen dem System mehrere IBM MQ Queues zur Verfügung.
+Aufgrund dieser Last wurde die Berechnung zum einen in CICS-Instanzen ausgelagert und zum anderen wurde der Ablauf in zwei Teile zerlegt:
+\begin{itemize}
+\item Bereitstellen der Preisinformationen
+\item Berechnung der Preise
+\end{itemize}
+\paragraph{Bereitstellen der Preisinformationen}~\\
 Bevor die eigentliche Ermittlung der Preise stattfindet, werden zunächst die Preisinformationen und die kundenindividuellen Preisabhängigkeiten, wie zum Beispiel Rabatte, ermittelt.
-Für die Verarbeitung werden zwei weitere Queues verwendet.
+Für die Verarbeitung werden zwei Queues verwendet.
 Eine startet eine Transaktion im CICS, die andere wartet auf deren Antwort.
 Innerhalb der Transaktion werden alle benötigten Preisinformationen und -abhängigkeiten mit Hilfe einer Db2 Datenbank ermittelt.
 Diese Informationen werden dann in einem sogenannten \glqq SHARED GETMAIN\grqq-Bereich gespeichert.
-Dabei handelt es sich im Prinzip um einen Hauptspeicherbereich, der dem CICS zur Verfügung steht.
+Dabei handelt es sich im Prinzip um einen Hauptspeicherbereich, der dem CICS Subsystem zur Verfügung steht.
 Die Adresse dieses Bereiches wird den Transaktionen zur Verfügung gestellt.
 Somit greifen die einzelnen Transaktionen nicht mehr direkt auf die Datenbank zu, sondern stattdessen auf den schnelleren Hauptspeicher.
 Diese Vorarbeit ist notwendig, da es aufgrund von bis zu 60 Millionen Datenbankzugriffen zu massiven Einbußen bezüglich der Performance führen würde.
 
-Die Queues, die für die Bestimmung der Preise benötigt werden, werden im Folgenden beschrieben.
+\paragraph{Berechnung der Preise}~\\
+Um die Berechnungsdaten der 180.000 Geschäftspartner an CICS-Instanzen zu übertragen, stehen dem System weitere Queues zur Verfügung.
 Darunter ist eine allgemeine Queue in der alle Aufträge, die für die Weiterverarbeitung zur Verfügung stehen, geschrieben werden.
 Pro Geschäftspartner wird ein Auftrag angelegt.
 In diesem Auftrag befinden sich die Namen vier weiterer Queues.
@@ -263,6 +174,3 @@ Sobald ein Auftrag in die allgemeinen Auftragsqueue geschrieben wird, wird eine 
 Diese führt die Preisermittlung durch und schreibt das Ergebnis auf die dazugehörigen Queues.
 Ist dies geschehen, stehen die Queues wieder für einen neuen Auftrag zur Verfügung.
 Es können maximal 30 Transaktionen zeitgleich arbeiten.
-
-
- 
