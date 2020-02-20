@@ -1,58 +1,30 @@
 \section{Interviews}
-In diesem Absatz wird zunächst erläutert, auf welcher Grundlage (Kommentar: was heißt hier Grundlage?) die Interviews geführt wurden.
-Anschließend werden die Ergebnisse der einzelnen Interviews nach Gruppen aufgeteilt, ausgewertet und interpretiert.
-Schließlich wird daraus ein allgemeines Stimmungsbild abgeleitet.
-
-\subsection{Durchführung}
-Interviewt wurden jeweils zwei Mitarbeiter der Gruppen, CICS Administration, Db2 Administration, IBM MQ Administration.
-Zusätzlich wurde eine Fachberaterin im Bereich Technologiestrategie und ein Mitarbeiter (Kommentar: wirklich nur einer?) des Entwicklerteams der DATEV Rechnungsschreibung befragt.
-Für die beiden letztgenannten Interviews waren nur die Fragen 1., 2. und 6. bis 10. des Fragebogens von Relevanz.
-Sowohl der Fragenkatalog, als auch die ausgefüllten und digitalisierten Fragebögen sind im Anhang \ref{app:fragen} zu finden.
-Vor Durchführung der Interviews, wurde den Teams in getrennten Terminen die Ergebnisse dieser Arbeit vorgestellt.
+Bevor die eigentlichen Interviews durchgeführt wurden, wurden den einzelnen Stakeholdern, also CICS Administration, Db2 Administration, IBM MQ Administration, Entwickler und einer Mitarbeiterin des Technologiestrategieteams, die Ergebnisse dieser Arbeit vorgestellt.
+Es wurde sowohl die z/OSMF Lösung (siehe Absatz \ref{sec:akttemp}) als auch die durch z/OSPT ermöglichte Lösung (siehe Absatz \ref{ch:ausblick}) erläutert.
 Der Schwerpunkt der Vorstellung wurde an das jeweilige Team angepasst.
 So wurde bei den Administratorenteams vor allem auf die Erstellung der Templates, was für ihr Arbeitsgebiet relevant ist, eingegangen.
-Außerdem wurde neben der im Absatz \ref{sec:akttemp} dargestellten Lösung (Kommentar: welche?), auch die Lösung aus Kapitel \ref{ch:ausblick} (Kommentar: welche?) vorgestellt.
-An Hand des durch diese Arbeit bereit gestellten Templates wurde die z/OSMF Oberfläche erläutert.
 
-\subsubsection{CICS Administratoren}
-Die Einschätzung des Werts des aktuell möglichen Ablaufs mittels z/OSMF von CICS Administrator 1 ist mittelmäßig.
-So bietet es zwar eine flexible Versionierung und Veröffentlichung, jedoch ist es durch die verschiedenen Sprachen und Dokumentarten (Kommentar: siehe ....  einfügen)  mit Startschwierigkeiten versehen. (Kommentar: vlt. eher etwas spezifischer, EInarbeitungsaufwand??)
-Im Gegensatz dazu sieht CICS Administrator 2 das momentane Template zumindest für CICS als ablauffähig und mehrfach einsetzbar. (Kommentar: das ist kein Gegensatz zu Admin1, vlt. eher: Dagegen bewertet CICS Admin 2 das Template...... )
-Beide Administratoren sehen einen Vorteil in der z/OSPT Lösung, d.h. der Konfigurierbarkeit  außerhalb des Templates 
-Als Nachteil bewerten sie jedoch die Notwendigkeit eines sehr dynamischen Templates (KOmmentar: der Nachteil ist nicht die Notwendigkeit, sondern, dass das Template durch die notwendige Komplexität sehr komplex wird.
-Die Benutzerfreundlichkeit der Oberfläche wird von CICS Administrator 1 für beide Lösungen (z/OSMF Und z/OSPT) mit sehr gut bewertet.
-Auf Grund dessen, dass er noch nicht damit gearbeitet hat, enthält sich CICS Administrator 2 hier der Bewertung.
-Die Arbeitsweise bei Änderungen an den Workflow Definitionsdateien und dahinterliegenden Skripten usw., wird als schlecht bis mittelmäßig eingeschätzt.
-Hier fehlt beiden Befragten eine geeignete Toolunterstützung, z.B. auch mit Syntaxhighlighting.
-Der erste Eindruck wird von einem hohen Ersteinrichtungsaufwand und einer zeitaufwändigen Einarbeitungsphase geprägt.
-Zusammen mit den verschiedenen Sprachen hat dies auf CICS Administrator 1 eine eher abschreckende Wirkung.
-Dennoch können sich beide Befragten vorstellen, nachdem der Einarbeitungsaufwand erbracht wurde, täglich mit dem Toolkit zu arbeiten, da bei dem aktuell etablierten Prozess ein hoher manueller Aufwand zu erbringen ist und eine Abstimmung zwischen den Administratoren und dem Entwicklerteam notwendig ist.
+Sowohl der Fragenkatalog, als auch die ausgefüllten und digitalisierten Fragebögen sind im Anhang \ref{app:fragen} zu finden.
+Für das Entwicklerteam und der Mitarbeiterin des Technologiestrategieteams waren nur die Fragen 1., 2. und 6. bis 10. des Fragebogens von Relevanz.
+Die Fragebögen werden im Folgenden zunächst nach Gruppen ausgewertet.
+Schließlich wird daraus ein allgemeines Stimmungsbild abgeleitet.
 
-Zusammenfassend lässt sich sagen, dass die CICS Administratoren eine Chance auf Verbesserung des Prozesses durch das Toolkit sehen.
-Allerdings schreckt der hohe Einarbeitungsaufwand und die Mischung aus verschiedenen Sprachen und fehlendem Syntaxhighlighting bei der Templateerstellung ab.
+\subsection{CICS Administratoren}
+Der momentan etablierte Bereitstellungsprozess wird von der CICS Administration mit hohen manuellen Aufwand verbunden sei.
+Dies kombiniert mit viel Abstimmungsbedarf zwischen den Administratoren- und Entwicklerteams führt dazu, dass der Prozess als langsam und verbesserungswürdig angesehen wird.
+In der Umsetzung mit z/OSMF sieht die CICS Administration trotz des vermuteten hohen Einarbeitungsaufwandes bereits einen Mehrwert.
+Der Hauptvorteil des vorgestellten z/OSPT Lösungsansatzes sei dessen Flexibilität.
+Jedoch schreckt die dadurch benötigte Komplexität des zu erstellenden dynamischen Templates ab.
+Dieser Effekt wird durch fehlende Toolunterstützung und dem dadurch fehlenden Syntaxhighlighting beim Editieren der Template Dateien bzw. der Workflowdefinitionfiles verstärkt.
+Nach der Hürde des Einarbeitungsaufwandes und Eingewöhnung in das Editieren von Template Dateien und der Workflowdefinitionsdateien stehe einer aufwandssparenden Provisionierung mittels des \glqq IBM Cloud Provisioing and Management for z/OS\grqq-Toolkits nichts im Wege.
 
-\subsubsection{Db2 Administratoren}
-Sowohl Db2 Administrator 1 als auch Db2 Administrator 2 erkennen die Möglichkeit einer Verbesserung durch z/OSMF.
-Jedoch sind sie der Meinung, dass noch einiges an Forschung und Weiterentwicklung notwendig ist um es sinnvoll nutzen zu können.
-Sie stimmen auch bei ihrer Ansicht bezüglich z/OSPT überein.
-So sehen sie den Vorteil des Kommandozeileninterfaces vor allem bei einer Endausbaustufe mit automatisiertem Deployment innerhalb einer CI/DC-Pipline und dem Einsatz von Jenkins basierten Builds und Tests.
-Db2 Administrator 2 stört sich an den Begriffen \glqq Container\grqq{} und \glqq Image\grqq, da diese teilweise vertauscht und synonym verwendet werden. (Kommentar: von wem? Von Dir oder von IBM?)
-Bezüglich der Benutzerfreundlichkeit der Oberfläche fällt die Bewertung bei beiden schlecht bis mittelmäßig aus.
-Db2 Administrator 1 empfindet die gezeigte Arbeitsweise für Änderungen an den Workflow Definitionsdateien als sehr schlecht, da es momentan ohne automatisches Deployment realisiert ist.
-Die Bewertung von Db2 Administrator 2 ist mittelmäßig, da eine Entwicklungsumgebung sinnvoll wäre, vor allem in Hinblick auf eine Syntaxprüfung.
-Der erste Eindruck des Toolkits ist sehr positiv. (Kommentar: damit ist wieder z/OSPT gemeint, oder?)
-Es wird als mächtiges Tool und als Zukunft des modernen Deployments auf dem Mainframe eingeschätzt, jedoch wird es als sehr komplex betrachtet.
-Im Vergleich dazu wird der aktuell etablierte Bereitstellungsprozess ebenfalls als komplex beschrieben.
-Dieser funktioniere zwar sehr gut, aber es sind viele Abhängigkeiten zu anderen Personen vorhanden, dadurch entstehen Wartezeiten.
-Außerdem sei ein sehr umfangreiches Wissen über alle beteiligten Subsysteme notwendig.
-Hinzu kommt ein hoher Konfigurationsaufwand und viel Vorarbeit, zum Beispiel Funktionsuser und ein Rechtekonzept.
-Beide Db2 Administratoren könnten sich  vorstellen mit dem Toolkit täglich zu arbeiten, um diese Probleme anzugehen.
-Eine INtegration mit einer Jenkins-basierten Build-Pipeline wird hierfür von Db2 Administrator 1 vorausgesetzt.
-
-Die Interviews mit den Db2 Administratoren ergaben folgendes Bild.
-Sie sehen in dem Toolkit eine gute Möglichkeit, um den Bereitstellungsprozess zu vereinfachen und weniger zeitaufwändig zu gestalten.
-Allerdings ist noch viel Forschungsarbeit in dieses Thema zu investieren.
-Als Hauptpunkt ist die Nutzung von Jenkins und damit die Einbindung und Etablierung einer automatisierten Build-Pipeline zu nennen.
+\subsection{Db2 Administratoren}
+Das ganze \glqq IBM Cloud Provisioing and Management for z/OS\grqq-Toolkit wird als sehr mächtig, aber komplex beschrieben.
+Im Vergleich dazu funktioniere der momentan etablierte Bereitstellungsprozess sehr gut, da dieser bereits lange eingesetzt wird.
+Jedoch könnten lange Wartezeiten, die durch die vielen Abhängigkeiten zwischen Personen und Abteilungen zu Stande kommen, durch einen automatisierten Ablauf mittels des Toolkits eliminiert werden.
+Der durch z/OSMF ermöglichte zeige zwar das eine Automatisierung in diesem Bereich möglich ist, aber auch das noch viel Forschungsaufwand und Weiterentwicklung in diesem Bereich notwendig ist, um die Provisionierung wirklich nutzen zu können.
+z/OSPT diene dabei als Hilfsmittel den Bereitstellungsprozess in eine CI/CD-Pipeline aufzunehmen und so weiter zu automatisieren.
+Das durch das Toolkit ermöglichte automatisiertes Deployment von z/OS Middleware wird als notwendiger Schritt, um den Mainframe weiterhin erfolgreich zu betreiben, betrachtet.
 
 \subsubsection{IBM MQ Administratoren}
 IBM MQ Administrator 1 sieht bereits im aktuell funktionsfähigen Template einen Mehrwert.
@@ -90,7 +62,7 @@ Jedoch sobald der Erstaufwand für die Einarbeitung in z/OSMF geleistet wurde, m
 Diese Verantwortung würde im Fall der Umsetzung mit z/OSPT bei dem Entwicklerteam selbst liegen. (Kommentar: das ist echt schwierig zu verstehen, lass uns das morgen mal umformulieren auf Basis der Interview-Unterlagen).
 Durch die eingesparten Absprachen erhofft man  sich eine höhere Effizienz im  (KOmmentar: in was? tägliche Arbeit? WEnn das so wäre dann widerspricht das der "nicht häufigen Nutzung oben).
 Es wurde noch die Nutzung in der Qualitätssicherungs- und Produktionsstage genannt.
-Hier werden Vorteile einer einfache Skalierbarkeit gesehen. (Kommentar: zu oberflächlich: versteht man nicht. für die Zukunft könnte man sich die Nutzung auch für die QS_ und Prod-Stage vorstellen, und dort z.B. auch CICS-Umgebungen horizontal skalieren. Dies ist jedoch nicht Teil der vorliegenden Arbeit).
+Hier werden Vorteile einer einfache Skalierbarkeit gesehen. (Kommentar: zu oberflächlich: versteht man nicht. für die Zukunft könnte man sich die Nutzung auch für die QS und Prod-Stage vorstellen, und dort z.B. auch CICS-Umgebungen horizontal skalieren. Dies ist jedoch nicht Teil der vorliegenden Arbeit).
 Vor allem auf Grund der Eigenverantwortung über die Subsysteme (Kommentar: über das Management der eigenen Testssysteme mit den Subsystemen) könnte man sich die tägliche Arbeit mit dem Toolkit vorstellen.
 Allerdings nur in Hinblick auf eine Integration in eine Jenkins Build Pipeline, für die erst einmal Sammeln von Erfahrungen bezüglich des Prozesses und des Toolings notwendig wären.
 
