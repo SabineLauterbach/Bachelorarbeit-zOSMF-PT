@@ -64,12 +64,27 @@ Nach der Durchführung dieser Schritte und einem erfolgreichen Startversuch, ste
 Der komplette Ablauf dauert, unter der Annahme, dass alle Beteiligten verfügbar sind, nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
 
 \subsection{Bereitstellungsprozess einer Db2 Datenbank}
+Wie in Abbildung \ref{fig:aktdb2} zu erkennen ist, ist der Bereitstellungsprozess einer neuen Db2 Datenbank mit vielen Aufgaben im Entwicklerteam verbunden.
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=\paperwidth,angle=90]{figures/swimlaneDb2.pdf}
 \caption{Bereistellungsprozess einer Db2 Datenbank}
 \label{fig:aktdb2}
 \end{figure}
+Zunächst müssen sogenannte Projektinformationen, unter anderem Daten der Voruntersuchung, vom Entwicklerteam bereitgestellt werden.
+Das Projektkürzel, der Datenbank- und Projektname und die Projektbezeichnung müssen mit den involvierten Abteilungen besprochen werden.
+Über den sogenannten \glqq Datenbankänderungsantrag\grqq{} wird ein Genehmigungsprozess angestoßen.
+Wenn alle Genehmigungen erteilt wurden, kann ein Dateneigentümer festgelegt werden.
+Anschließend muss die Datenbank mittels eines Datenbankmodells vom Entwicklerteam beschrieben werden und eine Usergruppe, die im späteren Verlauf die Datenbankzugriffsrechte benötigt, beantragt und angelegt werden.
+Die eigentliche manuelle Erstellung der Datenbank wird mittels des Datenbankmodells und den Projektinformationen im Anschluss dazu durchgeführt.
+
+Die Zugriffsrechte für die zuvor beantrage Usergruppe auf die neue Datenbank werden beantragt.
+Schließlich steht dem Entwicklerteam die neue Db2 Datenbank zur Verfügung.
+Wird die Db2 Datenbank in Verbindung mit einem CICS verwendet, so sind weitere manuelle Schritte vom CICS Administratorenteam notwendig.
+Der komplette Ablauf dauert, unter der Annahme, dass alle Beteiligten verfügbar sind, nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
+
+\subsection{Bereitstellungsprozess einer IBM MQ Queue}
+Auch bei dem Bereitstellungsprozess, siehe Abbildung \ref{fig:aktmq}, einer IBM MQ Queue ist das Entwicklerteam der Initiator.
 
 \begin{figure}[ht!]
 \centering
@@ -78,19 +93,22 @@ Der komplette Ablauf dauert, unter der Annahme, dass alle Beteiligten verfügbar
 \label{fig:aktmq}
 \end{figure}
 
+Die Grundlage diese Prozesses ist ein Antrag auf Erstellung einer neuen IBM MQ Queue.
+Zuvor findet eine Beratung via Telefon, Email oder Terminen statt.
+Die Queues werden anschließend manuell eingerichtet und stehen dem Entwicklerteam zur Verfügung.
+Wird die Queue in Verbindung mit einem CICS verwendet, so sind weitere manuelle Schritte vom CICS Administratorenteam notwendig.
+Trotz des scheinbar schmalen Prozesses dauert der Ablauf unter der Annahme, dass alle Beteiligten verfügbar sind, nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
+
+\subsection{Zusammenfassung aktueller Bereitstellungsprozess}
 Wie in den drei Diagrammen, Abbildungen \ref{fig:aktcics}, \ref{fig:aktdb2} und \ref{fig:aktmq}, zu erkennen ist, ist der aktuelle Bereitstellungsprozess noch mit vielen manuellen Schritten verbunden.
 Außerdem ist der Hauptaufwand in den Administratorenteams angesiedelt.
 Das Entwicklerteam ist der Initiator des Ablaufs.
 Folglich kümmert es sich um Formulare und die erste Kontaktaufnahme zum Administratorenteam.
-Bei dem Bereitstellungsprozess einer Db2 Datenbank muss es außerdem Projektinformationen, unter anderem Daten der Voruntersuchung, bereitstellen.
-Hinzu kommt das Erstellen eines Datenbankmodells.
-Hierfür wird Datenbankwissen benötigt, hierzu wird gegenfalls die Unterstützung eines Administrator benötigt.
 
 Zusätzlich zu den vielen manuellen Schritten sind die vielen Absprachen zwischen mehreren Abteilungen zu nennen.
 Steht ein beteiligtes Team nicht zu Verfügung, kommt es zu Verzögerungen, das Team muss warten, der komplette Zeitplan kann sich dadurch nach hinten verschieben.
 Der Prozess für die Bereitstellung einer CICS-Instanz, mit einer Db2 Datenbank und IBM MQ Queues dauert in der Summe circa sechs Arbeitstage.
 Es setzt sich aus der Dauer der Einzelprozesse zusammen, für jedes Subsystem wird mit circa zwei Arbeitstagen gerechnet.
-Diese Einschätzung beruht auf den Annahmen, dass zum einen jedes beteiligte Team nur diese Aufgabe zu erledigen hat und zum anderen jeweils ein Tag für die Beratung durch das jeweilige Administratorenteam veranschlagt wird.
 Natürlich ist ein parallelisierter Ablauf der einzelnen Teilprozesse möglich, so kann die Gesamtdauer im besten Fall auf circa zwei bis drei Arbeitstage verkürzt werden.
 
 Ein weiterer Punkt ist, dass die Kommunikation beziehungsweise der Initiator für den Start des gesamten Prozesses meist per Zuruf stattfindet.
