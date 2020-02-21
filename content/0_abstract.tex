@@ -1,30 +1,28 @@
 \thispagestyle{empty}
 \section*{Kurzdarstellung}
 \label{sec:kurzdarstellung}
-Innerhalb der DATEV eG gewinnen PaaS (Plattform as a Service) Ansätze immer mehr an Bedeutung.
-Ein Vorteil dabei ist die unkomplizierte, automatisierte Provisionierung von Laufzeitumgebungen.
-Im Vergleich dazu ist der Bereitstellungsprozess für legacy z/OS Anwendungen mit vielen manuellen Schritten und vielen Absprachen, auch abteilungsübergreifend, verbunden.
+Bei DATEV eG gewinnen Cloud Native und PaaS (Plattform as a Service) Ansätze immer mehr an Bedeutung.
+Ein Vorteil dabei ist die automatisierte Provisionierung von Laufzeitumgebungen (Self Services).
+Für legacy z/OS Anwendungen ist das Bereitstellen von Laufzeitumgebungen ein manueller, fehleranfälliger Prozess mit vielen Abstimmungen.
 
-Das Ziel dieser Forschung ist es zu bestimmen, ob die automatische Bereitstellung von Laufzeitumgebungen für legacy z/OS Anwendungen möglich ist.
-Dazu werden folgende Forschungsfragen gestellt:
+Ziel dieser Forschung ist es, zu bestimmen, ob die automatisierte Provisionierung auch für legacy z/OS Anwendungen möglich ist.
+Folgende Forschungsfragen werden gestellt:
 \begin{enumerate}
-\item Ist es technisch möglich mit dem \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit eine Laufzeitumgebung für legacy z/OS Anwendungen automatisiert bereitzustellen?
-\item Wird dadurch der aktuelle Bereitstellungsprozess schneller und auch sicherer?
-\item Erzeugt die Nutzung einen Mehrwert bei den Stakeholdern, also den Entwicklerteam und den Administratorenteams?
+\item Ist es technisch möglich, mit dem \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit Laufzeitumgebungen für legacy z/OS Anwendungen automatisiert bereitzustellen?
+\item Wird der Bereitstellungsprozess dadurch schneller und sicherer?
+\item Erzeugt er einen Mehrwert bei Stakeholdern (Entwickler, Administratoren)?
 \end{enumerate}
-Um diese Forschungsfragen zu beantworten, wurde zunächst anhand einer Beispielanwendung, der DATEV Rechnungsschreibung, das \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit untersucht.
-Das Toolkit bietet zwei Möglichkeiten für die automatisierte Bereitstellung von Laufzeitumgebungen.
-Es wurde sich für eine dieser Möglichkeiten entschieden, diese wurde implementiert.\\
-Anschließend wurde der dadurch ermöglichte Prozess aufgezeigt und mit dem etablierter Prozess verglichen.
-Dabei stellte sich heraus, dass der ermöglichte Bereitstellungsprozess schneller und durch weniger Absprachen auch weniger fehleranfällig ist.
-Dennoch ist die Lösung nicht optimal und das Toolkit bietet weitere Möglichkeiten zur Verbesserung.\\
-Schließlich sind Interviews mit den Stakeholdern bezüglich eines Mehrwertes des neuen Prozesses durchgeführt worden.
-Sowohl die befragten Entwickler als auch die befragten Administratoren sehen in dem Toolkit eine Chance auf Verbesserung des aktuell etablierter Bereitstellungsprozesses.
-Jedoch ist die momentane Lösung zwar funktionsfähig, aber noch bezüglich firmenweiten und einfacheren Einsatz zu optimieren.
+Um diese Forschungsfragen zu beantworten, wurde sich für eine von zwei technischen Alternativen im Toolkit entschieden. 
+Mit dieser wurde beispielhaft für eine DATEV-Anwendung ein automatisierter Prozess implementiert.
+Die gewählte Alternative ist jedoch nicht optimal, die zweite Alternative im Toolkit bietet Möglichkeiten zur Verbesserung.\\
+Der Prozess wurde aufgezeigt, mit dem etablierten Vorgehen verglichen, und in Interviews mit den Stakeholdern bewertet.
 
-Auf dieser Grundlage lässt sich sagen, dass das \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit die automatisierte Bereitstellung von Laufzeitumgebungen für legacy z/OS Anwendungen ermöglicht.
-Die in dieser Arbeit implementierte Möglichkeit ist nicht optimal, bietet aber bereits einen Mehrwert für die Stakeholder.
-Weiterführende Forschung könnte sich mit der Implementierung der zweiten Möglichkeit und mit den damit verbundenen weiteren Verbesserungen des Bereitstellungsprozesses beschäftigen.
+Sowohl befragte Entwickler als auch Administratoren sehen in der Lösung grundsätzlich eine Verbesserung des aktuell etablierter Bereitstellungsprozesses.
+Sie ist aber  insb. für den firmenweitem Einsatz noch zu optimieren.
+
+Damit wird das \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit für die automatisierte Bereitstellung von Laufzeitumgebungen für legacy z/OS Anwendungen als geeignet erachtet.
+Die in dieser Arbeit implementierte Variante ist nicht optimal, bietet aber bereits einen Mehrwert für die Stakeholder.
+Weiterführende Forschung könnte sich mit der Implementierung der Alternative und den damit verbundenen weiteren Verbesserungen des Bereitstellungsprozesses beschäftigen. 
 
 
 
