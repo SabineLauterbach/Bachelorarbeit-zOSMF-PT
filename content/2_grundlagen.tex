@@ -122,23 +122,23 @@ Als \glqq Type\grqq{} können beispielhaft CICS oder auch WINDOWSNT für Windows
 Ist der \glqq Type\grqq{} CICS,  muss der Name der Transaktion angegeben werden, für Windows Plattformen der Dateipfad der auszuführenden exe.
 \cite{Aranha.2013}
 
-\section{Bereitstellung von Subsystemen}
+\section{\glqq IBM Cloud Provisioning and Management for z/OS\grqq}
+Die Verwaltung von Subsystemen ist mit vielen manuellen Schritten verbunden.\footnote{Analyse des aktuellen Bereitstellungsprozesses, siehe in Absatz \ref{sec:aktbereit}}
 Betreut werden die einzelnen Subsysteme über alle Stages hinweg von eigens dafür entstandenen Administratorenteams.
 Die \glqq CICS Administration\grqq{} kümmert sich um alles rund um das CICS Subsystem.
 Die \glqq Db2 Administration\grqq{} stellt Datenbanken und Tabellen auf Anfrage der Entwickler bereit.
 Die \glqq IBM MQ Administration\grqq{} verwaltet die IBM MQ Ressourcen.
-Um diese Aufgaben zu bewältigen sind aktuell viele proprietäre und veraltete Tools im Einsatz.
-Die Verwaltung von Subsystemen ist mit vielen manuellen Schritten verbunden.\footnote{Analyse des aktuellen Bereitstellungsprozesses, siehe in Absatz \ref{sec:aktbereit}}
-Für die Automation dieser Prozesse bietet die IBM das \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit an.
+Um diese Aufgabe zu bewältigen sind aktuell viele proprietäre und veraltete Tools im Einsatz.
+
+Für die Automation dieser Prozesse bietet die IBM \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} an.
 Dies umfasst zwei Lösungen, \glqq z/OS Provisioning Toolkit\grqq\footnote{siehe Absatz \ref{sssec:zospt}} und \glqq z/OS Management Facility\grqq\footnote{siehe Absatz \ref{sssec:zosmf}}.
 Bei beiden Lösungen stehen die sogenannten \glqq Templates\grqq{} im Mittelpunkt.
-
+Mit Hilfe eines Templates können Instanzen erzeugt werden.
+Diese Instanz kann eine oder mehrere verschiedene Subsystem-Instanzen enthalten.\\
 Ein Template besteht aus drei Dateien:
 
 \paragraph{\glqq Aktiondefinitionfile\grqq} ~\\
 Hier werden die Aktionen, die ein Anwender mit einer Instanz eines Templates durchführen kann, festgelegt.
-Unter einer Instanz ist das Endergebnis der Bereitstellung eines Templates zu verstehen.
-Diese Instanz kann eine oder mehrere verschiedene Subsystem-Instanzen enthalten.
 Einer Aktion wird ein sogenannter \glqq Workflow\grqq{} zugewiesen.
 
 Ein Workflow ist über eine XML Datei, die sogenannte \glqq Workflowdefinitionfile\grqq, definiert.
