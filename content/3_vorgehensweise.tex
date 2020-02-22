@@ -1,31 +1,51 @@
 \chapter{Vorgehensweise}\label{ch:vorgehensweise}
-Um einen Überblick über die momentan in der DATEV e.G. etablierten Bereitstellungsprozesse für die Middlewarekomponenten CICS, Db2 und IBM MQ zu bekommen, wurden diese analysiert.
+Um einen Überblick über die momentan in der DATEV e.G. etablierten Bereitstellungsprozesse für die Middlewarekomponenten CICS, Db2 und IBM MQ zu bekommen, sollten diese analysiert werden.
 
-Wie in Absatz \ref{sec:mot} beschrieben wird für die Beantwortung der Forschungsfragen eine Beispielanwendung, die als Laufzeitumgebung CICS, als Datenbank Db2 und als Message Lösung IBM MQ verwendet, benötigt.
-Hier bietet sich die \glqq DATEV Rechnungsschreibung\grqq{} an.
+Wie in Absatz \ref{sec:ziel} beschrieben wird für die Beantwortung der Forschungsfragen eine Beispielanwendung, die als Laufzeitumgebung CICS, als Datenbank Db2 und als Message Lösung IBM MQ verwendet, benötigt.
+Hier bietet sich die \glqq DATEV Rechnungsschreibung\grqq{}\footnote{Beschreibung siehe Absatz \ref{rechBesch}} an.
 Dabei handelt es sich um eine legacy z/OS Anwendung, ein Teil dieser Anwendung erfüllt die oben genannten Kriterien.
 Um die genauen Anforderungen an die Middleware ausfindig zu machen, wurde dieser Teil analysiert.
-Anhand dieser Anforderungen wurde mittels z/OSPT und z/OSMF ein Template bereitgestellt.
+Die Absicht war anhand dieser Anforderungen mittels z/OSPT und z/OSMF ein Template bereitzustellen.
 
-Im Folgenden wird speziell auf die Vorgehensweise bei der Implementierung dieses Templates eingegangen. 
-Begonnen wurde auf dem Testplex.
-Dieser ist komplett von anderen Systemumgebungen abgekapselt, um Auswirkungen von Fehlern in den Tests auf die Entwicklung und Produktion zu vermeiden.
-In dieser Umgebung wird zunächst untersucht, wie es möglich ist eine CICS-Instanz zu provisionieren.
-Hierfür wird vorerst ein von der IBM bei der Installation von z/OSMF mitgeliefertes minimales CICS Template verwendet.
-Anschließend wird ein umfangreicheres mitgeliefertes Template an die Anforderungen der Anwendung angepasst.
+Im Folgenden wird speziell auf die Vorgehensweise bei der Implementierung dieses Templates eingegangen.
+Um die von allen Entwickler verwendeten Subsysteme der Entwicklungsstage bei eventuell auftretenden Fehler in der automatisierten Bereistellung nicht zu stören, wurden die ersten Schritte auf dem Testplex durchgeführt.
+Da auf dem Testplex die Testdaten für die DATEV Rechnungsschreibung nicht verfügbar sind, werden vorerst nur die benötigten Middleware-Systeme provisioniert.
+Die Ziele der Nutzung des Testplexes sind das Sammeln von ersten Erfahrungen mit \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} und ein Template, das DATEV spezifische Middleware, also CICS, Db2 und IBM MQ Instanzen beinhaltet.
+Da das CICS Subsystem als Laufzeitumgebung im Mittelpunkt der Subsysteme steht, werden zunächst folgende von der IBM bei der Installation von z/OSMF mitgelierferte CICS Templates untersucht:
+\begin{itemize}
+\item \glqq cics\_getting\_started\grqq
+\item \glqq cics\_54\grqq
+\end{itemize}
+
+\paragraph{\glqq cics\_getting\_started\grqq}~\\
+Dieses Template wird von der IBM für die ersten Schritte der Provisionierung einer CICS Instanz angeboten.
+Das Template bietet nur minimale Konfigurationsmöglichkeiten.
+So entspricht die CICS Instanz einer minimal lauffähigen CICS Instanz nach IBM Standard.
+
+\paragraph{\glqq cics\_54\grqq}~\\
+Hierbei handelt es sich um ein Template, das eine vollumfängliche CICS Instanz nach IBM Standard mit der CICS Version 5.4 provisioniert.
+Es ermöglicht die Angabe von komplexen Konfigurationen.
+
+Mit den durch die Untersuchung dieser beiden Templates gesammelten Erfahrungen, erfolgt die Implementierung eines an das DATEV e.G. Umfeld angepasstes CICS Template.
+Ist die daraus erzeugte CICS Instanz funktionsfähig wird die Provisionierung einer Db2 Datenbank und IBM MQ Queues nacheinander in das Template aufgenommen.
 Für die Provisionierung von Db2 Datenbanken existiert innerhalb der DATEV e.G. bereits eine REST-API.
 Es wird versucht diese innerhalb des Templates zu nutzen.
 IBM MQ Queues werden mittels Standard IBM Jobs provisioniert.
-Da es sich beim Testplex, wie im Absatz \ref{sec:zosanw} beschrieben, nur um eine Testumgebung für Systemtests handelt, werden vorerst nur die benötigten Middleware-Systeme provisioniert.
 
-Nachdem eine CICS-Instanz, eine Db2 Datenbank und IBM MQ Queues auf dem Testplex sowohl provisioniert als auch deprovisioniert werden können, folgt der nächste Schritt.
+Nachdem eine CICS Instanz, eine Db2 Datenbank und IBM MQ Queues auf dem Testplex sowohl provisioniert als auch deprovisioniert werden können, folgt der nächste Schritt.
 Dabei handelt es sich um den Wechsel vom Testplex in die Entwicklungsstage.
 In der Entwicklungsstage sind alle Anwendungsdaten, die für diese Tests notwendig sind, vorhanden.
-Somit kann hier die Integration der Beispielanwendung in die provisionierte CICS-Instanz stattfinden.
+Somit kann hier die Integration der Beispielanwendung in die provisionierte Instanz stattfinden.
 
-Es folgten Interviews mit Vertretern aus dem Administratorenteam, Entwicklerteam und dem Team für die Technologiestrategie.
-Dadurch wird eine Bewertung bezüglich des möglichen Nutzwertes, sowie der Akzeptanz der Technologie durch die Stakeholdern bei DATEV e.G., erfasst.
+Um ein Meinungsbild bezüglich des Einsatzen von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} zu bekommen, wurden mit Vertretern der Stakeholder also der Administratorenteams, der Entwickler und dem Technologiestrategieteam semi-strukturelle Interviews durchgeführt.
+Aus den Administratorenteams und von den Entwicklern wurden jeweils zwei Vertreter und aus dem Technologiestrategieteam ein Vertreter befragt.
+Es handelt sich zwar um Experten in ihrem Arbeitsbereich, trotzdem ist die geringe Anzahl an Befragten bezüglich des Ergebnisses zu beachten.
+Es wurden semi-strukturelle Interviews gewählt um auf einzelne Antworten genauer eingehen zu können.
+Auf eine Transkription der Interviews wurde verzichtet, da nicht der genaue Verlauf der Interviews sondern die Antworten auf die Fragen relevant sind.
 
-
-
-
+Die Interviews fanden in unterschiedlichen kleinen Besprechungsräumen innerhalb eines DATEV e.G. Gebäudes statt und dauerten etwas zehn bis zwanzig Minuten.
+Vor den eigentlichen Interviews wurde sowohl die z/OSMF Lösung (siehe Absatz \ref{sec:akttemp}) als auch die durch z/OSPT ermöglichte Lösung (siehe Absatz \ref{ch:ausblick}) den kompletten Teams erläutert.
+Der Schwerpunkt der Vorstellung wurde an das jeweilige Team angepasst.
+So wurde bei den Administratorenteams vor allem auf die Erstellung der Templates, welche für ihr Arbeitsgebiet relevant ist, eingegangen.
+Sowohl der Fragenkatalog, als auch die ausgefüllten und digitalisierten Fragebögen sind im Anhang \ref{app:fragen} zu finden.
+Für das Entwicklerteam und der Mitarbeiterin des Technologiestrategieteams waren nur die Fragen 1., 2. und 6. bis 10. des Fragebogens von Relevanz.
