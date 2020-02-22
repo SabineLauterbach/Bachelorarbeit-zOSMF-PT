@@ -1,34 +1,39 @@
 \chapter{Realisierung}\label{ch:realisierung}
-In diesem Kapitel wird beschrieben, wie die Aufgabe dieser Arbeit gelöst wurde.
+In diesem Kapitel wird beschrieben, wie bei der Beantwortung der Forschungs-Fragen der Arbeit (Kommentar: Link zur EInleitung) vorgegangen wurde.
 Dazu wird nach der im Kapitel \ref{ch:vorgehensweise} beschriebenen Reihenfolge der Arbeitsschritte vorgegangen.
-Es ist nochmal zu erwähnen, dass zunächst die Provisionierung einer CICS-Instanz untersucht wird.
+Es ist noch einmal zu erwähnen, dass zunächst die Provisionierung einer CICS-Instanz untersucht wird.
 Danach wird in weiteren Schritten zuerst eine Db2 Datenbank und schließlich IBM MQ Queues dem Bereitstellungsprozess hinzugefügt.
 Die Funktionsfähigkeit der so generierten Laufzeitumgebung wird mittels eines Testablaufes am Beispiel der DATEV-Rechnungsschreibung  sichergestellt. 
 Es folgt eine Bewertung der implementierten Provisionierungslösung durch die Stakeholder bei DATEV e.G. (Entwickler, Administration, Technologiestrategie).
 Zuletzt wird noch ein Fazit zur Realisierung gezogen und ein Ausblick im Bezug auf die technischen Aspekte gegeben.
 
 \section{Testplex}
-Vor Beginn der eigentlichen Untersuchung mussten zunächst alle benötigten Rechte beantragt werden.
-Hierzu zählen unter anderem die Rechte für die Nutzung des Test-Plexes, die Nutzung von z/OSMF und z/OSPT und die Rechte für die Templateverwaltung innerhalb von z/OSMF.
-Außerdem war es auf dem Testplex möglich, die Rechte für das Erstellen der CICS Dateien, das Recht, um eine CICS-Instanz starten zu dürfen und die Rechte für die Administration von Db2 und IBM MQ einer persönlichen UserID zu geben.
-Dies stellt kein Problem dar, weil es sich bei dem Testplex um eine reine Systemtestumgebung handelt.
-Das \glqq IBM Cloud and Management for z/OS\grqq-Toolkit benötigt lesenden Zugriff auf den Speicherpfad der Template Dateien.
-Schließlich konnte mit dem ersten Versuch, ein bei der Installation von z/OSMF mitgeliefertes minimales CICS Template zu provisionieren, begonnen werden.
+Der Zugriff auf Ressourcen und Tools bei DATEV e.G. wird über ein Rechtekonzept über RACF (Kommentar: Link) verwaltet. Um die Forschungsfragen beantworten zu können, mussten vor Beginn der eigentlichen Untersuchung zunächst alle benötigten Rechte beantragt werden.
+Hierzu zählen unter anderem die Rechte für die Nutzung des Test-Plexes, die Nutzung von z/OSMF und z/OSPT und die Rechte für die Templateverwaltung innerhalb von z/OSMF. 
+Beispielsweise benötigt das \glqq IBM Cloud and Management for z/OS\grqq-Toolkit lesenden Zugriff auf den Speicherpfad der Template Dateien.
+Deshalb wurde zu Beginn der Umsetzung auf dem Testplex gearbeitet.
+Hier ist es  möglich, die Rechte für das Erstellen der CICS Dateien, das Starten einer CICS-Instanz und die Administration von Db2 und IBM MQ einer persönlichen UserID zu geben, was auf dem eigentlichen Entwicklungs-Plex nicht ohne weiteres umsetzbar ist ist. 
+
+Damit eignet sich der Testplex - als reine Systemtestumgebung - gut für die ersten Versuche mit der Implementierung der Provisionierung.
+
+Schließlich konnte mit dem ersten Versuch, ein bei der Installation von z/OSMF mitgeliefertes minimales CICS Template zu provisionieren, begonnen werden.  (Kommentar: unterschiede zwischen den verprobten Templates irgendwo beschreiben, das "minimale", das umfangreichere, das an DATEV angepasste - was ist da spezifisch, usw.)
+Ziel war es, mit dem Tool vertraut zu werden und die grundsätzliche Lauffähigkeit zu prüfen.
 
 \subsection{IBM Standard CICS Template}
-Trotz der Vorteile durch die Weboberfläche von z/OSMF wurde zunächst auf z/OSPT gesetzt.
+Trotz der Vorteile durch die Weboberfläche von z/OSMF (Kommentar: Link auf Kap)  wurde zunächst auf z/OSPT gesetzt.
 Diese Entscheidung fiel auf Grund der höheren Flexibilität von z/OSPT, durch das Konzept der Images\footnote{Beschreibung siehe Absatz \ref{sssec:zospt}}.
 Da es sich um ein mitgeliefertes Template handelt, sind alle benötigten Workflow Definitionsdateien und Template Dateien vorhanden.
 Somit konnte mittels des Konsolenbefehesl \glqq zospt build\grqq{} ein Image erzeugt werden.
-Jedoch zeigte sich ein weiterer Nachteil des Kommandozeileninterfaces, es ist nicht möglich Templates eine Domain und einen Tenant zuzuweisen.
+Jedoch zeigte sich ein weiterer Nachteil des Kommandozeileninterfaces, es ist nicht möglich Templates eine Domain und einen Tenant zuzuweisen. (Kommentar: warum brauche ich das? wie löse ich das langfristig? Ist das ein KO Kriterium generell für zOSPT usw.)
 Dies hatte zur Folge, dass der Befehl \glqq zospt build\grqq{} fehlschlug.
-Für alle folgenden Aufgaben wurde deshalb z/OSMF genutzt.
+Für alle folgenden Aufgaben wurde deshalb z/OSMF genutzt. (Kommentar: siehe meine Bemerkungen in der Mail. DIe Entscheidung für die Alternative wrüde ich ausführlicher ableiten)
 
-Um das Template in die Software Services\footnote{Beschreibung in Absatz \ref{sssec:zosmf}} von z/OSMF aufzunehmen, sind die Template- und Workflow-Dateien in einem Unix Dateisystem auf dem Großrechner abgelegt.
+(Kommentar: hier würde ich auf Kap. 2.4.2 verweisen... wie in Kap. 2.4.2 aufgezeigt muss das Template in die Software Services.... )
+Um das Template in die Software Services\footnote{Beschreibung in Absatz \ref{sssec:zosmf}} von z/OSMF aufzunehmen, müssen die Template-und Workflow-Dateien in einem Unix Dateisystem auf dem Großrechner abgelegt sein. 
 Dabei wurden ihm eine Domain und ein Tenant zugewiesen.
-Bevor das Template provisioniert werden kann, müssen Änderungen in der Variableinputfile vorgenommen werden.
+Bevor das Template provisioniert werden kann (Kommentar: was bedeutet hier die "Provisionierung eines Templates"; ich will ja ein CICS provisionieren...) , müssen Änderungen in der Variableinputfile vorgenommen werden. (Kommentar: warum... weil es nicht zur DATEV Umgebung passt? dann muss man das hier erwähnen...  - auch dass es sich um eine Art Konfigurationsfile handelt, in dem man das Template an die spezifischen Anforderungen der Firma handelt.) 
 Dazu mussten die Werte, der in der Tabelle \ref{tab:cgsvars} genannten Variablen angepasst werden.
-Die Kurzbeschreibungen und die Beschreibungen aller Variablen, die im Standard Template vorhanden sind, ist in \cite{IBM.2019} zu finden.
+Die Kurzbeschreibungen und die Beschreibungen aller Variablen, die im Standard Template vorhanden sind, ist in \cite{IBM.2019} zu finden. (Kommentar, das ist gut, aber der Sinn des Variableninputfiles kommt nicht raus)
 \begin{table}[h]
 \centering
 \begin{tabularx}{\textwidth}{X|X}
@@ -65,15 +70,16 @@ DFH\_CICS\_HLQ & High-level qualifier von dem CICS Installationsort. \\
 \caption{Zu verändernde Variablen im minimalen CICS Template}
 \label{tab:cgsvars}
 \end{table}
-Mit Hilfe der z/OSMF Oberfläche konnte das Template akutalisiert und somit die Änderungen übernommen werden.
+Mit Hilfe der z/OSMF Oberfläche konnte das Template aktualisiert und somit die Änderungen übernommen werden.
 
-Als nächster Schritt wurde ein Testlauf und somit ein erster Versuch das Template zu provisionieren durchgeführt.
-Dabei kam es anfangs zu Rechteproblemen, da die Anforderungen und Rahmenbedingungen der DATEV e.G. in dem standardisierten IBM Template natürlich nicht berücksichtigt waren, beispielsweise ist die Berechtigung für das Starten von Jobs von DATEV Vorgaben abhängig und CICS-Start-Mechanismen haben spezifische Anforderungen an die Eingabeparameter.
-Nach den notwendigen Anpassungen funktionierte das Provisonieren und die definierten Aktionen des IBM Standard CICS Templates im DATEV Umfeld.
+Als nächster Schritt wurde ein Testlauf und somit ein erster Versuch, das Template zu provisionieren, durchgeführt.
+Dabei kam es anfangs trotz Testplex-Umgebung zu Rechteproblemen, da die Anforderungen und Rahmenbedingungen der DATEV e.G. in dem standardisierten IBM Template natürlich nicht berücksichtigt waren, beispielsweise ist die Berechtigung für das Starten von Jobs von DATEV Vorgaben abhängig und CICS-Start-Mechanismen haben spezifische Anforderungen an die Eingabeparameter.
+Nach den notwendigen Anpassungen funktionierte das Provisonieren und die definierten Aktionen des IBM Standard CICS Templates im DATEV Umfeld. 
+Das Ziel, die technische Umsetzung bei DATEV e.G. grundsätzlich zu verproben, war damit erfüllt.
 
 \subsubsection{DATEV e.G. spezifischen CICS Template}\label{sssec:datevcics}
-Nachdem das minimale IBM Standard CICS Template funktionsfähig war und erste Erfahrungen mit z/OSMF gesammelt worden waren, wurde ein allgemeines, mitgeliefertes Template untersucht.
-Ziel dieses nächsten Schritts war die Provisionierung einer funktionsfähigen DATEV e.G. spezifische CICS-Instanz.
+Nachdem das minimale IBM Standard CICS Template funktionsfähig war und erste Erfahrungen mit z/OSMF gesammelt worden waren, wurde ein allgemeines, mitgeliefertes Template untersucht. (Kommentar: von wem mitgeliefert, wodurch unterscheidet es sich vom oben genutzten Template usw.)
+Ziel dieses nächsten Schritts war die Provisionierung einer funktionsfähigen DATEV e.G. spezifischen CICS-Instanz. (Kommentar: was ist der Unterschied zu dem ersten Schritt? Das kommt nicht rüber. du könntest in der vorhergehenden Section sagen, warum uns das für die DATEV nicht weiterhilft)
 Um dieses Template an die DATEV Umgebung anzupassen und letztendlich eine \glqq DATEV CICS-Instanz \grqq{} zu provisionieren, wurden folgende Schritte durchgeführt.
 
 \begin{samepage}
@@ -84,16 +90,17 @@ Um dieses Template an die DATEV Umgebung anzupassen und letztendlich eine \glqq 
 \end{itemize}
 \end{samepage}
 
-Die Analyse ergab, dass das mitgelieferte Template mit insgesamt 76 verwendeten Dateien sehr umfangreich ist.
+Die Analyse ergab, dass das mitgelieferte Template mit insgesamt 76 verwendeten Dateien sehr komplex und umfangreich ist.
 Es zählen alle Dateien, die direkt mit dem Template in Verbindung stehen.
 Im Zentrum des Templates steht die Workflow Definitionsdatei \glqq provision.xml \grqq{} mit circa 583 Zeilen Code.
 In dieser sind alle Steps, die bei einer Provisionierung durchgeführt werden, definiert.
 Das Template beinhaltet nicht nur die Möglichkeit, CICS-Instanzen mit unterschiedlichen Konfigurationen zu provisionieren, sondern auch, ob dies mit Skripten oder mit der REST-Api geschieht.
-Zu diesen unterschiedliche Konfigurationen zählt unter anderem die Unterscheidung, ob die CICS-Instanz einem Sysplex hinzugefügt werden soll oder nicht.
-Die Übersichtlichkeit des allgeminen Templates ist dadurch geringer.
-So wurden neben allen für ein DATEV e.G. spezifischen CICS nicht notwendigen Dateien auch nicht benötigte Variablen und Steps entfernt.
-Wie in der Tabelle \ref{tab:vglTemps} zu sehen ist, konnten dadurch circa die Hälfte der Dateien gelöscht werden und bei der provision.xml wurde ein Drittel an Quellcode eingespart werden.
-Diese Version dient dem weiteren Vorgehen als Grundlage.
+Zu diesen unterschiedlichen Konfigurationen zählt unter anderem die Unterscheidung, ob die CICS-Instanz einem Sysplex (Kommentar weiß jemand, was das ist? ist das wichtig? Würde den Satz entfernen) hinzugefügt werden soll oder nicht.
+Die Übersichtlichkeit des allgeminen Templates ist dadurch geringer. (Kommentar: als was? und ist Übersichtlichkeit ein wichtiges Kriterium?)
+Es war also nötig, dieses umfangreiche Template zu überarbeiten und an DATEV spezifische Anforderungen anzupassen. 
+Dazu gehörte das Entfernen von allen für ein DATEV e.G. spezifischen CICS nicht notwendigen Dateien, sowie nicht benötigte Variablen und Steps.
+Wie in der Tabelle \ref{tab:vglTemps} zu sehen ist, konnten dadurch circa die Hälfte der Dateien gelöscht werden und bei der provision.xml wurde ein Drittel an Quellcode eingespart werden. (Kommentar: ist Umfang reduzieren das Ziel? doch eher nciht. Ziel war es , ein zielgerichtetes, auf DATEV spezifische Anforderungen angepasstes Template zu erhalten, das musst beschrieben werden.)
+Das überarbeitete Template dient dem weiteren Vorgehen als Grundlage.
 
 \begin{table}[h]
 \centering
@@ -108,18 +115,20 @@ provision.xml & circa 583 Codezeilen & circa 199 Codezeilen. \\
 \label{tab:vglTemps}
 \end{table}
 
-Als nächster Schritt wurde in Zusammenarbeit mit den CICS Administratorenteam festgelegt, wie im Umfeld der automatisierten Bereitstellung die CSD Dateien verwaltet werden soll.
-Es wurde festgelegt, dass jede provisionierte CICS-Instanz ihre eigene CSD Datei zur Verfügung gestellt bekommen soll.
-Hierfür soll die bestehende, von den Kollegen gepflegte Datei kopiert und mit bestimmten Namenkonventionen gespeichert werden.
+(Kommentar: ich würde die Schritte als Problem/Ziel/Umsetzung/Fazit aufbauen. 
+WIe beschrieben benötigt eine CICS Instanz enie sog. CSD (Link auf 2.3.1)-Datei, die die notwendigen Ressourdcen definiert. 
+Als nächster Schritt wurde in Zusammenarbeit mit den CICS Administratorenteam diskutiert, wie im Umfeld der automatisierten Bereitstellung die CSD Dateien verwaltet werden sollen. 
+Es wurde festgelegt, dass jede provisionierte CICS-Instanz ihre eigene CSD Datei zur Verfügung gestellt bekommen soll. 
+Hierfür soll die bestehende, von den Kollegen gepflegte Datei automatisiert (Kommentar: ist doch so, im Batch, s.u.?)  kopiert und mit bestimmten Namenkonventionen gespeichert werden.
 Somit ist sichergestellt, dass durch die neu provisionierten Instanzen die existierenden und bei DATEV im Einsatz befindlichen Instanzen nicht beeinflusst werden.
-Das ermöglicht auch jedem Nutzer der Provisionierung, die CSD seiner eigenen CICS-Instanz ohne Seiteneffekte zu bearbeiten.
+Das ermöglicht auch jedem Nutzer der Provisionierung (wer wäre das? der Admin? derEntwickler? Noermalerweise hat ein ENtwickler damit nichts zu tun ==> klarstellen), die CSD seiner eigenen CICS-Instanz ohne Seiteneffekte zu bearbeiten.
 Ein weiterer Vorteil ist, dass bei der Deprovisionierung der CICS-Instanz diese Kopie der Standard Datei ohne Nebenwirkungen gelöscht werden kann.
 Dadurch, dass die Datei, die von den Kollegen gepflegt wird, als Grundlage verwendet wird, sind alle provisionierten Instanzen immer auf dem aktuellsten Stand.
 Um dies umzusetzen, musste ein JCL Job geschrieben werden, der den Kopiervorgang implementiert.
-Dieser Job wurde mittels eines neuen Steps in den z/OSMF Workflow eingebunden.
-Außerdem mussten bestimmte Gruppen zu der CSD Liste der CICS-Instanz hinzugefügt werden.
+Dieser Job wurde als neuer Steps in den z/OSMF Workflow eingebunden.
+Innerhalb der CSD mussten bestimmte Gruppen zu der CSD Liste der CICS-Instanz hinzugefügt werden. (Kommentar: warum?)
 Die JCL ist in Abbildung \ref{code:addCSD} dargestellt.
-Die Reihenfolge ist relevant, da es der Initialisierungsreihenfolge entspricht.
+Die Reihenfolge ist relevant, da sie der Initialisierungsreihenfolge (Kommentar: was ist die Initialisierung?)  entspricht.
 
 \begin{minipage}{\linewidth}
 \lstinputlisting[caption={Hinzufügen weiterer CSD Gruppen zur Liste der provisionierten CICS-Instanz mittels eines Jobs},captionpos=b,label={code:addCSD}]{listings/initaddCSDalt.jcl}
@@ -129,8 +138,8 @@ Im nächsten Schritt wurden die Jobs und Skripte angepasst.
 Zunächst wurden die Namen der CICS Dateien\footnote{Beschreibung in Absatz \ref{sssec:speziDat}} an die DATEV e.G. internen Namenskonventionen angepasst.
 Ein spezielles Augenmerk lag auf der Anpassung der \glqq createCICS.jcl\grqq-Datei.
 In dieser befindet sich die Definition des STC Jobs für das provisionierte CICS.
-Im Standard IBM Template beinhaltet diese zunächst ein Makro für die Validierung der SIT Parameter.
-Zusätzlich werden noch bevor die Jobdefinition beginnt alle aus der Datei für die Eingabevariablen benötigten Variablenwerte in temporäre Zwischenvariablen eingefügt.
+Im Standard IBM Template beinhaltet diese zunächst ein Makro für die Validierung der SIT Parameter. (Kommentar: warum "zunächst"? Wenn du das schreibst wartet man auf ein "später")
+Zusätzlich werden alle aus der Datei für die Eingabevariablen benötigten Variablenwerte in temporäre Zwischenvariablen eingefügt.
 Danach folgt die Definition des Jobs, diese setzt sich aus folgenden Hauptbestandteilen zusammen:
 
 \begin{samepage}
@@ -141,15 +150,15 @@ Danach folgt die Definition des Jobs, diese setzt sich aus folgenden Hauptbestan
 \end{itemize}
 \end{samepage}
 
-Sowohl bei die Einbindung der benötigten Bibliotheken als auch das Einbinden der zuvor angelegten CICS spezifischen Dateien beschränkte sich auf das Hinzufügen weiterer DD-Statements.
+Sowohl die Einbindung der benötigten Bibliotheken, als auch das Einbinden der zuvor angelegten CICS spezifischen Dateien beschränkte sich auf das Hinzufügen weiterer DD-Statements. (Kommentar: irgendwie ergibt der Satz keinen Sinn...)
 
 In Abbildung \ref{code:sitparams} ist zu sehen, dass es vor allem bei der Definition der SIT Parameter zu tief verschachtelten if-Bedingungen kommen kann.
-Es handelt sich um den Code, der für das Einlesen der Variable \glqq DFH\_REGION\_SITPARAMS\grqq{} aus der Eingabedatei zuständig ist.
+Es handelt sich um den Code, der für das Einlesen der Variable  \glqq DFH\_REGION\_SITPARAMS\grqq{} aus der Eingabedatei zuständig ist.
 In dieser Variable werden die SIT Parameter als Komma separierter String angegeben.
-Für die Erzeugung eines DATEV e.G. spezifischen CICS wurde das Makro für die Validierung von SIT Parametern beibehalten.
+Für die Erzeugung eines DATEV e.G. spezifischen CICS wurde das ursprünglich in dem Template verwendete Makro für die Validierung von SIT Parametern beibehalten.
 Alles danach wurde zunächst durch eine zur Verfügung gestellten DATEV e.G. Standard JCL, für die Erzeugung eines CICS, ersetzt.
-Nach und nach wurde damit die notwendige Logik, wie die aus Abbildung \ref{gleiche abbildung wie oben}, hinzugefügt .
-Damit wurde die vorher statische DATEV e.G. Standard JCL durch Verwendung von Template internen Variablen flexibilisiert.
+Nach und nach wurde damit die für die DATEV eG spezifische CICS Provisionierung notwendige Logik, (siehe Abbildung \ref{gleiche abbildung wie oben}),  hinzugefügt .
+Damit wurde die vorher statische DATEV e.G. Standard JCL für das Erstellen von CICS Instanzen durch die Verwendung von Template  Variablen flexibilisiert.
 
 \begin{minipage}{\linewidth}
 \lstinputlisting[caption={Setzen der SIT Parameter durch Auslesen der \glqq DFH\_REGION\_SITPARAMS\grqq{} Variablen},captionpos=b,label={code:sitparams}]{listings/sitparams.jcl}
@@ -158,15 +167,15 @@ Damit wurde die vorher statische DATEV e.G. Standard JCL durch Verwendung von Te
 Es wurden nur die wirklich benötigten SIT Parameter aufgenommen.
 Die anzunehmenden Werte wurden einzeln mit dem CICS Administratorenteam besprochen und festgelegt.
 Es ist zu beachten, dass es im IBM Standard Template zwei Möglichkeiten gibt, diese Parameter zu setzen.
-Für bestimmte SIT Parameter besteht eine Variable innerhalb des Templates.
+Für bestimmte SIT Parameter existiert eine Variable innerhalb des Templates.
 Für alle anderen ist die Variable \glqq DFH\_REGION\_SITPARAMS\grqq{} vorgesehen.
 In dieser Arbeit wurde hauptsächlich mit letzterer Variante gearbeitet.
 Dadurch sind die SIT Parameter nur an einer Stelle im Template zu verwalten, beziehungsweise wird die Verwaltung  nicht auf zwei Arbeitsweisen verteilt.
 
-Durch die beschriebene Vorgehensweie wurde erfolgreich die Provisionierung eines DATEV e.G. spezifischen CICS-Instanz umgesetzt.
-Sichergestellt wurde dies mit einem Anmeldevorgang an dieses CICS, wie in Abbildung \ref{fig:cicslogin} zu sehen ist.
-Außerdem sind alle Standard DATEV eG Transaktionen in dieser Instanz funktionsfähig.
-Die Deprovisionierung verlief nach Plan.
+Durch die beschriebene Vorgehensweise wurde erfolgreich die Provisionierung eines DATEV e.G. spezifischen CICS-Instanz umgesetzt.
+Getestet wurde die Nutzbarkeit der Instanz mit einem Anmeldevorgang an dieses CICS, wie in Abbildung \ref{fig:cicslogin} zu sehen ist.
+Darüber hinaus wurde erfolgreich nachgewiesen, dass Standard Transaktionen der DATEV eG  in dieser Instanz funktionsfähig sind.
+Die Deprovisionierung verlief nach Plan. (Kommentar: ein wichtiger Punkt in automtisierten Prozessen ist eben das schnelle Provisioniieren als auch Deprovisionieren von Instanzen. Das könnte man hier erwähnen. Dass man eben nicht CICS Instanzen langlebig  hegen und pflegen muss, sondern dass sie automatisiert, verlässlich ohne manuelle Abstimmung immer wieder erstellt werden können.
 
 \begin{figure}[h]
 	\centering
