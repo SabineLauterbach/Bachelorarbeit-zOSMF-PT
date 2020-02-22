@@ -134,6 +134,7 @@ Für die Automation dieser Prozesse bietet die IBM \glqq IBM Cloud Provisioning 
 Dies umfasst zwei Lösungen, \glqq z/OS Provisioning Toolkit\grqq\footnote{siehe Absatz \ref{sssec:zospt}} und \glqq z/OS Management Facility\grqq\footnote{siehe Absatz \ref{sssec:zosmf}}.
 
 Hier genauer auf das Tool eingehen
+(Kommentar von Sabine aus der Realisierung: ein wichtiger Punkt in automtisierten Prozessen ist eben das schnelle Provisioniieren als auch Deprovisionieren von Instanzen. Das könnte man hier erwähnen. Dass man eben nicht CICS Instanzen langlebig  hegen und pflegen muss, sondern dass sie automatisiert, verlässlich ohne manuelle Abstimmung immer wieder erstellt werden können.
 
 Bei beiden Lösungen stehen die sogenannten \glqq Templates\grqq{} im Mittelpunkt.
 Mit Hilfe eines Templates können Instanzen erzeugt werden.
@@ -166,7 +167,7 @@ Dadurch können Variablen an einer Stelle im Template definiert und in alle Work
 
 Neben den Workflowdefinitionfiles muss in einer Aktion auch der Pfad der sogenannte \glqq Variableinputfile\grqq{} angegeben sein.
 
-\paragraph{\glqq Variableinputfile\grqq} ~\\
+\paragraph{\glqq Variableinputfile\grqq}\label{par:variable} ~\\
 In dieser Datei werden den in der Workflowdefinitionfile definierten Variablen Werte zugewiesen.
 Somit kann das Template konfiguriert werden.
 
@@ -176,8 +177,13 @@ Da ein Template immer provisioniert werden kann, wird hier auch der Speicherort 
 Zusätzlich kann noch eine Beschreibung des Templates hinzugefügt werden.
 \cite{IBM.2019}
 
+Für die Provisionierung eines Templates müssen diesem eine sogenannte \glqq Domain\grqq{} und ein \glqq Tenant\grqq{} zugewiesen werden.
+Unter einer \glqq Domain\grqq{} ist ein System zu verstehen, dass Systemressourcen in Ressourcenpools gliedert.
+\glqq Tenants\grqq{} sind die dazugehörigen Rechtegruppen, die dem Anwender den Zugriff auf und die Nutzung von zugeordneten Templates ermöglicht.
+\cite{Rotthove.2018}
+
 \subsection{z/OS Provisioning Toolkit}\label{sssec:zospt}
-z/OSPT bietet ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Laufzeitumgebungen.
+z/OSPT bietet ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Templates.
 In Abbildung \ref{fig:zospt_help} werden die möglichen Kommandozeilenbefehle mittels des Befehls \glqq zospt -h\grqq{} in einem Kommandofenster angezeigt.
 \begin{figure}[h]
 	\centering
@@ -196,8 +202,8 @@ Dabei handelt es sich um eine Template-Instanz \footnote{Beschreibung in Absatz 
 \cite{IBM.2019b}
 
 \subsection{z/OS Management Facility}\label{sssec:zosmf}
-Der Hauptaugenmerk dieser Arbeit liegt  bei z/OSMF, da damit die Verwaltung von Workflows und Templates über eine browserbasierende Schnittstelle möglich ist.
-Durch diese Oberfläche, in Abbildung \ref{fig:zosmf_welcome} dargestellt, ist es einfacher zu bedienen als das Kommandozeileninterface von z/OSPT  und somit wird der Einstieg in die Provisionierung erleichtert.
+z/OSMF bietet für die Verwaltung von Workflows und Templates eine browserbasierende Schnittstelle.
+Diese Oberfläche wird in Abbildung \ref{fig:zosmf_welcome} dargestellt.
 
 \begin{figure}[h]
 \centering
@@ -211,13 +217,8 @@ Für diese Arbeit besitzt nur der Menüpunkt \glqq Cloud Provisioning\grqq{} Rel
 Unter diesem Punkt sind die Funktionalitäten für die automatisierte Bereitstellung von Templates zu finden.
 \cite{Rotthove.2018}
 
-Zuerst ist das \glqq Resource Management\grqq{} zu nennen..
-Darunter werden sogenannte \glqq Domains\grqq{} und die dazugehörigen \glqq Tenants\grqq{} verwaltet.
-Unter einer \glqq Domain\grqq{} ist ein System zu verstehen, dass Systemressourcen in Ressourcenpools gliedert.
-\glqq Tenants\grqq{} sind die dazugehörigen Rechtegruppen, die dem Anwender den Zugriff auf und die Nutzung von zugeordneten Templates ermöglicht.
-Einem Template muss sowohl eine \glqq Domain\grqq{} als auch ein \glqq Tenant\grqq{} zugewiesen werden.
-\cite{Rotthove.2018}
-
+Zuerst ist das \glqq Resource Management\grqq{} zu nennen.
+Hier werden die \glqq Domains\grqq{} und \glqq Tenants\grqq{} verwaltet.
 Zur Verwaltung der Templates und Template-Instanzen kommen die \glqq Software Services\grqq{} zum Einsatz.
 Dort können neue Templates über die Manifest-File hinzugefügt werden.
 Dann muss, wie oben beschrieben, eine \glqq Domain\grqq{} und ein \glqq Tenant\grqq{} zugwiesen werden.
