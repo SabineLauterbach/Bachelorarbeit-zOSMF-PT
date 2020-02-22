@@ -1,7 +1,7 @@
 \chapter{Einleitung}\label{ch:einleitung}
 \glqq I recently predicted the last mainframe will be unplugged on March 15, 1996\grqq\footnote{\cite{Alsop.1993}} - ein in der Großrechner-Welt bekannt gewordenes Zitat.
 Es handelt sich um eine 1993 getroffene Vorhersage, nämlich dass der letzte Mainframe, auch Großrechner genannt, am 15 März 1996 abgeschaltet werden wird.
-Warum war diese (sicherlich überspitzt formulierte) Vorhersage falsch? 
+Warum war diese Vorhersage falsch? 
 Wieso wird sich im Jahre 2020 dennoch mit dieser Technologie beschäftigt? 
 Und was genau ist ein Großrechner?
 
@@ -9,39 +9,40 @@ In einem Satz ist ein Großrechner\footnote{Beschreibung im Absatz \ref{sec:main
 In dieser Arbeit wird nur auf Mainframes aus dem Hause IBM eingegangen.
 Damit ist auch der Technologiestack festgelegt.
 Das verwendete Betriebssystem ist z/OS, darauf werden Middleware Produkte wie CICS\footnote{Anwendungsserver, CICS Beschreibung Absatz \ref{cics}}, das Datenbanksystem Db2\footnote{ Beschreibung Absatz \ref{sssec:db2}} sowie die Messaging Lösung \glqq IBM MQ\grqq{}\footnote{Beschreibung im Absatz \ref{sec:mq} zu finden} betrieben.
-Als Programmiersprachen werden z.B. COBOL, IBM Assembler, C und C++ verwendet, sowie seit ca. 23 Jahren Java.\footnote{\cite{Steegmans.2003}}. (Kommentar: die 23 Jahre sind sehr theoretisch, relevant wurde Java auf z/OS erst in den letzten 5-10 Jahren)
+Als Programmiersprachen werden z.B. COBOL, IBM Assembler, C und C++ verwendet.
+Seit ca. 1997 ist es theoretisch möglich Java auf dem Mainframe zu verwenden.\footnote{\cite{Steegmans.2003}}. (Habe hier versucht es irgendwie zu schaffen, dass klar wird dass es seit 1997 zwar möglich ist aber noch nicht wirklich genutzt wird)
 
 Der IBM Mainframe hat eine lange Geschichte.
 Vor mehr als fünfzig Jahren wurde der allererste Großrechner, das sog. "System/360" vorgestellt.
 Bis in die 90er Jahre spielte der IBM Mainframe eine Hauptrolle auf dem Computermarkt, dann gewannen zunehmend verteilte Client-Server-Systeme an Bedeutung.\footnote{\cite{Ceruzzi.2003}}
-Seitdem gilt der Mainframe bereits als \glqq  legacy\grqq{} und damit als "Altlast" (Quelle: https://www.egovernment-computing.de/was-ist-ein-legacy-system-a-802283/.
+Seitdem gilt der Mainframe bereits als \glqq  legacy\grqq{} und damit als "Altlast"\footnote{\cite{legacy.22.2.2020}}.
 
 Wieso also wird sich mit der Mainframe Technologie noch beschäftigt? Eine Antwort: Auf dem Mainframe werden geschäftskritische Anwendungen in der ganzen Welt gehostet.
 So verarbeiten Großrechner auch heutzutage weltweit circa 1,2 Millionen CICS Transaktionen pro Sekunde.\footnote{\cite{IBM.2019}}
 Im Vergleich hierzu werden 63.000 Google Suchanfragen pro Sekunde abgesetzt. \footnote{\cite{Sullivan.2016}}
 
-Aus der Kombination von hohem Workload, der Abhängigkeit von einem Hersteller (IBM) und dem als veraltet geltenden Technologiestack entstehen jedoch zunehmend Risiken. (Kommentar: das System ist nicht veraltet, als Hardware ist z-Plattform nach wie vor sehr modern. deshalb die Änderung)
+Aus der Kombination von hohem Workload, der Abhängigkeit von einem Hersteller (IBM) und dem als veraltet geltenden Technologiestack entstehen jedoch zunehmend Risiken.
 Es wird immer schwieriger, Nachwuchs in diesem Bereich zu finden.
 Zum einem, da Mainframe-Know How kaum noch an Universitäten gelehrt wird.
 Die Seite des Hochschulkomasses\footnote{\cite{internetagenturKolnFrankfurtsunzinetTYPO3Programmmierung.}} liefert z.B. weder für \glqq Mainframe\grqq{} noch für \glqq Großrechner\grqq{} einen Treffer.
-Zum anderen ist der demographische Faktor bei den Wissensträgern nicht zu vernachlässigen. Diese sind - wie die Technolgien auf dem Mainframe - in die Jahre gekommen und erreichen das Rentenalter.
-Ein weiteres Problem ist, dass eine Firma, die einen IBM Großrechner mit z/OS betreibt, von dem oben genannten proprietären Technologiestack abhängig ist, dass heißt es existiert eine starke Hersteller- und Plattformabhängigkeit, z.B. in Bezug auf CICS, DB2, IBM-COBOL-Compiler, Assembler, etc.).
+Zum anderen ist der demographische Faktor bei den Wissensträgern nicht zu vernachlässigen. Diese sind - wie die Technologien auf dem Mainframe - in die Jahre gekommen und erreichen das Rentenalter.
+Ein weiteres Problem ist, dass eine Firma, die einen IBM Großrechner mit z/OS betreibt, von dem oben genannten proprietären Technologiestack abhängig ist, dass heißt es existiert eine starke Hersteller- und Plattformabhängigkeit, z.B. in Bezug auf CICS, Db2, IBM-COBOL-Compiler, Assembler.
 
 Offensichtlich betreiben dennoch einige Firmen einen IBM Großrechner.
-Darunter zählen hauptsächlich Banken, das Gesundheitswesen, (Kommentar: hast DU hier eine Quelle? Ich kenne keine aus dem Gesundheitswesen)  Versicherungen, Fluggesellschaften usw.
+Darunter zählen hauptsächlich Banken, Versicherungen, Fluggesellschaften usw..
 Der gemeinsame Nenner dieser Unternehmen ist, dass sich über die Jahre und Jahrzehnte enorme Investitionen auf dem Mainframe angesammelt haben.
 Die entstandenen Kernsysteme haben hohe Anforderungen an Massendatenverarbeitung, Sicherheitsstandards und Hochverfügbarkeit.
-All diese Punkte sprechen nach wie vor für die Nutzung eines Großrechners, z.B. auch bei der DATEV eG.
+All diese Punkte sprechen nach wie vor für die Nutzung eines Großrechners, z.B. auch bei der DATEV e.G..
 \cite{IBM.2014}
 
-Die DATEV eG wurde am 14.02.1966 von 65 Steuerbevollmächtigten gegründet.
+Die DATEV e.G. wurde am 14.02.1966 von 65 Steuerbevollmächtigen gegründet.
 Sie verfolgten mit der Gründung das Ziel, Buchführungsaufgaben für ihre Mandanten mit Hilfe der neu aufkommenden EDV zu bewältigen.
 Aufgrund hohen Mitgliederwachstums wurde hierfür bereits 1969 in einen firmeneigenen IBM-Großrechner investiert.\cite{DATEVeG.2017}
 Heute umfasst das Leistungsspektrum der DATEV e.G. unter anderem das Rechnungswesen, Personalwirtschaft, Consulting, IT-Sicherheit, Weiterbildung für ihre Kunden, in erster Linie Steuerberater, Wirtschaftsprüfer und Rechtsanwälte, und deren Mandanten.
 Ein nicht unbeträchtlicher Teil dieser betriebswirtschaftlichen Anwendungen läuft bis heute auf einem IBM Großrechner im DATEV Rechenzentrum.
 So werden pro Tag circa 150.000 Batch Jobs\footnote{Beschreibung in Absatz \ref{ssec:job}} und circa 90 Millionen CICS-Transaktionen verarbeitet.
 Diese Last wird von circa 14.000 aktiven Modulen erzeugt.
-Wie in der Abbildung \ref{fig:Programmiersprachen} zu sehen ist, ist COBOL mit circa 46\% Prozent die am häufigsten verwendete Programmiersprache am Großrechner bei der DATEV eG.
+Wie in der Abbildung \ref{fig:Programmiersprachen} zu sehen ist, ist COBOL mit circa 46\% Prozent die am häufigsten verwendete Programmiersprache am Großrechner bei der DATEV e.G..
 Durch diese Module werden unter anderem im Monat circa 11 Millionen Lohnabrechnungen erstellt und circa eine Millionen Umsatzsteuer-Voranmeldungen durchgeführt.
 
 \begin{figure}
@@ -70,16 +71,17 @@ Durch diese Module werden unter anderem im Monat circa 11 Millionen Lohnabrechnu
 \label{fig:Programmiersprachen}
 \end{figure}
 
-\section{Motivation}\label{sec:mot}
-(Kommentar, das ist das einzige Kapitel auf der Ebene, ist das gewollt?
+\section{Problemstellung}\label{sec:probstell}
 Im Jahre 2020 ist der größte Konkurrent für den Mainframe die Cloud.
 Laut einer Vorhersage aus dem Jahr 2018\footnote{Statistik im Anhang \ref{app:itworkload}} soll im Jahre 2020 circa 79 Prozent des weltweiten Workloads in einer Cloud verarbeitet werden.
 Für die Entwicklung von neuen Online-Anwendungen im cloud-native Stil wurde bei der DATEV e.G. eine Platform-as-a-Service (PaaS)-Lösung geschaffen und neue DevOps Prozesse aufgebaut. 
-Damit können Entwicklerteams unter anderem Datenbanken und Messaginglösungen entweder manuell über einen Marktplatz (siehe Abbildung \ref{fig:markt}) oder automatisiert per CI/CD-Pipeline\footnote{Glossar \ref{Glossarlink}} der Laufzeitumgebung ihrer Anwendung hinzufügen. (@Sabine: Stimmt das so?)
+Damit können Entwicklerteams unter anderem Datenbanken und Messaginglösungen entweder manuell über einen Marktplatz (siehe Abbildung \ref{fig:markt}) oder automatisiert per CI/CD-Pipeline\footnote{Glossar \ref{Glossarlink}} der Laufzeitumgebung ihrer Anwendung hinzufügen.
 Dadurch ergibt sich für jede einzelne Anwendung der in Abbildung \ref{fig:cloudentw} dargestellte Entwicklungsprozess.
 Wie zu sehen ist liegt der Fokus dabei auf der Entwicklereffizienz und der Verringerung der Zeit bis Änderungen beim Kunden ankommen.
 Diese CI/CD-Pipeline wurde mittels Jenkins realisiert.
 Den Entwicklern stehen moderne Entwicklungsumgebungen und git als Sourceverwaltung standardmäßig zur Verfügung.
+
+cloud entwicklungsprozess einfügen!!!
 
 Der Entwicklungsprozess für z/OS Anwendungen bei DATEV e.G. erscheint im Vergleich zu dieser PaaS-Lösung veraltet.
 So wurde 2010 eine auf Eclipse basierende Entwicklungsumgebung für COBOL und IBM Assembler in der DATEV e.G. flächendeckend bereitgestellt.
@@ -96,8 +98,8 @@ Dieses weit verbreitete Standard-Tool ist im z/OS Umfeld tatsächlich eine entsc
 Dadurch wurde ein bis dato verwendetes eigenentwickeltes Tool für die Sourceverwaltung der z/OS Sourcen abgelöst.
 Das Tooling wurde somit modernisiert, jedoch nicht der Entwicklungsprozess selbst.
 Es teilen sich sehr viele Anwendungen die gleichen Test-CICS/Db2/MQ Ressourcen.
-Das heißt auch, dass eine Parallelentwicklung an unterschiedlichen Features nur mit viel Abstimmungs-Aufwand und Absprachen innerhalb eines Entwicklungsteams, teilweise auch abteilungsübergreifend, möglich ist.
-Werden Änderungen an bestehenden Ressourcen durchgeführt oder werden neue Systemumgebungen benötigt, entsteht weiterer Abstimmungs-Aufwand und weitere Absprachen.
+Das heißt auch, dass eine Parallelentwicklung an unterschiedlichen Features nur mit viel Abstimmungsaufwand und Absprachen innerhalb eines Entwicklungsteams, teilweise auch abteilungsübergreifend, möglich ist.
+Werden Änderungen an bestehenden Ressourcen durchgeführt oder werden neue Systemumgebungen benötigt, entsteht weiterer Abstimmungsaufwand und weitere Absprachen.
 Dadurch wird der Prozess fehleranfällig und langsam.
 
 Es bleibt die Frage, wie wird mit den vielen Mainframebestandsanwendungen bei der DATEV e.G. in Zukunft umgegangen?
@@ -107,6 +109,7 @@ Auch im Falle einer geplanten Ablöse von Anwendungen muss je nach Strategie (z.
 Daraus folgt, dass aus Sicht der DATEV e.G. weiter in die IBM Mainframe Plattform investiert werden muss. 
 Dies bedeutet Investitionen in die bereitgestellte Infrastruktur (Hardware, Betriebssysteme, Lizenzen), insbesondere auch Investitionen, die die oben genannten Anforderungen an Weiterentwicklung, Wartung und Entwicklungseffizienz sowie Effizienz im Betrieb adressieren.
 
+\section{Ziel der Arbeit}\label{sec:ziel}
 In diesem Zusammenhang läuft aktuell  bei DATEV e.G. ein Proof of Concept bezüglich automatisierter Builds von z/OS Anwendungen auf Basis von Jenkins basierten Pipelines.
 Dies ist auch die Voraussetzung für automatisierte Tests von z/OS Programmen im Rahmen des \glqq Continuous Integration, Continuous Deployment\grqq{}\footnote{Beschreibung in Absatz \ref{Grundlagen}} Ansatzes.
 Ist dieser Rahmen gegeben ist eine Integration von z/OS Ressourcen in einen Marktplatz möglich.
