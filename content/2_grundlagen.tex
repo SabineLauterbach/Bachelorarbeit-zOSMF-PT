@@ -1,5 +1,43 @@
 \chapter{Grundlagen}\label{ch:grundlagen}
-In diesem Kapitel werden für diese Arbeit wichtige Begriffe erläutert.
+Um den Unterschied zwischen modernen cloud native Entwicklungsprozessen und dem Mainframe Entwicklungsprozess darstellen zu können, werden zunächst Begriffe aus dem cloud-native-Umfeld erläutert.
+Dabei wird auch auf den dadurch ermöglichten Entwicklungsprozess, dessen Vorteile und Begrifflichkeiten eingegangen.
+Anschließend werden für die Beantwortung der Forschungsfragen relevanten Begriffe des Mainframe-Umfelds beleuchtet.
+
+\section{cloud-native bei der DATEV e.G.}
+Eine cloud-native Anwendung ist eine speziell für das Cloud-Computing\footnote{Glossar \ref{Glossar}} konzipierte und entwickelte Anwendung.
+Eine solche Anwendung setzt sich meinst aus viele kleine Teile, sogenannte \glqq Microservices\grqq, zusammen.
+Diese einzelnen entkoppelten Services sind in Container paketiert.
+Diese Container und somit die Anwendung können auf verschiedenen Cloud-Umgebungen, auch von unterschiedlichen Anbietern,  ausgeführt werden.
+Dadurch ist eine schnelle Reaktion auf Markt- und Kundenanforderungen möglich.
+Außerdem besteht keine Herstellerabhängigkeit.
+Bei der DATEV e.G. wird auf \glqq Platform-as-a-Service\grqq{} als Ausprägung des Cloud-Computing-Konzepts gesetzt.
+\cite{cloudnative.23.2.2020}
+
+\section{\glqq Platform-as-a-Service\grqq{} bei DATEV e.G.}\label{sec:paas}
+Platform-as-a-Service, kurs PaaS, beschreibt neben Insfrastructure-as-a-Service, kurz IaaS und Software-as-a-Service, kurz SaaS, eine der drei grundsätzlichen Ausprägungen des Cloud-Computing-Konzepts.
+Alle drei beschreiben einen Grad an Auslagerung von IT-Systemen in die Cloud.
+Im Vergleich zu SaaS, bei der ganze Anwendungen in einer Cloud zur Verfügung stehen, stellt eine PaaS-Lösung eine Plattform, die sich neben der Infrastruktur auch um das Betriebssystem, die Middleware und die Laufzeitumgebung kümmert, bereit.
+Dadurch können sich Entwickler auf die eigentliche Implementierung der Anwendung konzentrieren.
+Des Weiteren ist es möglich beispielsweise Betriebssysteme oder Datenbanken auszutauschen und zu testen.
+\cite{paas.23.2.2020}
+
+Bei der DATEV e.G. kommt die sogenannte \glqq Self-Service-Cloud\grqq-Variante des PaaS-Ansatzes zum Einsatz.
+Das bedeutet, dass die oben genannte Bereitstellungsplattform in einer \glqq Private Cloud\grqq{} zur Verfügung gestellt wird.
+Es wird von einer \glqq Private Cloud\grqq{} gesprochen, wenn die Cloud-Umgebung unternehmensintern gehostet wird.\footnote{\cite{privatecloud.23.2.2020}}
+Die Plattform stellt ein webbasiertes Portal, beispielsweise siehe Abbildung \ref{fig:marketplace}, für das Provisionieren von Infrastruktur, Betriebssystemen o.ä. zur Verfügung.
+So ist es eine Bereitstellung mit wenigen Klicks möglich.
+Dadurch entfällt der Umweg über die Administratorenteams.
+\cite{selfservice.23.2.2020}
+
+Die DATEV e.G. verwendet als Bereitstellungsplattform die pivotal Distribution der quelloffenen PaaS \glqq Cloud Foundry\grqq.
+\glqq Cloud Foundry\grqq{} bietet zur Verwaltung von Instanzen neben einer Weboberfläche auch ein Kommandozeileninterface an.
+Ein weiterer Vorteil ist, dass es sich komplett um das Staging von Anwendungen kümmert.
+\cite{foundry.23.2.2020}
+
+Durch dieses Kommandozeileninterface ist es möglich den Entwicklungsprozess im Hinblick auf das Deployment weiter zu automatisieren.
+Hierbei setzt die DATEV e.G. auf Jenkins basierende \glqq Continuous Integration, Continuous Deployment\grqq-Pipeline.
+
+\section{\glqq Continuous Integration, Continuous Deployment\grqq}
 
 \section{Mainframe / Großrechner}\label{sec:mainframe}
 Im modernen Sprachgebrauch kann ein Großrechner oder auch Mainframe als größte zur Verfügung stehende Serverart betrachtet werden.
@@ -22,7 +60,7 @@ Bei der DATEV e.G. handelt es sich unter anderem um folgende Middlewarekomponent
 
 Diese Subsysteme stehen in jeder Stage zur Verfügung.
 Eine Stage beschreibt eine isolierte Systemumgebung mit eigenen Subsystemen und Ressourcenverwaltung.
-Die DATEV e.G. unterscheidet vier Stages:
+Die DATEV e.G. unterscheidet am Mainframe vier Stages:
 \begin{samepage}
 \begin{itemize}
 \item Testplex:\\

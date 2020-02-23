@@ -75,13 +75,9 @@ Durch diese Module werden unter anderem im Monat circa 11 Millionen Lohnabrechnu
 Im Jahre 2020 ist der größte Konkurrent für den Mainframe die Cloud.
 Laut einer Vorhersage aus dem Jahr 2018\footnote{Statistik im Anhang \ref{app:itworkload}} soll im Jahre 2020 circa 79 Prozent des weltweiten Workloads in einer Cloud verarbeitet werden.
 Für die Entwicklung von neuen Online-Anwendungen im cloud-native Stil wurde bei der DATEV e.G. eine Platform-as-a-Service (PaaS)-Lösung geschaffen und neue DevOps Prozesse aufgebaut. 
-Damit können Entwicklerteams unter anderem Datenbanken und Messaginglösungen entweder manuell über einen Marktplatz (siehe Abbildung \ref{fig:markt}) oder automatisiert per CI/CD-Pipeline\footnote{Glossar \ref{Glossarlink}} der Laufzeitumgebung ihrer Anwendung hinzufügen.
-Dadurch ergibt sich für jede einzelne Anwendung der in Abbildung \ref{fig:cloudentw} dargestellte Entwicklungsprozess.
-Wie zu sehen ist liegt der Fokus dabei auf der Entwicklereffizienz und der Verringerung der Zeit bis Änderungen beim Kunden ankommen.
-Diese CI/CD-Pipeline wurde mittels Jenkins realisiert.
-Den Entwicklern stehen moderne Entwicklungsumgebungen und git als Sourceverwaltung standardmäßig zur Verfügung.
-
-cloud entwicklungsprozess einfügen!!!
+Damit können Entwicklerteams unter anderem Datenbanken und Messaginglösungen entweder manuell über einen Marktplatz (siehe Abbildung \ref{fig:markt}) oder automatisiert per \glqq Continuous Integration, Continuous Deployment\grqq{}\footnote{Beschreibung in Absatz \ref{Grundlagen}} der Laufzeitumgebung ihrer Anwendung hinzufügen.
+Eine genaue Beschreibung der Begrifflichkeiten erfolgt im Absatz \ref{sec:paas}.
+Dabei stehen den Entwicklern moderne Entwicklungsumgebungen und git als Sourceverwaltung standardmäßig zur Verfügung.
 
 Der Entwicklungsprozess für z/OS Anwendungen bei DATEV e.G. erscheint im Vergleich zu dieser PaaS-Lösung veraltet.
 So wurde 2010 eine auf Eclipse basierende Entwicklungsumgebung für COBOL und IBM Assembler in der DATEV e.G. flächendeckend bereitgestellt.
@@ -111,7 +107,7 @@ Dies bedeutet Investitionen in die bereitgestellte Infrastruktur (Hardware, Betr
 
 \section{Ziel der Arbeit}\label{sec:ziel}
 In diesem Zusammenhang läuft aktuell  bei DATEV e.G. ein Proof of Concept bezüglich automatisierter Builds von z/OS Anwendungen auf Basis von Jenkins basierten Pipelines.
-Dies ist auch die Voraussetzung für automatisierte Tests von z/OS Programmen im Rahmen des \glqq Continuous Integration, Continuous Deployment\grqq{}\footnote{Beschreibung in Absatz \ref{Grundlagen}} Ansatzes.
+Dies ist auch die Voraussetzung für automatisierte Tests von z/OS Programmen im Rahmen des \glqq Continuous Integration, Continuous Deployment\grqq{} Ansatzes.
 Ist dieser Rahmen gegeben ist eine Integration von z/OS Ressourcen in einen Marktplatz möglich.
 Die dafür notwendige automatisierte Provisionierung einer z/OS Anwendungsumgebung, d.h Laufzeit, Middleware etc., ist aktuell noch weitgehend unerforscht. 
 Hier sind die Prozesse bei DATEV und anderen Kunden oft noch proprietär, hoch spezialisiert,  manuell und nicht modernisiert. 
