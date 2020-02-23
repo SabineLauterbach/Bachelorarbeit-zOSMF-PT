@@ -39,12 +39,16 @@ Software, die für den Kunden bereitsteht
 \section{Subsysteme / Middleware}
 Für die Beantwortung der Forschungsfragen liegt der Fokus auf dem Erstellen (\glqq Provisionieren \grqq) einer anwendungsspezifischen Laufzeitumgebung mit einer Datenhaltung und Message Queuing innerhalb des Testplexes und der Entwicklung.
 Als Laufzeitumgebung wird \glqq CICS\grqq, als Datenhaltung \glqq Db2\grqq{} und für das Message Queuing \glqq IBM MQ\grqq{} verwendet.
-Diese werden im Folgenden erläutert, hierzu dient Abbildung \ref{fig:archüber} als Überblick.
+Wie in Abbildung \ref{fig:archüber} dargestellt ist, existieren mehrere Instanzen pro Subsystem.
+Es existiert bei der DATEV e.G. jedoch nur eine geringe Anzahl an Instanzen pro Subsystem.
+Diese Instanzen sind langlebig und müssen dahingehend gepflegt und gewartet werden.
+Daraus folgt, dass sich, wie in der Problemstellung, Absatz \ref{sec:probstell}, bereits erwähnt, viele Anwendungen die gleichen Test-CICS/Db2/MQ Ressourcen teilen.
+Diese einzelnen Subsysteme werden im Folgenden erläutert, hierzu dient Abbildung \ref{fig:archüber} als Überblick.
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{figures/architektur.pdf}
-\caption{Architekturübersicht über die Subsysteme bei DATEV eG}
+\caption{Architekturübersicht über die Subsysteme einer Stage bei DATEV eG}
 \label{fig:archüber}
 \end{figure}
 
@@ -131,15 +135,24 @@ Die \glqq IBM MQ Administration\grqq{} verwaltet die IBM MQ Ressourcen.
 Um diese Aufgabe zu bewältigen sind aktuell viele proprietäre und veraltete Tools im Einsatz.
 
 Für die Automation dieser Prozesse bietet die IBM \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} an.
-Dies umfasst zwei Lösungen, \glqq z/OS Provisioning Toolkit\grqq\footnote{siehe Absatz \ref{sssec:zospt}} und \glqq z/OS Management Facility\grqq\footnote{siehe Absatz \ref{sssec:zosmf}}.
+Dabei handelt es ich um ein bei der Installation von \glqq z/OS Management Facility\grqq{}\footnote{Siehe Absatz \ref{sssec:zosmf}}, kurz z/OSMF, mitgeliefertes Tool.
+Beide Tools sind innerhalb der DATEV e.G. vorhanden, allerdings werden sie sehr selten genutzt.
+Sie sind auch außerhalb der DATEV e.G. kaum verbreitet.
+Aus Sicht der IBM besteht Interesse an Erfahrungsberichten zur Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq.
+So wurde im Rahmen der neunzehnten \glqq AMC\grqq{}\footnote{Academic Mainframe Consortium e.V.} Tagung im IBM Client Center Böblingen am 16.01.2020 um ca. 14:30  bei einem ca. 30 minütigen Vortrag ein Arbeitsstand dieser Arbeit vorgestellt.
+Die Agenda der Veranstaltung ist im Anhang \ref{app:AMC} zu finden.
+Der AMC e.V. ist ein Förderverein für die akademische Ausbildung auf dem Mainframe.\footnote{\cite{Amc.23.2.2020}}
+Neben Vertretern der IBM nahmen an der Tagung Vertreter von Hochschulen und verschiedenen Unternehmen teil.
+Der Vortrag \glqq kam ja sehr gut an und hat auch später noch zu Gesprächen geführt\grqq\footnote{AMC Vorstand Ernst Lugert, 20.1.2020}.
+Daraus lässt sich ableiten, dass sich neben der DATEV e.G. und der IBM auch andere Firmen für die automatisierte Provisionierung von z/OS Middleware mit \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} interessieren.
 
-Hier genauer auf das Tool eingehen
-(Kommentar von Sabine aus der Realisierung: ein wichtiger Punkt in automtisierten Prozessen ist eben das schnelle Provisioniieren als auch Deprovisionieren von Instanzen. Das könnte man hier erwähnen. Dass man eben nicht CICS Instanzen langlebig  hegen und pflegen muss, sondern dass sie automatisiert, verlässlich ohne manuelle Abstimmung immer wieder erstellt werden können.
-
-Bei beiden Lösungen stehen die sogenannten \glqq Templates\grqq{} im Mittelpunkt.
+Bei \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} stehen die sogenannten \glqq Templates\grqq{} im Mittelpunkt.
 Mit Hilfe eines Templates können Instanzen erzeugt werden.
-Diese Instanz kann eine oder mehrere verschiedene Subsystem-Instanzen enthalten.\\
-Ein Template besteht aus drei Dateien:
+Diese Instanz kann eine oder mehrere verschiedene Subsystem-Instanzen enthalten.
+Dabei steht eine schnelle Provisionierung als auch Deprovisionierung von Instanzen im Vordergrund.
+Mittels Templates läuft diese automatisiert, verlässlich und ohne manuelle Abstimmungen ab.
+Dadurch ist die Bereitstellung einer Instanz wiederholbar, so kann die Instanz im Fehlerfall sicher neugestartet werden und muss nicht langlebig gepflegt werden.
+\\ Ein solches Template besteht aus drei Dateien:
 
 \paragraph{\glqq Aktiondefinitionfile\grqq} ~\\
 Hier werden die Aktionen, die ein Anwender mit einer Instanz eines Templates durchführen kann, festgelegt.
@@ -182,8 +195,10 @@ Unter einer \glqq Domain\grqq{} ist ein System zu verstehen, dass Systemressourc
 \glqq Tenants\grqq{} sind die dazugehörigen Rechtegruppen, die dem Anwender den Zugriff auf und die Nutzung von zugeordneten Templates ermöglicht.
 \cite{Rotthove.2018}
 
+Dies umfasst zwei Lösungen, \glqq z/OS Provisioning Toolkit\grqq\footnote{siehe Absatz \ref{sssec:zospt}} und \glqq z/OS Management Facility\grqq\footnote{siehe Absatz \ref{sssec:zosmf}}.
+
 \subsection{z/OS Provisioning Toolkit}\label{sssec:zospt}
-z/OSPT bietet ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Templates.
+z/OS Provisioning Toolkit, kurz z/OSPT, bietet ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Templates.
 In Abbildung \ref{fig:zospt_help} werden die möglichen Kommandozeilenbefehle mittels des Befehls \glqq zospt -h\grqq{} in einem Kommandofenster angezeigt.
 \begin{figure}[h]
 	\centering
@@ -202,8 +217,8 @@ Dabei handelt es sich um eine Template-Instanz \footnote{Beschreibung in Absatz 
 \cite{IBM.2019b}
 
 \subsection{z/OS Management Facility}\label{sssec:zosmf}
-z/OSMF bietet für die Verwaltung von Workflows und Templates eine browserbasierende Schnittstelle.
-Diese Oberfläche wird in Abbildung \ref{fig:zosmf_welcome} dargestellt.
+Der Funktionsumfang von z/OS Management Facility, kurz z/OSMF, umfasst Systemmanagementfunktionen in einer browserbasierenden Benutzeroberfläche, dargestellt in Abbildung \ref{fig:zosmf_welcome}.
+Zu diesen Funktionen zählt die Verwaltung von Workflows und Templates.
 
 \begin{figure}[h]
 \centering
