@@ -9,35 +9,27 @@ Eine solche Anwendung setzt sich meinst aus viele kleine Teile, sogenannte \glqq
 Diese einzelnen entkoppelten Services sind in Container paketiert.
 Diese Container und somit die Anwendung können auf verschiedenen Cloud-Umgebungen, auch von unterschiedlichen Anbietern,  ausgeführt werden.
 Dadurch ist eine schnelle Reaktion auf Markt- und Kundenanforderungen möglich.
-Außerdem besteht keine Herstellerabhängigkeit.
-Bei der DATEV e.G. wird auf \glqq Platform-as-a-Service\grqq{} als Ausprägung des Cloud-Computing-Konzepts gesetzt.
-\cite{cloudnative.23.2.2020}
+Außerdem besteht keine Herstellerabhängigkeit.\cite{cloudnative.23.2.2020}\\
+Eine moderne cloud-native Anwendung innerhalb der DATEV e.G. machen folgende Dinge aus:
+\begin{itemize}
+\item \glqq Cloud Foundry\grqq
+\item CI/CD-Pipeline
+\end{itemize}
 
-\section{\glqq Platform-as-a-Service\grqq{} bei DATEV e.G.}\label{sec:paas}
-Platform-as-a-Service, kurs PaaS, beschreibt neben Insfrastructure-as-a-Service, kurz IaaS und Software-as-a-Service, kurz SaaS, eine der drei grundsätzlichen Ausprägungen des Cloud-Computing-Konzepts.
-Alle drei beschreiben einen Grad an Auslagerung von IT-Systemen in die Cloud.
+\section{\glqq Cloud Foundry\grqq}
+Bei Cloud Foundry handelt es sich um eine quelloffene Platform-as-a-Service, kurz PaaS.
+Platform-as-a-Service, beschreibt neben Insfrastructure-as-a-Service, kurz IaaS und Software-as-a-Service, kurz SaaS, einen Grad an Auslagerung von IT-Systemen in die Cloud.
 Im Vergleich zu SaaS, bei der ganze Anwendungen in einer Cloud zur Verfügung stehen, stellt eine PaaS-Lösung eine Plattform, die sich neben der Infrastruktur auch um das Betriebssystem, die Middleware und die Laufzeitumgebung kümmert, bereit.
-Dadurch können sich Entwickler auf die eigentliche Implementierung der Anwendung konzentrieren.
-Des Weiteren ist es möglich beispielsweise Betriebssysteme oder Datenbanken auszutauschen und zu testen.
-\cite{paas.23.2.2020}
-
-Bei der DATEV e.G. kommt die sogenannte \glqq Self-Service-Cloud\grqq-Variante des PaaS-Ansatzes zum Einsatz.
-Das bedeutet, dass die oben genannte Bereitstellungsplattform in einer \glqq Private Cloud\grqq{} zur Verfügung gestellt wird.
-Es wird von einer \glqq Private Cloud\grqq{} gesprochen, wenn die Cloud-Umgebung unternehmensintern gehostet wird.\footnote{\cite{privatecloud.23.2.2020}}
-Die Plattform stellt ein webbasiertes Portal, beispielsweise siehe Abbildung \ref{fig:marketplace}, für das Provisionieren von Infrastruktur, Betriebssystemen o.ä. zur Verfügung.
-So ist es eine Bereitstellung mit wenigen Klicks möglich.
-Dadurch entfällt der Umweg über die Administratorenteams.
-\cite{selfservice.23.2.2020}
-
-Die DATEV e.G. verwendet als Bereitstellungsplattform die pivotal Distribution der quelloffenen PaaS \glqq Cloud Foundry\grqq.
-\glqq Cloud Foundry\grqq{} bietet zur Verwaltung von Instanzen neben einer Weboberfläche auch ein Kommandozeileninterface an.
-Ein weiterer Vorteil ist, dass es sich komplett um das Staging von Anwendungen kümmert.
+Für die Verwaltung von Ressourcen bietet Cloud Foundry eine Weboberfläche, den sogenannten \glqq Marketplace\grqq, an.
+In diesem können mit wenigen Mausklicks Schnittstellen zu Datenbankmanagementsysteme oder Monitorlösungen zur Anwendung hinzugefügt werden.
+Diese Schnittstellen, auch \glqq Self-Service\grqq{} oder \glqq Service-Broker\grqq{} genannt, können mittels einer von Cloud Foundry zur Verfügung gestellten API selbst entwickelt werden.
+Ein Vorteil ist, dass sich Cloud Foundry um das Staging der Anwendungen kümmert.
+Um eine Anwendung in eine solche Stage bereitzustellen, bietet Cloud Foundry ein Kommandozeileninterface an.
+Neben der Bereitstellung können mit diesem Interface beispielsweise Anwendungen auch horizontal skaliert werden.
+Um die Breitstellung über mehrere Stages hinweg zu automatisieren komm bei der DATEV e.G. eine auf Jenkins basierende CI/CD-Pipeline zum Einsatz.
 \cite{foundry.23.2.2020}
 
-Durch dieses Kommandozeileninterface ist es möglich den Entwicklungsprozess im Hinblick auf das Deployment weiter zu automatisieren.
-Hierbei setzt die DATEV e.G. auf Jenkins basierende \glqq Continuous Integration, Continuous Deployment\grqq-Pipeline.
-
-\section{\glqq Continuous Integration, Continuous Deployment\grqq}
+\section{\glqq CI/CD-Pipeline\grqq}
 
 \section{Mainframe / Großrechner}\label{sec:mainframe}
 Im modernen Sprachgebrauch kann ein Großrechner oder auch Mainframe als größte zur Verfügung stehende Serverart betrachtet werden.
