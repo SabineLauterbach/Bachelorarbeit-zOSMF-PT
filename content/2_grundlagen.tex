@@ -3,16 +3,17 @@ Um den Unterschied zwischen modernen cloud native Entwicklungsprozessen und dem 
 Dabei wird auch auf den dadurch ermöglichten Entwicklungsprozess, dessen Vorteile und Begrifflichkeiten eingegangen.
 Anschließend werden für die Beantwortung der Forschungsfragen relevanten Begriffe des Mainframe-Umfelds beleuchtet.
 
-\section{cloud-native bei der DATEV e.G.}
+\section{cloud-native bei der DATEV e.G.}\label{sec:cloudnative}
 Eine cloud-native Anwendung ist eine speziell für das Cloud-Computing\footnote{Glossar \ref{Glossar}} konzipierte und entwickelte Anwendung.
-Oft werden damit Online-Anwendungen und mobile "Apps" entwickelt, für die häufig und hoch frequent neue Features bereitgestellt werden sollen. 
+Oft werden damit Online-Anwendungen und mobile \glqq Apps\grqq entwickelt, für die häufig und hoch frequent neue Features bereitgestellt werden sollen. 
 Für solche Anwendung ist das Architekturpattern der sogenannten \glqq Microservices\grqq, weit verbreitet.
-Diese einzelnen entkoppelten Services sind z.B. in Containern paketiert. 
-Bekannt geworden ist hier der Ansatz von Docker. (Kommentar: würde ich erwähnen, da z/OSpt explizit ein "docker like" vorgehen unterstützt. also auch enie Quelle angeben)
+Diese einzelnen entkoppelten Services sind beispielsweise in Containern paketiert. 
+Bekannt geworden ist hier der Ansatz von Docker\footnote{Glossar \ref{Docker Glossar link}}.
 Diese Container und somit die Anwendung können auf verschiedenen Cloud-Umgebungen, auch von unterschiedlichen Anbietern,  ausgeführt werden.
 Dort können bereitstehende Services für Datenhaltung, Security, Messaging usw. genutzt werden. 
 Dadurch ist eine schnelle Reaktion auf Markt- und Kundenanforderungen möglich.
-Außerdem besteht dadurch eine geringere Herstellerabhängigkeit. (Kommentar: die beiden Sätze sind grundsätzlich richtig, aber ich würde sie etwas erläutern, z.B: ist man mit MongoDB und COnfluent Kafka nicht per se herstellerunabhängig. aber man hat mehr optionenh).\cite{cloudnative.23.2.2020}\\
+Eine geringe Herstellerabhängigkeit im Bezug auf den Cloud Anbieter ist dadurch außerdem gegeben.
+\cite{cloudnative.23.2.2020}\\
 Eine moderne cloud-native Anwendung innerhalb der DATEV e.G. machen folgende Dinge aus:
 \begin{itemize}
 \item \glqq Cloud Foundry\grqq
@@ -22,7 +23,7 @@ Eine moderne cloud-native Anwendung innerhalb der DATEV e.G. machen folgende Din
 \subsection{\glqq Cloud Foundry\grqq}
 Bei Cloud Foundry handelt es sich um eine quelloffene Platform-as-a-Service, kurz PaaS.
 Platform-as-a-Service, beschreibt neben Insfrastructure-as-a-Service, kurz IaaS und Software-as-a-Service, kurz SaaS, einen Grad an Auslagerung von IT-Systemen in die Cloud.
-IIm Vergleich zu SaaS, bei der ganze Anwendungen in einer Cloud zur Verfügung stehen, und IaaS, bei der die automatisierte Bereitstellung von Infrastrukturkomponenten wie Netzwerk, SPeicher usw. im Fokus steht, stellt eine PaaS-Lösung eine Plattform, die sich neben der Infrastruktur auch um das Betriebssystem, die Middleware und die Laufzeitumgebung kümmert, bereit. (Kommentar: Quelle z.B: https://www.ibm.com/de-de/cloud/learn/iaas-paas-saas)
+Im Vergleich zu SaaS, bei der ganze Anwendungen in einer Cloud zur Verfügung stehen, und IaaS, bei der die automatisierte Bereitstellung von Infrastrukturkomponenten wie Netzwerk, Speicher usw. im Fokus steht, stellt eine PaaS-Lösung eine Plattform, die sich neben der Infrastruktur auch um das Betriebssystem, die Middleware und die Laufzeitumgebung kümmert, bereit.\footnote{\cite{ipsaas.25.2.2020}}
 Für die Verwaltung von Ressourcen bietet Cloud Foundry eine Weboberfläche, den sogenannten \glqq Marketplace\grqq, an.
 In diesem können mit wenigen Mausklicks Schnittstellen zu Services wie Datenbankmanagementsysteme, Messaging- oder Monitorlösungen zur Anwendung hinzugefügt werden.
 Diese Schnittstellen, auch \glqq Self-Service\grqq{} oder \glqq Service-Broker\grqq{} genannt, können mittels einer von Cloud Foundry zur Verfügung gestellten API selbst entwickelt werden.
@@ -30,44 +31,65 @@ Ein Vorteil ist, dass sich Cloud Foundry um das Staging der Anwendungen kümmert
 D.h. eine Anwendung kann mit den benötigten Komponenten sicher von einer Entwicklungs- in eine QS- bzw. Produktiv-Stage verschoben werden. 
 Um eine Anwendung in eine solche Stage bereitzustellen, bietet Cloud Foundry ein Kommandozeileninterface an.
 Neben der Bereitstellung können mit diesem Interface beispielsweise Anwendungen auch horizontal skaliert werden.
-Um die Breitstellung über mehrere Stages hinweg zu automatisieren komm bei der DATEV e.G. eine auf Jenkins basierende CI/CD-Pipeline zum Einsatz.
+Um die Breitstellung über mehrere Stages hinweg zu automatisieren kommt bei der DATEV e.G. eine auf Jenkins basierende CI/CD-Pipeline zum Einsatz.
 \cite{foundry.23.2.2020}
 
 \subsection{\glqq CI/CD-Pipeline\grqq}\label{sec:cicd}
-CI/CD steht für \glqq Continous Integration und Continous Delivery\grqq{} in manchen Fällen auch für \glqq Continous Integration, Continous Delivery und Continous Deployment\grqq{}.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{figures/ci-cd-flow-desktop_1.png}
+	\caption{Abgrenzung von Continuous Integration, Continuous Delivery und Continuous Deployment  (Quelle: \cite{cicdbild.25.2.2020})}
+	\label{fig:ci}
+\end{figure}
+
+CI/CD steht für \glqq Continuous Integration und Continuous Delivery\grqq{} in manchen Fällen auch für \glqq Continuous Integration, Continuous Delivery und Continuous Deployment\grqq{}.
 Die einzelnen Begriffe werden im Folgenden erläutert, als Überblick dient Abbildung \ref{fig:cicd}
+\paragraph{\glqq Continuous Integration\grqq}~\\
+Continous Integration beschreibt einen Prozess bei dem Änderungen von Entwickler regelmäßig in eine gemeinsame Codebasis integriert und getestet werden.
+In Abbildung \ref{fig:ci} ist der Prozess dargestellt.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{figures/CI.png}
+	\caption{Continuous Integration Prozessaufbau Quelle: \cite{cibild.25.2.2020}}
+	\label{fig:ci}
+\end{figure}
+Eine Voraussetzung für den Einsatz von CI ist eine gemeinsame Sourceverwaltung.
+Bei der DATEV e.G. handelt es sich dabei um GIT.
+Nachdem ein Entwickler Änderungen am Code vorgenommen hat, lädt er diese in die Verwaltung hoch.
+Dabei kann eine erste Überprüfung des Codes mittels statischer Codeanalyse durchgeführt werden.
+Zur statischen Codeanalyse zählen unter anderem die Prüfung vorher definierter Coderichtlinien.
+Sind diese erfolgreich, wird ein isolierter CI-Server benachrichtigt.
+Dieser Server holt sich den neusten Stand des Quellcodes und baut diesen, um anschließend automatisierte Tests durchzuführen.
 
-(KOmmentar: ich würde noch etwas zur CI/CD Pipeline schreiben udn auf DevOPs usw. eingehen. VOrschlag (bitte in eigenen Worten wiedergeben...) 
- CI/CD Pipeline automatisiert den Entwicklungsprozess. 
-Build, Test, Quality Gates (z.B: Codequalitäts-CHecks) und 
-Deployment.  
-Automatisierung durch Jenkins 
-GIT als Sourceverwaltung.  
-Ziel bei DATEV eG i"Product-Teams" 
-schnell, ohne manuelle Schritte und Koordinationsbedarf (autonom) 
-"Operations"-Teams, kontinuierlich Wert für Kunden liefern können. 
-DevOps Ansatz. 
-Amazon, ein wichtiger Cloud-Anbieter zitieren
-https://aws.amazon.com/de/devops/what-is-devops/ zu DevOps folgendes: 
-"Dabei kommen Praktiken zur Automatisierung von traditionell manuellen, zeitaufwendigen Prozessen zum Einsatz. Der verwendete Technologie-Stack und die genutzten Tools ermöglichen eine schnelle und zuverlässige Ausführung und Weiterentwicklung von Anwendungen. Diese Tools ermöglichen Engineers auch, in Eigenregie Aufgaben zu erledigen (wie beispielsweise die Bereitstellung von Code oder Infrastruktur), für die sie üblicherweise auf die Unterstützung anderer Teams angewiesen waren. Das Ergebnis ist auch hier eine erhöhte Geschwindigkeit."
+Bei den Tests handelt es sich um sogenannte \glqq Unittests\grqq.
+Diese Art von Tests handelt es sich hauptsächlich zum einem um Tests, die anhand vordefinierter Eingangsdaten die Ausgabe bestimmter Funktionen prüfen.
+Zum anderen beinhalten diese Tests die Überprüfung, ob mit Fehlerbedingungen korrekt umgegangen wird.
+Dabei werden Abhängigkeiten zu externen Ressourcen, wie beispielsweise einer Datenbank, außen vor gelassen.
+Wenn solche Ressourcen dennoch benötigt werden, müssen diese mit Hilfe eines sogenannten \glqq Mocking-Framework\grqq{} simuliert werden.
+Schließlich stellt der CI-Server die Ergebnisse dieser Test zur Verfügung.
 
-vlt. noch was zu Architektur, Cloud Native Anwendungen
-Microservices,  12-factor-Apps.
-Autonomie von Anwendungen zur Entwicklungs-und Betriebszeit eitgehend unabhängig von anderen Services entwickelt und produktiv ...
-
-
-
-HIER BILD VON CICD ÜBERBLICK EINFÜGEN!!!
-\paragraph{\glqq Continous Integration\grqq}~\\
+Continuous Integration sorgt dafür, dass individuelle Codeänderungen sofort nach der Integration in die Codebasis auf Korrektheit geprüft werden.
+Im Fehlerfall werden die Entwickler sofort automatisch benachrichtigt, verbunden mit regelmäßiger Integration führt das zu einer schnelleren und einfacheren Fehlerbehebung.
+Ein weiterer Vorteil ist, dass neben der Prüfung auf Korrektheit auch eine statische Codeanalyse möglich ist.
+Dadurch kann sichergestellt werden, dass es sich um sauberen Code handelt.
 \cite{Laster.2017}
 
-\paragraph{\glqq Continous Delivery\grqq}~\\
+\paragraph{\glqq Continuous Delivery\grqq}~\\
+Bei Continuous Delivery werden die Änderungen, die vorher auf dem isolierten CI-Server getestet und integriert wurden, in eine Stage, z. B. in die Entwiclungsstage, automatisch übertragen.
+Hier werden dann weitere Tests, wie Integrationstests und Akzeptanztests, durchgeführt.
+Durch den sogenannten \glqq DevOps\grqq-Gedanken gewinnt bei Continuous Delivery \glqq Infrastructure-as-code\grqq{}\footnote{Infrastrukturdefinitionen in Dateien, die einer Sourceverwaltung gespeichert werden} an Bedeutung.
+
+DevOps heißt bei DATEV e.G., dass sich ein Entwicklerteam neben den Softwareentwicklern auch aus Infrastrukturentwickler, Tester und Fachberater zusammensetzt.
+Dieses Team kümmert sich während des gesamten Lebenszyklus' um die Anwendung.
+
+Am Ende einer Continuous Delivery Pipeline steht ein theoretisch auslieferbarer Stand der Anwendung.
+Die Übergabe dieses Standes in die Produktion ist bei Continuous Delivery noch manuell umzusetzen.
 \cite{Laster.2017}
 
-\paragraph{\glqq Continous Deployment\grqq}~\\
+\paragraph{\glqq Continuous Deployment\grqq}~\\
+Continuous Deployment beschreibt den nächsten Schritt nach Continuous Delivery.
+Dabei handelt es sich um die automatisierte Bereitstellung in eine Produktions-Stage.
 \cite{Laster.2017}
-
-
 
 \section{Mainframe / Großrechner}\label{sec:mainframe}
 Im modernen Sprachgebrauch kann ein Großrechner oder auch Mainframe als größte zur Verfügung stehende Serverart betrachtet werden.
@@ -75,13 +97,6 @@ Er wird von Unternehmen verwendet, um  kommerzielle Datenbanken, Transaktionsser
 Im Gegensatz zu verteilten Serversystemen, bei denen die Funktionalitäten auf einzelne Server, wie zum Beispiel einen E-Mail-Server, einen Datenbank-Server, einen Web-Server usw. aufgeteilt sind, handelt es sich bei einem Mainframe um ein zentralisiertes System.
 Die einzelnen Funktionalitäten werden von sogenannte \glqq Subsysteme\grqq, auch \glqq Middleware\grqq{} genannt, zur Verfügung gestellt.
 Darunter zählen unter anderem Datenbanksysteme und Anwendungsserver.
-
-(Kommentar: hier könnte man die Abgrenzung zu Cloud native machen....)
-im Gegensatz zu cloud native sind z/OS Anwendungen häufig monolithisch
-.... shared subsystems....
-CI/CD pipeline nicht vorhanden aber im Aufbau
-du kümmerst dich v.a. um den self service aspekt von PaaS...
-
 \cite{Ebbers.2011}
 
 \section{Mainframe Anwendungen bei DATEV e.G.}\label{sec:zosanw}
@@ -210,22 +225,21 @@ Die \glqq IBM MQ Administration\grqq{} verwaltet die IBM MQ Ressourcen.
 Um diese Aufgaben zu bewältigen, sind aktuell in erster Linie proprietäre Tools im Einsatz, die nicht der Erwartungshaltung an moderne Administrationstools entsprechen. (Kommentar: hier würde ich ein Bild einer "alten" Admin-Oberfläche als Beispiel zeigen, irgendeinen CICS-Dialog von den Admins, möglichst ISPF oder BMS )
 
 Für die Automation dieser Prozesse bietet die IBM das \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} an.
-Dabei handelt es ich um ein bei der Installation von \glqq z/OS Management Facility\grqq{}\footnote{Siehe Absatz \ref{sssec:zosmf}}, kurz z/OSMF, mitgeliefertes Tool. (Kommentar: z/OSMF ist Teil des Betriebssystems)
+Dabei handelt es ich um ein bei der Installation von \glqq z/OS Management Facility\grqq{}\footnote{Siehe Absatz \ref{sssec:zosmf}}, kurz z/OSMF, mitgeliefertes Tool.
 z/OSMF ist wiederum Teil der Standardauslieferung des Betriebssystems z/OS.
 Es soll z/OS-Administration über moderne Oberfläschen und APIs  ermöglichen.
-z/OSMF (und damit auch „IBM Cloud Provisioning and Management for z/OS“) ist bei DATEV verfügbar, wird aber noch nicht flächendeckend eingesetzt, da die Administratoren den herkömmlichen Tools vertrauen und eine Umstellung immer auch mit Lernaufwand und Einarbeitung verbunden ist. (Kommentar: wieso beide: meinst Du das „IBM Cloud Provisioning and Management for z/OS“ und z/OSMF? Eigentlich ist das 1 Tool, ersteres ist Teil von zweiterem) 
-Sie sind auch außerhalb der DATEV e.G. kaum verbreitet. (Kommentar: über z/OSMF an sich bin ich mir nicht sicher, wenn dann könnte man höchstens sagen, das „IBM Cloud Provisioning and Management for z/OS“ ist noch nicht weit verbreitet). 
-Auch aus Sicht der IBM besteht Interesse an Erfahrungsberichten zur Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq.
+z/OSMF (und damit auch \glqq IBM Cloud Provisioning and Management for z/OS\grqq) ist bei DATEV verfügbar, wird aber noch nicht flächendeckend eingesetzt, da die Administratoren den herkömmlichen Tools vertrauen und eine Umstellung immer auch mit Lernaufwand und Einarbeitung verbunden ist.
+\glqq IBM Cloud Provisioning and Management for z/OS\grqq{} ist auch außerhalb der DATEV e.G. kaum verbreitet. 
+Aus Sicht der IBM besteht Interesse an Erfahrungsberichten zur Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq.
 So wurde im Rahmen der neunzehnten \glqq AMC\grqq{}\footnote{Academic Mainframe Consortium e.V.} Tagung im IBM Client Center Böblingen am 16.01.2020 um ca. 14:30  bei einem ca. 30 minütigen Vortrag ein Arbeitsstand dieser Arbeit vorgestellt.
 Die Agenda der Veranstaltung ist im Anhang \ref{app:AMC} zu finden.
 Der AMC e.V. ist ein Förderverein für die akademische Ausbildung auf dem Mainframe.\footnote{\cite{Amc.23.2.2020}}
 Neben Vertretern der IBM nahmen an der Tagung Vertreter von Hochschulen und verschiedenen Unternehmen teil.
-Der Vortrag \glqq kam ja sehr gut an und hat auch später noch zu Gesprächen geführt\grqq\footnote{AMC Vorstand Ernst Lugert, 20.1.2020}.
-(Kommentar: ist das Zitat nur das "kam ja sehr gut an" oder gehört auch der Teil "hat auch später noch zu Gesprächen geführt"? Der zweite Teil scheint nicht aus einem Gespräch zu stammen. d.h. hier bitte nochmal drauf schauen".)
+Der Vortrag \glqq kam ja sehr gut an und hat auch später noch zu Gesprächen geführt\grqq\footnote{AMC Vorstand Ernst Lugert, 20.1.2020}. (Das ist ein Zitat einer Email)
 In den anschließenden Gesprächen wurde deutlich, dass sich neben der DATEV e.G. und der IBM auch andere Firmen für die automatisierte Provisionierung von z/OS Middleware mit \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} interessieren, aber noch kaum Erfahrung in dem Umfeld besteht.
 
 Bei \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} stehen die sogenannten \glqq Templates\grqq{} im Mittelpunkt.
-Dabei handelt es sich um eine Art Script. (Kommentar: kann man das so sagen?)
+Dabei handelt es sich um eine Verwaltungseinheit
 Mit Hilfe eines Templates können Instanzen erzeugt werden.
 Diese Instanz kann eine oder mehrere verschiedene Subsystem-Instanzen enthalten.
 Dabei steht sowohl eine schnelle Provisionierung als auch Deprovisionierung von Instanzen durch den Entwickler im Vordergrund.
@@ -233,9 +247,11 @@ Mittels Templates läuft beides automatisiert, verlässlich und ohne manuelle Ab
 Die Bereitstellung einer Instanz ist wiederholbar, so kann die Instanz z.B. im Fehlerfall sicher neugestartet werden und muss nicht langlebig gepflegt werden.
 \\ Ein solches Template besteht aus drei Dateien:
 
-\paragraph{\glqq Aktiondefinitionfile\grqq} ~\\
-Hier werden die Aktionen, die ein Anwender mit einer Instanz eines Templates durchführen kann, festgelegt.
-Einer Aktion wird ein sogenannter \glqq Workflow\grqq{} zugewiesen.
+\paragraph{\glqq Manifest-File\grqq} ~\\
+Im der Manifest-File ist der Speicherpfad der sogenannten \glqq Aktiondefinitionfile\grqq{} und der sogenannten \glqq Variableinputfile\grqq{} angegeben.
+Erläuterungen zu diesen beiden Dateien folgt im Anschluss.
+Da ein Template immer provisioniert werden kann, wird hier auch der Speicherpfad des Provisionierungsworkflows angegeben.
+\cite{IBM.2019}
 
 Ein Workflow ist über eine XML Datei, die sogenannte \glqq Workflowdefinitionfile\grqq, definiert.
 Diese lässt sich grob in zwei Teile untergliedern:
@@ -257,52 +273,38 @@ Sowohl die Variablendefinition als auch die Steps können in externe XML Dateien
 Dadurch können Variablen an einer Stelle im Template definiert und in alle Workflowdefinitionfiles aufgenommen werden.
 \cite{Rotthove.2018}
 
+Zusätzlich kann in der Manifest-File eine Beschreibung des Templates hinzugefügt werden.
+\cite{IBM.2019}
+\paragraph{\glqq Aktiondefinitionfile\grqq} ~\\
+Weitere optionale Aktionen, die ein Anwender mit einer Instanz eines Templates durchführen kann, werden in der Aktiondefinitionfile festgelegt.
+Standardmäßig handelt es sich dabei um folgende Aktionen.
+Dieser Begriffe werden am Beispiel einer Template-Instanz, die eine Datenbank provisioniert, erläutert.
+\begin{itemize}
+\item check\_status\\
+Prüft den Status der Template-Instanz, beispielsweise ob die Datenbank erreichbar ist.
+\item start\\
+Welche Schritte sollen beim Starten der Template-Instanz durchgeführt werden.
+Beispielsweise die Erzeugung von Tabellen.
+\item stop\\
+Welche Schritte sollen beim Stoppen der Template-Instanz durchgeführt werden.
+Beispielsweise das Löschen von Tabellen.
+\item deprovisioning\\
+Welche Schritte sollen beim Deprovisionieren der Template-Instanz durchgeführt werden.
+Üblicherweise wird die Template-Instanz zunächst gestoppt, am Beispiel der Datenbank ist dies nicht notwendig, da beim Löschen der Datenbank automatisch die Tabellen auch gelöscht werden.
+\end{itemize}
+
 Neben den Workflowdefinitionfiles muss in einer Aktion auch der Pfad der sogenannte \glqq Variableinputfile\grqq{} angegeben sein.
 
 \paragraph{\glqq Variableinputfile\grqq}\label{par:variable} ~\\
 In dieser Datei werden den in der Workflowdefinitionfile definierten Variablen Werte zugewiesen.
 Somit kann das Template für spezifische Anforderungen, z.B. einer speziellen Anwendung,  konfiguriert werden.
 
-\paragraph{\glqq Manifest-File\grqq} ~\\
-Hier wird dem Template mitgeteilt, an welchem Speicherort sich die oben genannten Dateien befinden.
-Da ein Template immer provisioniert werden kann, wird hier auch der Speicherort des Provisionierungsworkflows angegeben.
-Zusätzlich kann noch eine Beschreibung des Templates hinzugefügt werden.
-\cite{IBM.2019}
-
 Für die Provisionierung eines Templates müssen diesem eine sogenannte \glqq Domain\grqq{} und ein \glqq Tenant\grqq{} zugewiesen werden.
 Unter einer \glqq Domain\grqq{} ist ein System zu verstehen, das Systemressourcen in Ressourcenpools gliedert.
 \glqq Tenants\grqq{} sind die dazugehörigen Rechtegruppen, die dem Anwender den Zugriff auf und die Nutzung von zugeordneten Templates ermöglicht.
 \cite{Rotthove.2018}
 
-Dies umfasst zwei Lösungen, (Kommentar: die Überleitung mit "DIes umfasst" bekomme ich gerade nicht hin... auf was beziehst Du Dich mit "Dies"?) \glqq z/OS Provisioning Toolkit\grqq\footnote{siehe Absatz \ref{sssec:zospt}} und \glqq z/OS Management Facility\grqq\footnote{siehe Absatz \ref{sssec:zosmf}}.
-
-\subsection{z/OS Provisioning Toolkit}\label{sssec:zospt}
-
-
-Das z/OS Provisioning Toolkit, kurz z/OSPT bietet für das Provisionieren von Laufzeitumgebungen ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Templates bzw. "Images" sowie das Starten von Instanzen an. 
-Dabei orientiert sich z/OSPT an der Docker Commandline und spricht von Containern (auch wenn es in z/OS diese nicht gibt) und Images.
-
-https://docs.docker.com/engine/reference/commandline/docker/) (Kommentar: siehe auch....https://searchitoperations.techtarget.com/definition/Docker-image 
-A Docker image includes the elements needed to run an application as a container -- such as code, config files, environment variables, libraries and run time. If the image is deployed to a Docker environment it can then be executed as a Docker container. The docker run command will create a container from a given image.)
-(Kommentar: wird bei z/OSPT tatsächlich von Templates gesprochen, oder sind das in dem Zusammenhang immer Images?)
-In Abbildung \ref{fig:zospt_help} werden die möglichen Kommandozeilenbefehle mittels des Befehls \glqq zospt -h\grqq{} in einem Kommandofenster angezeigt. 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\textwidth]{figures/zospt_help_putty.png}
-	\caption{z/OSPT mögliche Kommandozeilenbefehle}
-	\label{fig:zospt_help}
-\end{figure}
-
-Mit z/OSPT werden zwei weitere Begriffe eingeführt.\\
-\paragraph{\glqq Images\grqq}~\\
-Dabei handelt es sich grundsätzlich um ein Template, jedoch kann dieses Template über eine weitere Inputdatei configuriert werden.
-Dadurch kann ein Template mit spezifischen Änderungen provisioniert werden, ohne dass ein neues Template erzeugt werden muss.
-Dies erhöht die Flexibilität der Templates. 
-
-\paragraph{\glqq Container\grqq}~\\
-Dabei handelt es sich um eine Template-Instanz und ist damit die lauffähige Variante eines Templates.\footnote{Beschreibung in Absatz \ref{sssec:instance}}.
-(Kommentar: vlt. kannst Du hier erwähnen: mit RUN startet man ein Image und erzeugt einen Container, mit start stop managed man den Life Cycle, -images zeigt die verfügbaren Images an usw. 
-\cite{IBM.2019b}
+\glqq IBM Cloud Provisioning and Management for z/OS\grqq{} umfasst zwei Lösungen, \glqq z/OS Management Facility\grqq\footnote{siehe Absatz \ref{sssec:zosmf}} und \glqq z/OS Provisioning Toolkit\grqq\footnote{siehe Absatz \ref{sssec:zospt}}.
 
 \subsection{z/OS Management Facility}\label{sssec:zosmf}
 Der Funktionsumfang von z/OS Management Facility, kurz z/OSMF, umfasst Systemmanagementfunktionen
@@ -327,9 +329,45 @@ Dort können neue Templates über die Manifest-Files hinzugefügt werden.
 Es folgt, wie oben beschrieben, die Zuweisung einer \glqq Domain\grqq{} und eines \glqq Tenants\grqq{}.
 Anschließend kann das Template, falls es keine Fehler beinhaltet, veröffentlicht werden.
 Es ist zu empfehlen vorher einen \glqq Test Run\grqq{} durchzuführen.
-Dabei wird eine Instance (Kommentar: Instanz oder Instance?) testweise provisioniert.
-(Kommentar: Du beschreibst hier das Verwalten von Templates mit z/OSMF viel ausführlicher als mit z/OSPT, hier würde ich beides gleichwertig aufzeigen. Auch wenn danach irgendwann die Entscheidung gefällt wird, nur z/OSMF weiter zu verfolgen, kommt z/OSPT ja noch häufig vor. Bei der Vorstellung sollte sich die spätere Beurteilung noch nicht niederschlagen)
+Dabei wird eine Instanz testweise provisioniert.
 Diese Test-Template-Instanz verhält sich genauso wie eine Instanz, die aus einem veröffentlichten Template erzeugt wurde. 
-Somit können  das Template und die in der Aktiondefintionfile definierten Aktionen vor der Veröffentlichung getestet werden.
-(Kommentar: ist das das gleiche wie der "RUN" von z/OSPT?)
+Somit können das Template und die in der Aktiondefintionfile definierten Aktionen vor der Veröffentlichung getestet werden.
 \cite{Rotthove.2018}
+
+
+\subsection{z/OS Provisioning Toolkit}\label{sssec:zospt}
+Das z/OS Provisioning Toolkit, kurz z/OSPT bietet für das Provisionieren von Laufzeitumgebungen ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Templates bzw. \glqq Images\grqq{} sowie das Starten von Instanzen an. 
+z/OSPT orientiert sich an der Docker Commandline und spricht von Containern (auch wenn es in z/OS diese nicht gibt) und Images.
+\paragraph{\glqq Docker-Images\grqq}~\\
+Ein Docker-Image beschreibt die Vorlage für einen Docker-Container und beinhaltet alle Elemente, die für die Ausführung einer Anwendung als Container benötigt werden, so wie den Code, Konfigurationsdateien, Umgebungsvariablen, Bibliotheken und die Laufzeitumgebung.
+
+\paragraph{\glqq Docker-Container\grqq}~\\
+Mit dem Kommandozeilenbefehl \glqq docker run\grqq{} wird aus einem Docker-Image ein Docker-Container erzeugt.
+Ein Docker-Container beschreibt somit eine lauffähige Instanz eines Docker-Images.
+\cite{Vohra.2016}
+
+Im Vergleich dazu sind die Definitionen in z/OSPT folgende:
+\paragraph{\glqq z/OSPT-Images\grqq}~\\
+Grundsätzlich ist ein z/OSPT-Image einem Docker-Image nicht unähnlich.
+Es verknüpft ein Template mit den enthaltenen Dateien (Actiondefinitionfile, Variableinputfile und die Manifest-File) mit einer weiteren nicht im Template enthaltenen Konfigurationsdatei, der sogenannten \glqq zosptfile\grqq.
+In dieser muss der Name des zugrundeliegenden Templates angeben werden.
+Danach ist es möglich die Werte aus der Variableinputfile zu überschreiben und so das Verhalten der Template-Instanz zu verändern.
+Dadurch kann ein Template mit spezifischen Änderungen provisioniert werden, ohne dass ein neues Template erzeugt werden muss.
+
+\paragraph{\glqq z/OSPT-Container\grqq}~\\
+Die Beziehung zwischen einem z/OSPT-Container und einem z/OSPT-Image ist die gleiche wie zwischen einem Docker-Container und einem Docker-Image.
+Ein z/OSPT-Container entspricht einer Template-Instanz, die mit Hilfe eines z/OSPT-Images gestartet wurde.
+
+Um nun einen z/OSPT-Container bereitzustellen, muss ein Template zur Verfügung stehen.
+Es ist von Vorteil, wenn diesem über die z/OSMF Oberfläche bereits eine Domain und ein Tenant zugewiesen worden sind, da es ohne die z/OSMF Oberfläche nicht ohne weiteres möglich ist dies zu Lösen.
+Anschließend kann mittels des Konsolenbefehls \glqq zospt build\grqq{} und der Angabe des Pfades der zosptfile ein Image erzeugt werden.
+Wird nun der \glqq zospt run\grqq-Befehl ausgeführt, wird ein z/OSPT-Container erzeugt (entspricht dem Provisionieren einer Template-Instanz) und gestartet (nur wenn die start-Aktion in der Actiondefinitionfile definiert wurde).
+Der Status von vorhanden Instanzen und Container kann ebenfalls mittels Kommandozeilenbefehlen abgefragt werden.
+\cite{IBM.2019b}
+In Abbildung \ref{fig:zospt_help} werden die möglichen Kommandozeilenbefehle mittels des Befehls \glqq zospt -h\grqq{} in einem Kommandofenster angezeigt. 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{figures/zospt_help_putty.png}
+	\caption{z/OSPT mögliche Kommandozeilenbefehle}
+	\label{fig:zospt_help}
+\end{figure}
