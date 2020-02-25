@@ -202,31 +202,35 @@ Ist der \glqq Type\grqq{} CICS,  muss der Name der Transaktion angegeben werden,
 \cite{Aranha.2013}
 
 \section{\glqq IBM Cloud Provisioning and Management for z/OS\grqq}
-Die Verwaltung von Subsystemen ist mit vielen manuellen Schritten verbunden.\footnote{Analyse des aktuellen Bereitstellungsprozesses, siehe in Absatz \ref{sec:aktbereit}}
-Betreut werden die einzelnen Subsysteme über alle Stages hinweg von eigens dafür entstandenen Administratorenteams.
+Die Verwaltung von Subsystemen von z/OS ist mit vielen manuellen Schritten verbunden.\footnote{Analyse des aktuellen Bereitstellungsprozesses, siehe in Absatz \ref{sec:aktbereit}}
+Betreut werden die einzelnen Subsysteme über alle Stages hinweg von eigens dafür zuständigen Administratorenteams.
 Die \glqq CICS Administration\grqq{} kümmert sich um alles rund um das CICS Subsystem.
 Die \glqq Db2 Administration\grqq{} stellt Datenbanken und Tabellen auf Anfrage der Entwickler bereit.
 Die \glqq IBM MQ Administration\grqq{} verwaltet die IBM MQ Ressourcen.
-Um diese Aufgabe zu bewältigen sind aktuell viele proprietäre und veraltete Tools im Einsatz.
+Um diese Aufgaben zu bewältigen, sind aktuell in erster Linie proprietäre Tools im Einsatz, die nicht der Erwartungshaltung an moderne Administrationstools entsprechen. (Kommentar: hier würde ich ein Bild einer "alten" Admin-Oberfläche als Beispiel zeigen, irgendeinen CICS-Dialog von den Admins, möglichst ISPF oder BMS )
 
-Für die Automation dieser Prozesse bietet die IBM \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} an.
-Dabei handelt es ich um ein bei der Installation von \glqq z/OS Management Facility\grqq{}\footnote{Siehe Absatz \ref{sssec:zosmf}}, kurz z/OSMF, mitgeliefertes Tool.
-Beide Tools sind innerhalb der DATEV e.G. vorhanden, allerdings werden sie sehr selten genutzt.
-Sie sind auch außerhalb der DATEV e.G. kaum verbreitet.
-Aus Sicht der IBM besteht Interesse an Erfahrungsberichten zur Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq.
+Für die Automation dieser Prozesse bietet die IBM das \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} an.
+Dabei handelt es ich um ein bei der Installation von \glqq z/OS Management Facility\grqq{}\footnote{Siehe Absatz \ref{sssec:zosmf}}, kurz z/OSMF, mitgeliefertes Tool. (Kommentar: z/OSMF ist Teil des Betriebssystems)
+z/OSMF ist wiederum Teil der Standardauslieferung des Betriebssystems z/OS.
+Es soll z/OS-Administration über moderne Oberfläschen und APIs  ermöglichen.
+z/OSMF (und damit auch „IBM Cloud Provisioning and Management for z/OS“) ist bei DATEV verfügbar, wird aber noch nicht flächendeckend eingesetzt, da die Administratoren den herkömmlichen Tools vertrauen und eine Umstellung immer auch mit Lernaufwand und Einarbeitung verbunden ist. (Kommentar: wieso beide: meinst Du das „IBM Cloud Provisioning and Management for z/OS“ und z/OSMF? Eigentlich ist das 1 Tool, ersteres ist Teil von zweiterem) 
+Sie sind auch außerhalb der DATEV e.G. kaum verbreitet. (Kommentar: über z/OSMF an sich bin ich mir nicht sicher, wenn dann könnte man höchstens sagen, das „IBM Cloud Provisioning and Management for z/OS“ ist noch nicht weit verbreitet). 
+Auch aus Sicht der IBM besteht Interesse an Erfahrungsberichten zur Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq.
 So wurde im Rahmen der neunzehnten \glqq AMC\grqq{}\footnote{Academic Mainframe Consortium e.V.} Tagung im IBM Client Center Böblingen am 16.01.2020 um ca. 14:30  bei einem ca. 30 minütigen Vortrag ein Arbeitsstand dieser Arbeit vorgestellt.
 Die Agenda der Veranstaltung ist im Anhang \ref{app:AMC} zu finden.
 Der AMC e.V. ist ein Förderverein für die akademische Ausbildung auf dem Mainframe.\footnote{\cite{Amc.23.2.2020}}
 Neben Vertretern der IBM nahmen an der Tagung Vertreter von Hochschulen und verschiedenen Unternehmen teil.
 Der Vortrag \glqq kam ja sehr gut an und hat auch später noch zu Gesprächen geführt\grqq\footnote{AMC Vorstand Ernst Lugert, 20.1.2020}.
-Daraus lässt sich ableiten, dass sich neben der DATEV e.G. und der IBM auch andere Firmen für die automatisierte Provisionierung von z/OS Middleware mit \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} interessieren.
+(Kommentar: ist das Zitat nur das "kam ja sehr gut an" oder gehört auch der Teil "hat auch später noch zu Gesprächen geführt"? Der zweite Teil scheint nicht aus einem Gespräch zu stammen. d.h. hier bitte nochmal drauf schauen".)
+In den anschließenden Gesprächen wurde deutlich, dass sich neben der DATEV e.G. und der IBM auch andere Firmen für die automatisierte Provisionierung von z/OS Middleware mit \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} interessieren, aber noch kaum Erfahrung in dem Umfeld besteht.
 
 Bei \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} stehen die sogenannten \glqq Templates\grqq{} im Mittelpunkt.
+Dabei handelt es sich um eine Art Script. (Kommentar: kann man das so sagen?)
 Mit Hilfe eines Templates können Instanzen erzeugt werden.
 Diese Instanz kann eine oder mehrere verschiedene Subsystem-Instanzen enthalten.
-Dabei steht eine schnelle Provisionierung als auch Deprovisionierung von Instanzen im Vordergrund.
-Mittels Templates läuft diese automatisiert, verlässlich und ohne manuelle Abstimmungen ab.
-Dadurch ist die Bereitstellung einer Instanz wiederholbar, so kann die Instanz im Fehlerfall sicher neugestartet werden und muss nicht langlebig gepflegt werden.
+Dabei steht sowohl eine schnelle Provisionierung als auch Deprovisionierung von Instanzen durch den Entwickler im Vordergrund.
+Mittels Templates läuft beides automatisiert, verlässlich und ohne manuelle Abstimmungen ab.
+Die Bereitstellung einer Instanz ist wiederholbar, so kann die Instanz z.B. im Fehlerfall sicher neugestartet werden und muss nicht langlebig gepflegt werden.
 \\ Ein solches Template besteht aus drei Dateien:
 
 \paragraph{\glqq Aktiondefinitionfile\grqq} ~\\
@@ -246,7 +250,7 @@ Ein Workflow kann aus mehreren Steps bestehen.
 Die Steps werden in Definitionsreihenfolge ausgeführt.
 Allerdings können Bedingungen für die Durchführung eines Steps definiert werden.
 So ist es beispielsweise möglich, einen Step nur durchzuführen, wenn eine bestimmte Variable einen bestimmten Wert besitzt.
-Innerhalb eines Steps können sowohl interne und externe Scripte als auch JCLs und somit Programme ausgeführt werden.
+Innerhalb eines Steps können sowohl interne und externe Scripte als auch JCLs und somit z/OS Programme ausgeführt werden.
 Darüber hinaus besteht die Möglichkeit REST-Calls auszuführen.
 Durch ein XML Schema wird sichergestellt, dass die Workflowdefinitionfile keine syntaktischen Fehler beinhaltet.
 Sowohl die Variablendefinition als auch die Steps können in externe XML Dateien ausgelagert werden.
@@ -257,7 +261,7 @@ Neben den Workflowdefinitionfiles muss in einer Aktion auch der Pfad der sogenan
 
 \paragraph{\glqq Variableinputfile\grqq}\label{par:variable} ~\\
 In dieser Datei werden den in der Workflowdefinitionfile definierten Variablen Werte zugewiesen.
-Somit kann das Template konfiguriert werden.
+Somit kann das Template für spezifische Anforderungen, z.B. einer speziellen Anwendung,  konfiguriert werden.
 
 \paragraph{\glqq Manifest-File\grqq} ~\\
 Hier wird dem Template mitgeteilt, an welchem Speicherort sich die oben genannten Dateien befinden.
@@ -266,34 +270,44 @@ Zusätzlich kann noch eine Beschreibung des Templates hinzugefügt werden.
 \cite{IBM.2019}
 
 Für die Provisionierung eines Templates müssen diesem eine sogenannte \glqq Domain\grqq{} und ein \glqq Tenant\grqq{} zugewiesen werden.
-Unter einer \glqq Domain\grqq{} ist ein System zu verstehen, dass Systemressourcen in Ressourcenpools gliedert.
+Unter einer \glqq Domain\grqq{} ist ein System zu verstehen, das Systemressourcen in Ressourcenpools gliedert.
 \glqq Tenants\grqq{} sind die dazugehörigen Rechtegruppen, die dem Anwender den Zugriff auf und die Nutzung von zugeordneten Templates ermöglicht.
 \cite{Rotthove.2018}
 
-Dies umfasst zwei Lösungen, \glqq z/OS Provisioning Toolkit\grqq\footnote{siehe Absatz \ref{sssec:zospt}} und \glqq z/OS Management Facility\grqq\footnote{siehe Absatz \ref{sssec:zosmf}}.
+Dies umfasst zwei Lösungen, (Kommentar: die Überleitung mit "DIes umfasst" bekomme ich gerade nicht hin... auf was beziehst Du Dich mit "Dies"?) \glqq z/OS Provisioning Toolkit\grqq\footnote{siehe Absatz \ref{sssec:zospt}} und \glqq z/OS Management Facility\grqq\footnote{siehe Absatz \ref{sssec:zosmf}}.
 
 \subsection{z/OS Provisioning Toolkit}\label{sssec:zospt}
-z/OS Provisioning Toolkit, kurz z/OSPT, bietet ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Templates.
-In Abbildung \ref{fig:zospt_help} werden die möglichen Kommandozeilenbefehle mittels des Befehls \glqq zospt -h\grqq{} in einem Kommandofenster angezeigt.
+
+
+Das z/OS Provisioning Toolkit, kurz z/OSPT bietet für das Provisionieren von Laufzeitumgebungen ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Templates bzw. "Images" sowie das Starten von Instanzen an. 
+Dabei orientiert sich z/OSPT an der Docker Commandline und spricht von Containern (auch wenn es in z/OS diese nicht gibt) und Images.
+
+https://docs.docker.com/engine/reference/commandline/docker/) (Kommentar: siehe auch....https://searchitoperations.techtarget.com/definition/Docker-image 
+A Docker image includes the elements needed to run an application as a container -- such as code, config files, environment variables, libraries and run time. If the image is deployed to a Docker environment it can then be executed as a Docker container. The docker run command will create a container from a given image.)
+(Kommentar: wird bei z/OSPT tatsächlich von Templates gesprochen, oder sind das in dem Zusammenhang immer Images?)
+In Abbildung \ref{fig:zospt_help} werden die möglichen Kommandozeilenbefehle mittels des Befehls \glqq zospt -h\grqq{} in einem Kommandofenster angezeigt. 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{figures/zospt_help_putty.png}
 	\caption{z/OSPT mögliche Kommandozeilenbefehle}
 	\label{fig:zospt_help}
 \end{figure}
+
 Mit z/OSPT werden zwei weitere Begriffe eingeführt.\\
 \paragraph{\glqq Images\grqq}~\\
-Dabei handelt es sich grundsätzlich um ein Template, jedoch kann dieses Template über eine weitere Inputdatei verändert werden.
+Dabei handelt es sich grundsätzlich um ein Template, jedoch kann dieses Template über eine weitere Inputdatei configuriert werden.
 Dadurch kann ein Template mit spezifischen Änderungen provisioniert werden, ohne dass ein neues Template erzeugt werden muss.
-Dies erhöht die Flexibilität der Templates weiter.
+Dies erhöht die Flexibilität der Templates. 
 
 \paragraph{\glqq Container\grqq}~\\
-Dabei handelt es sich um eine Template-Instanz \footnote{Beschreibung in Absatz \ref{sssec:instance}}.
+Dabei handelt es sich um eine Template-Instanz und ist damit die lauffähige Variante eines Templates.\footnote{Beschreibung in Absatz \ref{sssec:instance}}.
+(Kommentar: vlt. kannst Du hier erwähnen: mit RUN startet man ein Image und erzeugt einen Container, mit start stop managed man den Life Cycle, -images zeigt die verfügbaren Images an usw. 
 \cite{IBM.2019b}
 
 \subsection{z/OS Management Facility}\label{sssec:zosmf}
-Der Funktionsumfang von z/OS Management Facility, kurz z/OSMF, umfasst Systemmanagementfunktionen in einer browserbasierenden Benutzeroberfläche, dargestellt in Abbildung \ref{fig:zosmf_welcome}.
-Zu diesen Funktionen zählt die Verwaltung von Workflows und Templates.
+Der Funktionsumfang von z/OS Management Facility, kurz z/OSMF, umfasst Systemmanagementfunktionen
+in einer browserbasierenden Benutzeroberfläche, dargestellt in Abbildung \ref{fig:zosmf_welcome}.
+Zu diesen Funktionen zählt auch die Verwaltung von Workflows und Templates.
 
 \begin{figure}[h]
 \centering
@@ -303,18 +317,19 @@ Zu diesen Funktionen zählt die Verwaltung von Workflows und Templates.
 \end{figure}
 
 Die linke Seite der Abbildung \ref{fig:zosmf_welcome} zeigt den Umfang der z/OSMF  Funktionen.
-Für diese Arbeit besitzt nur der Menüpunkt \glqq Cloud Provisioning\grqq{} Relevanz.
-Unter diesem Punkt sind die Funktionalitäten für die automatisierte Bereitstellung von Templates zu finden.
+Für diese Arbeit besitzt nur der Menüpunkt \glqq Cloud Provisioning\grqq{} Relevanz .
+Unter diesem Punkt sind die Funktionalitäten für die automatisierte Bereitstellung von Templates zu finden, und der Begriff "z/OSMF" wird im folgenden synonym für diese Lösung verwendet
 \cite{Rotthove.2018}
 
-Zuerst ist das \glqq Resource Management\grqq{} zu nennen.
-Hier werden die \glqq Domains\grqq{} und \glqq Tenants\grqq{} verwaltet.
+Unter dem Punkt \glqq Resource Management\grqq{} werden die \glqq Domains\grqq{} und \glqq Tenants\grqq{} verwaltet.
 Zur Verwaltung der Templates und Template-Instanzen kommen die \glqq Software Services\grqq{} zum Einsatz.
-Dort können neue Templates über die Manifest-File hinzugefügt werden.
-Dann muss, wie oben beschrieben, eine \glqq Domain\grqq{} und ein \glqq Tenant\grqq{} zugwiesen werden.
+Dort können neue Templates über die Manifest-Files hinzugefügt werden.
+Es folgt, wie oben beschrieben, die Zuweisung einer \glqq Domain\grqq{} und eines \glqq Tenants\grqq{}.
 Anschließend kann das Template, falls es keine Fehler beinhaltet, veröffentlicht werden.
 Es ist zu empfehlen vorher einen \glqq Test Run\grqq{} durchzuführen.
-Dabei wird eine Instance testweise provisioniert.
-Diese Template-Instanz verhält sich genauso wie eine Instanz, die aus einem veröffentlichten Template erzeugt wurde.
-Somit können damit das Template und die in der Aktiondefintionfile definierten Aktionen getestet werden.
+Dabei wird eine Instance (Kommentar: Instanz oder Instance?) testweise provisioniert.
+(Kommentar: Du beschreibst hier das Verwalten von Templates mit z/OSMF viel ausführlicher als mit z/OSPT, hier würde ich beides gleichwertig aufzeigen. Auch wenn danach irgendwann die Entscheidung gefällt wird, nur z/OSMF weiter zu verfolgen, kommt z/OSPT ja noch häufig vor. Bei der Vorstellung sollte sich die spätere Beurteilung noch nicht niederschlagen)
+Diese Test-Template-Instanz verhält sich genauso wie eine Instanz, die aus einem veröffentlichten Template erzeugt wurde. 
+Somit können  das Template und die in der Aktiondefintionfile definierten Aktionen vor der Veröffentlichung getestet werden.
+(Kommentar: ist das das gleiche wie der "RUN" von z/OSPT?)
 \cite{Rotthove.2018}
