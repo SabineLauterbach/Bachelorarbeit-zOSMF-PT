@@ -1,7 +1,7 @@
 \chapter{Realisierung}\label{ch:realisierung}
 In diesem Kapitel wird die Implementierung eines Templates zur Beantwortung der Forschungsfragen der Arbeit\footnote{Siehe Absatz \ref{sec:ziel}} beschrieben.
 Dazu wird nach der im Kapitel \ref{ch:vorgehensweise} beschriebenen Reihenfolge der Arbeitsschritte vorgegangen.
-Es ist noch einmal zu erwähnen, dass zunächst abzuwägen ist, welche Implementierungsvariante des „IBM Cloud Provisioning and Management for z/OS“ besser geeignet ist: z/OSPT oder z/OSMF.
+Es ist noch einmal zu erwähnen, dass zunächst abzuwägen ist, welche Implementierungsvariante des \glqq IBM Cloud Provisioning and Management for z/OS\grqq besser geeignet ist: z/OSPT oder z/OSMF.
 Die Provisionierung einer CICS-Instanz wird vorerst auf dem Testplex untersucht.
 Danach wird in weiteren Schritten zuerst eine Db2 Datenbank und schließlich IBM MQ Queues dem Bereitstellungsprozess hinzugefügt.
 Um einen Testablauf der DATEV-Rechnungsschreibung mit der so generierten Laufzeitumgebung durchführen zu können, muss das Template auch in der Entwicklungsstage verfügbar sein.
@@ -22,10 +22,9 @@ Aus der Tabelle \ref{tab:vglzosptzosmf} ergibt sich folgendes Fazit:\\
 z/OSPT ist durch den Einsatz von Images deutlich flexibler bezüglich der Konfigurationsmöglichkeiten der Templates.
 Jedoch ist die browserbasierende Schnittstelle von z/OSMF intuitiver als ein Kommandozeileninterface, dadurch fällt die Einarbeitung in automatisierte Bereitstellungsmechanismen einfacher.
 Hinzu kommt, dass innerhalb von z/OSPT die Zuweisung von Domains und Tenants nicht ohne weiteres möglich ist.
-Diese müssen in eine externe Konfigurationsdatei als Umgebungsvariablen aufgenommen werden. (Kommentar: ist das so schwierig,dass wir deshalb diese Lösung nicht weiter verfolgt haben? Klingt eigentlich ziemlich simpel. .. würde mich nicht überzeugen.
+Diese müssen in eine externe Konfigurationsdatei als Umgebungsvariablen aufgenommen werden.
 
-
-Diese beiden Gründe wurden als ausschlaggebend erachtet, um z/OSMF für die Beantwortung der Forschungsfragen dieser Arbeit heranzuziehen.
+Ausschlaggebender Grund für das Nutzen von z/OSMF für die Beantwortung der Forschungsfragen ist die browserbasierende Oberfläche.
 \begin{table}
 \centering
 \begin{tabularx}{\textwidth}{r|X|X}
@@ -57,7 +56,7 @@ Ziel war es, mit dem Tool vertraut zu werden und die grundsätzliche Lauffähigk
 Da es sich, wie in Kapitel \ref{ch:vorgehensweise} beschrieben, um ein mitgeliefertes Template handelt, sind alle benötigten Workflowdefinitionsfiles und Template Dateien vorhanden.
 Wie in Absatz \ref{sssec:zosmf} aufgezeigt, muss das Template in die Software Services von z/OSMF aufgenommen werden.
 Hierzu müssen die Template-und Workflow-Dateien in einem Unix Dateisystem auf dem Großrechner abgelegt sein. 
-Nach dem Aufnehmen werden dem Template noch eine Domain und ein Tenant zugewiesen. (Kommentar: woher kommen Domain und Tenant? wer hat die "bestimmt"? Wie sieht die Zuweisung aus?
+Nach dem Aufnehmen werden dem Template noch eine Domain und ein Tenant zugewiesen.\footnote{Siehe \ref{sec:tool}}
 
 Folgende Variablen sind in dem Variableinputfile nur mit Platzhaltern versehen und müssen für eine erfolgreiche Provisionierung ersetzt werden:
 \begin{table}[h]
@@ -80,15 +79,15 @@ DFH\_CICS\_HLQ & High-level qualifier von dem CICS Installationsort. \\
 \caption{Zu verändernde Variablen im \glqq cics\_getting\_started \grqq-Template}
 \label{tab:cgsvars}
 \end{table}
-Mit Hilfe der z/OSMF Oberfläche konnte das Template aktualisiert und somit die Änderungen übernommen werden. (Kommentar: klingt nach "hab ich einen Save gemacht", ist das nicht etwas zu sehr basic??)
 
 Als nächster Schritt wurde ein Testlauf und somit ein erster Versuch, das Template zu provisionieren, durchgeführt.
 Dabei kam es anfangs trotz Testplex-Umgebung zu Rechteproblemen, da die Anforderungen und Rahmenbedingungen der DATEV e.G. in dem standardisierten IBM Template natürlich nicht berücksichtigt waren, beispielsweise ist die Berechtigung für das Starten von Jobs von DATEV Vorgaben abhängig und CICS-Start-Mechanismen haben spezifische Anforderungen an die Eingabeparameter.
-Nach den notwendigen Anpassungen funktionierte das Provisonieren und die definierten Aktionen des \glqq cics\_getting\_started \grqq-Templates. (Kommentar: wie wurde das geprüft? Was war das Ergebnis? Ein CICS das man bei DATEV nicht nutzen konnte - war auch nicht das Ziel, weil es hier nur um das Handling in z/OSMF mit den Templates ging, oder ? ....)
+Nach den notwendigen Anpassungen wurde das \glqq cics\_getting\_started \grqq-Template provisioniert und die definierten Aktionen aus der Aktiondefinitionfile getestet.
+Dabei wurde sich auf das Nutzen der z/OSMF Oberfläche fokussiert und nicht auf die eigentliche Funktionsfähigkeit der CICS-Instanz. 
 
 \subsection{\glqq cics\_54\grqq-Template}
 Wie in Kapitel \ref{ch:vorgehensweise} bereits beschrieben, ermöglicht das \glqq cics\_54\grqq-Template komplexere Konfigurationsmöglichkeiten.
-Es mussten neben den in Tabelle \ref{tab:cgsvars} genannten Variablen noch folgende gesetzt werden. (Kommentar: welche folgenden?? meinst du Tabelle 5.3? 
+Es mussten neben den in Tabelle \ref{tab:cgsvars} genannten Variablen noch in Tabelle \ref{tab:c54vars} folgende Variablen gesetzt werden.
 Die Kurzbeschreibungen und die Beschreibungen aller weiteren Variablen, die im Standard Template vorhanden sind, ist unter \cite{Internetseite IBM} zu finden.
 
 \begin{table}[h]
@@ -124,8 +123,9 @@ Dennoch handelt es sich nur um eine IBM Standard CICS Instanz, die nicht mit ein
 \subsubsection{DATEV e.G. spezifischen CICS Template}\label{sssec:datevcics}
 Ziel dieses  Schritts war die Provisionierung einer funktionsfähigen DATEV e.G. spezifischen CICS Instanz. 
 In der im letzten Schritt provisionierten Standard IBM CICS-Instanz sind z.B. keine DATEV e.G. internen Transaktionen verfügbar.
-(Kommentar: meinst du so was wie xmon usw? das würde ich hier erwähnen, sonst kann man sich nicht so richtig vorstellen, was der Unterschied zu dem IBM Standard-CICS ist.)
-Dabei handelt es sich um interne Management-Transaktionen, mit denen z.B. Entwickler ihre fachlichen Transaktionen verwalten. Beispielhaft sei hier die Transaktion XMON zu erwähnen, ein DATEV proprietäres Auskunftssystem über CICS-Transaktionen, Programme, Dateien usw.) Dies ist unabhängig von einem automatisiert provisionierten CICS-System auch weiterhin notwendig.
+Dabei handelt es sich um interne Management-Transaktionen, mit denen z.B. Entwickler ihre fachlichen Transaktionen verwalten. 
+Beispielhaft sei hier die Transaktion XMON zu erwähnen, ein DATEV proprietäres Auskunftssystem über CICS-Transaktionen, Programme, Dateien usw..
+Dies ist unabhängig von einer automatisiert provisionierten CICS-Instanz auch weiterhin notwendig.
 
 Um dieses Template an die DATEV Umgebung anzupassen und letztendlich eine \glqq DATEV CICS Instanz \grqq{} zu provisionieren, wurden folgende Schritte durchgeführt.
 
@@ -171,10 +171,12 @@ So besitzt jede automatisch bereitgestellte CICS Instanz eine eigene CSD Datei.
 Durch dieses Vorgehen wird zudem sichergestellt, dass bei jeder Provisionierung die aktuellste Version der CSD Datei verwendet wird.
 So werden Änderungen, wie beispielsweise die Verfügbarkeit einer neueren CICS Version, an alle neu provisionierten Instanzen weitergegeben. (Kommentar:das ist ein Vorteil des Kopierens? versteh ich grad nicht)
 Neue Ressourcen, wie zum Beispiel eine Verbindung zu einem Db2 Subsystem, können so ohne Nebenwirkungen zu anderen CICS Instanzen in die CSD aufgenommen werden.
-Ein weiterer Vorteil ist, dass bei der Deprovisionierung der CICS-Instanz diese Kopie der Standard Datei ohne Nebenwirkungen gelöscht werden kann. (Kommentar: macht das Sinn? Ist die nicht für ein wiederholtes Provisionieren notwendig?)
+Ein weiterer Vorteil ist, dass bei der Deprovisionierung der CICS-Instanz diese Kopie der Standard Datei ohne Nebenwirkungen gelöscht werden kann.
 
-Um dies umzusetzen, musste ein JCL Job (Kommentar: Job oder Step?) geschrieben und in das Template eingebunden (Kommentar: korrekt?) werden, der den Kopiervorgang implementiert.
-Innerhalb der CSD mussten bestimmte Gruppen, Zeilen sieben, neun und zehn in Abbildung \ref{code:addCSD}, zu der CSD Liste der CICS Instanz hinzugefügt werden. (Kommentar: das hat aber nichst mehr mit dem Kopieren zu tun, oder? liest sich so)
+Um dies umzusetzen, wurden zunächst zwei JCL Jobs geschrieben und in die entsprechende Workflowdefinitionfile eingebunden.
+Einer für die Implementierung des Kopiervorgangs und einer zum Löschen dieser Kopie.
+Für die Anpassung der CSD der zu provisionierenden Instanz ist ein weiterer Job notwendig.
+Es mussten bestimmte Gruppen (Zeilen sieben, neun und zehn in Abbildung \ref{code:addCSD}) zu der CSD Liste der CICS Instanz hinzugefügt werden.
 Dabei handelt es sich um Ressourcen, die jede DATEV e.G. CICS Instanz benötigt.
 Die Reihenfolge ist relevant, da sie der Initialisierungsreihenfolge beim Startvorgang der CICS Instanz entspricht.
 Diese beiden Jobs wurde jeweils als neuer Step in den z/OSMF Workflow eingebunden.
