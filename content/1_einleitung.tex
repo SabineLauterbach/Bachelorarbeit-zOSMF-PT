@@ -6,31 +6,34 @@ Wieso wird sich im Jahre 2020 dennoch mit dieser Technologie beschäftigt?
 Und was genau ist ein Großrechner?
 
 In einem Satz ist ein Großrechner\footnote{Beschreibung im Absatz \ref{sec:mainframe} zu finden} ein leistungsstarkes, zentralisiertes Serversystem.
-In dieser Arbeit wird nur auf Mainframes aus dem Hause IBM eingegangen.
+In dieser Arbeit wird nur auf Mainframes aus dem Hause IBM, die sogenannte z-Plattform, eingegangen.
 Damit ist auch der Technologiestack festgelegt.
 Das verwendete Betriebssystem ist z/OS, darauf werden Middleware Produkte wie CICS\footnote{Anwendungsserver, CICS Beschreibung Absatz \ref{cics}}, das Datenbanksystem Db2\footnote{ Beschreibung Absatz \ref{sssec:db2}} sowie die Messaging Lösung \glqq IBM MQ\grqq{}\footnote{Beschreibung im Absatz \ref{sec:mq} zu finden} betrieben.
-Als Programmiersprachen werden z.B. COBOL, IBM Assembler, C und C++ verwendet.
-Seit ca. 1997 ist es theoretisch möglich Java auf dem Mainframe zu verwenden.\footnote{\cite{Steegmans.2003}}. (Habe hier versucht es irgendwie zu schaffen, dass klar wird dass es seit 1997 zwar möglich ist aber noch nicht wirklich genutzt wird)
+Als Programmiersprachen werden z.B. COBOL, IBM Assembler, C und C++ verwendet. 
+Seit ca. 1997 ist auch Java auf dem Mainframe verfügbar. \footnote{\cite{Steegmans.2003}}. (Habe hier versucht es irgendwie zu schaffen, dass klar wird dass es seit 1997 zwar möglich ist aber noch nicht wirklich genutzt wird )
+(Kommentar: ich würde hier nicht groß drüber schreiben. Es ist verfügbar und gut ist...)
 
 Der IBM Mainframe hat eine lange Geschichte.
-Vor mehr als fünfzig Jahren wurde der allererste Großrechner, das sog. \glqq System/360\grqq{} vorgestellt.
+Vor mehr als fünfzig Jahren wurde der erste Großrechner, das sog. \glqq System/360\grqq{} vorgestellt.
 Bis in die 90er Jahre spielte der IBM Mainframe eine Hauptrolle auf dem Computermarkt, dann gewannen zunehmend verteilte Client-Server-Systeme an Bedeutung.\footnote{\cite{Ceruzzi.2003}}
 Seitdem gilt der Mainframe bereits als \glqq  legacy\grqq{} und damit als "Altlast"\footnote{\cite{legacy.22.2.2020}}.
 
-Wieso also wird sich mit der Mainframe Technologie noch beschäftigt? Eine Antwort: Auf dem Mainframe werden geschäftskritische Anwendungen in der ganzen Welt gehostet.
+Wieso also wird sich mit der Mainframe Technologie noch beschäftigt? Eine Antwort: Auf dem Mainframe werden geschäftskritische Anwendungen in der ganzen Welt gehostet. (Kommentar: quelle: https://www.fintechfutures.com/2018/11/ibm-shows-off-three-new-bank-clients/ According to Big Blue, 92 of the world’s top 100 banks are running their core workloads on IBM Z – including 87% of all credit card transactions and 29 billion ATM transaction each year, and well over 30 billion transactions a day –10x the number of Google searches every day)
 So verarbeiten Großrechner auch heutzutage weltweit circa 1,2 Millionen CICS Transaktionen pro Sekunde.\footnote{\cite{IBM.2019}}
-Im Vergleich hierzu werden 63.000 Google Suchanfragen pro Sekunde abgesetzt. \footnote{\cite{Sullivan.2016}}
+Im Vergleich hierzu werden 63.000 Google Suchanfragen pro Sekunde abgesetzt.  \footnote{\cite{Sullivan.2016}}
 
 Aus der Kombination von hohem Workload, der Abhängigkeit von einem Hersteller (IBM) und dem als veraltet geltenden Technologiestack entstehen jedoch zunehmend Risiken.
 Es wird immer schwieriger, Nachwuchs in diesem Bereich zu finden.
 Zum einem, da Mainframe-Know How kaum noch an Universitäten gelehrt wird.
 Die Seite des Hochschulkomasses\footnote{\cite{internetagenturKolnFrankfurtsunzinetTYPO3Programmmierung.}} liefert z.B. weder für \glqq Mainframe\grqq{} noch für \glqq Großrechner\grqq{} einen Treffer.
-Zum anderen ist der demographische Faktor bei den Wissensträgern nicht zu vernachlässigen. Diese sind - wie die Technologien auf dem Mainframe - in die Jahre gekommen und erreichen das Rentenalter.
-Ein weiteres Problem ist, dass eine Firma, die einen IBM Großrechner mit z/OS betreibt, von dem oben genannten proprietären Technologiestack abhängig ist, dass heißt es existiert eine starke Hersteller- und Plattformabhängigkeit, z.B. in Bezug auf CICS, Db2, IBM-COBOL-Compiler, Assembler.
+Zum anderen ist der demographische Faktor bei den Wissensträgern nicht zu vernachlässigen. Diese sind - wie die Technologien auf dem Mainframe - in die Jahre gekommen und erreichen das Rentenalter. (KOmmentar: vlt. Quelle https://blog.infotelcorp.com/blog/articles/the-mainframe-skills-gap-is-widening-automation-can-save-us) 
+
+Ein weiteres Problem ist, dass eine Firma, die einen IBM Großrechner mit z/OS betreibt, von dem oben genannten proprietären Technologiestack abhängig ist, dass heißt, es existiert eine starke Hersteller- und Plattformabhängigkeit, z.B. in Bezug auf CICS, Db2, IBM-COBOL-Compiler, Assembler.
 
 Offensichtlich betreiben dennoch einige Firmen einen IBM Großrechner.
-Darunter zählen hauptsächlich Banken, Versicherungen, Fluggesellschaften usw..
-Der gemeinsame Nenner dieser Unternehmen ist, dass sich über die Jahre und Jahrzehnte enorme Investitionen auf dem Mainframe angesammelt haben.
+Darunter zählen hauptsächlich Banken, Versicherungen, Fluggesellschaften usw. 
+Der gemeinsame Nenner dieser Unternehmen ist, dass sich über die Jahre und Jahrzehnte enorme Investitionen auf dem Mainframe angesammelt haben.Darunter zählen hauptsächlich Banken, Versicherungen, Fluggesellschaften usw. (Kommentar: https://www.alliedmarketresearch.com/mainframe-market) 
+
 Die entstandenen Kernsysteme haben hohe Anforderungen an Massendatenverarbeitung, Sicherheitsstandards und Hochverfügbarkeit.
 All diese Punkte sprechen nach wie vor für die Nutzung eines Großrechners, z.B. auch bei der DATEV e.G..
 \cite{IBM.2014}
