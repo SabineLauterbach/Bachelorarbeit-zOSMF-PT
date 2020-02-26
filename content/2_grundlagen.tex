@@ -11,7 +11,7 @@ Diese einzelnen entkoppelten Services sind beispielsweise in Containern paketier
 Bekannt geworden ist hier der Ansatz von Docker\footnote{Glossar \ref{Docker Glossar link}}.
 Diese Container und somit die Anwendung können auf verschiedenen Cloud-Umgebungen, auch von unterschiedlichen Anbietern,  ausgeführt werden.
 Dort können bereitstehende Services für Datenhaltung, Security, Messaging usw. genutzt werden. 
-\cite{cloudnative.23.2.2020}\\
+\cite{.23.2.2020d}\\
 Eine moderne cloud-native Anwendung innerhalb der DATEV e.G. machen folgende Dinge aus:
 \begin{itemize}
 \item \glqq Cloud Foundry\grqq
@@ -30,13 +30,13 @@ D.h. eine Anwendung kann mit den benötigten Komponenten sicher von einer Entwic
 Um eine Anwendung in eine solche Stage bereitzustellen, bietet Cloud Foundry ein Kommandozeileninterface an.
 Neben der Bereitstellung können mit diesem Interface beispielsweise Anwendungen auch horizontal skaliert werden.
 Um die Breitstellung über mehrere Stages hinweg zu automatisieren kommt bei der DATEV e.G. eine auf Jenkins basierende CI/CD-Pipeline zum Einsatz.
-\cite{foundry.23.2.2020}
+\cite{.23.2.2020c}
 
 \subsection{\glqq CI/CD-Pipeline\grqq}\label{sec:cicd}
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{figures/ci-cd-flow-desktop_1.png}
-	\caption{Abgrenzung von Continuous Integration, Continuous Delivery und Continuous Deployment  (Quelle: \cite{cicdbild.25.2.2020})}
+	\caption{Abgrenzung von Continuous Integration, Continuous Delivery und Continuous Deployment  (Quelle: \cite{.25.2.2020d})}
 	\label{fig:cicd}
 \end{figure}
 
@@ -48,7 +48,7 @@ In Abbildung \ref{fig:ci} ist der Prozess dargestellt.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{figures/CI.png}
-	\caption{Continuous Integration Prozessaufbau Quelle: \cite{cibild.25.2.2020}}
+	\caption{Continuous Integration Prozessaufbau (Quelle: \cite{.25.2.2020e})}
 	\label{fig:ci}
 \end{figure}
 Eine Voraussetzung für den Einsatz von CI ist eine gemeinsame Sourceverwaltung.
@@ -239,7 +239,7 @@ Die Bereitstellung einer Instanz ist wiederholbar, so kann die Instanz z.B. im F
 Im der Manifest-File ist der Speicherpfad der sogenannten \glqq Aktiondefinitionfile\grqq{} und der sogenannten \glqq Variableinputfile\grqq{} angegeben.
 Erläuterungen zu diesen beiden Dateien folgt im Anschluss.
 Da ein Template immer provisioniert werden kann, wird hier auch der Speicherpfad des Provisionierungsworkflows angegeben.
-\cite{IBM.2019}
+\cite{.26.2.2020}
 
 Ein Workflow ist über eine XML Datei, die sogenannte \glqq Workflowdefinitionfile\grqq, definiert.
 Diese lässt sich grob in zwei Teile untergliedern:
@@ -262,7 +262,7 @@ Dadurch können Variablen an einer Stelle im Template definiert und in alle Work
 \cite{Rotthove.2018}
 
 Zusätzlich kann in der Manifest-File eine Beschreibung des Templates hinzugefügt werden.
-\cite{IBM.2019}
+\cite{.26.2.2020}
 \paragraph{\glqq Aktiondefinitionfile\grqq} ~\\
 Weitere optionale Aktionen, die ein Anwender mit einer Instanz eines Templates durchführen kann, werden in der Aktiondefinitionfile festgelegt.
 Standardmäßig handelt es sich dabei um folgende Aktionen.
@@ -282,6 +282,7 @@ Welche Schritte sollen beim Entfernen der Template-Instanz durchgeführt werden.
 \end{itemize}
 
 Neben den Workflowdefinitionfiles muss in einer Aktion auch der Pfad der sogenannte \glqq Variableinputfile\grqq{} angegeben sein.
+\cite{.26.2.2020}
 
 \paragraph{\glqq Variableinputfile\grqq}\label{par:variable} ~\\
 In dieser Datei werden den in der Workflowdefinitionfile definierten Variablen Werte zugewiesen.
