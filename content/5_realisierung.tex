@@ -88,7 +88,7 @@ Dabei wurde sich auf das Nutzen der z/OSMF Oberfläche fokussiert und nicht auf 
 \subsection{\glqq cics\_54\grqq-Template}
 Wie in Kapitel \ref{ch:vorgehensweise} bereits beschrieben, ermöglicht das \glqq cics\_54\grqq-Template komplexere Konfigurationsmöglichkeiten.
 Es mussten neben den in Tabelle \ref{tab:cgsvars} genannten Variablen noch in Tabelle \ref{tab:c54vars} folgende Variablen gesetzt werden.
-Die Kurzbeschreibungen und die Beschreibungen aller weiteren Variablen, die im Standard Template vorhanden sind, ist unter \cite{Internetseite IBM} zu finden.
+Die Kurzbeschreibungen und die Beschreibungen aller weiteren Variablen, die im Standard Template vorhanden sind, ist unter \cite{.26.2.2020b} zu finden.
 
 \begin{table}[h]
 \centering
@@ -169,7 +169,7 @@ Folgende Entscheidung wurde in Zusammenarbeit mit dem CICS Administratorenteam g
 Um Auswirkungen auf bereits im Einsatz befindliche Instanzen zu verhindern, wird die von den Kollegen gepflegte CSD-Datei bei jeder Provisionierung kopiert und mit bestimmten Namenskonventionen gespeichert.
 So besitzt jede automatisch bereitgestellte CICS Instanz eine eigene CSD Datei.
 Durch dieses Vorgehen wird zudem sichergestellt, dass bei jeder Provisionierung die aktuellste Version der CSD Datei verwendet wird.
-So werden Änderungen, wie beispielsweise die Verfügbarkeit einer neueren CICS Version, an alle neu provisionierten Instanzen weitergegeben. (Kommentar:das ist ein Vorteil des Kopierens? versteh ich grad nicht)
+Im Falle einer extra CSD Datei für alle provisionierten Instanzen müssten Änderungen, wie beispielsweise die Verfügbarkeit einer neueren CICS Version, an mehreren Stellen angepasst werden.
 Neue Ressourcen, wie zum Beispiel eine Verbindung zu einem Db2 Subsystem, können so ohne Nebenwirkungen zu anderen CICS Instanzen in die CSD aufgenommen werden.
 Ein weiterer Vorteil ist, dass bei der Deprovisionierung der CICS-Instanz diese Kopie der Standard Datei ohne Nebenwirkungen gelöscht werden kann.
 
@@ -191,13 +191,11 @@ Im \glqq cics\_54\grqq-Template beinhaltet diese ein Makro für die Validierung 
 Zusätzlich werden alle aus der Datei für die Eingabevariablen benötigten Variablenwerte in temporäre Zwischenvariablen eingefügt.
 Danach folgt die Definition des Jobs, diese setzt sich aus folgenden Hauptbestandteilen zusammen:
 
-\begin{samepage}
 \begin{itemize}
 \item Einbindung der benötigten Bibliotheken
 \item Einbindung der zuvor angelegten CICS spezifischen Dateien
 \item Definition der SIT Parameter
 \end{itemize}
-\end{samepage}
 
 Für das Einbinden der benötigten Bibliotheken und der zuvor angelegten CICS spezifischen Dateien ist nur das Hinzufügen weiterer DD-Statements notwendig.
 
@@ -206,7 +204,7 @@ Es handelt sich um den Code, der für das Einlesen der Variable  \glqq DFH\_REGI
 In dieser Variable werden die SIT Parameter als Komma separierter String angegeben.
 Für die Erzeugung eines DATEV e.G. spezifischen CICS wurde das ursprünglich in dem Template verwendete Makro für die Validierung von SIT Parametern beibehalten.
 Alles danach wurde zunächst durch eine zur Verfügung gestellten DATEV e.G. Standard JCL, für die Erzeugung eines CICS, ersetzt.
-Nach und nach wurde damit die für die DATEV eG spezifische CICS Provisionierung notwendige Logik, (siehe Abbildung \ref{gleiche abbildung wie oben}),  hinzugefügt .
+Nach und nach wurde damit die für die DATEV eG spezifische CICS Provisionierung notwendige Logik, (siehe Abbildung \ref{code:sitparams}),  hinzugefügt .
 Damit wurde die vorher statische DATEV e.G. Standard JCL für das Erstellen von CICS Instanzen durch die Verwendung von Template  Variablen flexibilisiert.
 
 \begin{minipage}{\linewidth}
@@ -238,7 +236,7 @@ In diesem Absatz wird die Provisionierung einer Db2 Datenbank beschrieben.
 In der Systemumgebung Testplex bedeutet dies die Provisionierung der Datenbank ohne Tabelle und Daten.
 
 Für die Erstellung einer Db2 Datenbank existiert innerhalb der DATEV e.G. eine REST-API.
-Wie im Absatz \ref{sssec:workflow} beschrieben, ist es möglich, innerhalb eines Workflow Steps einen REST-Request abzusenden.
+Wie im Absatz \ref{sec:tool} beschrieben, ist es möglich, innerhalb eines Workflow Steps einen REST-Request abzusenden.
 Der Code ist in Abbildung \ref{app:db2prov} im Anhang zu finden.
 So muss im Body des Requests unter anderem der Datenbankname und eine UserID übergeben werden.
 Der Code für das Löschen der Datenbank sieht ähnlich aus, nur handelt es sich in diesem Fall um einen DELETE-Request.
@@ -323,7 +321,7 @@ Dadurch ändert sich die Gruppe in Zeile acht im Codeabschnitt \ref{code:addCSD}
 Außerdem wurden sowohl in der Provisionierungs- als auch in der Deprovisionierungsdatei die Datenbanksteps auskommentiert und somit kommen diese nicht mehr zum Einsatz.
 
 \subsection{IBM MQ Anpassung}\label{ssec:mqentw}
-Da für die DATEV Rechnungsschreibung, wie im Absatz \ref{ssec:recharch} beschrieben, sehr viele gleichartige Queues benötigt werden, wurde für die Erstellung dieser von den IBM MQ Administratorenteam ein REXX Skript angefertigt.
+Da für die DATEV Rechnungsschreibung, wie im Absatz \ref{ssec:preis} beschrieben, sehr viele gleichartige Queues benötigt werden, wurde für die Erstellung dieser von den IBM MQ Administratorenteam ein REXX Skript angefertigt.
 Dies geschah unabhängig dieser Arbeit zum Zeitpunkt der Einführung des aktuellen DATEV Rechnungsschreibungsprozesses.
 Dieses Skript steht dieser Arbeit zur Verfügung.
 Für die Provisionierung IBM MQ Queues waren folgende Arbeitsschritte notwendig.
@@ -352,7 +350,7 @@ Hierfür musste der \glqq Define\grqq-Befehl für die Erstellung von Queues durc
 Die Logik für die Ermittlung der maximalen Queuetiefe und der maximalen Nachrichtenlänge wird dafür nicht mehr benötigt und konnte entfernt werden.
 
 Die durch die beiden Skripte erstellten Queues sind nur für den Datenaustausch zwischen der CICS Transaktion für die Preisermittlung und dem Batch Ablauf zuständig.
-Wie in Absatz \ref{ssec:recharch} beschrieben, benötigt der Ablauf noch weitere Queues.
+Wie in Absatz \ref{ssec:preis} beschrieben, benötigt der Ablauf noch weitere Queues.
 Da es sich hierbei um spezielle Queues handelt, wurde auf die im Absatz \ref{sssec:mqtplx} gezeigte Technik zurückgegriffen.
 Bei der Antwort-Queue für die Ermittlung der Listenpreise handelt es sich um eine Queue ohne besondere Parameter.
 Es werden noch zwei Trigger-Queues benötigt, die über Prozesse eine Transaktion im CICS starten.
