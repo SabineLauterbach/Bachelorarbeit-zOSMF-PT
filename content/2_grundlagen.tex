@@ -3,7 +3,7 @@ Um den Unterschied zwischen modernen cloud native Entwicklungsprozessen und dem 
 Dabei wird auch auf den dadurch ermöglichten Entwicklungsprozess, dessen Vorteile und Begrifflichkeiten eingegangen.
 Anschließend werden für die Beantwortung der Forschungsfragen relevanten Begriffe des Mainframe-Umfelds beleuchtet.
 
-\section{cloud-native bei der DATEV e.G.}\label{sec:cloudnative}
+\section{cloud-native bei DATEV e.G.}\label{sec:cloudnative}
 Eine cloud-native Anwendung ist eine speziell für das Cloud-Computing\footnote{Glossar \ref{Glossar}} konzipierte und entwickelte Anwendung.
 Oft werden damit Online-Anwendungen und mobile \glqq Apps\grqq entwickelt, für die häufig und hoch frequent neue Features bereitgestellt werden sollen. 
 Für solche Anwendung ist das Architekturpattern der sogenannten \glqq Microservices\grqq, weit verbreitet.
@@ -11,8 +11,6 @@ Diese einzelnen entkoppelten Services sind beispielsweise in Containern paketier
 Bekannt geworden ist hier der Ansatz von Docker\footnote{Glossar \ref{Docker Glossar link}}.
 Diese Container und somit die Anwendung können auf verschiedenen Cloud-Umgebungen, auch von unterschiedlichen Anbietern,  ausgeführt werden.
 Dort können bereitstehende Services für Datenhaltung, Security, Messaging usw. genutzt werden. 
-Dadurch ist eine schnelle Reaktion auf Markt- und Kundenanforderungen möglich.
-Eine geringe Herstellerabhängigkeit im Bezug auf den Cloud Anbieter ist dadurch außerdem gegeben.
 \cite{cloudnative.23.2.2020}\\
 Eine moderne cloud-native Anwendung innerhalb der DATEV e.G. machen folgende Dinge aus:
 \begin{itemize}
@@ -27,7 +25,7 @@ Im Vergleich zu SaaS, bei der ganze Anwendungen in einer Cloud zur Verfügung st
 Für die Verwaltung von Ressourcen bietet Cloud Foundry eine Weboberfläche, den sogenannten \glqq Marketplace\grqq, an.
 In diesem können mit wenigen Mausklicks Schnittstellen zu Services wie Datenbankmanagementsysteme, Messaging- oder Monitorlösungen zur Anwendung hinzugefügt werden.
 Diese Schnittstellen, auch \glqq Self-Service\grqq{} oder \glqq Service-Broker\grqq{} genannt, können mittels einer von Cloud Foundry zur Verfügung gestellten API selbst entwickelt werden.
-Ein Vorteil ist, dass sich Cloud Foundry um das Staging der Anwendungen kümmert.
+Außerdem kümmert sich Cloud Foundry um das Staging der Anwendungen.
 D.h. eine Anwendung kann mit den benötigten Komponenten sicher von einer Entwicklungs- in eine QS- bzw. Produktiv-Stage verschoben werden. 
 Um eine Anwendung in eine solche Stage bereitzustellen, bietet Cloud Foundry ein Kommandozeileninterface an.
 Neben der Bereitstellung können mit diesem Interface beispielsweise Anwendungen auch horizontal skaliert werden.
@@ -67,21 +65,11 @@ Zum anderen beinhalten diese Tests die Überprüfung, ob mit Fehlerbedingungen k
 Dabei werden Abhängigkeiten zu externen Ressourcen, wie beispielsweise einer Datenbank, außen vor gelassen.
 Wenn solche Ressourcen dennoch benötigt werden, müssen diese mit Hilfe eines sogenannten \glqq Mocking-Framework\grqq{} simuliert werden.
 Schließlich stellt der CI-Server die Ergebnisse dieser Test zur Verfügung.
-
-Continuous Integration sorgt dafür, dass individuelle Codeänderungen sofort nach der Integration in die Codebasis auf Korrektheit geprüft werden.
-Im Fehlerfall werden die Entwickler sofort automatisch benachrichtigt, verbunden mit regelmäßiger Integration führt das zu einer schnelleren und einfacheren Fehlerbehebung.
-Ein weiterer Vorteil ist, dass neben der Prüfung auf Korrektheit auch eine statische Codeanalyse möglich ist.
-Dadurch kann sichergestellt werden, dass es sich um sauberen Code handelt.
 \cite{Laster.2017}
 
 \paragraph{\glqq Continuous Delivery\grqq}~\\
 Bei Continuous Delivery werden die Änderungen, die vorher auf dem isolierten CI-Server getestet und integriert wurden, in eine Stage, z. B. in die Entwiclungsstage, automatisch übertragen.
-Hier werden dann weitere Tests, wie Integrationstests und Akzeptanztests, durchgeführt.
-Durch den sogenannten \glqq DevOps\grqq-Gedanken gewinnt bei Continuous Delivery \glqq Infrastructure-as-code\grqq{}\footnote{Infrastrukturdefinitionen in Dateien, die einer Sourceverwaltung gespeichert werden} an Bedeutung.
-
-DevOps heißt bei DATEV e.G., dass sich ein Entwicklerteam neben den Softwareentwicklern auch aus Infrastrukturentwickler, Tester und Fachberater zusammensetzt.
-Dieses Team kümmert sich während des gesamten Lebenszyklus' um die Anwendung.
-
+Hier werden weitere Tests, wie Integrationstests und Akzeptanztests, durchgeführt.
 Am Ende einer Continuous Delivery Pipeline steht ein theoretisch auslieferbarer Stand der Anwendung.
 Die Übergabe dieses Standes in die Produktion ist bei Continuous Delivery noch manuell umzusetzen.
 \cite{Laster.2017}

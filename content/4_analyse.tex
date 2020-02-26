@@ -1,8 +1,28 @@
 \chapter{Analyse}\label{ch:analyse}
-Im Folgendem wird der aktuelle Bereitstellungsprozess für die Laufzeitumgebung, dem dazugehörigen Datenbanksystem und einer Messaging Lösung getrennt voneinander dargestellt.
+Im Folgendem werden der Einsatz von cloud native bei der DATEV e.G. analysiert.
+Im Vergleich dazu wird der aktuelle Bereitstellungsprozess für die Laufzeitumgebung, dem dazugehörigen Datenbanksystem und einer Messaging Lösung erläutert.
 Anschließend erfolgt eine Beschreibung der Beispielanwendung \glqq DATEV-Rechnungsschreibung\grqq.
 Die dafür benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 1 aus der Abteilung, die für die DATEV-Rechnungsschreibung zuständig ist.
 Es wird vor allem der technische Aspekt beleuchtet.
+
+
+\section{Analyse von cloud native bei DATEV e.G.}
+Neben im Absatz \ref{sec:cloudnative} der technischen Umsetzung
+Dadurch ist eine schnelle Reaktion auf Markt- und Kundenanforderungen möglich.
+Eine geringe Herstellerabhängigkeit im Bezug auf den Cloud Anbieter ist dadurch außerdem gegeben.
+
+Continuous Integration sorgt dafür, dass individuelle Codeänderungen sofort nach der Integration in die Codebasis auf Korrektheit geprüft werden.
+Im Fehlerfall werden die Entwickler sofort automatisch benachrichtigt, verbunden mit regelmäßiger Integration führt das zu einer schnelleren und einfacheren Fehlerbehebung.
+Ein weiterer Vorteil ist, dass neben der Prüfung auf Korrektheit auch eine statische Codeanalyse möglich ist.
+Dadurch kann sichergestellt werden, dass es sich um sauberen Code handelt.
+
+Durch den sogenannten \glqq DevOps\grqq-Gedanken gewinnt bei Continuous Delivery \glqq Infrastructure-as-code\grqq{}\footnote{Infrastrukturdefinitionen in Dateien, die einer Sourceverwaltung gespeichert werden} an Bedeutung.
+
+DevOps heißt bei DATEV e.G., dass sich ein Entwicklerteam neben den Softwareentwicklern auch aus Infrastrukturentwickler, Tester und Fachberater zusammensetzt.
+Dieses Team kümmert sich während des gesamten Lebenszyklus' um die Anwendung.
+
+
+
 
 \section{Aktueller Bereitstellungsprozess}\label{sec:aktbereit}
 Die in diesem Absatz genannten Informationen stammen aus Gesprächen mit Mitarbeitern aus den jeweiligen Administratorenteams.
