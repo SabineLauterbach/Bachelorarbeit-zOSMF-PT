@@ -1,30 +1,49 @@
 \chapter{Analyse}\label{ch:analyse}
-Im Folgendem werden der Einsatz von cloud native bei der DATEV e.G. analysiert.
+Im Folgendem wird der Einsatz von cloud native bei der DATEV e.G. analysiert.
 Im Vergleich dazu wird der aktuelle Bereitstellungsprozess für die Laufzeitumgebung, dem dazugehörigen Datenbanksystem und einer Messaging Lösung erläutert.
 Anschließend erfolgt eine Beschreibung der Beispielanwendung \glqq DATEV-Rechnungsschreibung\grqq.
 Die dafür benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 1 aus der Abteilung, die für die DATEV-Rechnungsschreibung zuständig ist.
 Es wird vor allem der technische Aspekt beleuchtet.
 
 
-\section{Analyse von cloud native bei DATEV e.G.}
-Neben im Absatz \ref{sec:cloudnative} der technischen Umsetzung
-Dadurch ist eine schnelle Reaktion auf Markt- und Kundenanforderungen möglich.
-Eine geringe Herstellerabhängigkeit im Bezug auf den Cloud Anbieter ist dadurch außerdem gegeben.
+\section{Analyse von cloud native bei DATEV e.G.}\label{sec:analysecloud}
+Neben den im Absatz \ref{sec:cloudnative} beschriebenen Begriffe, \glqq cloud native\grqq, \glqq Cloud Foundry\grqq{} und \glqq CI/CD\grqq{} ist der sogenannte \glqq DevOps\grqq-Gedanke in diesem Zusammenhang bei der DATEV e.G. von Bedeutung.
+Laut dem Buch \glqq The Phoenix Project\grqq{} von Gene Kim\footnote{\cite{Kim.2014}} lassen sich die Werte und die Philosophie von DevOps in \glqq Three Ways\grqq{} erläutern.
 
-Continuous Integration sorgt dafür, dass individuelle Codeänderungen sofort nach der Integration in die Codebasis auf Korrektheit geprüft werden.
+\paragraph{\glqq The First Way\grqq} betrachtet den Fluss von der Entwicklung über die Middleware Verwaltung bis hin zum Kunden.
+Um diesen Fluss zu maximieren sollten möglichst kleine Änderungen in möglichst kleinen Arbeitsabschnitten entwickelt werden.
+Dabei helfen unter anderem Continuous Integration\footnote{Siehe Absatz \ref{sec:cicd}}, Continuous Delivery\footnote{Siehe Absatz \ref{sec:cicd}} und das automatische Erstellen von Laufzeitumgebungen nach Bedarf.
+
+\paragraph{\glqq The Second Way\grqq} betrachtet den Feedback-Fluss über alle Stages hinweg.
+Ziel dabei ist möglichst schnell Fehler zu erkennen und diese zu beheben oder gar zu vermeiden.
+Zur Erreichung dieses Ziel gehört unter anderen das Abschaffen der Schubladendenkweise.
+Ein Beispiel aus Entwicklersicht:\\
+\glqq Meine Anwendung läuft nicht... Ach da gibt es Probleme mit dem Webserver, dass werden die Kollegen der Administration schon lösen\grqq. (Selbst ausgedachtes Beipiel)
+
+\paragraph{\glqq The Third Way\grqq} betrachtet weniger den Prozess an sich, sondern eher das Schaffen einer Kultur.
+Eine Kultur die erlaubt Risiken einzugehen und aus Fehlern zu lernen, aber auch das Verständnis das Wiederholung und Übung Voraussetzung für einen guten Entwickler sind.
+Dabei ist ein hoher Grad an Vertrauen in das Team notwendig.
+
+Bei der DATEV e.G. äußert sich diese DevOps-Gedanke in eigenen sogenannten \glqq DevOps-Teams\grqq (STIMMT DAS????).
+Ein solches Team umfasst nicht nur Mitarbeiter für die Softwareentwicklung einer Anwendung sondern auch Mitarbeiter, die sich um die Middleware der Anwendung kümmern, die Testfälle für die Anwendung zur Verfügung stellen und Fachberater.
+Dem ganzen Team wird viel Vertrauen gegeben und somit kann es weitestgehend autonom, ohne viele Absprachen arbeiten.
+Dadurch steigt die Effektivität des Teams.
+
+Die Kombination mit einer automatisierten CI/CD-Pipeline birgt weitere Vorteile.
+So sorgt Continuous Integration dafür, dass individuelle Codeänderungen sofort nach der Integration in die Codebasis auf Korrektheit geprüft werden.
 Im Fehlerfall werden die Entwickler sofort automatisch benachrichtigt, verbunden mit regelmäßiger Integration führt das zu einer schnelleren und einfacheren Fehlerbehebung.
 Ein weiterer Vorteil ist, dass neben der Prüfung auf Korrektheit auch eine statische Codeanalyse möglich ist.
 Dadurch kann sichergestellt werden, dass es sich um sauberen Code handelt.
+Durch Continuous Delivery und Continuous Deployment kommen diese Änderungen voll automatisiert beim Kunden an.
+Dies führt auch zu einer Effizienzsteigerung.
 
-Durch den sogenannten \glqq DevOps\grqq-Gedanken gewinnt bei Continuous Delivery \glqq Infrastructure-as-code\grqq{}\footnote{Infrastrukturdefinitionen in Dateien, die einer Sourceverwaltung gespeichert werden} an Bedeutung.
-
-DevOps heißt bei DATEV e.G., dass sich ein Entwicklerteam neben den Softwareentwicklern auch aus Infrastrukturentwickler, Tester und Fachberater zusammensetzt.
-Dieses Team kümmert sich während des gesamten Lebenszyklus' um die Anwendung.
-
-
-
+Für die Bereitstellung der benötigten Laufzeitumgebung kommt bei DATEV e.G. die Cloud Foundry Distribution von \glqq pivotal\grqq{} zum Einsatz.
+Durch den zur Verfügung gestellten \glqq Marketplace\grqq{} können Laufzeitumgebungen effizient generiert werden.
+Eine automatisierte Bereitstellung ist mittels des Kommandozeileninterfaces und der Aufnahme in eine CI/CD-Pipeline möglich.
+So werden unter anderem isolierte Testumgebungen geschaffen.
 
 \section{Aktueller Bereitstellungsprozess}\label{sec:aktbereit}
+Um einen Vergleich zum automatisierten Bereitstellungsprozesses im cloud native-Umfeld ziehen zu können, wird im Folgenden der aktuell etablierte Prozess beschrieben.
 Die in diesem Absatz genannten Informationen stammen aus Gesprächen mit Mitarbeitern aus den jeweiligen Administratorenteams.
 Wie in Absatz \ref{sec:zosanw} beschrieben benötigt eine z/OS Anwendung zunächst eine Laufzeitumgebung, im Fall dieser Arbeit handelt es sich um CICS.
 
@@ -134,6 +153,8 @@ Natürlich ist ein parallelisierter Ablauf der einzelnen Teilprozesse möglich, 
 Ein weiterer Punkt ist, dass die Kommunikation beziehungsweise der Initiator für den Start des gesamten Prozesses meist per Zuruf stattfindet.
 So existiert für die erste Kontaktaufnahme kein Formular, keine Automation oder ähnliches.
 Zur Kommunikation wird auf E-Mail, Telefon oder mittels Terminen zurückgegriffen.
+
+Wird der Vergleich zu dem Bereitstellungsprozess im cloud native-Umfeld\footnote{Siehe Absatz \ref{sec:analysecloud}} gezogen, so steht dem automatisierten und dadurch effizienten cloud native Prozess, ein durch viele Absprachen langsamer und fehleranfälliger Prozess gegenüber.
 
 \section{DATEV-Rechnungsschreibung}\label{rechBesch}
 Für diese Arbeit wurde die DATEV-Rechnungsschreibung als Beispielanwendung herangezogen, weil sie folgenden Anforderungen entspricht.
