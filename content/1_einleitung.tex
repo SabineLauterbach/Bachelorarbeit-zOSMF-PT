@@ -26,7 +26,7 @@ Im Vergleich hierzu werden 63.000 Google Suchanfragen pro Sekunde abgesetzt.  \f
 Aus der Kombination von hohem Workload, der Abhängigkeit von einem Hersteller (IBM) und dem als veraltet geltenden Technologiestack entstehen jedoch zunehmend Risiken.
 Es wird immer schwieriger, Nachwuchs in diesem Bereich zu finden.
 Zum einem, da Mainframe-Know How kaum noch an Universitäten gelehrt wird.
-Die Seite des Hochschulkompasses\footnote{\cite{.09.02.2020}} (Kommentar: heißt das kompass??) liefert z.B. weder für \glqq Mainframe\grqq{} noch für \glqq Großrechner\grqq{} einen Treffer.
+Die Seite des Hochschulkompass\footnote{\cite{.09.02.2020}} liefert z.B. weder für \glqq Mainframe\grqq{} noch für \glqq Großrechner\grqq{} einen Treffer.
 Zum anderen ist der demographische Faktor bei den Wissensträgern nicht zu vernachlässigen. Diese sind - wie die Technologien auf dem Mainframe - in die Jahre gekommen und erreichen das Rentenalter.\footnote{\cite{.25.2.2020f}}
 
 Ein weiteres Problem ist, dass eine Firma, die einen IBM Großrechner mit z/OS betreibt, von dem oben genannten proprietären Technologiestack abhängig ist, dass heißt, es existiert eine starke Hersteller- und Plattformabhängigkeit, z.B. in Bezug auf CICS, Db2, IBM-COBOL-Compiler, Assembler.
@@ -46,7 +46,7 @@ So werden pro Tag circa 150.000 Batch Jobs\footnote{Beschreibung in Absatz \ref{
 Diese Last wird von circa 14.000 aktiven Modulen erzeugt.
 Wie in der Abbildung \ref{fig:Programmiersprachen} zu sehen ist, ist COBOL mit circa 46\% Prozent die am häufigsten verwendete Programmiersprache am Großrechner bei der DATEV e.G..
 Durch diese Module werden unter anderem im Monat circa 11 Millionen Lohnabrechnungen erstellt und circa eine Millionen Umsatzsteuer-Voranmeldungen durchgeführt. 
-2018 wurde mit den DATEV Produkten erstmals die Umsatz-MIlliarde erreicht. (Kommentar: Quelle einfügen)
+2018 wurde mit den DATEV Produkten erstmals die Umsatz-Milliarde erreicht.\footnote{\cite{.27.2.2020}}
 
 \begin{figure}
 \begin{tikzpicture}
@@ -77,12 +77,12 @@ Durch diese Module werden unter anderem im Monat circa 11 Millionen Lohnabrechnu
 \section{Problemstellung}\label{sec:probstell}
 Im Jahre 2020 ist der größte Konkurrent für den Mainframe die Cloud.
 Laut einer Vorhersage aus dem Jahr 2018\footnote{Statistik im Anhang \ref{app:itworkload}} soll im Jahre 2020 circa 79 Prozent des weltweiten Workloads in einer Cloud verarbeitet werden.
-Für die Entwicklung von neuen Online-Anwendungen im cloud-native Stil wurde bei der DATEV e.G. eine Platform-as-a-Service (PaaS)-Lösung geschaffen und neue DevOps Prozesse aufgebaut. (Kommentar: hier sollte schon ein Verweis auf die Definition von DevOps kommen, oder?)
+Für die Entwicklung von neuen Online-Anwendungen im cloud-native Stil wurde bei der DATEV e.G. eine Platform-as-a-Service (PaaS)-Lösung geschaffen und neue DevOps\footnote{Siehe Absatz \ref{sec:analysecloud}} Prozesse aufgebaut.
 Dies ist im Cloud-Zeitalter nötig, um mit einer verbesserten Entwicklungseffizienz und neuen Architekturen Anwendungen ("Apps") schneller auf den Markt bringen und auf Kundenanforderungen schneller reagieren zu können. Stichwort: Continuous Integration, COntinuous Delivery (CI/CD).
-EIn Baustein der effizientern Prozesse durch PaaS sind die sog. "Self Services".
+EIn Baustein der effizientern Prozesse durch PaaS sind die sog. \glqq Self Services\grqq.
 D.h., Entwicklerteams können sich über sog. \glqq Cloud Services\grqq, z.B. Datenbanken wie PostgreSQL, Mongo und Messaginglösungen wie Kafka entweder manuell über einen Marktplatz (siehe Abbildung \ref{fig:markt}) oder automatisiert per \glqq Build-Pipeline\grqq{} eine  Laufzeitumgebung für ihre Anwendung zusammenbauen.
 Eine genaue Beschreibung der Begrifflichkeiten erfolgt im Absatz \ref{sec:cloudnative}.
-Den Entwicklern steht, neben modernen Entwicklungsumgebungen (IDE) (Kommentar: Integrated Development Environment wie IntelliJ oder Eclipse) und einer Sourceverwaltung mit GIT, auch eine sog. \glqq Toolchain\grqq{} zur Verfügung. Diese beinhaltet Tools für Build, Test, Quality Gates und Deployment. 
+Den Entwicklern steht, neben modernen Entwicklungsumgebungen (IDE\footnote{Integrated Development Environment wie IntelliJ oder Eclipse}) und einer Sourceverwaltung mit GIT, auch eine sog. \glqq Toolchain\grqq{} zur Verfügung. Diese beinhaltet Tools für Build, Test, Quality Gates und Deployment. 
 Damit wird der Entwicklungsprozess automatisiert und man erhofft sich eine hohe Entwicklereffizient. (Kommentar: hier würde ich nach wie vor die Grafik von unserem go/cloud Sharepoint mit einbinden)
 
 Der Entwicklungsprozess für z/OS Anwendungen bei DATEV e.G. erscheint im Vergleich zu dieser PaaS-Lösung veraltet.
@@ -96,7 +96,6 @@ Diese stellte z.B. nur ein Syntaxhighlighting zur Verfügung.
 \label{fig:3270}
 \end{figure}
 Ein Meilenstein für die modernisierte z/OS Entwicklung bei DATEV war die Einführung von git im Jahr 2018 auch für z/OS Sourcen. 
-Das 
 Dieses weit verbreitete Standard-Tool ist im z/OS Umfeld tatsächlich eine entscheidende Neuerung.
 Dadurch wurde ein bis dato verwendetes eigenentwickeltes Tool für die Sourceverwaltung der z/OS Sourcen abgelöst.
 Dieses stellte nur ein sehr einfaches Versionierungskonzept ohne aus Git bekannte Features wie Merge, Branch usw. bereit. 
