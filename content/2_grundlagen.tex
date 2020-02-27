@@ -125,7 +125,7 @@ Software, die für den Kunden bereitsteht
 Für die Beantwortung der Forschungsfragen liegt der Fokus auf dem Erstellen (\glqq Provisionieren \grqq) einer anwendungsspezifischen Laufzeitumgebung mit einer Datenhaltung und Message Queuing auf der Entwicklungs-Stage.
 Als Laufzeitumgebung wird \glqq CICS\grqq, als Datenhaltung \glqq Db2\grqq{} und für das Message Queuing \glqq IBM MQ\grqq{} verwendet.
 Wie in Abbildung \ref{fig:archüber} dargestellt ist, sind mehrere Instanzen pro Subsystem möglich.
-Bei der DATEV e.G. existiert jedoch nur eine geringe Anzahl an Instanzen pro Subsystem. (Kommentar: hier wäre der Grund interessant, dh. wir könnten Jürgen Miehling oder Maderer mal fragen, warum das so ist. Wenn das so ist, weil der Aufwand, mehrere hinzustellen und zu administrieren, hoch wäre, dann wäre das wieder ein Argument für unsere automatisierte Provisionierung)
+Bei der DATEV e.G. wird die Anzahl an Instanzen pro Subsystem möglichst gering gehalten, um den Verwaltungsaufwand und den Aufwand bei Änderungen, beispielsweise bei einem Versionswechsel\footnote{circa alle eineinhalb Jahre erscheint eine neue CICS Version}, gering zu halten.
 Daraus folgt, dass sich, wie in der Problemstellung, Absatz \ref{sec:probstell}, bereits erwähnt, viele Anwendungen die gleichen Entwicklungs-CICS/Db2/IBM MQ Ressourcen teilen.
 Diese Instanzen sind langlebig, und müssen dahingehend gepflegt und gewartet werden, dass sie die Anforderungen für alle Anwendungen, die sich die Ressourcen teilen, abdecken. 
 
