@@ -1,20 +1,20 @@
 \chapter{Vorgehensweise}\label{ch:vorgehensweise}
-Für die Beantwortung der Forschungsfrage \glqq Ist es bei der DATEV e.G. möglich den Bereitstellungsprozess für z/OS Anwendung mit Hilfe des \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Tools an den cloud native Prozess anzunähern?\grqq{} werden zunächst die Vorteile des cloud native Prozesses bei der DATEV e.G. dargestellt.
-Um letztendlich eine mögliche Verbesserung des momentan in der DATEV e.G. etablierten Breitstellungsprozesses für die Middlewarekomponenten CICS, Db2 und IBM MQ feststellen zu können, werden diese analysiert.
+Für die Beantwortung der Forschungsfrage \glqq IIst es möglich, den Bereitstellungsprozess für z/OS Anwendung bei DATEV e.G. mit Hilfe des \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Tools an cloud native Prozesse anzunähern?\grqq{} werden zunächst die Vorteile des cloud native Prozesses bei der DATEV e.G. dargestellt.
+Um letztendlich eine mögliche Verbesserung des momentan in der DATEV e.G. etablierten Breitstellungsprozesses für die Middlewarekomponenten CICS, Db2 und IBM MQ bewerten zu können, wird dieser analysiert.
 
-Wie in Absatz \ref{sec:ziel} beschrieben wird für die Beantwortung der Forschungsfragen eine Beispielanwendung, die als Laufzeitumgebung CICS, als Datenbank Db2 und als Message Lösung IBM MQ verwendet, benötigt.
+Wie in Absatz \ref{sec:ziel} beschrieben, wird für die Beantwortung der Forschungsfragen eine Beispielanwendung, die als Laufzeitumgebung CICS, als Datenbank Db2 und als Message Lösung IBM MQ verwendet, benötigt.
 Hier bietet sich die \glqq DATEV Rechnungsschreibung\grqq{}\footnote{Beschreibung siehe Absatz \ref{rechBesch}} an.
 Dabei handelt es sich um eine legacy z/OS Anwendung, ein Teil dieser Anwendung erfüllt die oben genannten Kriterien.
 Um die genauen Anforderungen an die Middleware zu kennen, wurde dieser Teil analysiert.
 Anhand dieser Anforderungen soll mittels z/OSPT oder z/OSMF eine individuelle, auf die Anwendung zugeschnittene Laufzeitumgebung bereitgestellt werden.
-Konkret hat dies die Implementierung eines Templates zur Folge.
+Konkret verlangt dies die Implementierung eines Templates.
 Für die Entscheidung, ob z/OSPT oder z/OSMF zum Einsatz kommt, wurden die Vor- und Nachteile beider Lösungen gegenübergestellt.
 
-Im Folgenden wird speziell auf die Vorgehensweise bei der Implementierung dieses Templates eingegangen.\\
-Um die von allen Entwickler verwendeten Subsysteme der Entwicklungsstage bei eventuell auftretenden Fehler in der automatisierten Bereitstellung nicht zu stören, wurden die ersten Schritte auf dem Testplex durchgeführt.
-Die Anwendung kann auf dem Testplex nicht verprobt werden, da die Testdaten dort nicht verfügbar sind.
+Im Folgenden wird speziell auf die Vorgehensweise bei der Implementierung des Templates eingegangen.\\
+Um die von allen Entwicklern bei DATEV e.G. verwendeten Subsysteme der Entwicklungsstage bei eventuell auftretenden Fehler in der neuen, automatisierten Bereitstellung nicht zu beeinflussen, wurden die ersten Schritte auf dem Testplex durchgeführt.
+Die Anwendung selbst kann auf dem Testplex nicht verprobt werden, da die notwendigen Testdaten auf DB2 dort nicht verfügbar sind.
 Deshalb wird dort vorerst nur die Provisionierung der benötigten Middleware untersucht.
-Die Ziele der Nutzung des Testplexes sind das Sammeln von ersten Erfahrungen mit \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} und ein Template, das DATEV spezifische Middleware, also CICS, Db2 und IBM MQ Instanzen beinhaltet.
+Damit wird das Ziel verfolgt, erste Erfahrungen mit \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} zu sammeln und ein Template zu haben, das DATEV spezifische Middleware (Kommentar: würde ich so nciht schreiben, dann meint man, damit ist schon das Datev angepasste Template gemeint, das ist aber auf dem Testplex nicht das Ziel), also CICS, Db2 und IBM MQ Instanzen beinhaltet. 
 Da das CICS Subsystem als Laufzeitumgebung im Mittelpunkt der Subsysteme steht, werden zunächst folgende, von der IBM bei der Installation von z/OSMF mitgelierferten, CICS Templates untersucht:
 \begin{itemize}
 \item \glqq cics\_getting\_started\grqq
@@ -30,21 +30,22 @@ So entspricht die CICS Instanz einer minimal lauffähigen CICS Instanz nach IBM 
 Hierbei handelt es sich um ein Template, das eine vollumfängliche CICS Instanz nach IBM Standard mit der CICS Version 5.4 provisioniert.
 Es ermöglicht die Angabe von komplexen Konfigurationen.
 
-Mit den durch die Untersuchung dieser beiden Templates gesammelten Erfahrungen erfolgt die Implementierung eines an das DATEV e.G. Umfeld angepasstes CICS Template.
+Mit den durch die Untersuchung dieser beiden Templates gesammelten Erfahrungen erfolgt die Implementierung eines an das DATEV e.G. Umfeld angepassten CICS Templates.
 Ist die daraus erzeugte CICS Instanz funktionsfähig, wird die Provisionierung einer Db2 Datenbank und IBM MQ Queues nacheinander in das Template aufgenommen. 
-Dafür werden existierende, aktuell genutzte Services in das Template aufgenommen.
-Für die Provisionierung von Db2 Datenbanken existiert innerhalb der DATEV e.G. bereits eine REST-API.
+Für ein Erzeugen von DB2 und MQ existieren bei DATEV e.G. bereits einzelne, voneinander unabhängige Services der jeweiligen Administrations-Teams, die als Bausteine in das Template integriert werden können.
+Für die Provisionierung von Db2 Datenbanken existiert z.B. bereits eine REST-API.
 
 IBM MQ Queues werden mittels Standard IBM Jobs provisioniert.
+
 
 Nachdem eine CICS Instanz, eine Db2 Datenbank und IBM MQ Queues auf dem Testplex sowohl provisioniert als auch deprovisioniert werden können, folgt der nächste Schritt.
 Dabei handelt es sich um den Wechsel vom Testplex in die Entwicklungsstage.
 In der Entwicklungsstage sind alle Anwendungsdaten, die für Anwendungsttests notwendig sind, vorhanden.
 Somit kann hier die Integration der Beispielanwendung in die provisionierte Laufzeitumgebung sowie ein Testlauf stattfinden.
 
-Um ein Meinungsbild bezüglich des Einsatzen von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} zu bekommen, wurden mit Stakeholdern, also Mitarbeitern der Administratorenteams, Entwicklern und dem Technologiestrategieteam semi-strukturelle Interviews durchgeführt.
+Um ein Meinungsbild bezüglich des Einsatzen von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} bei DATEV e.G. zu bekommen, wurden mit Stakeholdern, also Mitarbeitern der Administratorenteams, Entwicklern und dem Technologiestrategieteam semi-strukturelle Interviews durchgeführt.
 Aus den Administratorenteams und von den Entwicklern wurden jeweils zwei Vertreter und aus dem Technologiestrategieteam ein Vertreter befragt.
-Es handelt sich hier um Experten in ihrem Arbeitsbereich, es ist zu beachten, dass hier nur eine geringe Anzahl von Kollegen für Befragungen zur Verfügung steht.
+Es handelt sich hier um Experten in ihrem Arbeitsbereich, es ist zu beachten, dass hier generell nur eine geringe Anzahl von Kollegen für Befragungen zur Verfügung steht.
 Es wurden semi-strukturelle Interviews gewählt um auf einzelne Antworten genauer eingehen zu können.
 Auf eine Transkription der Interviews wurde verzichtet, da nicht der genaue Verlauf der Interviews, sondern die Antworten auf die Fragen relevant sind.
 
