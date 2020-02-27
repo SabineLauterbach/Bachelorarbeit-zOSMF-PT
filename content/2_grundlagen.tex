@@ -20,7 +20,7 @@ Eine moderne cloud-native Anwendung innerhalb der DATEV e.G. machen folgende Din
 \item CI/CD-Pipeline
 \end{itemize}
 
-\subsection{\glqq Cloud Foundry\grqq}
+\subsection{\glqq Cloud Foundry\grqq}\label{ssec:cloudfoundry}
 Bei Cloud Foundry handelt es sich um eine quelloffene Platform-as-a-Service, kurz PaaS.
 Platform-as-a-Service, beschreibt neben Insfrastructure-as-a-Service, kurz IaaS und Software-as-a-Service, kurz SaaS, einen Grad an Auslagerung von IT-Systemen in die Cloud.
 Im Vergleich zu SaaS, bei der ganze Anwendungen in einer Cloud zur Verfügung stehen, und IaaS, bei der die automatisierte Bereitstellung von Infrastrukturkomponenten wie Netzwerk, Speicher usw. im Fokus steht, stellt eine PaaS-Lösung eine Plattform, die sich neben der Infrastruktur auch um das Betriebssystem, die Middleware und die Laufzeitumgebung kümmert, bereit.\footnote{\cite{ipsaas.25.2.2020}}
@@ -32,7 +32,9 @@ D.h. eine Anwendung kann mit den benötigten Komponenten sicher von einer Entwic
 Die notwendigen stagespezifischen Anpassungen werden konfigurativ beigesteuert.
 Um eine Anwendung in einer bestimmten Stage bereitzustellen, bietet Cloud Foundry ein Kommandozeileninterface an.
 Neben der Bereitstellung können mit diesem Interface beispielsweise Anwendungen auch horizontal skaliert werden.
-Um die Breitstellung über mehrere Stages hinweg zu automatisieren kommt bei der DATEV e.G. eine auf Jenkins basierende CI/CD-Pipeline zum Einsatz.
+Über die Programmiersprache groovy können diese Kommandozeilenbefehle in eine Jenkins basierende CI/CD-Pipeline aufgenommen werden.
+So kann die Bereitstellung über mehrere Stages hinweg automatisiert werden.
+Diese Methode wird bei der DATEV e.G. eingesetzt.
 \cite{.23.2.2020c}
 
 \subsection{\glqq CI/CD-Pipeline\grqq}\label{sec:cicd}
@@ -335,7 +337,8 @@ Somit können das Template und die in der Aktiondefintionfile definierten Aktion
 
 
 \subsection{z/OS Provisioning Toolkit}\label{sssec:zospt}
-Das z/OS Provisioning Toolkit, kurz z/OSPT bietet für das Provisionieren von Laufzeitumgebungen ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Templates bzw. \glqq Images\grqq{} sowie das Starten von Instanzen an. 
+Das z/OS Provisioning Toolkit, kurz z/OSPT bietet für das Provisionieren von Laufzeitumgebungen ein Kommandozeileninterface für die Bereitstellung und das Verwalten von Templates bzw. \glqq Images\grqq{} sowie das Starten von Instanzen an.
+Genau wie bei Cloud Foundry (Siehe Absatz \ref{ssec:cloudfoundry}) ermöglicht dieses die Einbindung in eine Jenkins basierende CI/CD-Pipeline.
 z/OSPT orientiert sich an der Docker Commandline und spricht von Containern (auch wenn es in z/OS diese nicht gibt) und Images.
 Zur Erläuterung werden die Begriffe hier  gegenüber gestellt.
 
@@ -351,7 +354,7 @@ Im Vergleich dazu sind die Definitionen in z/OSPT folgende:
 
 \paragraph{\glqq z/OSPT-Images\grqq}~\\
 Grundsätzlich ist ein z/OSPT-Image einem Docker-Image nicht unähnlich.
-Auch ein z/OSPT Image ist für die Erzeugung eines z/OSPT Containers zuständig und beinhaltet alle ELemente, die die ANwendung zur Laufzeit benötigt
+Auch ein z/OSPT Image ist für die Erzeugung eines z/OSPT Containers zuständig und beinhaltet alle Elemente, die die Anwendung zur Laufzeit benötigt
 Es verknüpft ein Template mit den enthaltenen Dateien (Actiondefinitionfile, Variableinputfile und die Manifest-File) mit einer weiteren nicht im Template enthaltenen Konfigurationsdatei, der sogenannten \glqq zosptfile\grqq.
 In dieser muss der Name des zugrundeliegenden Templates angegeben werden.
 Danach ist es möglich, die Werte aus der Variableinputfile zu überschreiben und so das Verhalten der Template-Instanz zu verändern.
