@@ -65,7 +65,6 @@ Hier liegt der zentrale Vorteil der Automatisierung.
 Bei jedem Bauen wird automatisch überprüft, ob das Ergebnis das erwartete ist.
 Voraussetzung dafür ist die oben beschriebene Paketierung der Anwendung mit der Laufzeitumgebung und den benötigten Komponenten. 
 
-
 Bei den Tests während der Continuous Integration handelt es sich um sogenannte \glqq Unittests\grqq.
 Dabei wird anhand vordefinierter Eingangsdaten die Ausgabe bestimmter Funktionen geprüft (Soll-Ist-Vergleich).
 Dazu gehört auch die Überprüfung, ob mit Fehlerbedingungen korrekt umgegangen wird.
@@ -75,7 +74,7 @@ Schließlich stellt der CI-Server die Ergebnisse dieser Tests (z.B. in einem Jen
 \cite{Laster.2017}
 
 \paragraph{\glqq Continuous Delivery\grqq}~\\
-Bei Continuous Delivery werden die Änderungen, die vorher auf dem isolierten CI-Server getestet und integriert wurden, in eine Stage, z. B. in die Entwiclungsstage, automatisch übertragen.
+Bei Continuous Delivery werden die Änderungen, die vorher auf dem isolierten CI-Server getestet und integriert wurden, in eine Stage, z. B. in die Entwicklungsstage, automatisch übertragen.
 Hier werden weitere Tests, wie Integrationstests und Akzeptanztests, durchgeführt.
 Am Ende einer Continuous Delivery Pipeline steht ein theoretisch auslieferbarer Stand der Anwendung.
 Die Übergabe dieses Standes in die Produktion ist bei Continuous Delivery noch manuell umzusetzen.
@@ -218,10 +217,6 @@ Ist der \glqq Type\grqq{} CICS,  muss der Name der Transaktion angegeben werden,
 
 \section{\glqq IBM Cloud Provisioning and Management for z/OS\grqq}\label{sec:tool}
 Die Verwaltung von Subsystemen von z/OS ist eine hochspezialisierte, teilweise manuelle Tätigkeit.\footnote{Analyse des aktuellen Bereitstellungsprozesses, siehe in Absatz \ref{sec:aktbereit}}
-Betreut werden die einzelnen Subsysteme über alle Stages hinweg von eigens dafür zuständigen Administratorenteams.
-Die \glqq CICS Administration\grqq{} kümmert sich um alles rund um das CICS Subsystem.
-Die \glqq Db2 Administration\grqq{} stellt Datenbanken und Tabellen auf Anfrage der Entwickler bereit.
-Die \glqq IBM MQ Administration\grqq{} verwaltet die IBM MQ Ressourcen.
 Um diese Aufgaben zu bewältigen, sind aktuell in erster Linie proprietäre Tools (siehe Abbildung \ref{fig:configalt} im Einsatz, die nicht der Erwartungshaltung an moderne Administrationstools entsprechen.
 
 \begin{figure}[h]

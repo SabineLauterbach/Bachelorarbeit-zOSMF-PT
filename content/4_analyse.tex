@@ -43,9 +43,11 @@ DIe automatisierte Bereitstellung ist mittels des Kommandozeileninterfaces und d
 So werden z.B. für jeden Entwickler isolierte Testumgebungen geschaffen.
 
 \section{Aktueller Bereitstellungsprozess}\label{sec:aktbereit}
-(Kommentar: hier würde ein Absatz reinpassen über die "Natur" von z/OS Anwendungen, die Monolithen sind und die nicht in schnellen Releasezyklen bereitgestellt werden, u.a. auch, weil sie viele Abhängigkeiten und Verzahnungen haben. Dadurch ist auch das Tseten schwieriger. Hier ist auch der Betrieb der MIddlewarekomponentn nicht Teil des Prouct teams sondern es esxistieren die geannnten Admin Teams.  existierenden Prozesse sind langsam und fehleranfällig, (hast du ja schon beschriebn...) .... usw. DIe Admins sind für die Systeme im Betrieb verantwortlich, deshalb achten sie auf die Systeme, haben sie im Griff, deshalb haben die auch zukünftig die hoheit über die templates usw. Dadurch wird klar, an welcher Ecke von DevOPs bzw. CI/CD die BA ansetzt. Warum das ganze nihct komplett umsetzbar ist...Das kann dann überleiten zu dem folgenden Beschreiben der PRovisionierungs
-Um einen Vergleich zum automatisierten Bereitstellungsprozesses im cloud native-Umfeld ziehen zu können, wird im Folgenden der aktuell etablierte Prozess für z/OS Anwendungen beschrieben.
-
+Im Vergleich zu den Product-Teams im cloud native Umfeld bei denen sich das Team selbst um den Betrieb der Middleware kümmert, verwalten im z/OS Umfeld eigen dafür entstandene Administratorenteams die Middleware - stage-übergreifend.
+Die \glqq CICS Administration\grqq{} kümmert sich um alles rund um das CICS Subsystem.
+Die \glqq Db2 Administration\grqq{} stellt Datenbanken und Tabellen auf Anfrage der Entwickler bereit.
+Die \glqq IBM MQ Administration\grqq{} verwaltet die IBM MQ Ressourcen.
+Um die Stellen, an denen das \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Tool helfen kann, ausfindig machen zu können, wird im Folgenden der aktuell etablierte Prozess für z/OS Anwendungen beschrieben.
 Die in diesem Absatz genannten Informationen stammen aus Gesprächen mit Mitarbeitern aus den jeweiligen Administratorenteams.
 Wie in Absatz \ref{sec:zosanw} beschrieben benötigt eine z/OS Anwendung zunächst eine Laufzeitumgebung, im Fall dieser Arbeit handelt es sich um CICS.
 
@@ -140,7 +142,7 @@ Die Queues werden anschließend manuell eingerichtet und stehen dem Entwicklerte
 Wird die Queue in Verbindung mit einem CICS verwendet, so sind weitere manuelle Schritte vom CICS Administratorenteam notwendig.
 Trotz des scheinbar schmalen Prozesses dauert der Ablauf unter der Annahme, dass alle Beteiligten verfügbar sind, nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
 
-\subsection{Zusammenfassung aktueller Bereitstellungsprozess}
+\subsection{Zusammenfassung aktueller Bereitstellungsprozess}\label{ssec:sumaktbereit}
 Wie in den drei Diagrammen, Abbildungen \ref{fig:aktcics}, \ref{fig:aktdb2} und \ref{fig:aktmq}, zu erkennen ist, ist der aktuelle Bereitstellungsprozess noch mit vielen manuellen Schritten verbunden.
 Außerdem ist der Hauptaufwand in den Administratorenteams angesiedelt.
 Das Entwicklerteam ist der Initiator des Ablaufs.
@@ -157,6 +159,15 @@ So existiert für die erste Kontaktaufnahme kein Formular, keine Automation oder
 Zur Kommunikation wird auf E-Mail, Telefon oder mittels Terminen zurückgegriffen.
 
 Wird der Vergleich zu dem Bereitstellungsprozess im cloud native-Umfeld\footnote{Siehe Absatz \ref{sec:analysecloud}} gezogen, so steht dem automatisierten und dadurch effizienten cloud native Prozess, ein durch viele Absprachen langsamer und fehleranfälliger Prozess gegenüber.
+Es ist festzustellen, dass die DATEV e.G. im Mainframe Umfeld noch weit vom DevOps-Gedanken entfernt.
+Product-Teams sind nicht vorhanden, die Administratorenteams sind für den Betrieb der Subsysteme verantwortlich und werden es in naher Zukunft auch weiterhin sein.
+
+Neben diesen Problemen im Bereitstellungsprozess ist die grundlegende Architektur einer z/OS Anwendung zu betrachten.
+Im Vergleich zur \glqq Microservices\grqq-Architektur, die im cloud native Umfeld zum Einsatz kommt\footnote{Siehe Absatz \ref{sec:cloudnative}}, sind klassische z/OS Anwendungen monolithisch aufgebaut.
+Außerdem haben sich über die Jahre viele Abhängigkeiten und Verzahnungen zwischen einzelnen Anwendungen gebildet.
+Diese hohe Koppelung zwischen den Modulen erhöht die Komplexität und erschwert das Testen dieser Anwendungen.
+Um das Testen effizienter zu gestalten und einen Schritt in Richtung DevOps, einer CI/CD-Pipeline und dadurch einer Verkürzung der Releasezyklen auch für monolithische z/OS Anwendungen zu gehen, wird mit Hilfe des \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Tools der Aspekt der automatisierten Bereitstellung von Laufzeitumgebungen für die Entwicklungsstage untersucht.
+Als Beispielanwendung dient ein Teil der z/OS Anwendung \glqq DATEV-Rechnungsschreibung\grqq.
 
 \section{DATEV-Rechnungsschreibung}\label{rechBesch}
 Für diese Arbeit wurde die DATEV-Rechnungsschreibung als Beispielanwendung herangezogen, weil sie folgenden Anforderungen entspricht.
