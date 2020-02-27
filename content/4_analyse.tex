@@ -1,6 +1,6 @@
 \chapter{Analyse}\label{ch:analyse}
 Im Folgendem wird der Einsatz von cloud native bei der DATEV e.G. analysiert.
-Im Vergleich dazu wird der aktuelle Bereitstellungsprozess für die Laufzeitumgebung, dem dazugehörigen Datenbanksystem und einer Messaging Lösung erläutert.
+Im Vergleich dazu, wird der aktuelle Bereitstellungsprozess für die Laufzeitumgebung, dem dazugehörigen Datenbanksystem und einer Messaging Lösung erläutert.
 Anschließend erfolgt eine Beschreibung der Beispielanwendung \glqq DATEV-Rechnungsschreibung\grqq.
 Die dafür benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 1 aus der Abteilung, die für die DATEV-Rechnungsschreibung zuständig ist.
 Es wird vor allem der technische Aspekt beleuchtet.
@@ -10,39 +10,42 @@ Neben den im Absatz \ref{sec:cloudnative} beschriebenen Begriffe, \glqq cloud na
 Laut dem Buch \glqq The Phoenix Project\grqq{} von Gene Kim\footnote{\cite{Kim.2014}} lassen sich die Werte und die Philosophie von DevOps in \glqq Three Ways\grqq{} erläutern.
 
 \paragraph{\glqq The First Way\grqq} betrachtet den Fluss von der Entwicklung über die Middleware Verwaltung bis hin zum Kunden.
-Um diesen Fluss zu maximieren sollten möglichst kleine Änderungen in möglichst kleinen Arbeitsabschnitten entwickelt werden.
+Um diesen Fluss zu optimieren, sollten möglichst kleine Änderungen in möglichst kleinen Arbeitsabschnitten entwickelt werden.
 Dabei helfen unter anderem Continuous Integration\footnote{Siehe Absatz \ref{sec:cicd}}, Continuous Delivery\footnote{Siehe Absatz \ref{sec:cicd}} und das automatische Erstellen von Laufzeitumgebungen nach Bedarf.
 
 \paragraph{\glqq The Second Way\grqq} betrachtet den Feedback-Fluss über alle Stages hinweg.
-Ziel dabei ist möglichst schnell Fehler zu erkennen und diese zu beheben oder gar zu vermeiden.
-Zur Erreichung dieses Ziel gehört unter anderen das Abschaffen der Schubladendenkweise.
+Ziel dabei ist, möglichst schnell Fehler zu erkennen und diese zu beheben oder gar zu vermeiden.
+Zur Erreichung dieses Ziels gehört unter anderem das Abschaffen der sog. "Schubladendenkweise".
 Ein Beispiel aus Entwicklersicht:\\
 \glqq Meine Anwendung läuft nicht... Ach da gibt es Probleme mit dem Webserver, dass werden die Kollegen der Administration schon lösen\grqq. (Selbst ausgedachtes Beipiel)
 
 \paragraph{\glqq The Third Way\grqq} betrachtet weniger den Prozess an sich, sondern eher das Schaffen einer Kultur.
-Eine Kultur die erlaubt Risiken einzugehen und aus Fehlern zu lernen, aber auch das Verständnis das Wiederholung und Übung Voraussetzung für einen guten Entwickler sind.
+Eine Kultur, die erlaubt Risiken einzugehen und aus Fehlern zu lernen, aber auch das Verständnis das Wiederholung und Übung Voraussetzung für einen guten Entwickler sind.
 Dabei ist ein hoher Grad an Vertrauen in das Team notwendig.
 
-Bei der DATEV e.G. äußert sich diese DevOps-Gedanke in eigenen sogenannten \glqq DevOps-Teams\grqq (STIMMT DAS????).
-Ein solches Team umfasst nicht nur Mitarbeiter für die Softwareentwicklung einer Anwendung sondern auch Mitarbeiter, die sich um die Middleware der Anwendung kümmern, die Testfälle für die Anwendung zur Verfügung stellen und Fachberater.
-Dem ganzen Team wird viel Vertrauen gegeben und somit kann es weitestgehend autonom, ohne viele Absprachen arbeiten.
+Bei der DATEV e.G. wird dieser DevOps-Gedanke durch sogenannte \glqq Product-Teams\grqq umgesetzt.
+In einem solchen Team kümmert man sich neben der eigentlichen Softwareentwicklung, Testmaßnahmen usw. auch um den Betrieb der Middleware, z.B. die im Cloud Native Umfeld üblichen noSQL Datenbanken wie Mongo oder PostgreSQL. 
+Dem ganzen Team wird viel Vertrauen gegeben und es soll weitestgehend autonom SOftware erstellen und betreiben können.
 Dadurch steigt die Effektivität des Teams.
 
 Die Kombination mit einer automatisierten CI/CD-Pipeline birgt weitere Vorteile.
 So sorgt Continuous Integration dafür, dass individuelle Codeänderungen sofort nach der Integration in die Codebasis auf Korrektheit geprüft werden.
-Im Fehlerfall werden die Entwickler sofort automatisch benachrichtigt, verbunden mit regelmäßiger Integration führt das zu einer schnelleren und einfacheren Fehlerbehebung.
+Im Fehlerfall werden die Entwickler sofort automatisch benachrichtigt. 
+Verbunden mit regelmäßiger Integration führt das zu einer schnelleren und einfacheren Fehlerbehebung.
 Ein weiterer Vorteil ist, dass neben der Prüfung auf Korrektheit auch eine statische Codeanalyse möglich ist.
-Dadurch kann sichergestellt werden, dass es sich um sauberen Code handelt.
-Durch Continuous Delivery und Continuous Deployment kommen diese Änderungen voll automatisiert beim Kunden an.
-Dies führt auch zu einer Effizienzsteigerung.
+Dadurch kann sichergestellt werden, dass der Code den gewünschten Qualitätskriterien entspricht.
+Durch Continuous Delivery und Continuous Deployment kommen diese Änderungen im Idealfall voll automatisiert beim Kunden an.
+Auch dies führt  zu einer Effizienzsteigerung.
 
-Für die Bereitstellung der benötigten Laufzeitumgebung kommt bei DATEV e.G. die Cloud Foundry Distribution von \glqq pivotal\grqq{} zum Einsatz.
-Durch den zur Verfügung gestellten \glqq Marketplace\grqq{} können Laufzeitumgebungen effizient generiert werden.
-Eine automatisierte Bereitstellung ist mittels des Kommandozeileninterfaces und der Aufnahme in eine CI/CD-Pipeline möglich.
-So werden unter anderem isolierte Testumgebungen geschaffen.
+Für die Bereitstellung der benötigten Laufzeitumgebung kommt bei DATEV e.G. die Cloud Foundry Distribution von \glqq pivotal\grqq{} als PaaS Plattform zum Einsatz.
+Durch den darin zur Verfügung gestellten \glqq Marketplace\grqq{} können Laufzeitumgebungen effizient "auf Knopfdruck" generiert werden.
+DIe automatisierte Bereitstellung ist mittels des Kommandozeileninterfaces und der Integration in eine CI/CD-Pipeline möglich.
+So werden z.B. für jeden Entwickler isolierte Testumgebungen geschaffen.
 
 \section{Aktueller Bereitstellungsprozess}\label{sec:aktbereit}
-Um einen Vergleich zum automatisierten Bereitstellungsprozesses im cloud native-Umfeld ziehen zu können, wird im Folgenden der aktuell etablierte Prozess beschrieben.
+(Kommentar: hier würde ein Absatz reinpassen über die "Natur" von z/OS Anwendungen, die Monolithen sind und die nicht in schnellen Releasezyklen bereitgestellt werden, u.a. auch, weil sie viele Abhängigkeiten und Verzahnungen haben. Dadurch ist auch das Tseten schwieriger. Hier ist auch der Betrieb der MIddlewarekomponentn nicht Teil des Prouct teams sondern es esxistieren die geannnten Admin Teams.  existierenden Prozesse sind langsam und fehleranfällig, (hast du ja schon beschriebn...) .... usw. DIe Admins sind für die Systeme im Betrieb verantwortlich, deshalb achten sie auf die Systeme, haben sie im Griff, deshalb haben die auch zukünftig die hoheit über die templates usw. Dadurch wird klar, an welcher Ecke von DevOPs bzw. CI/CD die BA ansetzt. Warum das ganze nihct komplett umsetzbar ist...Das kann dann überleiten zu dem folgenden Beschreiben der PRovisionierungs
+Um einen Vergleich zum automatisierten Bereitstellungsprozesses im cloud native-Umfeld ziehen zu können, wird im Folgenden der aktuell etablierte Prozess für z/OS Anwendungen beschrieben.
+
 Die in diesem Absatz genannten Informationen stammen aus Gesprächen mit Mitarbeitern aus den jeweiligen Administratorenteams.
 Wie in Absatz \ref{sec:zosanw} beschrieben benötigt eine z/OS Anwendung zunächst eine Laufzeitumgebung, im Fall dieser Arbeit handelt es sich um CICS.
 
