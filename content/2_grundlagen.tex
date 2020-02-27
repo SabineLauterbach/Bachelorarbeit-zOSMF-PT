@@ -9,9 +9,9 @@ Oft werden damit Online-Anwendungen und mobile \glqq Apps\grqq entwickelt, für 
 Für solche Anwendungen ist das Architekturpattern der sogenannten \glqq Microservices\grqq, weit verbreitet.
 Diese einzelnen, entkoppelten Services sind beispielsweise in Containern paketiert. 
 Bekannt geworden ist hier der Ansatz von Docker\footnote{Glossar \ref{Docker Glossar link}}.
-DIe Docker Container wird über ein Image beschrieben und beinhalte neben der Anwendung alles das, was die Anwendung an Komponenten zur Laufzeit benötigt, Bibliotheken, Dateien (Kommentar: Quelle https://www.dev-insider.de/was-sind-docker-container-a-597762/ 
-Somit kann die Anwend können auf verschiedenen "privat" und "public" Cloud-Umgebungen, auch von unterschiedlichen Anbietern, ausgeführt werden.
-Große Anbieter sind hier beispielsweise AWS (Amazon), Google, Microsoft Azure. (Kommentar: Quelle z.B: https://neuhandeln.de/im-ueberblick-die-groessten-anbieter-fuer-cloud-computing/) 
+Die Docker Container werden über Images beschrieben und beinhalte neben der Anwendung alles das, was die Anwendung an Komponenten zur Laufzeit benötigt, Bibliotheken, Dateien.\footnote{\cite{Vohra.2016}}
+Somit kann die Anwend können auf verschiedenen \glqq privat\grqq{} und \glqq public\grqq{} Cloud-Umgebungen, auch von unterschiedlichen Anbietern, ausgeführt werden.
+Große Anbieter sind hier beispielsweise AWS (Amazon), Google, Microsoft Azure.\footnote{\cite{.27.2.2020}}
 Dort können bereitstehende Services für Datenhaltung, Security, Messaging usw. genutzt werden. 
 \cite{.23.2.2020d}\\
 Eine moderne cloud-native Anwendung innerhalb der DATEV e.G. machen folgende Dinge aus:
@@ -55,7 +55,7 @@ In Abbildung \ref{fig:ci} ist der Prozess dargestellt.
 	\label{fig:ci}
 \end{figure}
 Eine Voraussetzung für den Einsatz von CI ist eine zentrale Sourceverwaltung.
-Bei der DATEV e.G. handelt es sich dabei um GIT. (Kommentar: Git-Schreibweise ist noch uneinheitlich)
+Bei der DATEV e.G. handelt es sich dabei um GIT.
 Nachdem ein Entwickler Änderungen am Code vorgenommen hat, lädt er diese in die Sourceverwaltung hoch.
 Dabei kann eine erste Überprüfung des Codes mittels statischer Codeanalyse durchgeführt werden.
 Dazu zählt unter anderem die Prüfung vorher definierter Coderichtlinien.
@@ -95,7 +95,7 @@ Darunter zählen unter anderem Datenbanksysteme und Anwendungsserver.
 \cite{Ebbers.2011}
 
 \section{Mainframe Anwendungen bei DATEV e.G.}\label{sec:zosanw}
-Das Betriebssystem des IBM Mainframes ist z/OS. (Kommentar: z/OS steht für zero downtime... Quelle -https://www.redbooks.ibm.com/redbooks/pdfs/sg246366.pdf)
+Das Betriebssystem des IBM Mainframes ist das für zero downtime stehende z/OS.\footnote{\cite{Ebbers.2011}}
 Darauf aufbauend benötigen klassische z/OS Anwendungen bestimmte Middleware.
 Bei der DATEV e.G. handelt es sich unter anderem um folgende Middlewarekomponenten:
 
@@ -122,11 +122,11 @@ Software, die für den Kunden bereitsteht
 \end{samepage}
 
 \section{Subsysteme / Middleware}
-Für die Beantwortung der Forschungsfragen liegt der Fokus auf dem Erstellen (\glqq Provisionieren \grqq) einer anwendungsspezifischen Laufzeitumgebung mit einer Datenhaltung und Message Queuing auf der Entwicklungs-Stage. (Komemntar Das mit dem Testplex würde ich erst in der Realsierung erwähnen. Es ist aber nicht der Fokus hier)
+Für die Beantwortung der Forschungsfragen liegt der Fokus auf dem Erstellen (\glqq Provisionieren \grqq) einer anwendungsspezifischen Laufzeitumgebung mit einer Datenhaltung und Message Queuing auf der Entwicklungs-Stage.
 Als Laufzeitumgebung wird \glqq CICS\grqq, als Datenhaltung \glqq Db2\grqq{} und für das Message Queuing \glqq IBM MQ\grqq{} verwendet.
 Wie in Abbildung \ref{fig:archüber} dargestellt ist, sind mehrere Instanzen pro Subsystem möglich.
 Bei der DATEV e.G. existiert jedoch nur eine geringe Anzahl an Instanzen pro Subsystem. (Kommentar: hier wäre der Grund interessant, dh. wir könnten Jürgen Miehling oder Maderer mal fragen, warum das so ist. Wenn das so ist, weil der Aufwand, mehrere hinzustellen und zu administrieren, hoch wäre, dann wäre das wieder ein Argument für unsere automatisierte Provisionierung)
-Daraus folgt, dass sich, wie in der Problemstellung, Absatz \ref{sec:probstell}, bereits erwähnt, viele Anwendungen die gleichen Entwicklungs-CICS/Db2/MQ Ressourcen teilen. (Kommentar: für CICS und DB2 stimmt das, aber für MQ?) 
+Daraus folgt, dass sich, wie in der Problemstellung, Absatz \ref{sec:probstell}, bereits erwähnt, viele Anwendungen die gleichen Entwicklungs-CICS/Db2/IBM MQ Ressourcen teilen.
 Diese Instanzen sind langlebig, und müssen dahingehend gepflegt und gewartet werden, dass sie die Anforderungen für alle Anwendungen, die sich die Ressourcen teilen, abdecken. 
 
 Diese einzelnen Subsysteme werden im Folgenden erläutert, hierzu dient Abbildung \ref{fig:archüber} als Überblick.
@@ -143,7 +143,7 @@ Das Customer Information Control System, kurz CICS, ist ein Applikationsserver f
 Ein Applikationsserver stellt eine Umgebung zur Verfügung, in der Anwendungen gehostet werden können.
 Dabei kümmert sich dieser unter anderem um Transaktionalität, Webkommunikation und Sicherheit.
 Hierfür stellen Applikationsserver eine API zur Verfügung.
-CICS hat  gegenüber anderen Anwendungsservern (Kommentar: Beispiel? Websphere? Tomcat?)  den Vorteil, dass es verschiedene Programmiersprachen unterstützt.
+CICS hat gegenüber anderen Anwendungsservern, wie zum Beispiel \glqq Apache Tomcat\grqq{} oder \glqq IBM WebSphere\grqq,  den Vorteil, dass es verschiedene Programmiersprachen unterstützt.
 Damit ist CICS ein Multi-Language Application Server und kann z.B. von COBOL, Assembler, Java und PLI Programmen genutzt werden.
 So können Programme innerhalb einer Anwendung in der für ihren Use-Case am besten geeigneten Sprache implementiert werden, für die Kommunikation zwischen den verschiedenen Sprachen stellt  CICS mit seinem erwähnten API die Funktionalität zur Verfügung.
 \cite{Rayns.2011}
@@ -152,7 +152,7 @@ Das CICS Subsystem einer Stage umfasst mehrere CICS Instanzen.
 
 \subsubsection{CICS Instanz} 
 Unter einer CICS Instanz ist ein einzelner Bereich, der auf dem z/OS Kernel aufsetzt, zu verstehen.
-Dieser Bereich ist mittels einer eindeutigen CICS ApplicationID gekennzeichnet und kann darüber explizit verwaltet (Kommentar: ist das richtig?) werden.
+Dieser Bereich ist mittels einer eindeutigen CICS ApplicationID gekennzeichnet und kann darüber explizit verwaltet werden.
 Eine CICS Instanz verwaltet mehrere CICS Transaktionen.
 
 Wenn in dieser Arbeit von dem CICS gesprochen wird, ist damit die CICS-Instanz  gemeint.
@@ -164,13 +164,17 @@ Eine Transaktion kann mehrere Programme unterschiedlicher Programmiersprachen um
 Über die TransaktionsID wird der Ablauf gestartet.
 Dies kann sowohl per Webanfrage oder per Messaging Queue als auch aus einem anderen Programm heraus oder manuell geschehen.
 In der Transaktion werden alle Änderungen, die Programme an Ressourcen, wie zum Beispiel einer Datenbank oder Dateien tätigen, protokolliert.
-So wird im Falle eines Fehlers die Möglichkeit eines Rollbacks (z.B. auf die in der Transaktion genutzte Datenbank) sichergestellt.
+So wird im Falle eines Fehlers die Möglichkeit eines Rollbacks, beispielsweise der in der Transaktion genutzten Datenbank, sichergestellt.
  \cite{Rayns.2011}
 
 \subsection{Db2}\label{sssec:db2}
 Db2 ist ein relationales Datenbanksystem, welches unter anderem als Subsystem eines z/OS Betriebssystems läuft.
 Einer Stage können mehrere Datenbanksysteme, auch Instanzen genannt, zugeordnet werden.
-In einer Instanz befinden sich die Datenbanken und Tabellen. (Kommentar: wie viele INstanzen haben wir in der Entwicklung?)
+In einer Instanz befinden sich die Datenbanken und Tabellen. 
+In der Entwicklungsstage sind das unter anderem \glqq DB0C\grqq{} und \glqq DB0T\grqq.
+DB0C wird als Sandbox betrieben, d.h. jeder Entwickler kann hier eigene Datenbanken erstellen und verwaltet.
+DB0T enthält von der Administration für die Entwickler verwaltete Datenbanken.
+Diese Datenbanken entsprechen in der Struktur den Datenbanken aus der Produktion und werden für Tests bezüglich Strukturänderungen usw. herangezogen.
 
 \subsection{IBM MQ}\label{sec:mq}
 IBM MQ ist eine Messaging-Lösung der IBM.
@@ -218,17 +222,23 @@ Betreut werden die einzelnen Subsysteme über alle Stages hinweg von eigens daf�
 Die \glqq CICS Administration\grqq{} kümmert sich um alles rund um das CICS Subsystem.
 Die \glqq Db2 Administration\grqq{} stellt Datenbanken und Tabellen auf Anfrage der Entwickler bereit.
 Die \glqq IBM MQ Administration\grqq{} verwaltet die IBM MQ Ressourcen.
-Um diese Aufgaben zu bewältigen, sind aktuell in erster Linie proprietäre Tools im Einsatz, die nicht der Erwartungshaltung an moderne Administrationstools entsprechen. (Kommentar: hier würde ich ein Bild einer "alten" Admin-Oberfläche als Beispiel zeigen, irgendeinen CICS-Dialog von den Admins, möglichst ISPF oder BMS )
+Um diese Aufgaben zu bewältigen, sind aktuell in erster Linie proprietäre Tools (siehe Abbildung \ref{fig:configalt} im Einsatz, die nicht der Erwartungshaltung an moderne Administrationstools entsprechen.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figures/Transaktionbearbeitenalt.PNG}
+\caption{Etablierte Konfigurationsoberfläche am Beispiel bei Änderung einer Transaktion}
+\label{fig:configalt}
+\end{figure}
 
 Für die Automation dieser Prozesse bietet die IBM das \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} an.
 Dabei handelt es ich um ein bei der Installation von \glqq z/OS Management Facility\grqq{}\footnote{Siehe Absatz \ref{sssec:zosmf}}, kurz z/OSMF, mitgeliefertes Tool.
 z/OSMF ist wiederum Teil der Standardauslieferung des Betriebssystems z/OS. 
-Es soll z/OS-Administration über moderne Oberfläschen und APIs  ermöglichen.
-(Kommentar: ich überlege gerade, ob der nächste Absatz nicht besser irgendwo anders aufgehängt werden sollte. Hier geht es um die Grundlagen des Tools, das was hier kommt ist quasi eine Bestätigung für die Relevanz der Forschungsfrage. Deshalb könnte man das so wie es ist vlt. noch umhängen - Zeilen 228 - 236)
+Es soll z/OS-Administration über moderne Oberflächen und APIs  ermöglichen.
 z/OSMF (und damit auch \glqq IBM Cloud Provisioning and Management for z/OS\grqq) ist bei DATEV verfügbar, wird aber noch nicht flächendeckend eingesetzt. Die Administratoren kennen und vertrauen auf ihre herkömmlichen Tools, und sehen in der Umstellung immer auch Lernaufwand und Risiko.
 \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} ist auch außerhalb der DATEV e.G. kaum verbreitet. 
 Deshalb besteht auch aus Sicht der IBM  Interesse an Erfahrungsberichten zur Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq.
-So wurde im Rahmen der neunzehnten \glqq AMC\grqq{}\footnote{Academic Mainframe Consortium e.V.} Tagung im IBM Client Center Böblingen am 16.01.2020 um ca. 14:30  (Kommentar: Uhrzeit??)  bei einem ca. 30 minütigen Vortrag ein Arbeitsstand dieser Arbeit vorgestellt.
+So wurde im Rahmen der neunzehnten \glqq AMC\grqq{}\footnote{Academic Mainframe Consortium e.V.} Tagung im IBM Client Center Böblingen am 16.01.2020  bei einem circa 30 minütigen Vortrag ein Arbeitsstand dieser Arbeit vorgestellt.
 Die Agenda der Veranstaltung ist im Anhang \ref{app:AMC} zu finden.
 Der AMC e.V. ist ein Förderverein für die akademische Ausbildung auf dem Mainframe.\footnote{\cite{.23.2.2020}}
 Neben Vertretern der IBM nahmen an der Tagung Vertreter von Hochschulen und verschiedenen Unternehmen teil.
@@ -238,17 +248,12 @@ In den anschließenden Gesprächen wurde deutlich, dass sich neben der DATEV e.G
 Bei \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} stehen die sogenannten \glqq Templates\grqq{} im Mittelpunkt.
 Mit Hilfe eines Templates können Instanzen erzeugt werden.
 Diese Instanz kann eine oder mehrere verschiedene Subsystem-Instanzen enthalten.
-Dabei steht sowohl eine schnelle Provisionierung, als auch Deprovisionierung von Instanzen durch den Entwickler im Vordergrund.
-(Kommentar: auch die näcshten 2 Zeilen sind eine Annahme und können am ENde zur Bewertung herangezogen werden. d.h das könnte man auch in vlt. in die Analyse mit rein nehmen)
-Mittels Templates läuft beides automatisiert, verlässlich, und ohne manuelle Abstimmungen ab.
-Die Bereitstellung einer Instanz ist wiederholbar, so kann die Instanz z.B. im Fehlerfall sicher neugestartet werden und muss nicht langlebig gepflegt werden.
-\\Das Template selbst ist eine Art "Verwaltungseinheit" und besteht aus drei Dateien:
+\\Das Template selbst ist eine Art \glqq Verwaltungseinheit\grqq{} und besteht aus drei Dateien:
 
 \paragraph{\glqq Manifest-File\grqq} ~\\
-Im  Manifest-File ist der Speicherpfad für das sogenannte \glqq Aktiondefinitionfile\grqq{} und das sogenannte \glqq Variableinputfile\grqq{} angegeben.
+Im Manifest-File ist der Speicherpfad für das sogenannte \glqq Aktiondefinitionfile\grqq{} und das sogenannte \glqq Variableinputfile\grqq{} angegeben.
 Erläuterungen zu diesen beiden Dateien folgen im Anschluss.
-Da ein Template immer provisioniert werden kann, wird hier auch der Speicherpfad des Provisionierungsworkflows angegeben.
-(Kommentar: ich finde die Formulierung schwierig, wäre es vlt. besser so: "für die Provisionierung des Templates ist auch die Angabe des Speicherpfads.... nötig)
+Ein Template benötigt zur Provisionierung einen dazugehörigen Provisionierungsworkflow, der Speicherpfad von diesem Workflow wird in der Manifest-File angegeben.
 \cite{.26.2.2020}
 
 Ein Workflow ist über eine XML Datei, das sogenannte \glqq Workflowdefinitionfile\grqq, definiert.
@@ -340,7 +345,6 @@ z/OSPT orientiert sich an der Docker Commandline und spricht von Containern (auc
 Zur Erläuterung werden die Begriffe hier  gegenüber gestellt.
 
 \paragraph{\glqq Docker-Images\grqq}~\\
-
 Ein Docker-Image beschreibt die Vorlage für einen Docker-Container und beinhaltet alle Elemente, die für die Ausführung einer Anwendung als Container benötigt werden, so wie den Code, Konfigurationsdateien, Umgebungsvariablen, Bibliotheken und die Laufzeitumgebung.
 
 \paragraph{\glqq Docker-Container\grqq}~\\
@@ -349,6 +353,7 @@ Ein Docker-Container beschreibt somit eine lauffähige Instanz eines Docker-Imag
 \cite{Vohra.2016}
 
 Im Vergleich dazu sind die Definitionen in z/OSPT folgende:
+
 \paragraph{\glqq z/OSPT-Images\grqq}~\\
 Grundsätzlich ist ein z/OSPT-Image einem Docker-Image nicht unähnlich.
 Auch ein z/OSPT Image ist für die Erzeugung eines z/OSPT Containers zuständig und beinhaltet alle ELemente, die die ANwendung zur Laufzeit benötigt
@@ -362,7 +367,6 @@ Die Beziehung zwischen einem z/OSPT-Container und einem z/OSPT-Image ist die gle
 Ein z/OSPT-Container entspricht einer Template-Instanz, die mit Hilfe eines z/OSPT-Images gestartet wurde.
 
 Um nun einen z/OSPT-Container bereitzustellen, muss ein Template zur Verfügung stehen.
-Es ist von Vorteil, wenn diesem über die z/OSMF Oberfläche bereits eine Domain und ein Tenant zugewiesen worden sind, dies ist ohne die z/OSMF Oberfläche nicht ohne weiteres möglich. (Kommentar: das ist doch eine Erkenntnis aus der Analyse oder Realisierung. Das gehört hier eigentlcih noch nicht hin, oder? kannst du darauf nicht verweisen?)
 Anschließend kann mittels des Konsolenbefehls \glqq zospt build\grqq{} und der Angabe des Pfades der zosptfile ein Image erzeugt werden.
 Wird nun der \glqq zospt run\grqq-Befehl ausgeführt, wird ein z/OSPT-Container erzeugt (entspricht dem Provisionieren einer Template-Instanz) und gestartet (nur wenn die start-Aktion in der Actiondefinitionfile definiert wurde).
 Der Status von vorhanden Instanzen und Container kann ebenfalls mittels Kommandozeilenbefehlen abgefragt werden.
