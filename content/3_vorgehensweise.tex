@@ -12,9 +12,9 @@ Für die Entscheidung, ob z/OSPT oder z/OSMF zum Einsatz kommt, wurden die Vor- 
 
 Im Folgenden wird speziell auf die Vorgehensweise bei der Implementierung des Templates eingegangen.\\
 Um die von allen Entwicklern bei DATEV e.G. verwendeten Subsysteme der Entwicklungsstage bei eventuell auftretenden Fehler in der neuen, automatisierten Bereitstellung nicht zu beeinflussen, wurden die ersten Schritte auf dem Testplex durchgeführt.
-Die Anwendung selbst kann auf dem Testplex nicht verprobt werden, da die notwendigen Testdaten auf DB2 dort nicht verfügbar sind.
+Die Anwendung selbst kann auf dem Testplex nicht verprobt werden, da die notwendigen Testdaten auf Db2 dort nicht verfügbar sind.
 Deshalb wird dort vorerst nur die Provisionierung der benötigten Middleware untersucht.
-Damit wird das Ziel verfolgt, erste Erfahrungen mit \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} zu sammeln und ein Template zu haben, das DATEV spezifische Middleware (Kommentar: würde ich so nciht schreiben, dann meint man, damit ist schon das Datev angepasste Template gemeint, das ist aber auf dem Testplex nicht das Ziel), also CICS, Db2 und IBM MQ Instanzen beinhaltet. 
+Damit wird das Ziel verfolgt, erste Erfahrungen mit \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} zu sammeln und ein Template zu provisionieren, das DATEV spezifische Middleware, also CICS, Db2 und IBM MQ Instanzen beinhaltet. 
 Da das CICS Subsystem als Laufzeitumgebung im Mittelpunkt der Subsysteme steht, werden zunächst folgende, von der IBM bei der Installation von z/OSMF mitgelierferten, CICS Templates untersucht:
 \begin{itemize}
 \item \glqq cics\_getting\_started\grqq
@@ -32,11 +32,10 @@ Es ermöglicht die Angabe von komplexen Konfigurationen.
 
 Mit den durch die Untersuchung dieser beiden Templates gesammelten Erfahrungen erfolgt die Implementierung eines an das DATEV e.G. Umfeld angepassten CICS Templates.
 Ist die daraus erzeugte CICS Instanz funktionsfähig, wird die Provisionierung einer Db2 Datenbank und IBM MQ Queues nacheinander in das Template aufgenommen. 
-Für ein Erzeugen von DB2 und MQ existieren bei DATEV e.G. bereits einzelne, voneinander unabhängige Services der jeweiligen Administrations-Teams, die als Bausteine in das Template integriert werden können.
+Für ein Erzeugen von Db2 und IBM MQ existieren bei DATEV e.G. bereits einzelne, voneinander unabhängige Services der jeweiligen Administrations-Teams, die als Bausteine in das Template integriert werden können.
 Für die Provisionierung von Db2 Datenbanken existiert z.B. bereits eine REST-API.
 
 IBM MQ Queues werden mittels Standard IBM Jobs provisioniert.
-
 
 Nachdem eine CICS Instanz, eine Db2 Datenbank und IBM MQ Queues auf dem Testplex sowohl provisioniert als auch deprovisioniert werden können, folgt der nächste Schritt.
 Dabei handelt es sich um den Wechsel vom Testplex in die Entwicklungsstage.
