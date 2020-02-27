@@ -7,22 +7,23 @@ Momentan werden die Prozesse und die Trigger Queues  statisch angelegt.
 Das heißt, dass sowohl Namen als auch die damit verknüpften Queueparameter fest hinterlegt sind, um nur ein Beispiel zu nennen.
 Besser wäre es, alle Parameter in der Eingabedatei des Templates anzugeben.
 Aus IBM MQ Sicht ist hinzuzufügen, dass die fehlende automatisierte Bereitstellung eines Queue Managers den gewünschten Effekt, einer weitgehende Automatisierung und Unabhängigkeit von der Administration, abschwächt.
+
 Während der Realisierung stellte sich ebenfalls heraus, dass ein Template, das mehrere Subsysteme beinhaltet und dadurch sehr anwendungsspezifisch ist, nicht für einen firmenweiten Einsatz geeignet ist.
 So ist zu empfehlen, dass für jedes Subsystem, also CICS, Db2 und IBM MQ, ein separates Template realisiert wird.
 
 Angenommen es besteht für jedes Subsystem ein Template und das IBM MQ Template beinhaltet die Provisionierung eines Queue Managers, so könnte jeder Entwickler seine eigene Instanzen der Templates besitzen und beispielsweise für eigene Tests nutzen.
 Dennoch wäre der ermöglichte Bereitstellungsprozess nicht optimal.
-So müsste für jede kleine Änderung an der Konfigurationsdatei ein neues Template erzeugt werden, siehe zweiter Fall im Abschnitt \ref{ssec:akttemp2fall}.
+So müsste für jede kleine Änderung an der Konfigurationsdatei ein neues Template erzeugt werden, siehe zweiter use-case im Abschnitt \ref{ssec:akttemp2fall}.
 Das dort genannte Beispiel einer CICS-Instanz und eindeutigen Application IDs wird hier aufgegriffen.
 Eine Möglichkeit diese Problem zu lösen, wäre einen Pool mit verfügbaren Application IDs bereitzustellen und dann mittels eines Programms eine ungenutzte Application ID zu bestimmen.
 Dieses Programm kann dann als Step in das Template aufgenommen werden.
 Jedoch müsste immer noch für jede kleine Änderung an der Konfigurationsdatei ein neues Template erzeugt werden.
 
 Hier schafft z/OSPT Abhilfe.
-Damit kann, wie in Absatz \ref{sssec:zospt} beschrieben, mit Hilfe einer Konfigurationsdatei das Template von außen gesteuert werden.
+Damit kann, wie in Absatz \ref{sssec:zospt} beschrieben, mit Hilfe einer Konfigurationsdatei das Template von außen gesteuert werden und es kommen Images zum Einsatz.
 Dadurch fällt das Kopieren des Template für den Mitarbeiter weg, dieser muss mittels des Kommandozeileninterfaces ein Image bauen und daraus einen Container erzeugen.
 Das Kommandozeileninterface hat einen weiteren Vorteil.
-Mit dessen Hilfe können Arbeitsschritte für die Provisionierung der Middleware in einen Jenkins-Ablauf aufgenommen werden.
+Mit dessen Hilfe können Arbeitsschritte für die Provisionierung der Middleware über groovy in einen Jenkins-Ablauf aufgenommen werden.
 Somit läuft der Prozess automatisiert ab und nähert sich modernen Entwicklungsabläufen wie denen aus der Cloud Native Entwicklung an.
 
 Angenommen es existieren jeweils ein CICS, ein Db2 und ein IBM MQ Template und diese sind so realisiert, dass sie firmenweit eingesetzt werden können.
@@ -39,7 +40,7 @@ Daran ist zu erkennen, dass von Seiten von z/OSMF beziehungsweise von IBM ebenfa
 
 Diese technische Umsetzung ermöglicht in Zukunft den in Diagramm \ref{fig:proneu} dargestellten Bereitstellungsprozess.
 Es ist zu erkennen, dass Verantwortung von den Administratorenteams an die Entwicklerteams übertragen wird.
-Dadurch wird Kommunikationsaufwand eingespart und einem Entwickler steht binnen weniger Minuten eine funktionsfähige Laufzeitumgebung für seine legacy z/OS Anwendung zur Verfügung.
+Dadurch wird Kommunikationsaufwand eingespart und einem Entwickler steht binnen weniger Minuten eine funktionsfähige Laufzeitumgebung in der Entwicklungsstage für seine legacy z/OS Anwendung zur Verfügung.
 Bei Problemen oder Beratungswunsch unterstützen die Administratorenteams weiterhin.
 Für die Realisierung dieser Lösung ist viel Zeitaufwand vor allem auf Seiten der Administration einzuplanen.
 

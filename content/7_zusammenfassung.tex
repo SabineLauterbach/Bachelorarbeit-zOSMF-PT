@@ -1,17 +1,40 @@
-\chapter{Zusammenfassung}\label{ch:zusammenfassung}
-Zusammenfassend lässt sich sagen, dass es generell möglich ist mit dem \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit Laufzeitumgebungen für legacy z/OS Anwendungen automatisiert bereitzustellen.
-Das funktionsfähige Template verkürzt den Bereitstellungsprozess deutlich.
-Durch den Abbau der Kommunikation zwischen den Abteilungen und nur einmaligem Erstellen der Skripte ist es zudem weniger fehleranfällig.
-Die Stakeholder sehen in diesem Template auch einen Mehrwert.
+\chapter{Zusammenfassung und Fazit}\label{ch:zusammenfassung}
+Zusammenfassend lässt sich sagen, dass es generell möglich ist mit \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} Laufzeitumgebungen für legacy z/OS Anwendungen automatisiert bereitzustellen.
+Wie aus Tabelle \ref{tab:zosvscn} zu erkennen ist, ist es in einem gewissen Grad auch möglich damit den Bereitstellungsprozess für z/OS Anwendungen bei DATEV e.G. an den cloud native Prozess anzunähern.
+
+\begin{table}[h]
+\centering
+\begin{tabularx}{\textwidth}{p{5cm}|X|X}
+& \glqq IBM Cloud Provisioning and Management for z/OS\grqq & cloud native \\
+\hline
+Produkt-Teams & nein & ja \\
+\hline
+automatisierte Bereitstellung von Laufzeitumgebungen in der: &  &  \\
+Entwicklungsstage & ja & ja\\
+Qualitätssicherungsstage & nein & ja\\
+Produktionsstage & nein & ja\\
+\hline
+CI/CD-Pipeline Unterstützung & ja, mit z/OSPT & ja \\
+\end{tabularx}
+\caption{Verlgeich von \glqq IBM Cloud Provisioning and Management for z/OS\grqq und cloud native im Bezug auf ihren Bereitstellungsprozess}
+\label{tab:zosvscn}
+\end{table}
+
+Die Annäherung beschränkt sich jedoch nur auf eine automatisierte Provisionierung von Laufzeitumgebungen in der Entwicklungsstage.
+Es werden noch keine Produkt-Teams gebildet, sondern auch mit den Einsatz von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} bleibt die Verwaltung und Überwachung der Middleware bei den Administratorenteams.
+
+Wird der z/OSMF Lösungsansatz genauer betrachtet, dann ist zu erkennen, dass dieser durch den Abbau der Kommunikation zwischen den Abteilungen und nur einmaligem Erstellen der Skripte weniger fehleranfällig und effizienter als der momentan etablierte Prozess ist.
 Jedoch ist es noch nicht perfekt.
 Der Bereitstellungsprozess ist noch immer mit einigen manuellen Schritten verbunden.
 So muss das Template manuell kopiert werden und Änderungen an der Konfiguration müssen innerhalb des Templates stattfinden.
 
 Hierfür wurde in der Arbeit eine Lösung mit Hilfe von z/OSPT beleuchtet.
-Diese sieht in einer Endausbaustufe eine einfache Einbindung des Templates in einen automatisierten Build-Prozess, zum Beipsiel mit Jenkins, vor.
-Außerdem würde der Einsatz von z/OSPT das Einbinden in den DATEV eG internen \glqq Marktplatz\grqq{} für Cloud Lösungen ermöglichen.
+Diese sieht in einer Endausbaustufe eine einfache Einbindung des Templates in einen automatisierten Build-Prozess, zum Beispiel mit Jenkins, vor.
+Außerdem würde der Einsatz von z/OSPT das Einbinden in den DATEV e.G. internen \glqq Marktplatz\grqq{} für Cloud Lösungen ermöglichen.
 Um diese Ziele zu erreichen muss noch viel Aufwand in die Gestaltung des Templates gesteckt werden.
 Zusätzlich müsste ein sogenannter \glqq Service Broker\grqq{} für die Einbindung der einzelnen Subsysteme in den \glqq Marktplatz\grqq{} implementiert werden.
-Diese beiden Lösungsansätze stoßen sowohl bei den Administratorenteams als auch beim involvierten Entwicklerteam auf fruchtbaren Boden.
-Dadurch wird eine Ähnlichkeit zum Cloud Native-Bereitstellungsprozesses hergestellt.
-Dies ist ein weiterer Schritt um dem Image eines veralteten Systems mit veralteten langsamen Prozesses zu entkommen.  
+z/OSPT ist dadurch dem cloud native Prozess näher als z/OSMF.
+
+Beide Lösungsansätze erzeugen bei den Stakeholdern, also den Entwicklerteams und den Administratorenteams einen Mehrwert und werden akzeptiert.
+Allgemein lässt sich sagen, dass die Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} ein kleiner Schritt in Richtung von DevOps, einer CI/CD-Pipeline und dadurch ein kleiner Schritt hin zur Verkürzung von Releasezyklen.
+Außerdem hilft dieser Schritt um dem Image eines veralteten Systems mit veralteten langsamen Prozesses zu entkommen.
