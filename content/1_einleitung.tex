@@ -20,7 +20,7 @@ Seitdem gilt der Mainframe bereits als \glqq  legacy\grqq{} und damit als \glqq 
 Wieso also wird sich mit der Mainframe Technologie noch beschäftigt? Eine Antwort: Auf dem Mainframe werden auch im Jahr 2020 geschäftskritische Anwendungen in der ganzen Welt gehostet.
 So verwenden laut IBM 92 der 100 weltweit führenden Banken für ihre Kernabläufe einen IBM Mainframe.
 Dies beinhaltet 87 Prozent aller Kreditkartentransaktionen und ca. 350.000 Transaktionen pro Sekunde.\footnote{\cite{.25.2.2020c}}
-Inklusiver dieser Transaktionen verarbeiten Großrechner heutzutage weltweit circa 1,2 Millionen CICS Transaktionen pro Sekunde.\footnote{\cite{.23.11.2019b}}
+Inklusive dieser Transaktionen verarbeiten Großrechner heutzutage weltweit circa 1,2 Millionen CICS Transaktionen pro Sekunde.\footnote{\cite{.23.11.2019b}}
 Im Vergleich hierzu werden 63.000 Google Suchanfragen pro Sekunde abgesetzt.  \footnote{\cite{.02.12.2019}}
 
 Aus der Kombination von hohem Workload, der Abhängigkeit von einem Hersteller (IBM) und dem als veraltet geltenden Technologiestack entstehen jedoch zunehmend Risiken.
@@ -29,7 +29,7 @@ Zum einem, da Mainframe-Know How kaum noch an Universitäten gelehrt wird.
 Die Seite des Hochschulkompass\footnote{\cite{.09.02.2020}} liefert z.B. weder für \glqq Mainframe\grqq{} noch für \glqq Großrechner\grqq{} einen Treffer.
 Zum anderen ist der demographische Faktor bei den Wissensträgern nicht zu vernachlässigen. Diese sind - wie die Technologien auf dem Mainframe - in die Jahre gekommen und erreichen das Rentenalter.\footnote{\cite{.25.2.2020f}}
 
-Ein weiteres Problem ist, dass eine Firma, die einen IBM Großrechner mit z/OS betreibt, von dem oben genannten proprietären Technologiestack abhängig ist, dass heißt, es existiert eine starke Hersteller- und Plattformabhängigkeit, z.B. in Bezug auf CICS, Db2, IBM-COBOL-Compiler, Assembler.
+Ein weiteres Problem ist, dass eine Firma, die einen IBM Großrechner mit z/OS betreibt, von dem oben genannten proprietären Technologiestack abhängig ist, dass heißt, es existiert eine starke Hersteller- und Plattformabhängigkeit, z.B. in Bezug auf CICS, Db2, IBM-COBOL-Compiler, IBM Assembler.
 
 Offensichtlich betreiben dennoch etliche Firmen einen IBM Großrechner.
 Dazu zählen hauptsächlich Banken, Versicherungen, Fluggesellschaften usw.\footnote{\cite{.25.2.2020c}}
@@ -78,11 +78,11 @@ Durch diese Module werden unter anderem im Monat circa 11 Millionen Lohnabrechnu
 Im Jahre 2020 ist der größte Konkurrent für den Mainframe die Cloud.
 Laut einer Vorhersage aus dem Jahr 2018\footnote{Statistik im Anhang \ref{app:itworkload}} soll im Jahre 2020 circa 79 Prozent des weltweiten Workloads in einer Cloud verarbeitet werden.
 Für die Entwicklung von neuen Online-Anwendungen im cloud-native Stil wurde bei der DATEV e.G. eine Platform-as-a-Service (PaaS)-Lösung geschaffen und neue DevOps\footnote{Siehe Absatz \ref{sec:analysecloud}} Prozesse aufgebaut.
-Dies ist im Cloud-Zeitalter nötig, um mit einer verbesserten Entwicklungseffizienz und neuen Architekturen Anwendungen ("Apps") schneller auf den Markt bringen und auf Kundenanforderungen schneller reagieren zu können. Stichwort: Continuous Integration, Continuous Delivery (CI/CD).
-EIn Baustein der effizientern Prozesse durch PaaS sind die sog. \glqq Self Services\grqq.
+Dies ist im Cloud-Zeitalter nötig, um mit einer verbesserten Entwicklungseffizienz und neuen Architekturen Anwendungen (\glqq Apps\grqq) schneller auf den Markt bringen und auf Kundenanforderungen schneller reagieren zu können. Stichwort: Continuous Integration, Continuous Delivery (CI/CD)\footnote{Siehe Absatz \ref{sec:cicd}}.
+Ein Baustein der effizientern Prozesse durch PaaS sind die sog. \glqq Self Services\grqq.
 D.h., Entwicklerteams können sich über sog. \glqq Cloud Services\grqq, z.B. Datenbanken wie PostgreSQL, Mongo und Messaginglösungen wie Kafka entweder manuell über einen Marktplatz (siehe Abbildung \ref{fig:markt}) oder automatisiert per \glqq Build-Pipeline\grqq{} eine  Laufzeitumgebung für ihre Anwendung zusammenbauen.
 Eine genaue Beschreibung der Begrifflichkeiten erfolgt im Absatz \ref{sec:cloudnative}.
-Den Entwicklern steht, neben modernen Entwicklungsumgebungen (IDE\footnote{Integrated Development Environment wie IntelliJ oder Eclipse}) und einer Sourceverwaltung mit GIT, auch eine sog. \glqq Toolchain\grqq{} zur Verfügung. Diese beinhaltet Tools für Build, Test, Quality Gates und Deployment. 
+Den Entwicklern steht, neben modernen Entwicklungsumgebungen (IDE\footnote{Integrated Development Environment wie IntelliJ oder Eclipse}) und einer Sourceverwaltung mit Git, auch eine sog. \glqq Toolchain\grqq{} zur Verfügung. Diese beinhaltet Tools für Build, Test, Quality Gates und Deployment. 
 Damit wird der Entwicklungsprozess automatisiert und man erhofft sich eine hohe Entwicklereffizienz. (Kommentar: hier würde ich nach wie vor die Grafik von unserem go/cloud Sharepoint mit einbinden)
 
 Der Entwicklungsprozess für z/OS Anwendungen bei DATEV e.G. erscheint im Vergleich zu dieser PaaS-Lösung veraltet.
@@ -95,7 +95,7 @@ Diese stellte z.B. nur ein Syntaxhighlighting zur Verfügung.
 \caption{Auszug aus einem REXX Skript in der ISPF Oberfläche}
 \label{fig:3270}
 \end{figure}
-Ein Meilenstein für die modernisierte z/OS Entwicklung bei DATEV war die Einführung von GIT im Jahr 2018 auch für z/OS Sourcen. 
+Ein Meilenstein für die modernisierte z/OS Entwicklung bei DATEV war die Einführung von Git im Jahr 2018 auch für z/OS Sourcen. 
 Dieses weit verbreitete Standard-Tool ist im z/OS Umfeld tatsächlich eine entscheidende Neuerung.
 Dadurch wurde ein bis dato verwendetes eigenentwickeltes Tool für die Sourceverwaltung der z/OS Sourcen abgelöst.
 Dieses stellte nur ein sehr einfaches Versionierungskonzept ohne aus Git bekannte Features wie Merge, Branch usw. bereit. 
@@ -120,8 +120,9 @@ Dies ist auch die Voraussetzung für automatisierte Tests von z/OS Programmen im
 Was jedoch fehlt, sind \glqq Self Services\grqq{} für  Laufzeitumgebung und  Middleware.
 Die dafür notwendige automatisierte Provisionierung einer z/OS Anwendungsumgebung, d.h Laufzeit, Middleware etc., ist aktuell noch weitgehend unerforscht. 
 Hier sind die Prozesse bei DATEV und anderen Kunden oft noch proprietär, hoch spezialisiert,  manuell und nicht modernisiert. 
-Gerade bei Mitarbeitern im Betrieb, die als Administratoren für die Middleware-Produkte arbeiten, sind die Bedenken groß, ob man diese Cloud-Vorgehensweise auf hochspezialisierte individuelle Komponenten wie CICS, DB2, IBM MQ anwenden kann.
-IBM bietet eine Lösung mit dem \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit. Dies hat sich noch nicht flächendeckend durchgesetzt, aber es herrscht großes Interesse an Erfahrungen und Einschätzungen bei IBM Kunden.
+Gerade bei Mitarbeitern im Betrieb, die als Administratoren für die Middleware-Produkte arbeiten, sind die Bedenken groß, ob man diese Cloud-Vorgehensweise auf hochspezialisierte individuelle Komponenten wie CICS, DB2, IBM MQ anwenden kann, \glqq weil man so etwas bisher nicht vermisst hat\grqq\footnote{Marcel Amrein, IBM Senior Technical Sales Professional (MQ and CICS) (Quelle: Anhang \ref{app:ibm})}.
+IBM bietet eine Lösung mit dem \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Toolkit. 
+Dies hat sich noch nicht flächendeckend durchgesetzt, aber \glqq Viele Kunden haben [...] im Moment Interesse, jedoch warten viele hier auf die ersten Erfahrungen von anderen\grqq\footnote{Tobias Leicher, IBM Senior IT Specialist for CICS and zAPI (Quelle: Anhang \ref{app:ibm})}.
 Hier setzt diese Arbeit an und klärt folgende Fragen:
 
 \begin{samepage}
