@@ -1,20 +1,19 @@
 \chapter{Grundlagen}\label{ch:grundlagen}
-Um den Unterschied zwischen modernen cloud native Entwicklungsprozessen und dem Mainframe Entwicklungsprozess darstellen zu können, werden zunächst Begriffe aus dem cloud-native-Umfeld erläutert.
-Dabei wird auch auf die Vorteile und Begrifflichkeiten des damit ermöglichten Entwicklungsprozesses eingegangen.
+Um den Unterschied zwischen modernen cloud native Entwicklungsprozessen und dem Mainframe Entwicklungsprozess darstellen zu können, werden zunächst Begriffe aus dem cloud native-Umfeld erläutert.
 Anschließend werden für die Beantwortung der Forschungsfragen relevante Begriffe des Mainframe-Umfelds beleuchtet.
 
-\section{cloud-native bei DATEV e.G.}\label{sec:cloudnative}
-Eine cloud-native Anwendung ist eine speziell für das Cloud-Computing\footnote{Glossar \ref{Glossar}} konzipierte und entwickelte Anwendung.
+\section{cloud native bei DATEV e.G.}\label{sec:cloudnative}
+Eine cloud native Anwendung ist eine speziell für das Cloud-Computing\footnote{Glossar \ref{Glossar}} konzipierte und entwickelte Anwendung.
 Oft werden damit Online-Anwendungen und mobile \glqq Apps\grqq entwickelt, für die häufig und hoch frequent neue Features bereitgestellt werden sollen. 
 Für solche Anwendungen ist das Architekturpattern der sogenannten \glqq Microservices\grqq, weit verbreitet.
 Diese einzelnen, entkoppelten Services sind beispielsweise in Containern paketiert. 
 Bekannt geworden ist hier der Ansatz von Docker\footnote{Glossar \ref{Docker Glossar link}}.
 Die Docker Container werden über Images beschrieben und beinhalte neben der Anwendung alles das, was die Anwendung an Komponenten zur Laufzeit benötigt, Bibliotheken, Dateien.\footnote{\cite{Vohra.2016}}
-Somit kann die Anwend können auf verschiedenen \glqq privat\grqq{} und \glqq public\grqq{} Cloud-Umgebungen, auch von unterschiedlichen Anbietern, ausgeführt werden.
+Somit können Anwendungen auf verschiedenen \glqq privat\grqq{} und \glqq public\grqq{} Cloud-Umgebungen, auch von unterschiedlichen Anbietern, ausgeführt werden.
 Große Anbieter sind hier beispielsweise AWS (Amazon), Google, Microsoft Azure.\footnote{\cite{.27.2.2020}}
 Dort können bereitstehende Services für Datenhaltung, Security, Messaging usw. genutzt werden. 
 \cite{.23.2.2020d}\\
-Eine moderne cloud-native Anwendung innerhalb der DATEV e.G. machen folgende Dinge aus:
+Eine moderne cloud native Anwendung innerhalb der DATEV e.G. machen folgende Dinge aus:
 \begin{itemize}
 \item \glqq Cloud Foundry\grqq
 \item CI/CD-Pipeline
@@ -23,10 +22,10 @@ Eine moderne cloud-native Anwendung innerhalb der DATEV e.G. machen folgende Din
 \subsection{\glqq Cloud Foundry\grqq}\label{ssec:cloudfoundry}
 Bei Cloud Foundry handelt es sich um eine quelloffene Platform-as-a-Service, kurz PaaS.
 Platform-as-a-Service, beschreibt neben Insfrastructure-as-a-Service, kurz IaaS und Software-as-a-Service, kurz SaaS, einen Grad an Auslagerung von IT-Systemen in die Cloud.
-Im Vergleich zu SaaS, bei der ganze Anwendungen in einer Cloud zur Verfügung stehen, und IaaS, bei der die automatisierte Bereitstellung von Infrastrukturkomponenten wie Netzwerk, Speicher usw. im Fokus steht, stellt eine PaaS-Lösung eine Plattform, die sich neben der Infrastruktur auch um das Betriebssystem, die Middleware und die Laufzeitumgebung kümmert, bereit.\footnote{\cite{ipsaas.25.2.2020}}
+Im Vergleich zu SaaS, bei der ganze Anwendungen in einer Cloud zur Verfügung stehen, und IaaS, bei der die automatisierte Bereitstellung von Infrastrukturkomponenten wie Netzwerk, Speicher usw. im Fokus steht, stellt eine PaaS-Lösung eine Plattform, die sich neben der Infrastruktur auch um das Betriebssystem, die Middleware und die Laufzeitumgebung kümmert, bereit.\footnote{\cite{.25.2.2020}}
 Für die Verwaltung von Ressourcen bietet Cloud Foundry eine Weboberfläche, den sogenannten \glqq Marketplace\grqq, an.
 In diesem können mit wenigen Mausklicks Schnittstellen zu Services wie Datenbankmanagementsysteme, Messaging- oder Monitorlösungen zur Anwendung hinzugefügt werden.
-Diese Schnittstellen, auch \glqq Self-Service\grqq{} oder \glqq Service-Broker\grqq{} genannt, können mittels einer von Cloud Foundry zur Verfügung gestellten API selbst entwickelt werden.
+Diese Schnittstellen, auch \glqq Self Service\grqq{} oder \glqq Service Broker\grqq{} genannt, können mittels einer von Cloud Foundry zur Verfügung gestellten API selbst entwickelt werden.
 Daneben kümmert sich Cloud Foundry um das Staging der Anwendungen.
 D.h. eine Anwendung kann mit den benötigten Komponenten sicher von einer Entwicklungs- in eine QS- bzw. Produktiv-Stage verschoben werden. 
 Die notwendigen stagespezifischen Anpassungen werden konfigurativ beigesteuert.
@@ -57,7 +56,7 @@ In Abbildung \ref{fig:ci} ist der Prozess dargestellt.
 	\label{fig:ci}
 \end{figure}
 Eine Voraussetzung für den Einsatz von CI ist eine zentrale Sourceverwaltung.
-Bei der DATEV e.G. handelt es sich dabei um GIT.
+Bei der DATEV e.G. handelt es sich dabei um Git.
 Nachdem ein Entwickler Änderungen am Code vorgenommen hat, lädt er diese in die Sourceverwaltung hoch.
 Dabei kann eine erste Überprüfung des Codes mittels statischer Codeanalyse durchgeführt werden.
 Dazu zählt unter anderem die Prüfung vorher definierter Coderichtlinien.
