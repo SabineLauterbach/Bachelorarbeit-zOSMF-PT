@@ -20,10 +20,10 @@ Ein Beispiel aus Entwicklersicht:\\
 \glqq Meine Anwendung läuft nicht... Ach da gibt es Probleme mit dem Webserver, dass werden die Kollegen der Administration schon lösen\grqq.
 
 \paragraph{\glqq The Third Way\grqq} betrachtet weniger den Prozess an sich, sondern eher das Schaffen einer Kultur.
-Eine Kultur, die erlaubt Risiken einzugehen und aus Fehlern zu lernen, aber auch das Verständnis das Wiederholung und Übung Voraussetzung für einen guten Entwickler sind.
+Eine Kultur, die erlaubt Risiken einzugehen und aus Fehlern zu lernen, aber auch das Verständnis, dass Wiederholung und Übung Voraussetzung für einen guten Entwickler sind.
 Dabei ist ein hoher Grad an Vertrauen in das Team notwendig.
 
-Bei der DATEV e.G. wird dieser DevOps-Gedanke durch sogenannte \glqq Product-Teams\grqq umgesetzt.
+Bei der DATEV e.G. wird dieser DevOps-Gedanke durch sogenannte \glqq Product-Teams \grqq umgesetzt.
 In einem solchen Team kümmert man sich neben der eigentlichen Softwareentwicklung, Testmaßnahmen usw. auch um den Betrieb der Middleware, z.B. die im Cloud Native Umfeld üblichen noSQL Datenbanken wie Mongo oder PostgreSQL. 
 Dem ganzen Team wird viel Vertrauen gegeben und es soll weitestgehend autonom Software erstellen und betreiben können.
 Dadurch steigt die Effektivität des Teams.
@@ -39,15 +39,15 @@ Auch dies führt  zu einer Effizienzsteigerung.
 
 Für die Bereitstellung der benötigten Laufzeitumgebung kommt bei DATEV e.G. die Cloud Foundry Distribution von \glqq pivotal\grqq{} als PaaS Plattform zum Einsatz.
 Durch den darin zur Verfügung gestellten \glqq Marketplace\grqq{} können Laufzeitumgebungen effizient \glqq auf Knopfdruck\grqq generiert werden.
-DIe automatisierte Bereitstellung ist mittels des Kommandozeileninterfaces und der Integration in eine CI/CD-Pipeline möglich.
+Die automatisierte Bereitstellung (Kommentar: automatisiert ist auch die "Knopfdruck" Variante, besser) Mittels des Kommandozeileninterfaces kann die Bereitstellung auch in eine CI/CD-Pipeline integriert werden.
 So werden z.B. für jeden Entwickler isolierte Testumgebungen geschaffen.
 
 \section{Aktueller Bereitstellungsprozess}\label{sec:aktbereit}
-Im Vergleich zu den Product-Teams im cloud native Umfeld bei denen sich das Team selbst um den Betrieb der Middleware kümmert, verwalten im z/OS Umfeld eigen dafür entstandene Administratorenteams die Middleware - stage-übergreifend.
+Im Vergleich zu den Product-Teams im cloud native Umfeld, bei denen sich das Team selbst um den Betrieb der Middleware kümmert, verwalten im z/OS Umfeld eigens dafür zuständige Administratorenteams die Middleware auf allen Stages.
 Die \glqq CICS Administration\grqq{} kümmert sich um alles rund um das CICS Subsystem.
 Die \glqq Db2 Administration\grqq{} stellt Datenbanken und Tabellen auf Anfrage der Entwickler bereit.
 Die \glqq IBM MQ Administration\grqq{} verwaltet die IBM MQ Ressourcen.
-Um die Stellen, an denen das \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Tool helfen kann, ausfindig machen zu können, wird im Folgenden der aktuell etablierte Prozess für z/OS Anwendungen beschrieben.
+Um die Bereiche, an denen das \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Tool helfen kann, identifizieren zu können, wird im Folgenden der aktuell etablierte Prozess für z/OS Anwendungen beschrieben.
 Die in diesem Absatz genannten Informationen stammen aus Gesprächen mit Mitarbeitern aus den jeweiligen Administratorenteams.
 Wie in Absatz \ref{sec:zosanw} beschrieben benötigt eine z/OS Anwendung zunächst eine Laufzeitumgebung, im Fall dieser Arbeit handelt es sich um CICS.
 
@@ -55,9 +55,9 @@ Wie in Absatz \ref{sec:zosanw} beschrieben benötigt eine z/OS Anwendung zunäch
 Um eine lauffähige CICS-Instanz einzurichten, sind mehrere Schritte notwendig.
 Der komplette Prozess wird in Abbildung \ref{fig:aktcics} dargestellt.
 Wie zu sehen ist, ist der Initiator des Prozesses das Entwicklerteam.
-Zunächst wird dort während der Entwicklungsphase festgestellt, dass ein neue CICS-Instanz benötigt wird.
-Hier hilft das CICS Administratorenteam mittels Beratung aus.
-Während einer Beratungsphase, die via Telefon, Emails oder Terminen stattfindet, wird sichergestellt, ob wirklich eine neue CICS-Instanz notwendig ist oder ob nicht eine bereits bestehende Instanz genutzt werden kann.
+Zunächst wird dort während der Entwicklungsphase festgestellt, dass ein neue CICS-Instanz benötigt wird, z.B. um eine neue Fachlichkeit testen zu können. 
+Hier hilft das CICS Administratorenteam mittels Beratung.
+Während einer Beratungsphase, die via Telefon, Emails oder Terminen stattfindet, wird sichergestellt, ob wirklich eine neue CICS-Instanz notwendig ist oder ob nicht eine bereits bestehende Instanz genutzt werden kann, die dann aber meist wieder zwischen Anwendungen und Entwicklern geteilt wird.
 Falls eine neue CICS-Instanz benötigt wird, wird ein RACF Eintrag für diese Instanz beantragt.
 Dieser Eintrag wird dann vom RACF Team erzeugt.
 Um sicherzustellen, dass die CICS-Instanz in den täglichen Sicherungen enthalten ist, muss das System Automations-Team benachrichtigt werden.
@@ -82,7 +82,7 @@ Es handelt sich um das Anlegen von:
 
 \paragraph{CICS spezifische Dateien}\label{sssec:speziDat} ~\\
 Zunächst müssen CICS spezifische Dateien im z/OS angelegt werden.
-Im Fall des dieser Arbeit zugrunde liegenden Beispiels handelt es sich um siebzehn verschiedene VSAM\footnote{Virtual Storage Access Method, spezielle Dateiart, die schnelle I/O-Zugriffe ermöglicht.\cite{Lovelace.2013}} Dateien.
+Im Fall des dieser Arbeit zugrunde liegenden Beispiels handelt es sich um siebzehn verschiedene VSAM\footnote{Virtual Storage Access Method, spezielle z/OS Dateiart, die schnelle I/O-Zugriffe ermöglicht.\cite{Lovelace.2013}} Dateien.
 Diese Dateien benötigt die CICS-Instanz um zum Beispiel Systemfehler zu protokollieren oder den Debugger aktivieren zu können.
 
 \paragraph{\glqq CICS System Definition\grqq} ~\\
@@ -94,17 +94,17 @@ Bei der Liste handelt es sich um das System, welches diese Ressource benötigt.
 Dort ist unter anderem für jede CICS-Instanz hinterlegt, zu welchem Db2 Datenbanksystem und welchem IBM MQ Messagingsystem sich diese Instanz verbinden soll.
 
 \paragraph{Started Task Control-Job} ~\\
-Bei einem Started Task Control-Job, kurz STC Job, handelt es sich um einen Batch Job, der mit Hilfe des \glqq START\grqq-Konsolenkommandos innerhalb von z/OS gestartet werden kann.
+Bei einem Started Task Control-Job, kurz STC Job, handelt es sich um einen langlaufenden Batch Job, der mit Hilfe des \glqq START\grqq-Konsolenkommandos innerhalb von z/OS gestartet werden kann. (Kommentar: der läuft doch so lange wie das CICS aktiv ist, oder?)
 Dieser Batch Job wird deshalb auch als Started Task bezeichnet.\cite{Cassier.2007}
-Bei der DATEV e.G. existiert für jede Instanz eines Subsystems ein solcher Job, so also auch für CICS.
+Bei der DATEV e.G. existiert für jede Instanz eines Subsystems (z.B. CICS) ein solcher Job.
 In diesem werden zunächst einige zur Laufzeit benötigten Bibliotheken und Dateien eingebunden, unter anderem die CICS spezifischen Dateien\footnote{Beschreibung in Absatz \ref{sssec:speziDat}}.
 Außerdem werden hier die SIT \footnote{CICS system initialization table} Parameter definiert.
 Zunächst wird festgelegt welche Standard SIT verwendet werden soll.
 Anschließend können diese Standardwerte überschrieben werden.
-Zu diesen Parametern zählen unter anderem der eindeutige Name der CICS-Instanz, der Speicherort der dazugehörenden CSD und die Information, ob eine Verbindung zu einem Db2 Datenbanksystem hergestellt werden soll.
+Zu diesen Parametern zählen unter anderem der eindeutige Name der CICS-Instanz, der Speicherort der dazugehörenden CSD und die Information, ob eine Verbindung zu einem (anwendungsspezifischen) Db2 Datenbanksystem hergestellt werden soll. (Kommentar: auch MQ, oder? und anwendungsspezifisch wäre ja der Fall, wenn man hier eine DB2 Sandbox bereitstellt, korrekt?)
 
-Nach der Durchführung dieser Schritte und einem erfolgreichen Startversuch, steht dem Entwickler eine neue CICS-Instanz zur Verfügung.
-Der komplette Ablauf dauert, unter der Annahme, dass alle Beteiligten verfügbar sind, nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
+Nach der Durchführung dieser Schritte wird das CICS gestartet und es steht dem Entwickler eine neue CICS-Instanz zur Verfügung.
+Der komplette Ablauf dauert, unter der Annahme, dass alle Beteiligten verfügbar sind, nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage. (KOmmentar: haben wir irgendwo beschrieben, wie die Anwendung in das CICS kommt? Ist der Build Prozess, der stellt die Anwendungsartefakte auf die Bibliotheken, die dem CICS zugeordnet sind. Das ist ja auch etwas, das gemacht werden muss. SInd das die oben in Zeile 100 erwähnten CICS spezifischen Dateien? Und wie wird die DB2 und MQ an das CICS angebunden?)
 
 \subsection{Bereitstellungsprozess einer Db2 Datenbank}
 Wie in Abbildung \ref{fig:aktdb2} zu erkennen ist, ist der Bereitstellungsprozess einer neuen Db2 Datenbank mit vielen Aufgaben im Entwicklerteam verbunden.
@@ -115,15 +115,15 @@ Wie in Abbildung \ref{fig:aktdb2} zu erkennen ist, ist der Bereitstellungsprozes
 \label{fig:aktdb2}
 \end{figure}
 Zunächst müssen sogenannte Projektinformationen, unter anderem Daten der Voruntersuchung, vom Entwicklerteam bereitgestellt werden.
-Das Projektkürzel, der Datenbank- und Projektname und die Projektbezeichnung müssen mit den involvierten Abteilungen besprochen werden.
+Das Projektkürzel (eindeutige Kennung von DATEV Projekten), der Datenbank- und Projektname und die Projektbezeichnung müssen mit den involvierten Abteilungen besprochen werden.
 Über den sogenannten \glqq Datenbankänderungsantrag\grqq{} wird ein Genehmigungsprozess angestoßen.
 Wenn alle Genehmigungen erteilt wurden, kann ein Dateneigentümer festgelegt werden.
 Anschließend muss die Datenbank mittels eines Datenbankmodells vom Entwicklerteam beschrieben werden und eine Usergruppe, die im späteren Verlauf die Datenbankzugriffsrechte benötigt, beantragt und angelegt werden.
 Die eigentliche manuelle Erstellung der Datenbank wird mittels des Datenbankmodells und den Projektinformationen im Anschluss dazu durchgeführt.
 
-Die Zugriffsrechte für die zuvor beantrage Usergruppe auf die neue Datenbank werden beantragt.
+Die Zugriffsrechte für die zuvor angeforderte Usergruppe auf die neue Datenbank werden beantragt.
 Schließlich steht dem Entwicklerteam die neue Db2 Datenbank zur Verfügung.
-Wird die Db2 Datenbank in Verbindung mit einem CICS verwendet, so sind weitere manuelle Schritte vom CICS Administratorenteam notwendig.
+Wird die Db2 Datenbank in Verbindung mit einem CICS verwendet, (wie im Fallbeispiel dieser Arbeit, der Rechnungsschreibung) so sind weitere manuelle Schritte des CICS Administratorenteams notwendig. 
 Der komplette Ablauf dauert, unter der Annahme, dass alle Beteiligten verfügbar sind, nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
 
 \subsection{Bereitstellungsprozess einer IBM MQ Queue}
@@ -139,34 +139,41 @@ Auch bei dem Bereitstellungsprozess, siehe Abbildung \ref{fig:aktmq}, einer IBM 
 Die Grundlage diese Prozesses ist ein Antrag auf Erstellung einer neuen IBM MQ Queue.
 Zuvor findet eine Beratung via Telefon, Email oder Terminen statt.
 Die Queues werden anschließend manuell eingerichtet und stehen dem Entwicklerteam zur Verfügung.
-Wird die Queue in Verbindung mit einem CICS verwendet, so sind weitere manuelle Schritte vom CICS Administratorenteam notwendig.
-Trotz des scheinbar schmalen Prozesses dauert der Ablauf unter der Annahme, dass alle Beteiligten verfügbar sind, nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
+Wird die Queue in Verbindung mit einem CICS verwendet, so sind weitere Abstimmungen und Maßnahmen des CICS Administratorenteams notwendig.
+Trotz des scheinbar schmalen Prozesses dauert der Ablauf unter der Annahme, dass alle Beteiligten verfügbar sind, sie nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
 
 \subsection{Zusammenfassung aktueller Bereitstellungsprozess}\label{ssec:sumaktbereit}
-Wie in den drei Diagrammen, Abbildungen \ref{fig:aktcics}, \ref{fig:aktdb2} und \ref{fig:aktmq}, zu erkennen ist, ist der aktuelle Bereitstellungsprozess noch mit vielen manuellen Schritten verbunden.
-Außerdem ist der Hauptaufwand in den Administratorenteams angesiedelt.
-Das Entwicklerteam ist der Initiator des Ablaufs.
-Folglich kümmert es sich um Formulare und die erste Kontaktaufnahme zum Administratorenteam.
+Wie in den drei Diagrammen, Abbildungen \ref{fig:aktcics}, \ref{fig:aktdb2} und \ref{fig:aktmq}, zu erkennen ist, ist der aktuelle Bereitstellungsprozess mit vielen manuellen Schritten verbunden.
+Der Hauptaufwand liegt bei den Administratorenteams, die in verschiedenen organisatorischen Einheiten angesiedelt sind.
+Das Entwicklerteam ist  Initiator des Ablaufs.
+Folglich kümmert es sich um die erforderlichen Formulare und die erste Kontaktaufnahme zum jeweiligen Administratorenteam.
 
-Zusätzlich zu den vielen manuellen Schritten sind die vielen Absprachen zwischen mehreren Abteilungen zu nennen.
-Steht ein beteiligtes Team nicht zu Verfügung, kommt es zu Verzögerungen, das Team muss warten, der komplette Zeitplan kann sich dadurch nach hinten verschieben.
-Der Prozess für die Bereitstellung einer CICS-Instanz, mit einer Db2 Datenbank und IBM MQ Queues dauert in der Summe circa sechs Arbeitstage.
+Zusätzlich zu den zahlreichen manuellen Schritten sind die vielen Absprachen zwischen mehreren Abteilungen zu nennen.
+Steht ein beteiligtes Team nicht zu Verfügung, oder sind andere Projekte höher priorisiert, kommt es zu Verzögerungen, das Entwicklungsteam muss warten, der komplette Zeitplan kann sich dadurch nach hinten verschieben.
+Der Prozess für die Bereitstellung einer neuen CICS-Instanz, mit einer Db2 Datenbank und IBM MQ Queues dauert in der Summe circa sechs Arbeitstage.
 Es setzt sich aus der Dauer der Einzelprozesse zusammen, für jedes Subsystem wird mit circa zwei Arbeitstagen gerechnet.
-Natürlich ist ein parallelisierter Ablauf der einzelnen Teilprozesse möglich, so kann die Gesamtdauer im besten Fall auf circa zwei bis drei Arbeitstage verkürzt werden.
+Natürlich ist ein parallelisierter Ablauf der einzelnen Teilprozesse möglich, so kann die Gesamtdauer im besten Fall auf circa zwei bis drei Arbeitstage verkürzt werden. 
 
-Ein weiterer Punkt ist, dass die Kommunikation beziehungsweise der Initiator für den Start des gesamten Prozesses meist per Zuruf stattfindet.
+Der Start des gesamten Prozesses findet meist auf "Zuruf" statt.
 So existiert für die erste Kontaktaufnahme kein Formular, keine Automation oder ähnliches.
-Zur Kommunikation wird auf E-Mail, Telefon oder mittels Terminen zurückgegriffen.
+Es wird auf E-Mail, Telefon oder mittels Terminen zurückgegriffen.
 
-Wird der Vergleich zu dem Bereitstellungsprozess im cloud native-Umfeld\footnote{Siehe Absatz \ref{sec:analysecloud}} gezogen, so steht dem automatisierten und dadurch effizienten cloud native Prozess, ein durch viele Absprachen langsamer und fehleranfälliger Prozess gegenüber.
+Wird der Vergleich zu dem Bereitstellungsprozess im cloud native-Umfeld\footnote{Siehe Absatz \ref{sec:analysecloud}} gezogen, so steht dem automatisierten und dadurch effizienten cloud native Prozess, ein durch viele Absprachen langsamer und fehleranfälliger Prozess auf z/OS gegenüber.
 Es ist festzustellen, dass die DATEV e.G. im Mainframe Umfeld noch weit vom DevOps-Gedanken entfernt.
-Product-Teams sind nicht vorhanden, die Administratorenteams sind für den Betrieb der Subsysteme verantwortlich und werden es in naher Zukunft auch weiterhin sein.
-
+(Kommentar: vlt. könnte man hier noch Unterüberschriften schreiben: Produktautonomie, Deplyment, Architektur)
+Die Autonomie eines Product-Teams ist hier nicht gegeben, die Administratorenteams sind für den Betrieb der Subsysteme verantwortlich.
+Daran wird sich auch durch automatisierte Provisionierung in Zukunft nichts ändern, da hier hohes Spezialistenwissen benötigt wird, das nicht von jedem Product Team bereitgestellt werden kann. 
+Dazu kommt, dass die Provisionierung im Rahmen dieser Arbeit auch nur die Bereitstellung von Entwicklungs-Instanzen der Middleware Systeme betrachtet. 
+Die Administratoren-Teams sind aber insb. für die produktiven Instanzen im Betrieb verantwortlich, die nach wie vor von Anwendungen geteilt werden.  
+D.h. der CLoud-Aspekt des automatischen Deployments einer Anwendung inklusive Runtime zwischen Stages wird also nicht umgesetzt. (Kommentar: evtl etwas für den Ausblick?)
 Neben diesen Problemen im Bereitstellungsprozess ist die grundlegende Architektur einer z/OS Anwendung zu betrachten.
-Im Vergleich zur \glqq Microservices\grqq-Architektur, die im cloud native Umfeld zum Einsatz kommt\footnote{Siehe Absatz \ref{sec:cloudnative}}, sind klassische z/OS Anwendungen monolithisch aufgebaut.
-Außerdem haben sich über die Jahre viele Abhängigkeiten und Verzahnungen zwischen einzelnen Anwendungen gebildet.
-Diese hohe Koppelung zwischen den Modulen erhöht die Komplexität und erschwert das Testen dieser Anwendungen.
-Um das Testen effizienter zu gestalten und einen Schritt in Richtung DevOps, einer CI/CD-Pipeline und dadurch einer Verkürzung der Releasezyklen auch für monolithische z/OS Anwendungen zu gehen, wird mit Hilfe des \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Tools der Aspekt der automatisierten Bereitstellung von Laufzeitumgebungen für die Entwicklungsstage untersucht.
+Im Vergleich zur \glqq Microservices\grqq-Architektur, die im cloud native Umfeld häufig zum Einsatz kommt\footnote{Siehe Absatz \ref{sec:cloudnative}}, sind klassische z/OS Anwendungen monolithisch aufgebaut.
+Insbesondere aus Performancegründen, haben sich über die Jahre Abhängigkeiten und Verzahnungen zwischen einzelnen Anwendungen gebildet.
+Diese starke Koppelung erhöht die Komplexität und erschwert das Testen dieser Anwendungen.
+(Kommentar: Was jetzt kommt ist das , was letztendlich das ist, wovon man sich etwas verspricht. Das würde ich jetzt betonen.... bei welchem Problem hilft die automatisierte Provisionierung hier also. aktuell eben das isolierte Testen und das schnelle, autonome Bereitstellen der SUbsysteminstanzen)
+Der Vorteil der hier untersuchten Automatisierung betrifft demnach v.a. die Entwicklungseffizienz.
+(Kommentar: Bereitstellung isolierter Testumgebungen, ohne Wartezeiten und möglichst wenig manueller Interaktion ist das was man sich verspricht. Ob Releasezyklen dadurch schneller werden, kann man nciht messen, nur die AUswirkung auf die Entwicklungszyklen, bzw. weniger Fehleranfälligkeit etc.)
+Um das Testen effizienter zu gestalten und einen Schritt in Richtung DevOps, einer CI/CD-Pipeline und dadurch einer Verkürzung der Releasezyklen (s. Kommentar) auch für monolithische z/OS Anwendungen zu gehen, wird mit Hilfe des \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Tools der Aspekt der automatisierten Bereitstellung von Laufzeitumgebungen für die Entwicklungsstage untersucht.
 Als Beispielanwendung dient ein Teil der z/OS Anwendung \glqq DATEV-Rechnungsschreibung\grqq.
 
 \section{DATEV-Rechnungsschreibung}\label{rechBesch}
@@ -196,7 +203,7 @@ Diese Datensätze beinhalten alle Informationen für die endgültige Erzeugung d
 Die Preisermittlung ist für die Berechnung der Preise mit den dazugehörigen kundenindividuellen Abhängigkeiten, beispielsweise Rabatte, zuständig.
 Die Eingabe beläuft sich an Lasttagen auf bis zu 180.000 Geschäftspartner.
 Im DATEV e.G. Umfeld ist ein Geschäftspartner entweder eine Kanzlei oder ein einzelner Mandant.
-Aufgrund dieser Last wurde die Berechnung zum einen in CICS-Instanzen ausgelagert und zum anderen wurde der Ablauf in zwei Teile zerlegt:
+Aufgrund dieser Last wurde die Berechnung zum einen in CICS-Instanzen ausgelagert (Kommentar: von vorher Batch, aber das weiß man ja nicht, deshalb klingt das etwas komisch. Vlt. besser: wird die Berechnung in CICS durchgeführt und in 2 Teile zerlegt... muss der Prof ja nicht wissen, dass das vorher Batch war, oder?) und zum anderen wurde der Ablauf in zwei Teile zerlegt:
 \begin{itemize}
 \item Bereitstellen der Preisinformationen
 \item Berechnung der Preise
@@ -210,11 +217,11 @@ Diese Informationen werden dann in einem sogenannten \glqq SHARED GETMAIN\grqq-B
 Dabei handelt es sich im Prinzip um einen Hauptspeicherbereich, der dem CICS Subsystem zur Verfügung steht.
 Die Adresse dieses Bereiches wird den Transaktionen zur Verfügung gestellt.
 Somit greifen die einzelnen Transaktionen nicht mehr direkt auf die Datenbank zu, sondern stattdessen auf den schnelleren Hauptspeicher.
-Diese Vorarbeit ist notwendig, da es aufgrund von bis zu 60 Millionen Datenbankzugriffen zu massiven Einbußen bezüglich der Performance führen würde.
+Diese Vorarbeit ist notwendig, da die notwendige Performance aufgrund von bis zu 60 Millionen Datenbankzugriffen nicht erreicht werden würde.
 
 \paragraph{Berechnung der Preise}~\\
 Um die Berechnungsdaten der 180.000 Geschäftspartner an CICS-Instanzen zu übertragen, stehen dem System weitere Queues zur Verfügung.
-Darunter ist eine allgemeine Queue in der alle Aufträge, die für die Weiterverarbeitung zur Verfügung stehen, geschrieben werden.
+Darunter ist eine allgemeine Queue, in der alle Aufträge, die für die Weiterverarbeitung zur Verfügung stehen, geschrieben werden.
 Pro Geschäftspartner wird ein Auftrag angelegt.
 In diesem Auftrag befinden sich die Namen vier weiterer Queues.
 Eine dieser Queues beinhaltet alle Informationen, die für die Preisermittlung des dazugehörigen Geschäftspartners notwendig sind.
