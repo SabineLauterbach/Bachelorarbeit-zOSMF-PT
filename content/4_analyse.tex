@@ -58,7 +58,7 @@ Wie zu sehen ist, ist der Initiator des Prozesses das Entwicklerteam.
 Zunächst wird dort während der Entwicklungsphase festgestellt, dass ein neue CICS-Instanz benötigt wird, z.B. um eine neue Fachlichkeit testen zu können. 
 Hier hilft das CICS Administratorenteam mittels Beratung.
 Während einer Beratungsphase, die via Telefon, Emails oder Terminen stattfindet, wird sichergestellt, ob wirklich eine neue CICS-Instanz notwendig ist oder ob nicht eine bereits bestehende Instanz genutzt werden kann, die dann aber meist wieder zwischen Anwendungen und Entwicklern geteilt wird.
-Falls eine neue CICS-Instanz benötigt wird, wird ein RACF Eintrag für diese Instanz beantragt.
+Falls eine neue CICS-Instanz benötigt wird, wird ein \Gls{racf} Eintrag für diese Instanz beantragt.
 Dieser Eintrag wird dann vom RACF Team erzeugt.
 Um sicherzustellen, dass die CICS-Instanz in den täglichen Sicherungen enthalten ist, muss das System Automations-Team benachrichtigt werden.
 
@@ -82,7 +82,7 @@ Es handelt sich um das Anlegen von:
 
 \paragraph{CICS spezifische Dateien}\label{sssec:speziDat} ~\\
 Zunächst müssen CICS spezifische Dateien im z/OS angelegt werden.
-Im Fall des dieser Arbeit zugrunde liegenden Beispiels handelt es sich um siebzehn verschiedene VSAM\footnote{Virtual Storage Access Method, spezielle z/OS Dateiart, die schnelle I/O-Zugriffe ermöglicht.\cite{Lovelace.2013}} Dateien.
+Im Fall des dieser Arbeit zugrunde liegenden Beispiels handelt es sich um siebzehn verschiedene VSAM Dateien.
 Diese Dateien benötigt die CICS-Instanz um zum Beispiel Systemfehler zu protokollieren oder den Debugger aktivieren zu können.
 
 \paragraph{\glqq CICS System Definition\grqq} ~\\

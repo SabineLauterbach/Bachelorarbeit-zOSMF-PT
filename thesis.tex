@@ -104,6 +104,9 @@
 	breakautoindent=true
 }
 
+% glossary
+\usepackage[toc,automake]{glossaries}
+
 % page setup
 % \setlength{\topskip}{\ht\strutbox}
 \geometry{paper=a4paper,left=2.5cm,top=3.0cm,bindingoffset=.8cm}
@@ -128,7 +131,7 @@
 
 % TODO remove if not needed...
 %\usepackage{blindtext}
-
+\include{content/glossaries}
 
 \begin{document}
 
@@ -176,4 +179,6 @@
 \bibliographystyle{wmaainf}
 \bibliography{refs}
 
+\glossarystyle{listgroup}
+\printglossaries
 \end{document}

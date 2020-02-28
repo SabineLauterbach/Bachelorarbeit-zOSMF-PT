@@ -9,11 +9,7 @@
 call:cleanup
 tskill acrobat  
 pdflatex %1.tex
-bibtex %1
 makeglossaries glossaries
-pdflatex %1.tex
-pdflatex %1.tex
-makeindex.exe %1.nlo -s nomencl.ist -o %1.nls
 pdflatex %1.tex
 
 
