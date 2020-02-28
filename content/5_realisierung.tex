@@ -47,7 +47,7 @@ Einsatz von Images & Ja & Nein\\
 \end{table}
 
 \section{Testplex}
-Der Zugriff auf Ressourcen und Tools bei DATEV e.G. wird über ein Rechtekonzept über RACF\footnote{Glossar \ref{Glossar LINK}} verwaltet. 
+Der Zugriff auf Ressourcen und Tools bei DATEV e.G. wird über ein Rechtekonzept über RACF verwaltet. 
 Um die Forschungsfragen beantworten zu können, mussten vor Beginn der eigentlichen Untersuchung zunächst alle benötigten Rechte beantragt werden.
 Hierzu zählen unter anderem die Rechte für die Nutzung des Testplexes, die Nutzung von z/OSMF und z/OSPT und die Rechte für die Templateverwaltung innerhalb von z/OSMF. 
 Beispielsweise benötigt \glqq IBM Cloud Provisioning and Management for z/OS\grqq lesenden Zugriff auf den Speicherpfad der Template Dateien.
@@ -168,7 +168,7 @@ provision.xml & circa 583 Codezeilen & circa 199 Codezeilen. \\
 Wie in Absatz \ref{ssec:aktcics} beschrieben, benötigt eine CICS Instanz spezifische Dateien.
 Die Namen dieser CICS Dateien wurden im dafür zuständigen Job an die DATEV e.G. internen Namenskonventionen angepasst.
 
-Die nächste Voraussetzung für die Bereitstellung einer CICS Instanz ist das Erstellen einer CSD-Datei\footnote{Beschreibung siehe Absatz\ref{ssec:aktcics}}.
+Die nächste Voraussetzung für die Bereitstellung einer CICS Instanz ist das Erstellen einer CSD-Datei\footnote{Beschreibung siehe Absatz \ref{ssec:aktcics}}.
 Folgende Entscheidung wurde in Zusammenarbeit mit dem CICS Administratorenteam getroffen.
 Um Auswirkungen auf bereits im Einsatz befindliche Instanzen zu verhindern, wird die von den Kollegen gepflegte CSD-Datei bei jeder Provisionierung kopiert und mit bestimmten Namenskonventionen gespeichert.
 So besitzt jede automatisch bereitgestellte CICS Instanz eine eigene CSD Datei.
@@ -325,7 +325,7 @@ Dadurch ändert sich die Gruppe in Zeile acht im Codeabschnitt \ref{code:addCSD}
 Außerdem wurden sowohl in der Provisionierungs- als auch in der Deprovisionierungsdatei die Datenbanksteps auskommentiert und somit kommen diese nicht mehr zum Einsatz.
 
 \subsection{IBM MQ Anpassung}\label{ssec:mqentw}
-Da für die DATEV Rechnungsschreibung, wie im Absatz \ref{ssec:preis} beschrieben, sehr viele gleichartige Queues benötigt werden, wurde für die Erstellung dieser von den IBM MQ Administratorenteam ein REXX Skript angefertigt.
+Da für die DATEV Rechnungsschreibung, wie im Absatz \ref{ssec:preis} beschrieben, sehr viele gleichartige Queues benötigt werden, wurde für die Erstellung dieser von den IBM MQ Administratorenteam ein \Gls{rexx} Skript angefertigt.
 Dies geschah unabhängig dieser Arbeit zum Zeitpunkt der Einführung des aktuellen DATEV Rechnungsschreibungsprozesses.
 Dieses Skript steht dieser Arbeit zur Verfügung.
 Für die Provisionierung IBM MQ Queues waren folgende Arbeitsschritte notwendig.
