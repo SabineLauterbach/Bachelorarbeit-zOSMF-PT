@@ -167,6 +167,11 @@ In der Transaktion werden alle Änderungen, die Programme an Ressourcen, wie zum
 So wird im Falle eines Fehlers die Möglichkeit eines Rollbacks, beispielsweise der in der Transaktion genutzten Datenbank, sichergestellt.
  \cite{Rayns.2011}
 
+\subsubsection{CICS Anwendungsdeployment}\label{sssec:cicsanwd}
+Zur Beantwortung der Forschungsfragen liegt der Fokus auf der Entwicklungsstage, deshalb wird im Folgenden nur das Deployment von Anwendung in eine Entwicklungs-CICS Instanz dargestellt.
+Das eine Anwendung einer CICS Instanz zur Verfügung steht, muss der kompilierte Sourcecode der Anwendung manuell in einer der CICS Instanz bekannten Bibliothek abgelegt werden.
+Eine solche Bibliothek muss im \glqq Started Task Control-Job\grqq{}\footnote{Siehe Absatz \ref{ssec:aktcics}} einer CICS Instanz manuell angegeben werden.
+
 \subsection{Db2}\label{sssec:db2}
 Db2 ist ein relationales Datenbanksystem, welches unter anderem als Subsystem eines z/OS Betriebssystems läuft.
 Einer Stage können mehrere Datenbanksysteme, auch Instanzen genannt, zugeordnet werden.

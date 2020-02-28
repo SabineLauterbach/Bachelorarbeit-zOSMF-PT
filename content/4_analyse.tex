@@ -175,7 +175,8 @@ Die Administratorenteams sind aber insbesondere für die produktiven Instanzen i
 D.h. der Cloud-Aspekt des automatischen Deployments einer Anwendung inklusive Runtime zwischen Stages wird also nicht umgesetzt.
 
 \paragraph{Deployment}~\\
-(Muss ich mir noch überlegen :D)
+Da für das Deployment einer z/OS CICS Anwendung, wie in Absatz \ref{sssec:cicsanwd} beschrieben, Bibliotheken zum Einsatz kommen, muss beim Testen einer Anwendung immer geprüft werden, ob der aktuellste Stand der Anwendung in dieser Bibliothek abgelegt ist, ob die Bibliothek überhaupt der CICS Instanz zur Verfügung steht und ob nicht eine andere Bibliothek mit anderem Stand von der CICS Instanz angezogen wird.
+Diese Probleme verschlechtern sich, wenn an der gleichen Anwendung mehrere Mitarbeiter entwickeln, so ist viel Absprache notwendig, um beispielsweise nicht den Stand eines Kollegen zu überschreiben.
 
 \paragraph{Architektur}~\\
 Neben den Problemen im Bereitstellungsprozess ist die grundlegende Architektur einer z/OS Anwendung zu betrachten.
