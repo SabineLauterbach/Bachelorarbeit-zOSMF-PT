@@ -7,8 +7,8 @@ Eine cloud native Anwendung ist eine speziell für das \Gls{cloudcomp} konzipier
 Oft werden damit Online-Anwendungen und mobile \glqq Apps\grqq entwickelt, für die häufig und hoch frequent neue Features bereitgestellt werden sollen. 
 Für solche Anwendungen ist das Architekturpattern der sogenannten \glqq Microservices\grqq, weit verbreitet.
 Diese einzelnen, entkoppelten Services sind beispielsweise in Containern paketiert. 
-Bekannt geworden ist hier der Ansatz von Docker\footnote{Glossar \ref{Docker Glossar link}}.
-Die Docker Container werden über Images beschrieben und beinhalte neben der Anwendung alles das, was die Anwendung an Komponenten zur Laufzeit benötigt, Bibliotheken, Dateien.\footnote{\cite{Vohra.2016}}
+Bekannt geworden ist hier der Ansatz von \Gls{docker}.
+Die Docker Container werden über Images beschrieben und beinhalte neben der Anwendung alles das, was die Anwendung an Komponenten zur Laufzeit benötigt, Bibliotheken, Dateien.\footnote{\cite[Kap. 1]{Vohra.2016}}
 Somit können Anwendungen auf verschiedenen \glqq privat\grqq{} und \glqq public\grqq{} Cloud-Umgebungen, auch von unterschiedlichen Anbietern, ausgeführt werden.
 Große Anbieter sind hier beispielsweise AWS (Amazon), Google, Microsoft Azure.\footnote{\cite{.27.2.2020}}
 Dort können bereitstehende Services für Datenhaltung, Security, Messaging usw. genutzt werden. 
@@ -72,19 +72,19 @@ Dazu gehört auch die Überprüfung, ob mit Fehlerbedingungen korrekt umgegangen
 Dabei werden Abhängigkeiten zu externen Ressourcen, wie beispielsweise einer Datenbank, außen vor gelassen.
 Wenn solche Ressourcen dennoch benötigt werden, müssen diese mit Hilfe eines sogenannten \glqq Mocking-Framework\grqq{} simuliert werden.
 Schließlich stellt der CI-Server die Ergebnisse dieser Tests (z.B. in einem Jenkins-Dashboard) zur Verfügung. 
-\cite{Laster.2017}
+\cite[Kap. 2]{Laster.2017}
 
 \paragraph{\glqq Continuous Delivery\grqq}~\\
 Bei Continuous Delivery werden die Änderungen, die vorher auf dem isolierten CI-Server getestet und integriert wurden, in eine Stage, z. B. in die Entwicklungsstage, automatisch übertragen.
 Hier werden weitere Tests, wie Integrationstests und Akzeptanztests, durchgeführt.
 Am Ende einer Continuous Delivery Pipeline steht ein theoretisch auslieferbarer Stand der Anwendung.
 Die Übergabe dieses Standes in die Produktion ist bei Continuous Delivery noch manuell umzusetzen.
-\cite{Laster.2017}
+\cite[Kap. 3]{Laster.2017}
 
 \paragraph{\glqq Continuous Deployment\grqq}~\\
 Continuous Deployment beschreibt den nächsten Schritt nach Continuous Delivery.
 Dabei handelt es sich um die automatisierte Bereitstellung in eine Produktions-Stage.
-\cite{Laster.2017}
+\cite[Kap. 4]{Laster.2017}
 
 \section{Mainframe / Großrechner}\label{sec:mainframe}
 Im modernen Sprachgebrauch kann ein Großrechner oder auch Mainframe als größte zur Verfügung stehende Serverart betrachtet werden.
@@ -92,10 +92,10 @@ Er wird von Unternehmen verwendet, um  kommerzielle Datenbanken, Transaktionsser
 Im Gegensatz zu verteilten Serversystemen, bei denen die Funktionalitäten auf einzelne Server, wie zum Beispiel einen E-Mail-Server, einen Datenbank-Server, einen Web-Server usw. aufgeteilt sind, handelt es sich bei einem Mainframe um ein zentralisiertes System.
 Die einzelnen Funktionalitäten werden von sogenannte \glqq Subsysteme\grqq, auch \glqq Middleware\grqq{} genannt, zur Verfügung gestellt. 
 Darunter zählen unter anderem Datenbanksysteme und Anwendungsserver.
-\cite{Ebbers.2011}
+\cite[S. 9-10]{Ebbers.2011}
 
 \section{Mainframe Anwendungen bei DATEV e.G.}\label{sec:zosanw}
-Das Betriebssystem des IBM Mainframes ist das für zero downtime stehende z/OS.\footnote{\cite{Ebbers.2011}}
+Das Betriebssystem des IBM Mainframes ist das für zero downtime stehende z/OS.\footnote{[S. 92]\cite{Ebbers.2011}}
 Darauf aufbauend benötigen klassische z/OS Anwendungen bestimmte Middleware.
 Bei der DATEV e.G. handelt es sich unter anderem um folgende Middlewarekomponenten:
 
@@ -146,7 +146,7 @@ Hierfür stellen Applikationsserver eine API zur Verfügung.
 CICS hat gegenüber anderen Anwendungsservern, wie zum Beispiel \glqq Apache Tomcat\grqq{} oder \glqq IBM WebSphere\grqq,  den Vorteil, dass es verschiedene Programmiersprachen unterstützt.
 Damit ist CICS ein Multi-Language Application Server und kann z.B. von COBOL, Assembler, Java und PLI Programmen genutzt werden.
 So können Programme innerhalb einer Anwendung in der für ihren Use-Case am besten geeigneten Sprache implementiert werden, für die Kommunikation zwischen den verschiedenen Sprachen stellt  CICS mit seinem erwähnten API die Funktionalität zur Verfügung.
-\cite{Rayns.2011}
+\cite[S. 4]{Rayns.2011}
 
 Das CICS Subsystem einer Stage umfasst mehrere CICS Instanzen.
 
@@ -165,7 +165,7 @@ Eine Transaktion kann mehrere Programme unterschiedlicher Programmiersprachen um
 Dies kann sowohl per Webanfrage oder per Messaging Queue als auch aus einem anderen Programm heraus oder manuell geschehen.
 In der Transaktion werden alle Änderungen, die Programme an Ressourcen, wie zum Beispiel einer Datenbank oder Dateien tätigen, protokolliert.
 So wird im Falle eines Fehlers die Möglichkeit eines Rollbacks, beispielsweise der in der Transaktion genutzten Datenbank, sichergestellt.
- \cite{Rayns.2011}
+ \cite[5-8]{Rayns.2011}
 
 \subsubsection{CICS Anwendungsdeployment}\label{sssec:cicsanwd}
 Zur Beantwortung der Forschungsfragen liegt der Fokus auf der Entwicklungsstage, deshalb wird im Folgenden nur das Deployment von Anwendung in eine Entwicklungs-CICS Instanz dargestellt.
@@ -185,7 +185,7 @@ Diese Datenbanken entsprechen in der Struktur den Datenbanken aus der Produktion
 IBM MQ ist eine Messaging-Lösung der IBM.
 Diese ermöglicht den asynchronen Datenaustausch zwischen Anwendungen mittels sogenannter Queues.
 Alle IBM MQ Begrifflichkeiten, die in dieser Arbeit verwendet werden, werden im Folgenden erläutert.
-\cite{Aranha.2013}
+\cite[Kap. 3.2]{Aranha.2013}
 
 Das IBM MQ Subsystem einer Stage setzt sich aus einem oder mehreren Queue Managern zusammen.
 Ein Queue Manager kann daher als IBM MQ Instanz gesehen werden.
@@ -196,7 +196,7 @@ Er verwaltet  alle anderen IBM MQ Ressourcen.
 Dazu gehören unter anderem die Speichersteuerung der Daten und die Wiederherstellung dieser im Falle eines Fehlers.
 Desweiteren koordiniert er den Zugriff aller Anwendungen auf die Nachrichten in den von ihm verwalteten Queues.
 Um hierbei die Konsistenz sicherzustellen, sorgt er für Locking und die notwendige Isolation der Queues.
-\cite{Aranha.2013}
+\cite[S. 36]{Aranha.2013}
 
 \subsubsection{Queues}
 In Queues werden die Nachrichten, die von Programmen gesendet und gelesen werden gespeichert.
@@ -211,7 +211,7 @@ Die sogenannte \glqq Initiation Queue\grqq{} ist eine spezielle Art der Local Qu
 Diese dient dem Queue Manager dazu, unter bestimmten Bedingungen eine Trigger-Nachricht darauf zu schreiben.
 Eine ander Local Queue kann so definiert sein, dass sobald eine Nachricht auf sie geschrieben wird, eine solche Trigger-Nachricht erzeugt wird.
 Dies ermöglicht beispielsweise den use-case, dass Anwendungen nur starten, wenn wirklich Daten zum Verarbeiten vorhanden sind.
-\cite{Aranha.2013}
+\cite[S. 37-38]{Aranha.2013}
 
 \subsubsection{Process}
 Für das Auslösen von Anwendungen wird nicht nur die Initiation Queue benötigt, sondern auch sogenannte \glqq Processes\grqq.
@@ -219,7 +219,7 @@ So muss der Local Queue, die den Start einer Anwendung auslösen soll, bei der D
 Ein Process legt den \glqq Type\grqq{} und den Namen der zu startenden Anwendung fest.
 Als \glqq Type\grqq{} können beispielhaft CICS oder auch WINDOWSNT für Windows unterstütze Plattformen genannt werden.
 Ist der \glqq Type\grqq{} CICS,  muss der Name der Transaktion angegeben werden, für Windows Plattformen der Dateipfad der auszuführenden exe.
-\cite{Aranha.2013}
+\cite[Kap. 4.5]{Aranha.2013}
 
 \section{\glqq IBM Cloud Provisioning and Management for z/OS\grqq}\label{sec:tool}
 Die Verwaltung von Subsystemen von z/OS ist eine hochspezialisierte, teilweise manuelle Tätigkeit.\footnote{Analyse des aktuellen Bereitstellungsprozesses, siehe in Absatz \ref{sec:aktbereit}}
@@ -275,7 +275,7 @@ Darüber hinaus besteht die Möglichkeit REST-Calls auszuführen.
 Durch ein XML Schema wird sichergestellt, dass das Workflowdefinitionfile keine syntaktischen Fehler beinhaltet.
 Sowohl die Variablendefinition als auch die Steps können in externe XML Dateien ausgelagert werden.
 Dadurch können Variablen an einer Stelle im Template definiert und in alle Workflowdefinitionfiles aufgenommen werden.
-\cite{Rotthove.2018}
+\cite[S. 140]{Rotthove.2018}
 
 Zusätzlich kann in dem Manifest-File eine Beschreibung des Templates hinzugefügt werden.
 \cite{.26.2.2020}
@@ -307,7 +307,7 @@ Somit kann das Template für spezifische Anforderungen, z.B. einer speziellen An
 Für die Provisionierung eines Templates müssen diesem eine sogenannte \glqq Domain\grqq{} und ein \glqq Tenant\grqq{} zugewiesen werden.
 Unter einer \glqq Domain\grqq{} ist ein System zu verstehen, das Systemressourcen in Ressourcenpools gliedert.
 \glqq Tenants\grqq{} sind die dazugehörigen Rechtegruppen, die dem Anwender den Zugriff auf und die Nutzung von zugeordneten Templates ermöglicht.
-\cite{Rotthove.2018}
+\cite[S. 15]{Keith.2016}
 
 \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} umfasst zwei Lösungen, \glqq z/OS Management Facility\grqq\footnote{siehe Absatz \ref{sssec:zosmf}} und \glqq z/OS Provisioning Toolkit\grqq\footnote{siehe Absatz \ref{sssec:zospt}}.
 
@@ -337,7 +337,7 @@ Es ist zu empfehlen vorher einen \glqq Test Run\grqq{} durchzuführen.
 Dabei wird eine Instanz testweise provisioniert.
 Diese Test-Template-Instanz verhält sich genauso wie eine Instanz, die aus einem veröffentlichten Template erzeugt wurde. 
 Somit können das Template und die in der Aktiondefintionfile definierten Aktionen vor der Veröffentlichung getestet werden.
-\cite{Rotthove.2018}
+\cite[S. 8]{Rotthove.2018}
 
 
 \subsection{z/OS Provisioning Toolkit}\label{sssec:zospt}
@@ -352,7 +352,7 @@ Ein Docker-Image beschreibt die Vorlage für einen Docker-Container und beinhalt
 \paragraph{\glqq Docker-Container\grqq}~\\
 Mit dem Kommandozeilenbefehl \glqq docker run\grqq{} wird aus einem Docker-Image ein Docker-Container erzeugt.
 Ein Docker-Container beschreibt somit eine lauffähige Instanz eines Docker-Images.
-\cite{Vohra.2016}
+\cite[Kap. 1]{Vohra.2016}
 
 Im Vergleich dazu sind die Definitionen in z/OSPT folgende:
 
