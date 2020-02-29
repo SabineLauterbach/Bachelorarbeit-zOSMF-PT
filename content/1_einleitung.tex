@@ -37,7 +37,8 @@ Offensichtlich betreiben dennoch etliche Firmen einen IBM Großrechner.
 Dazu zählen hauptsächlich Banken, Versicherungen, Fluggesellschaften usw.\footnote{\cite{.25.2.2020c}}
 Der gemeinsame Nenner dieser Unternehmen ist, dass sich über die Jahre und Jahrzehnte enorme Investitionen auf dem Mainframe angesammelt haben.
 Die entstandenen, hochgradig geschäftskritischen Kernsysteme haben hohe Anforderungen an Massendatenverarbeitung, Sicherheitsstandards und Hochverfügbarkeit.
-All diese Punkte sprechen nach wie vor für die Nutzung eines Großrechners, z.B. auch bei der DATEV e.G. (Kommentar: hier wäre ein Zitat schön, von einer Bank o.ä. ich schau mal ob ich was finde)
+All diese Punkte sprechen nach wie vor für die Nutzung eines Großrechners, z.B. auch bei der DATEV e.G., weshalb man nach Einführung der IBM z14 Plattform 2019 als Referenzkunde agierte.\footnote{\cite{.29.02.2020}}
+\glqq Hosting our SaaS and cloud services on the IBM z14 gives us peace of mind that customer information is kept secure, in compliance with data protection regulations.\grqq\footnote{Jutta Roessner, Executive Committee Member, DATEV}
 
 Die DATEV e.G. wurde am 14.02.1966 von 65 Steuerbevollmächtigen gegründet.
 Sie verfolgten mit der Gründung das Ziel, Buchführungsaufgaben für ihre Mandanten mit Hilfe der neu aufkommenden EDV zu bewältigen.
@@ -72,7 +73,7 @@ Durch diese Module werden unter anderem im Monat circa 11 Millionen Lohnabrechnu
 \end{axis}
 \end{tikzpicture}
 \centering
-\caption{Anteil der verwendeten Programmiersprachen auf dem Mainframe bei DATEV eG in Prozent}
+\caption{Anteil der verwendeten Programmiersprachen auf dem Mainframe bei DATEV e.G. in Prozent}
 \label{fig:Programmiersprachen}
 \end{figure}
 
@@ -91,7 +92,7 @@ D.h., Entwicklerteams können sich über sog. \glqq Cloud Services\grqq, z.B. Da
 \end{figure}
 Eine genaue Beschreibung der Begrifflichkeiten erfolgt im Absatz \ref{sec:cloudnative}.
 Den Entwicklern steht, neben modernen Entwicklungsumgebungen (IDE\footnote{Integrated Development Environment wie IntelliJ oder Eclipse}) und einer Sourceverwaltung mit Git, auch eine sog. \glqq Toolchain\grqq{} zur Verfügung. Diese beinhaltet Tools für Build, Test, Quality Gates und Deployment. 
-Damit wird der Entwicklungsprozess automatisiert und man erhofft sich eine hohe Entwicklereffizienz. (Kommentar: hier würde ich nach wie vor die Grafik von unserem go/cloud Sharepoint mit einbinden)
+Damit wird der Entwicklungsprozess automatisiert und man erhofft sich eine hohe Entwicklereffizienz.
 
 Der Entwicklungsprozess für z/OS Anwendungen bei DATEV e.G. erscheint im Vergleich zu dieser PaaS-Lösung veraltet.
 So wurde 2010 eine auf Eclipse basierende Entwicklungsumgebung für COBOL und IBM Assembler in der DATEV e.G. flächendeckend bereitgestellt.
@@ -110,23 +111,23 @@ Dieses stellte nur ein sehr einfaches Versionierungskonzept ohne aus Git bekannt
 Parallelentwicklung von verschiedenen Features war vorher mit viel Aufwand und Abstimmung möglich. 
 Das Tooling wurde somit modernisiert, jedoch nicht der Entwicklungsprozess selbst.
 Es teilen sich sehr viele Anwendungen die gleichen Entwicklungs-CICS/Db2/MQ Ressourcen.
-Das heißt auch, dass eine Parallelentwicklung - trotz jetzt möglichen Git-Branches - an unterschiedlichen Features nur mit viel Abstimmungsaufwand und Absprachen innerhalb eines Entwicklungsteams, teilweise auch abteilungsübergreifend, möglich ist.
+Das heißt auch, dass eine Parallelentwicklung - trotz jetzt möglicher Git-Branches - an unterschiedlichen Features nur mit viel Abstimmungsaufwand und Absprachen innerhalb eines Entwicklungsteams, teilweise auch abteilungsübergreifend, möglich ist.
 Werden Änderungen an bestehenden Ressourcen durchgeführt oder werden neue Systemumgebungen benötigt, entsteht weiterer Abstimmungsaufwand und weitere Absprachen.
-Dadurch ist der aktuelle Prozess fehleranfällig und langsam.
+Dadurch wird der aktuelle Prozess im Vergleich zu modernen cloud nativen Prozessen, als fehleranfällig und langsam angesehen.
 
 Es bleibt die Frage, wie wird vor diesem Hintergrund mit den vielen Mainframebestandsanwendungen bei der DATEV e.G. in Zukunft umgegangen?
-Die komplette Ablösung dieser Anwendungen durch cloud-native Lösungen ist eine Option, deren zeitlicher Rahmen und Machbarkeit aktuell nicht absehbar ist.\footnote{\ref{app:momappp} }
+Die komplette Ablösung dieser Anwendungen durch cloud-native Lösungen ist eine Option, deren zeitlicher Rahmen und Machbarkeit aktuell nicht absehbar ist.
 Für die Funktionsfähigkeit dieses Bestandsgeschäfts, das die Core-Business-Funktionalitäten der DATEV e.G. darstellt, muss also effiziente Weiterentwicklung und Wartung gewährleistet werden.
 Auch im Falle einer geplanten Ablöse von Anwendungen muss je nach Strategie (z.B. \glqq Rewrite\grqq / \glqq Rearchitect\grqq)\footnote{(Kommentar, Strategiepatterns lt. Gartner, ich schick DIr enien Link)} das Alt-System parallel dazu über Jahre oder Jahrzehnte gepflegt und funktional aktuell gehalten werden.
 Daraus folgt, dass aus Sicht der DATEV e.G. weiter in die IBM Mainframe Plattform investiert werden muss. 
 Dies bedeutet Investitionen in die bereitgestellte Infrastruktur (Hardware, Betriebssysteme, Lizenzen), insbesondere aber auch Investitionen, die die oben genannten Anforderungen an Weiterentwicklung, Wartung und Entwicklungseffizienz sowie Effizienz im Betrieb adressieren.
 
 \section{Ziel der Arbeit}\label{sec:ziel}
-Es liegt also nahe, sich an den oben beschriebenen Prozessen zu cloud native Entwicklung zu orientieren. 
+Es liegt also nahe, sich an den oben beschriebenen Prozessen für cloud native Entwicklung zu orientieren. 
 In diesem Zusammenhang läuft aktuell  bei DATEV e.G. ein Proof of Concept bezüglich automatisierter Builds von z/OS Anwendungen auf Basis von Jenkins basierten Pipelines. 
 Dies ist auch die Voraussetzung für automatisierte Tests von z/OS Programmen im Rahmen des \glqq Continuous Integration, Continuous Deployment\grqq{} Ansatzes.
 Was jedoch fehlt, sind \glqq Self Services\grqq{} für  Laufzeitumgebung und  Middleware.
-Die dafür notwendige automatisierte Provisionierung einer z/OS Anwendungsumgebung, d.h Laufzeit, Middleware etc., ist aktuell noch weitgehend unerforscht. 
+Die dafür notwendige automatisierte Provisionierung einer z/OS Anwendungsumgebung, d.h. Laufzeit, Middleware etc., ist aktuell noch weitgehend unerforscht. 
 Hier sind die Prozesse bei DATEV und anderen Kunden oft noch proprietär, hoch spezialisiert,  manuell und nicht modernisiert. 
 Gerade bei Mitarbeitern im Betrieb, die als Administratoren für die Middleware-Produkte arbeiten, sind die Bedenken groß, ob man diese Cloud-Vorgehensweise auf hochspezialisierte individuelle Komponenten wie CICS, DB2, IBM MQ anwenden kann, \glqq weil man so etwas bisher nicht vermisst hat\grqq\footnote{Marcel Amrein, IBM Senior Technical Sales Professional (MQ and CICS) (Quelle: Anhang \ref{app:ibm})}.
 IBM bietet als eine Lösung \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} an. 
@@ -140,6 +141,6 @@ Hier setzt diese Arbeit an und klärt folgende Fragen:
 \end{itemize}
 \end{samepage}
 
-Um diese Fragen zu beantworten wird die Provisionierung einer z/OS Laufzeitumgebung für eine bestehende Anwendung untersucht.
+Um diese Fragen zu beantworten, wird die Provisionierung einer z/OS Laufzeitumgebung für eine bestehende Anwendung untersucht.
 Diese Anwendung sollte CICS als Anwendungsserver, eine Db2 Datenbank und IBM MQ als Messaginglösung nutzen, um für diese 3 Haupt-Technologien (Middleware-Komponenten) eine Aussage treffen zu können.
 Die genaue Vorgehensweise wird im Kapitel \ref{ch:vorgehensweise} beschrieben.
