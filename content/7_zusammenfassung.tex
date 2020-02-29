@@ -21,7 +21,7 @@ CI/CD-Pipeline Unterstützung & ja, mit z/OSPT & ja \\
 \end{table}
 
 Die Annäherung beschränkt sich jedoch nur auf eine automatisierte Provisionierung von Laufzeitumgebungen in der Entwicklungsstage.
-Es werden noch keine Produkt-Teams gebildet (Kommentar: das stimmt so nicht, vlt. eher: es kann nicht ein klassisches Product-Team-Vorgehen umgesetzt werden), sondern auch mit den Einsatz von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} bleibt die Verwaltung und Überwachung der Middleware bei den Administratorenteams.
+Es kann kein klassisches Product-Team-Vorgehen umgesetzt werden, sondern auch mit den Einsatz von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} bleibt die Verwaltung und Überwachung der Middleware bei den Administratorenteams.
 
 Wird der z/OSMF Lösungsansatz genauer betrachtet, dann ist zu erkennen, dass dieser durch den Abbau der Kommunikation zwischen den Abteilungen und nur einmaligem Erstellen der Skripte weniger fehleranfällig und effizienter als der momentan etablierte Prozess ist.
 Jedoch ist es noch nicht perfekt.
@@ -36,8 +36,9 @@ Zusätzlich müsste ein sogenannter \glqq Service Broker\grqq{} für die Einbind
 z/OSPT ist dadurch dem cloud native Prozess näher als z/OSMF.
 
 Beide Lösungsansätze erzeugen bei den Stakeholdern, also den Entwicklerteams und den Administratorenteams einen Mehrwert und werden akzeptiert.
-Allgemein lässt sich sagen, dass die Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} ein kleiner Baustein in Richtung von DevOps, einer CI/CD-Pipeline für den Mainframe und dadurch ein kleiner Schritt hin zu mehr Entwicklungseffizienz, und damit ggf. auch kürzeren Releasezyklen sein kann.
-
-Kommentar: da fehlt noch einiges. Die Build Pipeline macht nur Sinn, wenn man auch darin automatisiert testen kann. Das kann man nur, wenn isolierte Testumgebungen da stehen. Deswegen ist das ein wichtiger Baustein für mehr Effizienz. 
+Allgemein lässt sich sagen, dass die Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} ein kleiner Baustein in Richtung von DevOps und einer CI/CD-Pipeline für den Mainframe sein kann.
+Dieser Baustein bezieht sich nur auf den Aspekt von automatisierter Bereitstellung von isolierten Testumgebungen.
+Dieser Aspekt ist jedoch essenziell für den Einsatz einer Build Pipeline.
+So kann dieser kleine aber wichtige Baustein zu einer besseren Entwicklungseffizienz beitragen.
 Außerdem hilft dieser Schritt, um dem Image eines veralteten Systems mit veralteten langsamen Prozesses zu entkommen.
-Ich schau nochmal über die EInleitung und versuche, das zu mappen. 
+
