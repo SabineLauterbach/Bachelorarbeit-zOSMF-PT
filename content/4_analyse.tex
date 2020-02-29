@@ -184,9 +184,16 @@ Im Vergleich zur \glqq Microservices\grqq-Architektur, die im cloud native Umfel
 Insbesondere aus Performancegründen, haben sich über die Jahre Abhängigkeiten und Verzahnungen zwischen einzelnen Anwendungen gebildet.
 Diese starke Koppelung erhöht die Komplexität und erschwert das Testen dieser Anwendungen.
 
+Wird der Architekturaspekt der geteilten Subsystem Ressourcen betrachtet, kristallisiert sich ein weiteres Problem heraus.
+Es ist möglich, dass eine Anwendung eine komplette CICS Instanz zum Absturz bringt.
+Ist dies der Fall sind auf Grund einer Anwendung alle anderen Anwendungen dieser CICS Instanz nicht mehr verfügbar.
+Mit Hilfe von isolierten Testumgebungen kann dieser Problem gelöst werden.
+
 Nach diesem Vergleich sieht die DATEV e.G. bei dem hier untersuchten automatisierten Prozess vor allem bei der Entwicklungseffizienz einen Vorteil.
 Dabei wird der Fokus auf die Effizienz bei der Bereitstellung isolierter Testumgebungen, ohne Wartezeit und mit möglichst wenig manueller Interaktion gelegt.
 Dadurch verspricht sich die DATEV e.G. kürzere Entwicklungszyklen und weniger Fehleranfälligkeit durch zu hohen Abstimmungsaufwand.
+
+
 Hierzu wird in dieser Arbeit das Tool \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} für die automatisierte Bereitstellung von Laufzeitumgebungen für die Entwicklungsstage untersucht.
 Als Beispielanwendung dient ein Teil der z/OS Anwendung \glqq DATEV-Rechnungsschreibung\grqq.
 
