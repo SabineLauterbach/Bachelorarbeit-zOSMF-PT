@@ -24,6 +24,7 @@ Die Annäherung beschränkt sich jedoch nur auf eine automatisierte Provisionier
 Es kann kein klassisches Product-Team-Vorgehen umgesetzt werden, sondern auch mit den Einsatz von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} bleibt die Verwaltung und Überwachung der Middleware bei den Administratorenteams.
 
 Wird der z/OSMF Lösungsansatz genauer betrachtet, dann ist zu erkennen, dass dieser durch den Abbau der Kommunikation zwischen den Abteilungen und nur einmaligem Erstellen der Skripte weniger fehleranfällig und effizienter als der momentan etablierte Prozess ist.
+Nachdem ein zeitaufwändiger Initialisierungsaufwand um die Erstellung eines Templates zu implementieren erbracht wurde, ermöglicht schon die Lösung mit z/OSMF eine Provisionierung einer anwendungsspezifischen Laufzeitumgebung binnen circa einer Stunde.
 Jedoch ist es noch nicht perfekt.
 Der Bereitstellungsprozess ist noch immer mit einigen manuellen Schritten verbunden.
 So muss das Template manuell kopiert werden und Änderungen an der Konfiguration müssen innerhalb des Templates stattfinden.
@@ -33,9 +34,11 @@ Diese sieht in einer Endausbaustufe eine einfache Einbindung des Templates in ei
 Außerdem würde der Einsatz von z/OSPT das Einbinden in den DATEV e.G. internen \glqq Marktplatz\grqq{} für Cloud Lösungen ermöglichen.
 Um diese Ziele zu erreichen, muss noch viel Aufwand in die Gestaltung des Templates gesteckt und Best Practices erarbeitet werden.
 Zusätzlich müsste ein sogenannter \glqq Service Broker\grqq{} für die Einbindung der einzelnen Subsysteme in den \glqq Marktplatz\grqq{} implementiert werden.
-z/OSPT ist dadurch dem cloud native Prozess näher als z/OSMF.
+z/OSPT ist dadurch dem cloud native Prozess näher als z/OSMF und ermöglicht die Provisionierung einer anwendungsspezifischen Laufzeitumgebung binnen weniger Minuten.
 
 Beide Lösungsansätze erzeugen bei den Stakeholdern, also den Entwicklerteams und den Administratorenteams einen Mehrwert und werden akzeptiert.
+Hier wird vor allem aus Sicht des Entwicklerteams an Effizienz gewonnen, da im Vergleich zu den circa zwei Tagen im best-case des etablierten Bereitstellungsprozesses, circa eine Stunde mit z/OSMF und wenige Minuten mit z/OSPT eine deutlich Zeiteinsparung nach sich zieht.
+Aus Sicht der Administratorenteams ist der hohe Initialisierungsaufwand für die erste Erstellung der Templates abschreckend, danach sinken die notwendigen Absprachen mit den Kollegen deutlich und erhöhen auch hier die Effizienz.
 Allgemein lässt sich sagen, dass die Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} ein kleiner Baustein in Richtung von DevOps und einer CI/CD-Pipeline für den Mainframe sein kann.
 Dieser Baustein bezieht sich nur auf den Aspekt von automatisierter Bereitstellung von isolierten Testumgebungen.
 Dieser Aspekt ist jedoch essenziell für den Einsatz einer Build Pipeline.
