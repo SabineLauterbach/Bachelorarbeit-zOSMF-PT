@@ -1,51 +1,52 @@
 \section{Interviews}
+(Kommentar: wäre hier nicht eine Einleitung, was du mti den Interviews bezweckst, hilfreich? Du hast das zwar schon mal irgendwo erwähnt, aber einen Satz am ANfang dieses Kapitels würd ich spendieren) 
 Die Fragebögen werden im Folgenden zunächst nach Gruppen ausgewertet.
 Schließlich wird daraus ein allgemeines Stimmungsbild abgeleitet.
 
 \subsection{CICS Administratoren}
 Der momentan etablierte Bereitstellungsprozess wird von der CICS Administration mit hohen manuellen Aufwand verbunden.
-Dies kombiniert mit viel Abstimmungsbedarf zwischen den Administratoren- und Entwicklerteams führt dazu, dass der Prozess als langsam und verbesserungswürdig angesehen wird.
-In der Umsetzung mit z/OSMF sieht die CICS Administration trotz des vermuteten hohen Einarbeitungsaufwandes bereits einen Mehrwert.
+Dies, kombiniert mit viel Abstimmungsbedarf zwischen den Administratoren- und Entwicklerteams, führt dazu, dass der Prozess als langsam und verbesserungswürdig angesehen wird. (Kommentar: steht das nicht in Widerspruch, dass du oben irgendwo schreibst, die Leute wollen keine Änderung, weil ja alles klappt?)
+In der Umsetzung mit z/OSMF sieht die CICS Administration trotz des vermuteten, hohen Einarbeitungsaufwandes bereits einen Mehrwert.
 Der Hauptvorteil des vorgestellten z/OSPT Lösungsansatzes sei dessen Flexibilität.
-Jedoch schreckt die dadurch benötigte Komplexität des zu erstellenden dynamischen Templates ab.
-Dieser Effekt wird durch fehlende Toolunterstützung und dem dadurch fehlenden Syntaxhighlighting beim Editieren der Template Dateien bzw. der Workflowdefinitionfiles verstärkt.
+Jedoch schreckt bei z/OSPT die Komplexität des zu erstellenden dynamischen Templates ab.
+Dieser Effekt wird durch fehlende Toolunterstützung und dem dadurch fehlenden Syntaxhighlighting beim Editieren der Templatedateien bzw. der Workflowdefinitionfiles verstärkt.
 Nach der Hürde des Einarbeitungsaufwandes und Eingewöhnung in das Editieren von Template Dateien und der Workflowdefinitionsdateien stehe einer aufwandssparenden Provisionierung mittels des \glqq IBM Cloud Provisioing and Management for z/OS\grqq-Toolkits nichts im Wege.
 
 \subsection{Db2 Administratoren}
 Das ganze \glqq IBM Cloud Provisioing and Management for z/OS\grqq-Toolkit wird als sehr mächtig, aber komplex beschrieben.
-Im Vergleich dazu funktioniere der momentan etablierte Bereitstellungsprozess sehr gut, da dieser bereits lange eingesetzt wird.
-Jedoch könnten lange Wartezeiten, die durch die vielen Abhängigkeiten zwischen Personen und Abteilungen zu Stande kommen, durch einen automatisierten Ablauf mittels des Toolkits eliminiert werden.
-Der durch z/OSMF ermöglichte Prozess zeige zwar das eine Automatisierung in diesem Bereich möglich ist, aber auch das noch viel Forschungsaufwand und Weiterentwicklung in diesem Bereich notwendig ist, um die Provisionierung wirklich nutzen zu können.
-z/OSPT diene dabei als Hilfsmittel den Bereitstellungsprozess in eine CI/CD-Pipeline aufzunehmen und so weiter zu automatisieren.
-Das durch das Toolkit ermöglichte automatisiertes Deployment von z/OS Middleware wird als notwendiger Schritt, um den Mainframe weiterhin erfolgreich zu betreiben, betrachtet.
+Im Vergleich dazu funktioniere der momentan etablierte Bereitstellungsprozess sehr gut, da dieser bereits lange eingesetzt werde.
+Jedoch könnten lange Wartezeiten, die durch die vielen Abhängigkeiten von Personen und Abteilungen zustande kommen, durch einen automatisierten Ablauf mittels des Toolkits eliminiert werden.
+Der durch z/OSMF ermöglichte Prozess zeige zwar, dass eine Automatisierung in diesem Bereich möglich ist, aber auch noch viel Forschungsaufwand und Weiterentwicklung in diesem Bereich notwendig ist, um die Provisionierung wirklich nutzen zu können.
+z/OSPT diene dabei als Hilfsmittel, den Bereitstellungsprozess in eine CI/CD-Pipeline aufzunehmen und so weiter zu automatisieren.
+Das durch das Toolkit ermöglichte automatisiertes Deployment (Kommentar: nicht Deployment sondern Provisionieren) von z/OS Middleware wird als notwendiger Schritt, um den Mainframe weiterhin erfolgreich zu betreiben, betrachtet.
 
 \subsubsection{IBM MQ Administratoren}
 Die IBM MQ Administratoren stimmen überein, dass der momentan etablierte Bereitstellungprozess mit einem hohen manuellen Arbeitsaufwand verbunden ist.
 Durch Arbeiten auf Zuruf und Kommunikation über Telefon, Email oder Terminen entstehen häufig Rückfragen.
 Die Meinungen über die Lösungen mit z/OSMF und z/OSPT sind jedoch unterschiedlich.
-So biete der z/OSMF Ablauf zwar einem Mehrwert durch Abbau von manuellen Eingriffen, allerdings sei dieser bezogen auf die Queues noch sehr spezifisch.
+So biete der z/OSMF Ablauf zwar einen Mehrwert durch Abbau von manuellen Eingriffen, allerdings sei dieser bezogen auf die Queues noch sehr spezifisch.
 Um einen größeren Mehrwert zu generieren, ist das automatische Provisionieren eines Queuemanagers mit in das Template aufzunehmen.
-Hier sei der zusätzliche Arbeitsaufwand nicht zu vernachlässigen.
-Beim z/OSPT Lösungsansatz wird kritisiert, dass es sich nur um \glqq pseudo\grqq Docker Container handle.
+Hier sei der zusätzliche Arbeitsaufwand (bei was: beim Template erstellen?) nicht zu vernachlässigen.
+Beim z/OSPT Lösungsansatz wird kritisiert, dass es sich  um \glqq pseudo\grqq Docker Container handle.
 Die hier von der IBM gewählte Namensgebung führt zur Verwirrung, da ein z/OSPT Container zwar ein Container im Sinne von einem Behältnis für Middleware ist, jedoch nicht im Sinne eines Docker Containers, der in unterschiedlichen Systemumgebungen lauffähig ist.
-Ein weiterer Kritikpunkt ist, dass das gesamte Toolkit im Vergleich zu Jenkins nicht einfach genug zu verwenden sei.
-Wenn diese Probleme behoben werden können, könnten sich die IBM MQ Administratoren vorstellen IBM MQ Ressourcen mittels des Toolkits zu verwalten.
-Dabei sei zu beachten, dass erst noch eigene Erfahrungen mit dem Toolkit gesammelt werden sollten, bevor eine endgültige Bewertung möglich ist.
+Ein weiterer Kritikpunkt ist, dass das gesamte Toolkit im Vergleich zu Jenkins nicht einfach genug zu verwenden sei. (Kommentar: das verstehe ich nicht, im Vergleich zu Jenkins? Jenkins ist was ganz anderes. Meint man damit die Einbindung in einen Jenkins Prozess? Die ist ja nur mit dem z/OSPT möglich. WOher wissen die Kollegen, dass das nicht einfach genug ist? 
+Wenn diese Probleme behoben werden können, könnten sich die IBM MQ Administratoren vorstellen, IBM MQ Ressourcen mittels des Toolkits zu verwalten.
+Dabei sei zu beachten, dass erst noch eigene Erfahrungen mit dem Toolkit gesammelt werden sollten, bevor eine endgültige Bewertung möglich ist. (In dem Absatz wird nicht klar, wann du von z/OSPT als TOolkit sprichst, oder von dem ganzen 
 
 \subsubsection{Entwicklerteam der DATEV Rechnungsschreibung}
 Der Entwicklerfragebogen wurde zusammen mit zwei Entwicklern ausgefüllt.
 
-Aus Sicht des Entwicklers wird vor allem für den in Absatz \ref{ssec:akttemp2fall} beschriebenen Fall viel Wissen über die z/OSMF Oberfläche und das Template selbst benötigt.
+Aus Sicht des Entwicklers wird vor allem für den in Absatz \ref{ssec:akttemp2fall} beschriebenen Fall viel Wissen über die z/OSMF Oberfläche und das Template selbst benötigt. (Kommentar: ist das denn so? Was müssen die im Template denn machen?)
 Dieses Wissen müsse auch bei nicht häufiger Nutzung über einen längeren Zeitraum erhalten werden.
-Deshalb sei der z/OSPT Lösungsansatz, mit dem auf die z/OSMF Oberfläche durch den Einsatz mittels Jenkins oder dem DATEV \glqq Marktplatz\grqq{} verzichtet werden kann, besser geeignet.
-Ist diese Integration möglich wird ein Hauptvorteil darin gesehen, dass der Bereitstellungsprozess mehr in den Händen des eigenen Teams liegt.
-So sei eine Steigerung der Effizienz möglich.
+Deshalb sei der z/OSPT Lösungsansatz, mit dem auf die z/OSMF Oberfläche verzichtet werden kann, und statt dessen mittels Jenkins Build Pipeline oder dem DATEV \glqq Marktplatz\grqq{} gearbeitet werden kann, besser geeignet. (Kommentar: Satz prüfen auf Konsistenz zu dem Interview, ich hab ihn in der ursprünglichen Formulierung nicht gut verstanden)
+Ist diese Integration möglich, wird ein Hauptvorteil darin gesehen, dass der Bereitstellungsprozess mehr in den Händen des eigenen Teams liegt.
+So sei eine Steigerung der Effizienz zu erreichen.
 Es stehe dem Sammeln von Erfahrungen mit dem Prozess und dem kompletten Toolkit nichts im Wege.
-Für die Zukunft könne sich die Nutzung auch für die Qualitätsicherungs- und Produktionsstage, um dort beispielsweise CICS-Instanzen horizontal zu skalieren, vorgestellt werden.
+Für die Zukunft könne man sich die Nutzung auch für die Qualitätsicherungs- und Produktionsstage, um dort beispielsweise CICS-Instanzen horizontal zu skalieren, vorstellen.
 
 \subsubsection{Fachberaterin im Bereich Technologiestrategie}
 Laut der Fachberaterin im Bereich Technologiestrategie ist der gezeigte Ablauf beziehungsweise die z/OSMF Oberfläche für die Aufgabe des Provisionierens von z/OS Middleware geeignet.
-Jedoch sei es besser wenn z/OSMF in den bereits existierenden \glqq Marktplatz\grqq{} für DATEV Cloud Lösungen integriert wäre.
+Jedoch sei es besser, wenn z/OSMF in den bereits existierenden \glqq Marktplatz\grqq{} für DATEV Cloud Lösungen integriert wäre.
 Der Prozess, der mit Hilfe von z/OSPT ermöglicht wird, wird als gut angesehen, da durch ihn die Entwicklung von z/OS Anwendungen an die Vorgehensweise der Cloud Native Entwicklung angenähert wird.
 Hier kommt die Rolle des Build Engineers auch für solche Anwendungen ins Spiel.
 Dieser kümmert sich um die Erstellung und Pflege der Build-Pipeline.
@@ -59,7 +60,7 @@ Zusätzlich diene die Konfigurationsdateien auch als Dokumentation, welche Resso
 
 Abschließend lässt sich sagen, dass aus Sicht einer Fachberaterin im Bereich Technologiestrategie dieses Toolkit die Entwicklung beziehungsweise den Bereitstellungsprozess deutlich verbessern könne.
 So sei für den Entwickler ein an die Cloud Native Welt angenäherter Entwicklungsprozess möglich.
-Dadurch wird der Wechsel zwischen beiden Umgebungen immer fließender.
+Dadurch werde der Wechsel zwischen beiden Umgebungen immer fließender.
 
 \subsection{Meinungsbild}
 Über alle Gruppen hinweg lassen sich folgende Punkte zusammenfassen:
@@ -74,10 +75,10 @@ Es stimmen alle Gruppen überein, dass der momentan etablierte Bereitstellungspr
 Sie würden einen automatisierten und dadurch schnelleren und weniger fehleranfälligen Prozess begrüßen.
 
 Jedoch muss dieser Prozess aus Entwicklersicht mit minimalem Konfigurationsaufwand verbunden sein.
-Dies könnte durch eine Provisionierung mittels z/OSPT und einer  Integration in eine Jenkins Build Pipeline oder durch die Einbindung in den \glqq DATEV Marktplatz\grqq{} mittels eines entwickelten \glqq Service Brokers\grqq. gewährleistet werden.
+Dies könnte durch eine Provisionierung mittels z/OSPT und einer  Integration in eine Jenkins Build Pipeline oder durch die Einbindung in den \glqq DATEV Marktplatz\grqq{} mittels eines entwickelten \glqq Service Brokers\grqq. gewährleistet werden. (Kommentar, wird Service-Broker irgendwo schon eingeführt?)
 Aus Sicht der Administratoren sind mit dieser Umsetzung nur wenige allgemeine Templates zu verwalten, da die Entwickler mit z/OSPT Images arbeiten und keine weiteren Templates erzeugen.
-Um diese Punkte zu ermöglichen, muss das Template umgestaltet werden.
+Um diese Punkte zu ermöglichen, muss das Template umgestaltet werden. (Kommetar: ist das auch eine AUssage aus den Interviews oder eine Anmerkungvon Dir?)
 Der dadurch in den Administratorenteams entstehende Aufwand und die damit verbundene steile Lernkurve hat eine abschreckende Wirkung.
 
-Trotz dieser abschreckenden Wirkung sind auch die Administratorenteams bereit, falls die Kapazitäten vorhanden sind, den Bereitstellungsprozess mit Hilfe des \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} zu verbessern.
+Trotz dieser abschreckenden Wirkung sind auch die Administratorenteams bereit, bei Bereitstellung der notwendigen Kapazitäten, den Bereitstellungsprozess mit Hilfe des \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} zu verbessern.
 Aus Sicht der Technologiestrategie ist dies ein wichtiger und notwendiger Schritt hin zu einem Cloud Native ähnlichen Prozess.
