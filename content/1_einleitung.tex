@@ -16,7 +16,7 @@ Seit ca. 1997 ist auch Java auf dem Mainframe verfügbar. \footnote{\cite[S. 6]{
 
 Der IBM Mainframe hat eine lange Geschichte.
 Vor mehr als fünfzig Jahren wurde der erste Großrechner, das sog. \glqq System/360\grqq{} vorgestellt.
-Bis in die 90er Jahre spielte der IBM Mainframe eine Hauptrolle auf dem Computermarkt, dann gewannen zunehmend verteilte Client-Server-Systeme an Bedeutung.\footnote{[Kap. 5]\cite{Ceruzzi.2003}}
+Bis in die 90er Jahre spielte der IBM Mainframe eine Hauptrolle auf dem Computermarkt, dann gewannen zunehmend verteilte Client-Server-Systeme an Bedeutung.\footnote{\cite[Kap. 5]{Ceruzzi.2003}}
 Seitdem gilt der Mainframe bereits als \glqq  legacy\grqq{} und damit als \glqq Altlast\grqq\footnote{\cite{.22.2.2020}}.
 
 Wieso also wird sich mit der Mainframe Technologie noch beschäftigt? Eine Antwort: Auf dem Mainframe werden auch im Jahr 2020 geschäftskritische Anwendungen in der ganzen Welt gehostet.
@@ -83,6 +83,12 @@ Für die Entwicklung von neuen Online-Anwendungen im cloud-native Stil wurde bei
 Dies ist im Cloud-Zeitalter nötig, um mit einer verbesserten Entwicklungseffizienz und neuen Architekturen Anwendungen (\glqq Apps\grqq) schneller auf den Markt bringen und auf Kundenanforderungen schneller reagieren zu können. Stichwort: Continuous Integration, Continuous Delivery (CI/CD)\footnote{Siehe Absatz \ref{sec:cicd}}.
 Ein Baustein der effizientern Prozesse durch PaaS sind die sog. \glqq Self Services\grqq.
 D.h., Entwicklerteams können sich über sog. \glqq Cloud Services\grqq, z.B. Datenbanken wie PostgreSQL, Mongo und Messaginglösungen wie Kafka entweder manuell über einen Marktplatz (siehe Abbildung \ref{fig:markt}) oder automatisiert per \glqq Build-Pipeline\grqq{} eine  Laufzeitumgebung für ihre Anwendung zusammenbauen.
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figures/CFMarketplace.jpg}
+\caption{Cloud Foundry Marketplace bei DATEV e.G.}
+\label{fig:markt}
+\end{figure}
 Eine genaue Beschreibung der Begrifflichkeiten erfolgt im Absatz \ref{sec:cloudnative}.
 Den Entwicklern steht, neben modernen Entwicklungsumgebungen (IDE\footnote{Integrated Development Environment wie IntelliJ oder Eclipse}) und einer Sourceverwaltung mit Git, auch eine sog. \glqq Toolchain\grqq{} zur Verfügung. Diese beinhaltet Tools für Build, Test, Quality Gates und Deployment. 
 Damit wird der Entwicklungsprozess automatisiert und man erhofft sich eine hohe Entwicklereffizienz. (Kommentar: hier würde ich nach wie vor die Grafik von unserem go/cloud Sharepoint mit einbinden)
