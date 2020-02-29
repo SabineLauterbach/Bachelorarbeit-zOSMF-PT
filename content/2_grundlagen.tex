@@ -1,6 +1,6 @@
 \chapter{Grundlagen}\label{ch:grundlagen}
 Um den Unterschied zwischen modernen cloud native Entwicklungsprozessen und dem Mainframe Entwicklungsprozess darstellen zu können, werden zunächst Begriffe aus dem cloud native-Umfeld erläutert.
-Anschließend werden für die Beantwortung der Forschungsfragen relevante Begriffe des Mainframe-Umfelds beleuchtet.
+Anschließend werden für die Beantwortung der Forschungsfragen relevante Begriffe des Mainframe-Umfelds eingeführt.
 
 \section{cloud native bei DATEV e.G.}\label{sec:cloudnative}
 Eine cloud native Anwendung ist eine speziell für das \Gls{cloudcomp} konzipierte und entwickelte Anwendung.
@@ -8,7 +8,7 @@ Oft werden damit Online-Anwendungen und mobile \glqq Apps\grqq entwickelt, für 
 Für solche Anwendungen ist das Architekturpattern der sogenannten \glqq Microservices\grqq, weit verbreitet.
 Diese einzelnen, entkoppelten Services sind beispielsweise in Containern paketiert. 
 Bekannt geworden ist hier der Ansatz von \Gls{docker}.
-Die Docker Container werden über Images beschrieben und beinhalte neben der Anwendung alles das, was die Anwendung an Komponenten zur Laufzeit benötigt, Bibliotheken, Dateien.\footnote{\cite[Kap. 1]{Vohra.2016}}
+Die Docker Container werden über Images beschrieben und beinhalte neben der Anwendung alles das, was die Anwendung an Middleware-Komponenten und Services zur Laufzeit benötigt, Bibliotheken, Dateien.\footnote{\cite[Kap. 1]{Vohra.2016}}
 Somit können Anwendungen auf verschiedenen \glqq privat\grqq{} und \glqq public\grqq{} Cloud-Umgebungen, auch von unterschiedlichen Anbietern, ausgeführt werden.
 Große Anbieter sind hier beispielsweise AWS (Amazon), Google, Microsoft Azure.\footnote{\cite{.27.2.2020}}
 Dort können bereitstehende Services für Datenhaltung, Security, Messaging usw. genutzt werden. 
@@ -31,7 +31,7 @@ D.h. eine Anwendung kann mit den benötigten Komponenten sicher von einer Entwic
 Die notwendigen stagespezifischen Anpassungen werden konfigurativ beigesteuert.
 Um eine Anwendung in einer bestimmten Stage bereitzustellen, bietet Cloud Foundry ein Kommandozeileninterface an.
 Neben der Bereitstellung können mit diesem Interface beispielsweise Anwendungen auch horizontal skaliert werden.
-Über die Programmiersprache groovy können diese Kommandozeilenbefehle in eine Jenkins basierende CI/CD-Pipeline aufgenommen werden.
+Über die Programmiersprache groovy können diese Kommandozeilenbefehle in eine Jenkins basierte CI/CD-Pipeline aufgenommen werden.
 So kann die Bereitstellung über mehrere Stages hinweg automatisiert werden.
 Diese Methode wird bei der DATEV e.G. eingesetzt.
 \cite{.23.2.2020c}
@@ -87,7 +87,7 @@ Dabei handelt es sich um die automatisierte Bereitstellung in eine Produktions-S
 \cite[Kap. 4]{Laster.2017}
 
 \section{Mainframe / Großrechner}\label{sec:mainframe}
-Im modernen Sprachgebrauch kann ein Großrechner oder auch Mainframe als größte zur Verfügung stehende Serverart betrachtet werden.
+Im modernen Sprachgebrauch kann ein Großrechner, oder auch Mainframe, als größte zur Verfügung stehende Serverart betrachtet werden.
 Er wird von Unternehmen verwendet, um  kommerzielle Datenbanken, Transaktionsserver und Anwendungen, die einen hohen Grad an Sicherheit und Verfügbarkeit benötigen, zu hosten.
 Im Gegensatz zu verteilten Serversystemen, bei denen die Funktionalitäten auf einzelne Server, wie zum Beispiel einen E-Mail-Server, einen Datenbank-Server, einen Web-Server usw. aufgeteilt sind, handelt es sich bei einem Mainframe um ein zentralisiertes System.
 Die einzelnen Funktionalitäten werden von sogenannte \glqq Subsysteme\grqq, auch \glqq Middleware\grqq{} genannt, zur Verfügung gestellt. 
@@ -176,7 +176,7 @@ Eine solche Bibliothek muss im \glqq Started Task Control-Job\grqq{}\footnote{Si
 Db2 ist ein relationales Datenbanksystem, welches unter anderem als Subsystem eines z/OS Betriebssystems läuft.
 Einer Stage können mehrere Datenbanksysteme, auch Instanzen genannt, zugeordnet werden.
 In einer Instanz befinden sich die Datenbanken und Tabellen. 
-In der Entwicklungsstage sind das unter anderem \glqq DB0C\grqq{} und \glqq DB0T\grqq.
+In der Entwicklungsstage sind das bei DATEV e.G. unter anderem \glqq DB0C\grqq{} und \glqq DB0T\grqq.
 DB0C wird als Sandbox betrieben, d.h. jeder Entwickler kann hier eigene Datenbanken erstellen und verwaltet.
 Bei DB0T handelt es sich um ein Datenbankmanagementsystem, dass sich alle Anwendungen der Entwicklungsstage teilen.
 Die darin enthalten Datenbanken werden von der Db2 Administration verwaltet.
