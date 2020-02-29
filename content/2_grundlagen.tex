@@ -178,8 +178,10 @@ Einer Stage können mehrere Datenbanksysteme, auch Instanzen genannt, zugeordnet
 In einer Instanz befinden sich die Datenbanken und Tabellen. 
 In der Entwicklungsstage sind das unter anderem \glqq DB0C\grqq{} und \glqq DB0T\grqq.
 DB0C wird als Sandbox betrieben, d.h. jeder Entwickler kann hier eigene Datenbanken erstellen und verwaltet.
-DB0T enthält von der Administration für die Entwickler verwaltete Datenbanken.
+Bei DB0T handelt es sich um ein Datenbankmanagementsystem, dass sich alle Anwendungen der Entwicklungsstage teilen.
+Die darin enthalten Datenbanken werden von der Db2 Administration verwaltet.
 Diese Datenbanken entsprechen in der Struktur den Datenbanken aus der Produktion und werden für Tests bezüglich Strukturänderungen usw. herangezogen.
+
 
 \subsection{IBM MQ}\label{sec:mq}
 IBM MQ ist eine Messaging-Lösung der IBM.

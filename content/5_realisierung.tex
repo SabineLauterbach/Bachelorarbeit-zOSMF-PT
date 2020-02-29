@@ -15,12 +15,14 @@ Mittels Templates läuft beides automatisiert, verlässlich, und ohne manuelle A
 Die Bereitstellung einer Instanz ist wiederholbar, so kann die Instanz z.B. im Fehlerfall sicher neu erstellt werden und muss nicht langlebig gepflegt werden.
 
 Es folgt ein Vergleich der beiden Tools an Hand folgender Kriterien:
+\begin{samepage}
 \begin{itemize}
 \item Schnittstelle
 \item Verwaltung von Templates
 \item Verwaltung von Instanzen bzw. Container
 \item Einsatz von Images
 \end{itemize}
+\end{samepage}
 
 Aus der Tabelle \ref{tab:vglzosptzosmf} ergibt sich folgendes Fazit:\\
 z/OSPT ist durch den Einsatz von Images deutlich flexibler bezüglich der Konfigurationsmöglichkeiten der Templates.
@@ -121,7 +123,6 @@ Es wurden die gleichen Änderungen bezüglich der DATEV Job Vorgaben und der spe
 Nach Aufnahme in z/OSMF konnte die Provisionierung und Deprovisionierung erfolgreich durchgeführt werden.
 Dadurch wurden erste Erfahrungen mit z/OSMF und die grundsätzliche technische Funktionsweise in der echten DATEV e.G. Entwicklungsumgebung erprobt, was vor allem für die CICS-Administratoren einen wichtigen Schritt darstellte.
 Dennoch handelt es sich erst einmal um eine IBM Standard CICS Instanz, die nicht mit einer DATEV e.G. spezifischen CICS Instanz zu vergleichen ist.
-
 
 \subsubsection{DATEV e.G. spezifischen CICS Template}\label{sssec:datevcics}
 Ziel dieses  Schritts war die Provisionierung einer funktionsfähigen DATEV e.G. spezifischen CICS Instanz. 
@@ -239,14 +240,15 @@ Die Deprovisionierung verlief nach Plan.
 In diesem Absatz wird die Provisionierung einer Db2 Datenbank Instanz beschrieben.
 In der Systemumgebung Testplex bedeutet dies die Provisionierung der Datenbank Instanz ohne Tabelle und Daten.
 
-Für die Erstellung einer Db2 Datenbank existiert innerhalb der DATEV e.G. eine REST-API.
+Für die Erstellung einer Db2 Datenbank existiert innerhalb der DATEV e.G. bereits ein \glqq Self Service\grqq.
+Dieser stellt für die Provisionierung einer Db2 Datenbank auch eine REST-API zur Verfügung.
 Wie im Absatz \ref{sec:tool} beschrieben, ist es möglich, innerhalb eines Workflow Steps einen REST-Request abzusenden.
 Der Code ist in Abbildung \ref{app:db2prov} im Anhang zu finden.
 So muss im Body des Requests unter anderem der Datenbankname und eine UserID übergeben werden.
 Der Code für das Löschen der Datenbank sieht ähnlich aus, nur handelt es sich in diesem Fall um einen DELETE-Request.
 Die zwei notwendigen Steps wurden erzeugt und in den Workflow eingebunden.
 
-Die API ist nur dazu fähig, Datenbanken auf einem bestimmten Datenbanksystem zu erzeugen.
+Die API ist nur dazu fähig, Datenbanken auf dem DB0C Sandbox Datenbankmanagementsystem\footnote{Siehe Absatz \ref{sssec:db2}} zu erzeugen.
 Um die Datenbank aus der CICS-Instanz heraus nutzen zu können, muss dem CICS dieses Datenbanksystem mitgeteilt werden.
 Hierfür ist, wie in Abbildung \ref{code:addCSD} in Zeile acht bereits zu sehen ist, das Hinzufügen einer weiteren CSD Gruppe notwendig, sowie die Aufnahme weitere Bibliotheken in der \glqq createCICS.jcl\grqq.
 Dieser Aufruf wurde mittels neuer Variablen im Template möglichst dynamisch gestaltet und mussten in dem Variableinputfile gesetzt werden.
@@ -278,7 +280,7 @@ Dadurch hat die CICS-Instanz Zugriff auf alle Queues, die sich innerhalb dieses 
 Des Weiteren ist die Aufnahme weiterer Bibliotheken in der \glqq createCICS.jcl\grqq{} notwendig.
 
 \section{Entwicklungsstage}
-Innerhalb der Entwicklungsstage sind die Sicherheits- und Rechtevorschriften schärfer als auf dem Test-Plex.
+Innerhalb der Entwicklungsstage sind die Sicherheits- und Rechtevorschriften schärfer als auf dem Testplex.
 So wäre es zwar möglich, alle für die administrativen Aufgaben notwendigen Rechte einer persönlichen UserID zu geben.
 Dies würde bedeuten, dass alle Anwender dieses Templates diese Rechte auch benötigen würden.
 Damit bestünde eine potentielle Gefahr für das System, da sie damit auch außerhalb des Templates diese Rechte besitzen würden.
@@ -307,19 +309,20 @@ Diese dient später als Ablageort der kompilierten Programme, die explizit nur i
 Dies ist ein Standardvorgehen innerhalb der DATEV e.G., mit dem es möglich ist, neue Programmversionen, und Schnittstellen zu bereits produktiven Modulen nutzen zu können.
 
 \subsection{Db2 Anpassung}\label{ssec:db2entw}
-Eine genauere technische Analyse der DATEV-Rechnungsschreibungsdatenbank kam zu dem  Ergebnis, dass es zwar möglich wäre, diese Datenbank für Testzwecke zu provisionieren, die Erstellung der dafür notwendigen \Gls{ddl} Skripte aber den zeitlichen Rahmen dieser Arbeit übersteigen würde.
-Der Grund hierfür ist die Komplexität der benötigten Tabellen.
+Um die Datenbankstruktur der DATEV-Rechnungsschreibung im DB0C Datenbankmanagementsystem nach zu stellen, wurde eine genaue tchnische Analyse der DATEV-Rechnungsschreibungsdatenbank durchgeführt.
+Dabei stellte sich heraus, dass die Komplexität der benötigten Tabellen sehr hoch ist.
 So wird auf drei Tabellen für die Ermittlung der Produktstammdaten lesend zugegriffen, auf neun weitere bei der Bestimmung der Preisabhängigkeiten.
 Auf die Tabellen wird nicht direkt zugegriffen, sondern über Views\footnote{Alias einer Datenbankabfrage, auf die wie auf eine normale Tabelle zugegriffen werden kann}.
 Bei den meisten werden innerhalb der View noch weitere Tabellen, teilweise aus anderen Datenbanken, gejoint.
 Insgesamt besteht das System aus 14 Tabellen, die auf vier Datenbanken aufgeteilt sind, und 12 Views für den Zugriff auf diese Tabellen.
 
-Die Db2 Administration muss dafür Vorarbeit leisten.
-Mit dieser wurde begonnen, jedoch stellte sich heraus, dass die Komplexität (circa 600 Zeilen Code\footnote{Data Definition Language im Anhang \ref{app:ddl} zufinden} für einen kleinen Teil an Tabellen) der Anwendung DATEV-Rechnungsschreibung im Rahmen dieser Arbeit als zu umfangreich angesehen wurde.
+Dennoch wurde von der Db2 Administration mit der Erstellung der dafür notwendigen \Gls{ddl} Skripte begonnen.
+Es stellte sich, dass bereits für einen kleinen Teil an Tabellen circa 600 Zeilen DDL Code\footnote{Im Anhang \ref{app:ddl} zufinden} notwendig ist.
+Eine vollständige Provisionierung eines so komplexen Datenbanksystems übersteigt den zeitlichen Rahmen dieser Arbeit.
 Sollte sich die Provisionierung generell als zielführend erweisen wird dieser Einmalaufwand erbracht werden.
 Im weiteren Lebenszyklus der Anwendung kann auf diese Db2 jederzeit zugegriffen werden, Änderungen sind ein erheblich geringerer Aufwand als die Initialleistung.
 
-Für die weiteren Schritte der hier vorliegenden Arbeit werden deshalb Datenbanken eines bereits existierenden Datenbanksystems für die DATEV e.G. Rechnungsschreibung genutzt.
+Für die weiteren Schritte der hier vorliegenden Arbeit werden deshalb die bereits im Datenbankmanagementsystem DB0T vorhanden Datenbanken der DATEV-Rechnungsschreibung genutzt.
 Hierfür mussten die dafür vorgesehenen Variablen in der Eingabedatei des Templates angepasst werden.
 Dadurch ändert sich die Gruppe in Zeile acht im Codeabschnitt \ref{code:addCSD} von \glqq DB0C\grqq{} auf \glqq DB0T\grqq.
 Außerdem wurden sowohl in der Provisionierungs- als auch in der Deprovisionierungsdatei die Datenbanksteps auskommentiert, da diese für den weiteren Test nicht mehr zum Einsatz kommen.
