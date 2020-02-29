@@ -7,7 +7,7 @@ Es wird vor allem der technische Aspekt beleuchtet.
 
 \section{Analyse von cloud native bei DATEV e.G.}\label{sec:analysecloud}
 Neben den im Absatz \ref{sec:cloudnative} beschriebenen Begriffe, \glqq cloud native\grqq, \glqq Cloud Foundry\grqq{} und \glqq CI/CD\grqq{} ist der sogenannte \glqq DevOps\grqq-Gedanke in diesem Zusammenhang bei der DATEV e.G. von Bedeutung.
-Laut dem Buch \glqq The Phoenix Project\grqq{} von Gene Kim\footnote{\cite{Kim.2014}} lassen sich die Werte und die Philosophie von DevOps in \glqq Three Ways\grqq{} erläutern.
+Laut dem Buch \glqq The Phoenix Project\grqq{} von Gene Kim\footnote{\cite[Kap. \glqq The Three Ways Explained\grqq]{Kim.2014}} lassen sich die Werte und die Philosophie von DevOps in \glqq Three Ways\grqq{} erläutern.
 
 \paragraph{\glqq The First Way\grqq} betrachtet den Fluss von der Entwicklung über die Middleware Verwaltung bis hin zum Kunden.
 Um diesen Fluss zu optimieren, sollten möglichst kleine Änderungen in möglichst kleinen Arbeitsabschnitten entwickelt werden.
@@ -96,7 +96,7 @@ Somit können Transaktionen auf diese beiden Ressourcen zugreifen.
 
 \paragraph{Started Task Control-Job} ~\\
 Bei einem Started Task Control-Job, kurz STC Job, handelt es sich um einen langlaufenden Batch Job, der mit Hilfe des \glqq START\grqq-Konsolenkommandos innerhalb von z/OS gestartet werden kann.
-Dieser Batch Job wird deshalb auch als Started Task bezeichnet.\cite{Cassier.2007}
+Dieser Batch Job wird deshalb auch als Started Task bezeichnet.\cite[S. 224]{Cassier.2007}
 Bei der DATEV e.G. existiert für jede Instanz eines Subsystems (z.B. CICS) ein solcher Job.
 In diesem werden zunächst einige zur Laufzeit benötigten Bibliotheken und Dateien eingebunden, unter anderem die CICS spezifischen Dateien\footnote{Beschreibung in Absatz \ref{sssec:speziDat}}.
 Außerdem werden hier die SIT \footnote{CICS system initialization table} Parameter definiert.
