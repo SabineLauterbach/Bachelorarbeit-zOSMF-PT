@@ -293,7 +293,7 @@ Bei der Übertragung des Templates vom Testplex in die Entwicklungsstage waren A
 
 \subsection{CICS Anpassung}\label{ssec:cicsentw}
 Damit der CICS spezifische technische User zum Einsatz kommt, musste der \glqq Job\grqq{} Baustein jeder JCL in jedem Step modifiziert werden.
-Dafür bietet z/OSMF die Möglichkeit, beim Zuweisen des \glqq Tenants\grqq{} eine Standard Jobkarte (Kommentar: Link?), die vor jeden Job des Templates eingefügt wird, zu hinterlegen.
+Dafür bietet z/OSMF die Möglichkeit, beim Zuweisen des \glqq Tenants\grqq{} eine Standard Jobkarte\footnote{Beschrieben im Glossar Eintrag \Gls{Batch-Job}}, die vor jeden Job des Templates eingefügt wird, zu hinterlegen.
 Die CICS spezifischen Dateien können von der täglichen Datensicherung der Entwicklungsstage ausgeschlossen werden, da diese bei der Deprovisionierung gelöscht werden.
 Um dies zu gewährleisten, musste der Messageclass Parameter mit dem Wert  \glqq NONE\grqq{} angegeben werden.
 
@@ -309,7 +309,7 @@ Diese dient später als Ablageort der kompilierten Programme, die explizit nur i
 Dies ist ein Standardvorgehen innerhalb der DATEV e.G., mit dem es möglich ist, neue Programmversionen, und Schnittstellen zu bereits produktiven Modulen nutzen zu können.
 
 \subsection{Db2 Anpassung}\label{ssec:db2entw}
-Um die Datenbankstruktur der DATEV-Rechnungsschreibung im DB0C Datenbankmanagementsystem nach zu stellen, wurde eine genaue tchnische Analyse der DATEV-Rechnungsschreibungsdatenbank durchgeführt.
+Um die Datenbankstruktur der DATEV-Rechnungsschreibung im DB0C Datenbankmanagementsystem nach zu stellen, wurde eine genaue technische Analyse der DATEV-Rechnungs-schreibungsdatenbank durchgeführt.
 Dabei stellte sich heraus, dass die Komplexität der benötigten Tabellen sehr hoch ist.
 So wird auf drei Tabellen für die Ermittlung der Produktstammdaten lesend zugegriffen, auf neun weitere bei der Bestimmung der Preisabhängigkeiten.
 Auf die Tabellen wird nicht direkt zugegriffen, sondern über Views\footnote{Alias einer Datenbankabfrage, auf die wie auf eine normale Tabelle zugegriffen werden kann}.
@@ -395,7 +395,6 @@ Bei einem anschließenden vergleich der Ausgabedateien beider Läufe waren keine
 
 \section{Bereitstellungsprozess aktuelles Template}\label{sec:akttemp}
 Bei dem Bereistellungsprozess, der durch das aktuelle Template möglich gemacht wird, sind drei Fälle zu unterscheiden:
-(Kommentar, das sind die technischen Use-Cases, aber in welchen fachlichen könnten die notwendig sein?)
 
 \begin{samepage}
 \begin{enumerate}
