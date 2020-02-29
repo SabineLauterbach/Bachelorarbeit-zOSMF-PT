@@ -21,7 +21,7 @@ Jedoch müsste immer noch für jede kleine Änderung an der Konfigurationsdatei 
 
 Hier schafft z/OSPT Abhilfe.
 Damit kann, wie in Absatz \ref{sssec:zospt} beschrieben, mit Hilfe einer Konfigurationsdatei das Template von außen gesteuert werden und es kommen Images zum Einsatz.
-Dadurch fällt das Kopieren des Template für den Mitarbeiter weg, dieser kann mittels des Kommandozeileninterfaces ein Image bauen und daraus einen Container (im Sinne des z/OSPT) erzeugen.
+Dadurch fällt das Kopieren des Template für den Mitarbeiter weg, dieser kann mittels des Kommandozeileninterfaces ein z/OSPT-Image bauen und daraus einen z/OSPT-Container erzeugen.
 Das Kommandozeileninterface hat einen weiteren Vorteil.
 Mit dessen Hilfe können Arbeitsschritte für die Provisionierung der Middleware über groovy in einen Jenkins-Ablauf aufgenommen werden.
 Somit läuft der Prozess automatisiert ab und nähert sich modernen Entwicklungsabläufen wie denen aus der Cloud Native Entwicklung an.
@@ -39,10 +39,11 @@ Für die \glqq Tenant\grqq{} Zuweisung zu einem Template würde weiterhin die z/
 Daran ist zu erkennen, dass von Seiten von z/OSMF beziehungsweise von IBM Verbesserungsmöglichkeiten bestehen.
 
 Diese technische Umsetzung ermöglicht in Zukunft den in Diagramm \ref{fig:proneu} dargestellten Bereitstellungsprozess.
-Es ist zu erkennen, dass Verantwortung von den Administratorenteams an die Entwicklerteams übertragen wird. (Kommentar: welche Verantwortung? Die für die Bereitstellung? Den Betrieb??)
+Es ist zu erkennen, dass Verantwortung für die Bereitstellung einer Laufzeitumgebung in der Entwicklungsstage von den Administratorenteams an die Entwicklerteams übertragen wird.
 Dadurch wird Kommunikationsaufwand eingespart und einem Entwickler steht binnen weniger Minuten eine funktionsfähige Laufzeitumgebung in der Entwicklungsstage für seine legacy z/OS Anwendung zur Verfügung.
 Bei Problemen oder Beratungswunsch unterstützen die Administratorenteams weiterhin.
-Für die Realisierung dieser Lösung ist viel Zeitaufwand (Kommentar: ist zu beliebig, vlt. eher: der Hauptaufwand der Umsetzung der Lösung liegt bei den Administratorenteams. Der Effizienzgewinn stellt sich ein, wenn für die wichtigsten Anwendungen Templates existieren, die von den Entwicklern jederzeit genutzt werden können, um individuelle Umgebungen zu nutzen, oder???).
+Der Hauptaufwand der Umsetzung dieser Lösung liegt bei den Administratorenteams.
+Der Effizienzgewinn stellt sich ein, wenn für die wichtigsten Anwendungen Templates existieren, die von den Entwicklern jederzeit genutzt werden können, um individuelle Umgebungen zu nutzen.
 
 \begin{figure}[ht!]
 \centering
