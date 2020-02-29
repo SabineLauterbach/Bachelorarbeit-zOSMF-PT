@@ -21,7 +21,7 @@ CI/CD-Pipeline Unterstützung & ja, mit z/OSPT & ja \\
 \end{table}
 
 Die Annäherung beschränkt sich jedoch nur auf eine automatisierte Provisionierung von Laufzeitumgebungen in der Entwicklungsstage.
-Es werden noch keine Produkt-Teams gebildet, sondern auch mit den Einsatz von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} bleibt die Verwaltung und Überwachung der Middleware bei den Administratorenteams.
+Es werden noch keine Produkt-Teams gebildet (Kommentar: das stimmt so nicht, vlt. eher: es kann nicht ein klassisches Product-Team-Vorgehen umgesetzt werden), sondern auch mit den Einsatz von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} bleibt die Verwaltung und Überwachung der Middleware bei den Administratorenteams.
 
 Wird der z/OSMF Lösungsansatz genauer betrachtet, dann ist zu erkennen, dass dieser durch den Abbau der Kommunikation zwischen den Abteilungen und nur einmaligem Erstellen der Skripte weniger fehleranfällig und effizienter als der momentan etablierte Prozess ist.
 Jedoch ist es noch nicht perfekt.
@@ -31,10 +31,13 @@ So muss das Template manuell kopiert werden und Änderungen an der Konfiguration
 Hierfür wurde in der Arbeit eine Lösung mit Hilfe von z/OSPT beleuchtet.
 Diese sieht in einer Endausbaustufe eine einfache Einbindung des Templates in einen automatisierten Build-Prozess, zum Beispiel mit Jenkins, vor.
 Außerdem würde der Einsatz von z/OSPT das Einbinden in den DATEV e.G. internen \glqq Marktplatz\grqq{} für Cloud Lösungen ermöglichen.
-Um diese Ziele zu erreichen muss noch viel Aufwand in die Gestaltung des Templates gesteckt werden.
+Um diese Ziele zu erreichen, muss noch viel Aufwand in die Gestaltung des Templates gesteckt und Best Practices erarbeitet werden.
 Zusätzlich müsste ein sogenannter \glqq Service Broker\grqq{} für die Einbindung der einzelnen Subsysteme in den \glqq Marktplatz\grqq{} implementiert werden.
 z/OSPT ist dadurch dem cloud native Prozess näher als z/OSMF.
 
 Beide Lösungsansätze erzeugen bei den Stakeholdern, also den Entwicklerteams und den Administratorenteams einen Mehrwert und werden akzeptiert.
-Allgemein lässt sich sagen, dass die Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} ein kleiner Schritt in Richtung von DevOps, einer CI/CD-Pipeline und dadurch ein kleiner Schritt hin zur Verkürzung von Releasezyklen.
-Außerdem hilft dieser Schritt um dem Image eines veralteten Systems mit veralteten langsamen Prozesses zu entkommen.
+Allgemein lässt sich sagen, dass die Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} ein kleiner Baustein in Richtung von DevOps, einer CI/CD-Pipeline für den Mainframe und dadurch ein kleiner Schritt hin zu mehr Entwicklungseffizienz, und damit ggf. auch kürzeren Releasezyklen sein kann.
+
+Kommentar: da fehlt noch einiges. Die Build Pipeline macht nur Sinn, wenn man auch darin automatisiert testen kann. Das kann man nur, wenn isolierte Testumgebungen da stehen. Deswegen ist das ein wichtiger Baustein für mehr Effizienz. 
+Außerdem hilft dieser Schritt, um dem Image eines veralteten Systems mit veralteten langsamen Prozesses zu entkommen.
+Ich schau nochmal über die EInleitung und versuche, das zu mappen. 
