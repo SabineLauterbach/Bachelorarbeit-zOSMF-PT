@@ -1,6 +1,6 @@
 \chapter{Zusammenfassung und Fazit}\label{ch:zusammenfassung}
 Zusammenfassend lässt sich sagen, dass es generell möglich ist mit \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} Laufzeitumgebungen für legacy z/OS Anwendungen automatisiert bereitzustellen.
-Wie aus Tabelle \ref{tab:zosvscn} zu erkennen ist, ist es in einem gewissen Grad auch möglich damit den Bereitstellungsprozess für z/OS Anwendungen bei DATEV e.G. an den cloud native Prozess anzunähern.
+Wie aus Tabelle \ref{tab:zosvscn} zu erkennen ist, ist es in einem gewissen Grad auch möglich, damit den Bereitstellungsprozess für z/OS Anwendungen bei DATEV e.G. an den cloud native Prozess anzunähern.
 
 \begin{table}[h]
 \centering
@@ -21,27 +21,27 @@ CI/CD-Pipeline Unterstützung & ja, mit z/OSPT & ja \\
 \end{table}
 
 Die Annäherung beschränkt sich jedoch nur auf eine automatisierte Provisionierung von Laufzeitumgebungen in der Entwicklungsstage.
-Es kann kein klassisches Product-Team-Vorgehen umgesetzt werden, sondern auch mit den Einsatz von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} bleibt die Verwaltung und Überwachung der Middleware bei den Administratorenteams.
+Es kann kein klassisches Product-Team-Vorgehen umgesetzt werden, sondern auch mit dem Einsatz von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} bleibt die Verwaltung und Überwachung der Middleware auf allen Stages bei den Administratorenteams.
 
 Wird der z/OSMF Lösungsansatz genauer betrachtet, dann ist zu erkennen, dass dieser durch den Abbau der Kommunikation zwischen den Abteilungen und nur einmaligem Erstellen der Skripte weniger fehleranfällig und effizienter als der momentan etablierte Prozess ist.
-Nachdem ein zeitaufwändiger Initialisierungsaufwand um die Erstellung eines Templates zu implementieren erbracht wurde, ermöglicht schon die Lösung mit z/OSMF eine Provisionierung einer anwendungsspezifischen Laufzeitumgebung binnen circa einer Stunde.
+Nachdem der zeitaufwändige initiale Aufwand für die Implementierung eines Templates erbracht wurde, ermöglicht schon die Lösung mit z/OSMF die  Provisionierung einer anwendungsspezifischen Laufzeitumgebung binnen circa einer Stunde.
 Jedoch ist es noch nicht perfekt.
-Der Bereitstellungsprozess ist noch immer mit einigen manuellen Schritten verbunden.
-So muss das Template manuell kopiert werden und Änderungen an der Konfiguration müssen innerhalb des Templates stattfinden.
+Der Bereitstellungsprozess ist noch immer mit einigen manuellen Schritten verbunden. 
+So muss das Template manuell kopiert werden und manuelle Änderungen an der Konfiguration müssen innerhalb des Templates, mit mäßiger bis schlechter Unterstützung bei Fehlern, bzgl. Syntax etc. durchgeführt werden.
 
-Hierfür wurde in der Arbeit eine Lösung mit Hilfe von z/OSPT beleuchtet.
-Diese sieht in einer Endausbaustufe eine einfache Einbindung des Templates in einen automatisierten Build-Prozess, zum Beispiel mit Jenkins, vor.
-Außerdem würde der Einsatz von z/OSPT das Einbinden in den DATEV e.G. internen \glqq Marktplatz\grqq{} für Cloud Lösungen ermöglichen.
-Um diese Ziele zu erreichen, muss noch viel Aufwand in die Gestaltung des Templates gesteckt und Best Practices erarbeitet werden.
-Zusätzlich müsste ein sogenannter \glqq Service Broker\grqq{} für die Einbindung der einzelnen Subsysteme in den \glqq Marktplatz\grqq{} implementiert werden.
-z/OSPT ist dadurch dem cloud native Prozess näher als z/OSMF und ermöglicht die Provisionierung einer anwendungsspezifischen Laufzeitumgebung binnen weniger Minuten.
+Hierfür wurde in der Arbeit eine Lösung mit Hilfe von z/OSPT beleuchtet. (Kommentar: Der Satz davor adressiert das Thema der manuellen Änderungen in den Template Dateien. Dafür liefert z/OSPT die LÖsung mit dem Konfigurations-file z/OPT-File. Das erwähnst du jetzt aber nicht sondern gehst gleich auf die Einbindung in Jenkinst ein. Das wäre aber erst eine Konsequenz dieser konfigurierbaren Template-Bereistellun) 
+In der Endausbaustufe wäre dadurcheine einfache Einbindung des Templates in einen automatisierten Build-Prozess, zum Beispiel mit Jenkins, möglich.
+Darüber hinaus würde der Einsatz von z/OSPT das Einbinden in den DATEV e.G. internen \glqq Marktplatz\grqq{} für Cloud Lösungen ermöglichen.
+Um diese Ziele zu erreichen, müssen Administratoren zusammen mit Entwicklern noch viel Aufwand in die Gestaltung solcher Templates stecken und Best Practices erarbeiten.
+Und es müsste ein sogenannter \glqq Service Broker\grqq{} für die Einbindung der einzelnen Subsysteme in den \glqq Marktplatz\grqq{} implementiert werden.
+z/OSPT ist insgesamt dem cloud native Prozess bei DATEV e.G. näher als z/OSMF und würde in einer voll umfänglichen Implementierung die Provisionierung einer anwendungsspezifischen Laufzeitumgebung binnen weniger Minuten bzw. während eines Builds ermöglichen.
 
 Beide Lösungsansätze erzeugen bei den Stakeholdern, also den Entwicklerteams und den Administratorenteams einen Mehrwert und werden akzeptiert.
-Hier wird vor allem aus Sicht des Entwicklerteams an Effizienz gewonnen, da im Vergleich zu den circa zwei Tagen im best-case des etablierten Bereitstellungsprozesses, circa eine Stunde mit z/OSMF und wenige Minuten mit z/OSPT eine deutlich Zeiteinsparung nach sich zieht.
-Aus Sicht der Administratorenteams ist der hohe Initialisierungsaufwand für die erste Erstellung der Templates abschreckend, danach sinken die notwendigen Absprachen mit den Kollegen deutlich und erhöhen auch hier die Effizienz.
+Hier wird vor allem aus Sicht des Entwicklerteams Effizienz gewonnen, da nach initialer Bereitstellung der Templates im Vergleich zum aktuell etablierten Bereitstellungsprozesses einer Dauer von ca. 2 Tagen ("best case"), circa eine Stunde mit z/OSMF und wenige Minuten mit z/OSPT gegenübersteht, d.h. eine deutlich Zeiteinsparung möglich wäre.
+Aus Sicht der Administratorenteams ist der hohe initiale Aufwand für die erste Erstellung der Templates abschreckend, danach sinken die notwendigen Absprachen mit den Kollegen deutlich und erhöhen auch hier die Effizienz.
 Allgemein lässt sich sagen, dass die Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} ein kleiner Baustein in Richtung von DevOps und einer CI/CD-Pipeline für den Mainframe sein kann.
 Dieser Baustein bezieht sich nur auf den Aspekt von automatisierter Bereitstellung von isolierten Testumgebungen.
 Dieser Aspekt ist jedoch essenziell für den Einsatz einer Build Pipeline.
-So kann dieser kleine aber wichtige Baustein zu einer besseren Entwicklungseffizienz beitragen.
-Außerdem hilft dieser Schritt, um dem Image eines veralteten Systems mit veralteten langsamen Prozessen zu entkommen.
+So kann dieser kleine aber wichtige Baustein zu einer besseren Entwicklungseffizienz beitragen und damit die umsatzstarken und geschäftskritsichen Bestandsanwendungen bei DATEV e.G. für die Zukunft sichern.
+Nicht zuletzt hilft dieser Schritt dabei, das Image von z/OS als ein veraltetes System mit veralteten langsamen Prozessen, zu verbessern.
 
