@@ -4,8 +4,8 @@ Um letztendlich eine mögliche Verbesserung des momentan in der DATEV e.G. etabl
 
 Wie in Absatz \ref{sec:ziel} beschrieben, wird für die Beantwortung der Forschungsfragen eine Beispielanwendung, die als Laufzeitumgebung CICS, als Datenbank Db2 und als Message Lösung IBM MQ verwendet, benötigt.
 Hier bietet sich die \glqq DATEV Rechnungsschreibung\grqq{}\footnote{Beschreibung siehe Absatz \ref{rechBesch}} an.
-Dabei handelt es sich um eine legacy z/OS Anwendung, ein Teil dieser Anwendung erfüllt die oben genannten Kriterien.
-Um die genauen Anforderungen an die Middleware zu kennen, wurde dieser Teil analysiert.
+Dabei handelt es sich um eine legacy z/OS Anwendung. Ein Bereich dieser Anwendung erfüllt die oben genannten Kriterien.
+Um die genauen Anforderungen an die Middleware zu kennen, wurde dieser Bereich analysiert.
 Anhand dieser Anforderungen soll mittels z/OSPT oder z/OSMF eine individuelle, auf die Anwendung zugeschnittene Laufzeitumgebung bereitgestellt werden.
 Konkret verlangt dies die Implementierung eines Templates.
 Für die Entscheidung, ob z/OSPT oder z/OSMF zum Einsatz kommt, wurden die Vor- und Nachteile beider Lösungen gegenübergestellt.
@@ -33,8 +33,7 @@ Es ermöglicht die Angabe von komplexen Konfigurationen.
 Mit den durch die Untersuchung dieser beiden Templates gesammelten Erfahrungen erfolgt die Implementierung eines an das DATEV e.G. Umfeld angepassten CICS Templates.
 Ist die daraus erzeugte CICS Instanz funktionsfähig, wird die Provisionierung einer Db2 Datenbank und IBM MQ Queues nacheinander in das Template aufgenommen. 
 Für ein Erzeugen von Db2 und IBM MQ existieren bei DATEV e.G. bereits einzelne, voneinander unabhängige Services der jeweiligen Administrations-Teams, die als Bausteine in das Template integriert werden können.
-Für die Provisionierung von Db2 Datenbanken existiert z.B. bereits eine REST-API.
-
+Für die Provisionierung von Db2 Datenbanken existiert z.B. bereits eine REST-API. 
 IBM MQ Queues werden mittels Standard IBM Jobs provisioniert.
 
 Nachdem eine CICS Instanz, eine Db2 Datenbank und IBM MQ Queues auf dem Testplex sowohl provisioniert als auch deprovisioniert werden können, folgt der nächste Schritt.
@@ -46,11 +45,11 @@ Um ein Meinungsbild bezüglich des Einsatzes von \glqq IBM Cloud Provisioning an
 Aus den Administratorenteams und von den Entwicklern wurden jeweils zwei Vertreter und aus dem Technologiestrategieteam ein Vertreter befragt.
 Es handelt sich hier um Experten in ihrem Arbeitsbereich, es ist zu beachten, dass hier generell nur eine geringe Anzahl von Kollegen für Befragungen zur Verfügung steht.
 Es wurden semi-strukturelle Interviews gewählt, um auf einzelne Antworten genauer eingehen zu können.
-Auf eine Transkription der Interviews wurde verzichtet, da nicht der genaue Verlauf der Interviews, sondern die Antworten auf die Fragen relevant sind.
+Auf eine Transkription der Interviews wurde verzichtet, da nicht der genaue Verlauf der Interviews, sondern die inhaltlichen Aussagen in den Antworten auf die Fragen relevant sind.
 
 Die Interviews fanden in  Besprechungsräumen innerhalb eines DATEV e.G. Gebäudes statt und dauerten etwa dreißig bis vierzig Minuten.
 Vor den eigentlichen Interviews wurde sowohl die z/OSMF Lösung (siehe Absatz \ref{sec:akttemp}) als auch die durch z/OSPT ermöglichte Lösung (siehe Absatz \ref{ch:ausblick}) den kompletten Teams erläutert.
 Der Schwerpunkt der Vorstellung wurde an die jeweilige Zielgruppe (Entwickler, Administrator, Technologie-Strategie) angepasst.
 So wurde bei den Administratorenteams vor allem auf die Erstellung der Templates, welche für ihr Arbeitsgebiet relevant ist, eingegangen.
 Sowohl der Fragenkatalog, als auch die ausgefüllten und digitalisierten Fragebögen sind im Anhang \ref{app:fragen} zu finden.
-Für das Entwicklerteam und der Mitarbeiterin des Technologiestrategieteams waren nur die Fragen 1., 2. und 6. bis 10. des Fragebogens von Relevanz.
+Für das Entwicklerteam und die Mitarbeiterin des Technologiestrategieteams waren nur die Fragen 1., 2. und 6. bis 10. des Fragebogens von Relevanz.
