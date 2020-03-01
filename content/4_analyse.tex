@@ -127,6 +127,12 @@ Schließlich steht dem Entwicklerteam die neue Db2 Datenbank zur Verfügung.
 Wird die Db2 Datenbank in Verbindung mit einem CICS verwendet, wie im Fallbeispiel dieser Arbeit, der DATEV-Rechnungsschreibung, so muss der entsprechende Eintrag in die CSD Datei manuell aufgenommen werden. 
 Der komplette Ablauf dauert, unter der Annahme, dass alle Beteiligten verfügbar sind, sie nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
 
+Eine Besonderheit im Bezug auf Db2 bei DATEV e.G. ist die "Db2-Sandbox"-Bereitstellung mit der DB2-Instanz DB0C. (Siehe Kap. 2.4.2)
+Diese stellt bereits eine PaaS-ähnliche Provisionierung dar, und es entfallen die meisten der Vorarbeiten durch das Entwicklerteam. 
+Enwtickler können dort also z.B. ohne Vorlage eines Datenbankmodells und Rechtebeantragung Datenbanken selbst, mit erheblich weniger zeitlichem Aufwand erstellen.  
+D.h. damit existiert bereits ein für die Entwicklung und isoliertes Testen notwendiger Service für Db2 bei DATEV.
+Für die Provisionierung einer kompletten Entwicklungs-Laufzeitumgebung, wie sie diese Arbeit als Ziel hat, kann der DB2-Sandbox-Service als Teilkomponente genutzt werden
+
 \subsection{Bereitstellungsprozess einer IBM MQ Queue}
 Auch bei dem Bereitstellungsprozess, siehe Abbildung \ref{fig:aktmq}, einer IBM MQ Queue ist das Entwicklerteam der Initiator.
 
