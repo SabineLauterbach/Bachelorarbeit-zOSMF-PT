@@ -182,11 +182,11 @@ Ein weiterer Vorteil ist, dass bei der Deprovisionierung der CICS-Instanz diese 
 
 Um dies umzusetzen, wurden zunächst zwei JCL Jobs geschrieben und in das entsprechende Workflowdefinitionfile eingebunden.
 Einer für die Implementierung des Kopiervorgangs und einer zum Löschen dieser Kopie.
-Für die Anpassung der CSD der zu provisionierenden Instanz ist ein weiterer Job notwendig.
+Für die Anpassung der CSD der zu provisionierenden Instanz ist ein weiterer Job, der \glqq InitAdditionalCSD.jcl\grqq-Job, notwendig.
 Es mussten bestimmte Gruppen (Zeilen sieben, neun und zehn in Abbildung \ref{code:addCSD}) zu der CSD Liste der CICS Instanz hinzugefügt werden.
 Dabei handelt es sich um Ressourcen, die jede DATEV e.G. CICS Instanz benötigt.
 Die Reihenfolge ist relevant, da sie der Initialisierungsreihenfolge beim Startvorgang der CICS Instanz entspricht.
-Diese beiden Jobs wurde jeweils als neuer Step in den z/OSMF Workflow eingebunden.
+Diese beiden Jobs wurde jeweils als neuer Workflowdefinitionfile-Step in den z/OSMF Workflow eingebunden.
 
 \begin{minipage}{\linewidth}
 \lstinputlisting[caption={Hinzufügen weiterer CSD Gruppen zur Liste der provisionierten CICS-Instanz mittels eines Jobs},captionpos=b,label={code:addCSD}]{listings/initaddCSDalt.jcl}
@@ -211,11 +211,11 @@ Es handelt sich um den Code, der für das Einlesen der Variable  \glqq DFH\_REGI
 In dieser Variable werden die SIT Parameter als Komma separierter String angegeben.
 Für die Erzeugung eines DATEV e.G. spezifischen CICS wurde das ursprünglich in dem Template verwendete Makro für die Validierung von SIT Parametern beibehalten.
 Alles danach wurde zunächst durch eine zur Verfügung gestellten DATEV e.G. Standard JCL, für die Erzeugung eines CICS, ersetzt.
-Nach und nach wurde damit die für die DATEV eG spezifische CICS Provisionierung notwendige Logik, (siehe Abbildung \ref{code:sitparams}), hinzugefügt.
+Nach und nach wurde damit die für die DATEV e.G. spezifische CICS Provisionierung notwendige Logik, (siehe Abbildung \ref{code:sitparams}), hinzugefügt.
 Damit wurde die vorher statische DATEV e.G. Standard JCL für das Erstellen von CICS Instanzen durch die Verwendung von Template  Variablen flexibilisiert.
 
 \begin{minipage}{\linewidth}
-\lstinputlisting[caption={Setzen der SIT Parameter durch Auslesen der \glqq DFH\_REGION\_SITPARAMS\grqq{} Variablen},captionpos=b,label={code:sitparams}]{listings/sitparams.jcl}
+\lstinputlisting[caption={Setzen der SIT Parameter durch Auslesen der \glqq DFH\_REGION\_SITPARAMS\grqq{} Variablen. (Zeile 379 bis 401 aus \glqq createCICS.jcl\grqq, siehe Anhang \ref{app:createcics})},captionpos=b,label={code:sitparams},firstline=379, lastline=401]{listings/CreateCICS.jcl}
 \end{minipage}
 
 Es wurden nur die wirklich benötigten SIT Parameter aufgenommen.
@@ -372,8 +372,8 @@ Dadurch benötigt jedes CICS eine eigene Initiation Queue.
 Die Zuweisung geschieht in der IBM MQ CSD Gruppe.
 Somit müsste für jede provisionierte CICS-Instanz eine solche CSD Gruppe angelegt werden.
 In Absprache mit der IBM MQ-Administrations wurde entschieden, die Verwaltung der IBM MQ CSD Gruppe komplett im Template durchzuführen.
-Diese Entscheidung hatte eine Änderung des in Abbildung \ref{code:addCSD} gezeigten Codes eines Jobs, der durch einen Workflow-Step dem Template zugeordnet ist, zur Folge.
-So wird, wie in Abbildung \ref{code:createGrp} in Zeile sieben bis zehn dargestellt, zunächst eine Gruppe angelegt und anschließend wird diese Gruppe dem CSD (Zeile 15) hinzugefügt.
+Diese Entscheidung hatte eine Änderung des in Abbildung \ref{code:addCSD} gezeigten Codes der \glqq InitAdditionalCSD.jcl\grqq, der durch einen Workflowdefinitionfile-Step dem Template zugeordnet ist, zur Folge.
+So wird, wie in Abbildung \ref{code:createGrp} in Zeile sieben bis zehn dargestellt, zunächst eine Gruppe angelegt und anschließend wird diese Gruppe dem CSD (Zeile fünfzehn) hinzugefügt.
 
 \begin{minipage}{\linewidth}
 \lstinputlisting[caption={Erstellung einer neuen CSD Gruppe},captionpos=b,label={code:createGrp}]{listings/InitAdditionalCSD.jcl}
@@ -461,8 +461,8 @@ Am Ende der Realisierung steht ein funktionsfähiges Template.
 Dieses Template provisioniert ein für die Rechnungsschreibung individualisiertes CICS und die benötigten IBM MQ Queues. 
 Wie in Absatz \ref{ssec:db2entw} beschrieben, wurde die Provisionierung einer spezifischen Db2 Datenbank wegen hoher Komplexität für diese Arbeit außen vorgelassen
 Auf dem Testplex wurde bewiesen, dass die Provisionierung einer Datenbank möglich ist.
-DIe Provisionierung der anwendungsspezifischen Db2-Tabellen wäre mit hohem einmaligen Arbeitsaufwand ebenfalls möglich.
-Ein Testablauf der Beispielanwendung DATEV Rechnungsschreibung in einer provisionierten, isolierten CICS-Laufzeitumgebung konnte korrekt durchgeführt werden.
+Die Provisionierung der anwendungsspezifischen Db2-Tabellen wäre mit hohem einmaligen Arbeitsaufwand ebenfalls möglich.
+Ein Testablauf der Beispielanwendung DATEV-Rechnungsschreibung in einer provisionierten, isolierten CICS-Laufzeitumgebung konnte korrekt durchgeführt werden.
 
 Folgende Probleme wurden im Rahmen der Implementierung erkannt:
 
@@ -481,13 +481,15 @@ Als erstes Problem sind nicht sprechenden Fehlermeldungen von z/OSMF, Abbildung 
 	\caption{Beispiel einer Fehlermeldung von zOSMF}
 	\label{fig:zosmffehler}
 \end{figure}
-Z.B. wird bei dem Hinzufügen und Aktualisieren eines Templates in z/OSMF das Template und damit alle davon benötigten Dateien auf Syntaxfehler geprüft.
-Die in Abbildung \ref{fig:zosmffehler} gezeigte Meldung tritt dann ein, wenn ein solcher Syntaxfehler vorhanden ist.
-Es ist aber nicht zu erkennen, welcher Fehler genau vorliegt, noch nicht einmal in welcher Datei dieser auftritt.
+Z.B. wird bei dem Hinzufügen und Aktualisieren eines Templates in z/OSMF das Template und damit alle davon benötigten Dateien (Actiondefinitionfile, Workflowdefinitionfiles, Variableinputfile, JCL-Dateien und REXX-Skripte) auf Syntaxfehler geprüft.
+Die in Abbildung \ref{fig:zosmffehler} gezeigte Meldung tritt dann ein, wenn einer dieser Dateien ein Syntaxfehler vorhanden ist.
+Beispielsweise wenn in einer JCL-Datei das Zeichenlimit von 80 Zeichen pro Zeile überschritten wird, dafür genügt schon ein \glqq Blank\grqq.
+Wie zu erkennen ist, zeigt die Fehlermeldung weder welcher Fehler genau vorliegt, noch nicht einmal in welcher Datei dieser auftritt.
 Zudem auch keine genaue Anzahl an auftretenden Fehlern.
 Dieser Umstand, kombiniert mit 36 bestehenden Dateien, erschwert die Fehlersuche.
-Im Gegensatz dazu, wird im Fehlerfall beim Ausführen eines Steps immer der Fehlercode und der genaue Ort des Fehlers ausgegeben.
-Beispielsweise wird bei einem Step, in dem ein REST Aufruf durchgeführt wird, und ein Fehler auftritt, der Requestcode und die hinterlegte Fehlermeldung an der z/OSMF Oberfläche angezeigt. 
+
+Im Gegensatz dazu, wird im Fehlerfall zur Laufzeit eines Workflow-Steps immer der Fehlercode und der genaue Ort des Fehlers ausgegeben.
+Beispielsweise wird bei einem Workflow-Step, in dem ein REST Aufruf durchgeführt wird, und ein Fehler auftritt, der Requestcode und die hinterlegte Fehlermeldung an der z/OSMF Oberfläche angezeigt. 
 
 Ein weiteres Problem ist eine nicht genau identifizierbare Programmiersprache, die für die dynamische Generierung von Skripten genutzt wird.
 Um diese Sprache einzusetzen muss am Zeilenanfang ein \glqq\#\grqq{} angegeben werden.
@@ -499,7 +501,7 @@ Dort werden die Queuenamen, die als kommaseparierte Liste in der Templatevariabl
 Zu sehen ist zunächst eine \glqq set\grqq{} Anweisung, mit der Variablen zugewiesen werden können, If-Bedingungen und eine foreach-Schleife stehen außerdem zur Verfügung.
 
 \begin{minipage}{\linewidth}
-\lstinputlisting[caption={Auslesen der \glqq DFH\_MQ\_QUEUENAMES\grqq{} Variablen und schreiben in REXX Variablen},captionpos=b,label={code:qsauslesen}]{listings/qsauslesen.rexx}
+\lstinputlisting[caption={Auslesen der \glqq DFH\_MQ\_QUEUENAMES\grqq{} Variablen und schreiben in REXX Variablen (Zeile 52 bis 61 aus \glqq defineQsRexx.jcl\grqq, siehe Anhang \ref{app:qsrexx})},captionpos=b,label={code:qsauslesen}, firstline=52, lastline=62]{listings/DefineQsRexx.jcl}
 \end{minipage}
 
 In Abbildung \ref{code:qsauslesenlaufzeit} wird das Ergebnis, welches beim Run erzeugt wird, dargestellt.
@@ -520,13 +522,13 @@ z/OSMF bietet hier eigentlich eine Möglichkeit in der Stepdefinition einen \glq
 Unter diesem User würde der Step dann ausgeführt werden.
 Folglich ist das die Stelle, an der zum Beispiel für CICS Steps der technische User für administrative CICS Aufgaben angegeben werden müsste.
 Damit würde das Gewähren der expliziten Rechte zum Starten eines Jobs mit der technischen User ID entfallen und damit die manuelle Arbeit des \glqq Gewährens\grqq.
-Um jedoch  einen \glqq runAsUser\grqq{} in der Stepdefinition angeben zu können, muss in der dem Template zugewiesen \glqq Domain\grqq{} ein sogenannter \glqq Cloud Security Admin\grqq{} hinterlegt sein.
+Um jedoch einen \glqq runAsUser\grqq{} in der Workflow-Stepdefinition angeben zu können, muss in der dem Template zugewiesenen Domain ein sogenannter \glqq Cloud Security Admin\grqq{} hinterlegt sein.
 Dieser würde sicherstellen, dass nur die für ein Template zugelassenen User dieses Template auch provisionieren dürfen.
 D.h. es kann beispielweise sichergestellt werden, dass nur DATEV-Rechnungsschreibungs-Entwickler das DATEV-Rechnungsschreibungs Template provisionieren.
 In dieser Arbeit wird die mitgelieferte \glqq Default Domain\grqq{} genutzt, in dieser ist kein \glqq Cloud Security Admin\grqq{} angegeben.
-Da es sich um die Standard \glqq Domain\grqq{} handelt, darf diese nicht geändert werden.
-Somit müsste eine eigene \glqq Domain\grqq{} angelegt werden um einen \glqq Cloud Security Admin\grqq{} hinterlegen zu können.
-Dadurch, dass sich z/OSMF bei der DATEV e.G. noch in einem Teststadium befindet, wird von der Erstellung einer eigenen \glqq Domain\grqq{} abgesehen.
+Da es sich um die Standard Domain handelt, darf diese nicht geändert werden.
+Somit müsste eine eigene Domain angelegt werden um einen Cloud Security Admin  hinterlegen zu können.
+Dadurch, dass sich z/OSMF bei der DATEV e.G. noch in einem Untersuchungs-Stadium  befindet, wird von der Erstellung einer eigenen Domain abgesehen.
 Dadurch ist es notwendig, die nicht optimale Lösung mit der Jobkarte\footnote{Siehe Absatz \ref{ssec:cicsentw}} einzusetzen.
 An diesen beiden Fällen ist zu erkennen, dass das Rechtekonzept noch nicht für einen firmenweiten Einsatz bei DATEV e.G. ausgelegt ist und noch überarbeitet und angepasst werden muss.
 Dies ist jedoch explizit nicht Bestandteil dieser Arbeit.
