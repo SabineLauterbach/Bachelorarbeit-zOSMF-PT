@@ -10,9 +10,9 @@ Es folgt ein Fazit zu dieser Implementierung.
 Zuletzt folgt eine Bewertung der implementierten Provisionierungslösung durch die Stakeholder bei DATEV e.G. (Entwickler, Administration, Technologiestrategie).
 
 \section{Vergleich zwischen z/OSPT und z/OSMF}
-Bei beiden steht sowohl eine schnelle Provisionierung, als auch Deprovisionierung von Instanzen durch den Entwickler im Vordergrund.
+Bei beiden Varianten steht sowohl eine schnelle Provisionierung, als auch Deprovisionierung von Instanzen durch den Entwickler im Vordergrund.
 Mittels Templates läuft beides automatisiert, verlässlich, und ohne manuelle Abstimmungen ab.
-Die Bereitstellung einer Instanz ist wiederholbar, so kann die Instanz z.B. im Fehlerfall sicher neu erstellt werden und muss nicht langlebig gepflegt werden.
+Die Bereitstellung einer Instanz ist wiederholbar, so kann die Instanz z.B. im Fehlerfall sicher neu erstellt werden und muss nicht langlebig gepflegt werden. 
 
 Es folgt ein Vergleich der beiden Tools an Hand folgender Kriterien:
 \begin{samepage}
@@ -30,6 +30,7 @@ Jedoch ist die browserbasierende Schnittstelle von z/OSMF intuitiver als ein Kom
 Hinzu kommt, dass innerhalb von z/OSPT für die Zuweisung von Domains und Tenants eine weitere externe Konfigurationsdatei gepflegt werden muss.
 
 Ausschlaggebender Grund für das Nutzen von z/OSMF für die Beantwortung der Forschungsfragen ist die browserbasierende Oberfläche.
+Die damit ermittelten Forschungsergebnisse sind aber auch als Basis für eine Bewertung von z/OSPT nutzbar. (Kommentar: stimmt doch, oder? etliches, was bei der Template-Erstellung gemacht werden muss, wäre doch auch in z/OSPT notwenidg gewesen, korrekt?)
 \begin{table}
 \centering
 \begin{tabularx}{\textwidth}{r|X|X}
@@ -51,10 +52,10 @@ Einsatz von Images & Ja & Nein\\
 Der Zugriff auf Ressourcen und Tools bei DATEV e.G. wird über ein Rechtekonzept über RACF verwaltet. 
 Um die Forschungsfragen beantworten zu können, mussten vor Beginn der eigentlichen Untersuchung zunächst alle benötigten Rechte beantragt werden.
 Hierzu zählen unter anderem die Rechte für die Nutzung des Testplexes, die Nutzung von z/OSMF und z/OSPT und die Rechte für die Templateverwaltung innerhalb von z/OSMF. 
-Beispielsweise benötigt \glqq IBM Cloud Provisioning and Management for z/OS\grqq lesenden Zugriff auf den Speicherpfad der Template Dateien.
+Beispielsweise benötigt \glqq IBM Cloud Provisioning and Management for z/OS\grqq  lesenden Zugriff auf den Speicherpfad der Template Dateien.
 Auf dem Testplex ist es  möglich, die Rechte für das Erstellen der CICS Dateien, das Starten einer CICS Instanz und die Administration von Db2 und IBM MQ einer persönlichen UserID zu geben, was in der Entwicklungsstage nicht ohne weiteres umsetzbar ist. 
 
-Schließlich konnte, wie im Kapitel \ref{ch:vorgehensweise} beschrieben, mit dem ersten Versuch, das bei der Installation von z/OSMF mitgelieferte \glqq cics\_getting\_started\grqq{} Template zu provisionieren, begonnen werden.
+Schließlich konnte, wie in Kapitel \ref{ch:vorgehensweise} beschrieben, mit dem ersten Versuch, das bei der Installation von z/OSMF mitgelieferte \glqq cics\_getting\_started\grqq{} Template zu provisionieren, begonnen werden.
 Ziel war es, mit dem Tool vertraut zu werden und die grundsätzliche Lauffähigkeit zu prüfen.
 
 \subsection{\glqq cics\_getting\_started \grqq-Template}\label{ssec:cgs}
@@ -86,14 +87,14 @@ DFH\_CICS\_HLQ & High-level qualifier von dem CICS Installationsort. \\
 \end{table}
 
 Als nächster Schritt wurde ein Testlauf und somit ein erster Versuch, das Template zu provisionieren, durchgeführt.
-Dabei kam es anfangs trotz Testplex-Umgebung zu Rechteproblemen, da die Anforderungen und Rahmenbedingungen der DATEV e.G. in dem standardisierten IBM Template natürlich nicht berücksichtigt waren, kommen.
+Dabei kam es anfangs trotz Testplex-Umgebung zu Rechteproblemen, da die Anforderungen und Rahmenbedingungen der DATEV e.G. in dem standardisierten IBM Template natürlich nicht berücksichtigt waren.
 Beispielsweise ist die Berechtigung für das Starten von Jobs von DATEV Vorgaben abhängig und CICS-Start-Mechanismen haben spezifische Anforderungen an die Eingabeparameter.
-Nach den notwendigen Anpassungen wurde das \glqq cics\_getting\_started \grqq-Template provisioniert und die definierten Aktionen aus dem Actiondefinitionfile getestet.
+Nach den notwendigen Anpassungen wurde das \glqq cics\_getting\_started \grqq-Template provisioniert und die definierten Aktionen aus dem Aktiondefinitionfile getestet.
 Dabei wurde sich auf das Nutzen der z/OSMF Oberfläche fokussiert und nicht auf die eigentliche Funktionsfähigkeit der CICS-Instanz. 
 
 \subsection{\glqq cics\_54\grqq-Template}
 Wie in Kapitel \ref{ch:vorgehensweise} bereits beschrieben, ermöglicht das \glqq cics\_54\grqq-Template komplexere Konfigurationsmöglichkeiten.
-Es mussten neben den in Tabelle \ref{tab:cgsvars} genannten Variablen noch in Tabelle \ref{tab:c54vars} folgende Variablen gesetzt werden.
+Es mussten neben den in Tabelle \ref{tab:cgsvars} genannten Variablen noch folgende, in Tabelle \ref{tab:c54vars} genannte Variablen gesetzt werden.
 Die Kurzbeschreibungen und die Beschreibungen aller weiteren Variablen, die im Standard Template vorhanden sind, sind unter \cite{.26.2.2020b} zu finden.
 
 \begin{table}[h]
@@ -225,7 +226,7 @@ Für alle anderen ist die Variable \glqq DFH\_REGION\_SITPARAMS\grqq{} vorgesehe
 In dieser Arbeit wurde hauptsächlich mit letzterer Variante gearbeitet.
 Dadurch sind die SIT Parameter nur an einer Stelle im Template zu verwalten, beziehungsweise wird die Verwaltung  nicht auf zwei Arbeitsweisen verteilt.
 
-Durch die beschriebene Vorgehensweise wurde erfolgreich die Provisionierung eines DATEV e.G. spezifischen CICS Instanz umgesetzt.
+Durch die beschriebene Vorgehensweise wurde erfolgreich die Provisionierung einer DATEV e.G. spezifischen CICS Instanz umgesetzt.
 Getestet wurde die Nutzbarkeit der Instanz mit einem Anmeldevorgang an dieses CICS, wie in Abbildung \ref{fig:cicslogin} zu sehen ist.
 Darüber hinaus wurde erfolgreich nachgewiesen, dass Standard Transaktionen der DATEV e.G.  in dieser Instanz funktionsfähig sind.
 Die Deprovisionierung verlief nach Plan.
@@ -256,9 +257,9 @@ Dieser Aufruf wurde mittels neuer Variablen im Template möglichst dynamisch ges
 
 \subsubsection{Bereitstellung IBM MQ}\label{sssec:mqtplx}
 In diesem Absatz wird die Provisionierung einer IBM MQ Queue im Testplex beschrieben. 
-Es ist auch möglich einen IBM MQ Queue Manager zu provisionieren, der Fokus dieser Arbeit liegt aber auf der Bereitstellung von Queues. 
-Für die Bereitstellung eines IBM MQ Queue Mangers bei DATEV e.G. ist laut IBM MQ-Administration vorerst keine automatische Bereitstellung vorgesehen, gegebenenfalls kann dies in einem zukünftigen Szenario umgesetzt werden.
-Ebenfalls in Abstimmung mit MQ- und CICS-Administration wurde entschieden, die Funktion eines Starts einer CICS Transaktionen über eine Queue vorerst nicht umzusetzen. Der Fokus lag auf der Prüfung, wie es möglich ist, eine einzelne Queue zu provisionieren, nicht die voll umfängliche Umsetzung der Anforderung der Anwendung DATEV-Rechnungsschreibung. 
+Es ist prinzipiell auch möglich, einen IBM MQ Queue Manager zu provisionieren, der Fokus dieser Arbeit liegt aber auf der Bereitstellung von Queues. 
+Hintergrund ist, dass für  IBM MQ Queue Manger bei DATEV e.G.  laut IBM MQ-Administration vorerst keine automatische Bereitstellung vorgesehen werden soll, gegebenenfalls kann dies aber in einem zukünftigen Szenario umgesetzt werden.
+Ebenfalls in Abstimmung mit MQ- und CICS-Administration wurde entschieden, die Funktion eines Starts einer CICS Transaktionen über eine Queue vorerst nicht umzusetzen. Der Fokus lag damit auf der Prüfung, wie es möglich ist, eine einzelne Queue zu provisionieren, nicht die voll umfängliche Umsetzung der Anforderung der Anwendung DATEV-Rechnungsschreibung. 
 
 Die IBM stellt Programme für die Verwaltung und das Nutzen von Queues  zur Verfügung.
 Diese können mittels eines Jobs und bestimmten Parametern gestartet werden.
@@ -277,24 +278,24 @@ Der Job für das Löschen der Queues ist analog aufgebaut.
 
 Ähnlich wie in Absatz \ref{sssec:db2tpl} für die Datenbank-Provisionierung beschrieben, muss der CSD Datei eine weitere Gruppe für den Queuemanager angegeben werden.
 Zu sehen in Abbildung \ref{code:addCSD} in Zeile 11.
-Dadurch hat die CICS-Instanz Zugriff auf alle Queues, die sich innerhalb dieses Managers befinden.
-Des Weiteren ist die Aufnahme weiterer Bibliotheken in der \glqq createCICS.jcl\grqq{} notwendig.
+Dadurch hat eine Anwendung in dieser CICS-Instanz Zugriff auf alle Queues, die sich innerhalb dieses Managers befinden.
+Des Weiteren ist die Aufnahme weiterer Bibliotheken (Kommentar: MQ-System-Bibliotheken? würde ich so schreiben, z.B: die Aufnahme der notwendigen MQ-System-Bibliotheken...) in der \glqq createCICS.jcl\grqq{} notwendig.
 
 \section{Entwicklungsstage}
 Innerhalb der Entwicklungsstage sind die Sicherheits- und Rechtevorschriften schärfer als auf dem Testplex.
 So wäre es zwar möglich, alle für die administrativen Aufgaben notwendigen Rechte einer persönlichen UserID zu geben.
-Dies würde bedeuten, dass alle Anwender dieses Templates diese Rechte auch benötigen würden.
+Dies würde aber bedeuten, dass auch alle Anwender (Entwickler) dieses Templates diese Rechte benötigen würden.
 Damit bestünde eine potentielle Gefahr für das System, da sie damit auch außerhalb des Templates diese Rechte besitzen würden.
 Somit wurde in Absprache mit den Administratorenteams für CICS und IBM MQ festgelegt, hierfür jeweils einen technischen User\footnote{User ID mit zunächst keinen Berechtigungen} zu beantragen.
 Diesem werden nur die für das Template benötigten Rechte übergeben und er ist somit use-case-spezifisch.
 Um als Anwender das Template nutzen zu können, werden nur die Rechte benötigt, Jobs mit diesen technischen Usern ausführen zu dürfen.
-Für Db2 ist ein solcher User nicht notwendig, da es sich beim Datenbankmanagementsystem hinter der REST-API um DB0C\footnote{Siehe Absatz \ref{sssec:db2}} handelt und jeder Entwickler in dieser \glqq Sandbox\grqq{} Datenbanken verwalten darf. 
+Für Db2 ist ein solcher User nicht notwendig, da es sich beim Datenbankmanagementsystem hinter der REST-API um DB0C\footnote{Siehe Absatz \ref{sssec:db2}} handelt und jeder Entwickler in dieser \glqq DB2-Sandbox\grqq{} seine Datenbanken verwalten darf. 
 
 Bei der Übertragung des Templates vom Testplex in die Entwicklungsstage waren Anpassungen in allen drei Bereichen des Templates notwendig.
 
 \subsection{CICS Anpassung}\label{ssec:cicsentw}
 Damit der CICS spezifische technische User zum Einsatz kommt, musste der \glqq Job\grqq{} Baustein jeder JCL in jedem Step modifiziert werden.
-Dafür bietet z/OSMF die Möglichkeit, beim Zuweisen des \glqq Tenants\grqq{} eine Standard Jobkarte\footnote{Beschrieben im Glossar Eintrag \Gls{Batch-Job}}, die vor jeden Job des Templates eingefügt wird, zu hinterlegen.
+Dafür bietet z/OSMF die Möglichkeit, beim Zuweisen des \glqq Tenants\grqq{} eine Standard Jobkarte\footnote{Beschrieben im Glossar Eintrag \Gls{Batch-Job}}, die vor jedem Job des Templates eingefügt wird, zu hinterlegen.
 Die CICS spezifischen Dateien können von der täglichen Datensicherung der Entwicklungsstage ausgeschlossen werden, da diese bei der Deprovisionierung gelöscht werden.
 Um dies zu gewährleisten, musste der Messageclass Parameter mit dem Wert  \glqq NONE\grqq{} angegeben werden.
 
@@ -302,31 +303,31 @@ Als Vorlage für die spezifische CSD Datei, die im Template genutzt wird, wird d
 In der Entwicklungsstage kommen im Vergleich zum Testplex andere Db2 und IBM MQ Bibliotheken zum Einsatz.
 Dahingehend wurde die \glqq createCICS.jcl\grqq-Datei angepasst.\footnote{Code siehe Anhang \ref{app:createcics}}
 Zusätzlich musste ein SIT Parameter angepasst werden, so dass die Log Dateien in der Entwicklungsstage funktionsfähig sind.
-Eine weitere CSD Gruppe musste hinzugefügt werden.
+Eine weitere CSD Gruppe für die Verkettung der Anwendungsbibliotheken musste hinzugefügt werden.
 Siehe Zeile 16 im Codeabschnitt \ref{code:createGrp}.
 Diese sorgt dafür, dass die Bibliotheken, die die kompilierten Programme der kompletten Entwicklungsstage beinhalten, zur Verfügung stehen. 
-Außerdem kam noch eine neue Bibliothek hinzu.
-Diese dient später als Ablageort der kompilierten Programme, die explizit nur in dieser CICS-Instanz vorhanden sind.
-Dies ist ein Standardvorgehen innerhalb der DATEV e.G., mit dem es möglich ist, neue Programmversionen, und Schnittstellen zu bereits produktiven Modulen nutzen zu können.
+Dazu kam noch eine neue Bibliothek.
+Diese dient später als Ablageort der kompilierten Programme, die explizit nur in dieser CICS-Instanz vorhanden sind und dort getestet werden sollen.
+Diese Verkettung ist ein Standardvorgehen innerhalb der DATEV e.G., mit dem es möglich ist, neue Programmversionen und Schnittstellen zu testen und Zugriff auf notwendige, in Entwicklung bereitstehende sonstige Module zu haben.
 
 \subsection{Db2 Anpassung}\label{ssec:db2entw}
-Um die Datenbankstruktur der DATEV-Rechnungsschreibung im DB0C Datenbankmanagementsystem nach zu stellen, wurde eine genaue technische Analyse der DATEV-Rechnungs-schreibungsdatenbank durchgeführt.
+Um die Datenbankstruktur der DATEV-Rechnungsschreibung im DB0C Datenbankmanagementsystem nachzustellen, d.h. ein isoliertes "Sandbox-Datenbank-System, zu provisionieren, wurde eine genaue technische Analyse der DATEV-Rechnungs-schreibungsdatenbank durchgeführt.
 Dabei stellte sich heraus, dass die Komplexität der benötigten Tabellen sehr hoch ist.
 So wird auf drei Tabellen für die Ermittlung der Produktstammdaten lesend zugegriffen, auf neun weitere bei der Bestimmung der Preisabhängigkeiten.
 Auf die Tabellen wird nicht direkt zugegriffen, sondern über Views\footnote{Alias einer Datenbankabfrage, auf die wie auf eine normale Tabelle zugegriffen werden kann}.
 Bei den meisten werden innerhalb der View noch weitere Tabellen, teilweise aus anderen Datenbanken, gejoint.
 Insgesamt besteht das System aus vierzehn Tabellen, die auf vier Datenbanken aufgeteilt sind, und zwölf Views für den Zugriff auf diese Tabellen.
 
-Dennoch wurde von der Db2 Administration mit der Erstellung der dafür notwendigen \Gls{ddl} Skripte begonnen.
-Es stellte sich, dass bereits für einen kleinen Teil an Tabellen circa 600 Zeilen DDL Code\footnote{Im Anhang \ref{app:ddl} zufinden} notwendig ist.
+Um dies in einer DB2-Sandbox-Instanz (siehe Kap. xx) nachzubilden, sind sog. \Gls{ddl} Skripte notwendig. Mit der Erstellung wurde von der Db2 Administration begonnen.
+Es stellte sich heraus, dass bereits für einen kleinen Teil an Tabellen circa 600 Zeilen DDL Code\footnote{Im Anhang \ref{app:ddl} zufinden} notwendig sind.
 Eine vollständige Provisionierung eines so komplexen Datenbanksystems übersteigt den zeitlichen Rahmen dieser Arbeit.
 Sollte sich die Provisionierung generell als zielführend erweisen wird dieser Einmalaufwand erbracht werden.
 Im weiteren Lebenszyklus der Anwendung kann auf diese Db2 jederzeit zugegriffen werden, Änderungen sind ein erheblich geringerer Aufwand als die Initialleistung.
 
-Für die weiteren Schritte der hier vorliegenden Arbeit werden deshalb die bereits im Datenbankmanagementsystem DB0T vorhanden Datenbanken der DATEV-Rechnungsschreibung genutzt.
+Für die weiteren Schritte der hier vorliegenden Arbeit wurden deshalb die bereits im Datenbankmanagementsystem DB0T vorhandenen Datenbanken der DATEV-Rechnungsschreibung genutzt.
 Hierfür mussten die dafür vorgesehenen Variablen in der Eingabedatei des Templates angepasst werden.
 Dadurch ändert sich die Gruppe in Zeile acht im Codeabschnitt \ref{code:addCSD} von \glqq DB0C\grqq{} auf \glqq DB0T\grqq.
-Außerdem wurden sowohl in der Provisionierungs- als auch in der Deprovisionierungsdatei die Datenbanksteps auskommentiert, da diese für den weiteren Test nicht mehr zum Einsatz kommen.
+Außerdem wurden sowohl in der Provisionierungs- als auch in der Deprovisionierungsdatei die Datenbanksteps auskommentiert, da diese für den weiteren Test in der Entwicklungs-Stage nicht mehr zum Einsatz kommen.
 
 \subsection{IBM MQ Anpassung}\label{ssec:mqentw}
 Da für die DATEV Rechnungsschreibung, wie im Absatz \ref{ssec:preis} beschrieben, sehr viele gleichartige Queues benötigt werden, wurde für die Erstellung dieser von den IBM MQ Administratorenteam ein \Gls{rexx} Skript angefertigt.
@@ -337,7 +338,7 @@ Für die Provisionierung IBM MQ Queues waren folgende Arbeitsschritte notwendig.
 \begin{samepage}
 \begin{itemize}
 \item Anpassung des zur Verfügung stehenden Skriptes
-\item Implementierung von Jobs für restliche Queues
+\item Implementierung von Jobs für restliche Queues (d.h. nicht im rexx Skript enthalten)
 \item Anpassung der CICS CSD Datei
 \end{itemize}
 \end{samepage}
@@ -357,34 +358,34 @@ Als Grundlage kann das vorher angepasste Provisionierungsskript dienen.
 Hierfür musste der \glqq Define\grqq-Befehl für die Erstellung von Queues durch den \glqq Delete\grqq-Befehl ausgetauscht werden.
 Die Logik für die Ermittlung der maximalen Queuetiefe und der maximalen Nachrichtenlänge wird dafür nicht mehr benötigt und konnte entfernt werden.
 
-Die durch die beiden Skripte erstellten Queues sind nur für den Datenaustausch zwischen der CICS Transaktion für die Preisermittlung und dem Batch Ablauf zuständig.
+Die durch die beiden Skripte erstellten Queues sind im Rahmen der DATEV Rechnungssschreibung nur für den Datenaustausch zwischen der CICS Transaktion für die Preisermittlung und dem Batch Ablauf zuständig.
 Wie in Absatz \ref{ssec:preis} beschrieben, benötigt der Ablauf noch weitere Queues.
 Da es sich hierbei um spezielle Queues handelt, wurde auf die im Absatz \ref{sssec:mqtplx} gezeigte Technik zurückgegriffen.
 Bei der Antwort-Queue für die Ermittlung der Listenpreise handelt es sich um eine Queue ohne besondere Parameter.
-Es werden noch zwei Trigger-Queues benötigt, die über Prozesse eine Transaktion im CICS starten.
+Es werden noch zwei Trigger-Queues benötigt, die über Prozesse ("processes", siehe Kap...) eine Transaktion im CICS starten.
 Als letzter Baustein für das Triggering der Transaktion wird noch eine Initiation Queue benötigt.
 Diese muss im CICS hinterlegt sein.
 
 Jeder CICS-Instanz kann nur eine Initiation Queue zugewiesen sein.
-Dadurch benötigt jedes CICS eine eigene Initiation Queue.
+Dadurch benötigt jedes CICS eine eigene Initiation Queue. (Kommentar: verstehe ich das richtig: 1 CICS kann nur 1 Initiaation QUeue haben und eine Initiation QUeue kann auch nur einem 1 CICS zugeordnet sein? Dann macht der Satz Sinn)
 Die Zuweisung geschieht in der IBM MQ CSD Gruppe.
-Somit müsste für jede provisionierte CICS-Instanz im Voraus eine solche CSD Gruppe angelegt werden.
-In Absprache mit der IBM MQ-Administrations  wurde entschieden, die Verwaltung der IBM MQ CSD Gruppe komplett dem Template zu übergeben.
-Diese Entscheidung hatte eine Änderung des in Abbildung \ref{code:addCSD} gezeigten Codes zur Folge.
-So wird, wie in Abbildung \ref{code:createGrp} dargestellt, zunächst eine Gruppe angelegt und anschließend wird diese Gruppe dem CSD hinzugefügt.
+Somit müsste für jede provisionierte CICS-Instanz eine solche CSD Gruppe angelegt werden.
+In Absprache mit der IBM MQ-Administrations  wurde entschieden, die Verwaltung der IBM MQ CSD Gruppe komplett im Template durchzuführen.
+Diese Entscheidung hatte eine Änderung des in Abbildung \ref{code:addCSD} gezeigten Codes in der Template-JCL (Kommentar: das ist einer der Template Steps, korrekt? vlt. lässt sich das besser benennen, welche Datei ist das? HÄngt die irgendwo im Anhang?) zur Folge.
+So wird, wie in Abbildung \ref{code:createGrp} in Zeile xxx dargestellt, zunächst eine Gruppe angelegt und anschließend wird diese Gruppe dem CSD hinzugefügt.
 
 \begin{minipage}{\linewidth}
 \lstinputlisting[caption={Erstellung einer neuen CSD Gruppe},captionpos=b,label={code:createGrp}]{listings/InitAdditionalCSD.jcl}
 \end{minipage}
 
-Für jeden IBM MQ bezogenen Job wurde zuallerletzt die Jobkarte angepasst und der technische User der CICS-Administration durch den technischen User der IBM MQ-Administration, der für administrative Aufgaben berechtigt ist, ausgetauscht.
+Für jeden IBM MQ bezogenen Job wurde die Jobkarte angepasst und der technische User der CICS-Administration durch den technischen User der IBM MQ-Administration, der für administrative Aufgaben berechtigt ist, ausgetauscht.
 
 \subsection{Testablauf}
 Für die Prüfung der Funktionsfähigkeit der so generierten Laufzeitumgebung steht dieser Arbeit ein Testablauf zur Verfügung.
 Dieser wurde von den Mitarbeitern der DATEV Rechnungsschreibung bereitgestellt.
 Dabei handelt es sich um einen Teilablauf des gesamten DATEV Rechnungsschreibungsprozesses.
 In diesem Ablauf wird nur die Preisermittlung, die die Laufzeitumgebung CICS benötigt, getestet.
-Als Eingabe dienen vordefinierte Dateien, die Ergebnisse werden ebenfalls in Dateien geschrieben.
+Als Eingabe dienen vordefinierte Dateien mit Testdaten, die Ergebnisse werden zur Prüfung ebenfalls in Dateien geschrieben.
 Der Ablauf liegt in Form von zwei Jobs vor.
 Beide sind in der gleichen JCL Datei definiert, somit starten beide zeitgleich. 
 Dies ist notwendig, da der erste Job die Verarbeitung im CICS über die Queues startet und der zweite auf die Ergebnisqueues lauscht.
@@ -392,7 +393,7 @@ Dies ist notwendig, da der erste Job die Verarbeitung im CICS über die Queues s
 Um den Ablauf in der provisionierten Laufzeitumgebung zu starten, musste lediglich der verwendete Queue Manager angepasst werden.
 Über die Queues und das verwendete Triggering wird die Transaktion im provisionierten CICS gestartet.
 Um das Ergebnis der Anwendung zu prüfen, wurde dies mit dem gleichen Testablauf und den gleichen Eingabedateien in der aktuell existierenden Testumgebung der DATEV e.G. Rechnungsschreibung durchgeführt.
-Bei einem anschließenden Vergleich der Ausgabedateien beider Läufe waren keine Abweichungen festzustellen.
+Bei einem anschließenden Vergleich der Ausgabedateien beider Läufe waren keine Abweichungen festzustellen und der Test wird somit als erfolgreich bewertet.
 
 \section{Bereitstellungsprozess aktuelles Template}\label{sec:akttemp}
 Bei dem Bereistellungsprozess, der durch das aktuelle Template möglich gemacht wird, sind drei Fälle zu unterscheiden:
@@ -405,13 +406,13 @@ Dadurch wird eine neue Instanz eines Templates benötigt.
 Dem Entwicklerteam steht das Template in z/OSMF zur Verfügung und es wurde noch keine Instanz dieses Templates provisioniert.
 
 \item Use-Case: Zusätzliche Template Instanz\\
-Ein weiterer Entwickler möchte eine andere Programmänderung auf einer isolierten Laufzeitumgebung testen.
-Dadurch wird eine neue Instanz eines Templates benötigt.
-Dem Entwicklerteam steht dieses Template in z/OSMF zur Verfügung aber es steht bereits eine Instanz dieses Templates zur Verfügung.
-Um diese Instanz nicht zu stören, wird eine weitere Instanz benötigt.
+Ein weiterer Entwickler möchte parallel zu einem anderen Entwickler eine weitere  Programmänderung (anderer "Git-Branch" auf einer isolierten Laufzeitumgebung testen. 
+Nur diese Änderung soll getestet werden, unabhängig von anderen parallelen Aktivitäten in der Anwendung. 
+Dem Entwicklerteam steht dieses Template in z/OSMF zur Verfügung aber es wurde  bereits eine Instanz dieses Templates bereitgestellt. 
+Um isoliert von dieser existierenden Instanz und den darin vorhandenen Änderungen zu testen, wird eine weitere Instanz benötigt.
 
 \item Use-Case: Änderungen durch Administratorenteam\\
-Die Provisionierung von einer IBM MQ Instanz soll von REXX Skripte auf eine REST-API umgestellt werden.
+Die Provisionierung  einer IBM MQ Instanz soll z.B. von REXX Skripten auf eine REST-API umgestellt werden.
 Dies hat Änderungen an Workflowdefinitionfiles zur Folge.
 Hier ist zwischen zwei weiteren Fällen zu unterscheiden:
 \begin{enumerate}
@@ -422,14 +423,14 @@ Hier ist zwischen zwei weiteren Fällen zu unterscheiden:
 \end{samepage}
 
 \subsection{Use-Case: Neue Template Instanz}
-Der Mitarbeiter meldet sich an der zOSMF Oberfläche an und klickt auf den Menüleistenpunkt \glqq Cloud Provisioning\grqq.
+Der Administrator (KOmmentar: Oder?? Meinst Du der Entwickler??) meldet sich an der zOSMF Oberfläche an und klickt auf den Menüleistenpunkt \glqq Cloud Provisioning\grqq. (Kommentar: verweis auf die Abbildung ...? die gibt es doch schon)
 Anschließend öffnet er die \glqq Software Services\grqq{} und wählt dort das oben genannte Template aus.
-Er kann es ohne Änderungen provisionieren und damit seine Programmabläufe testen.
+Er kann es ohne Änderungen  (was heißt hier ohne Änderungen? er hat doch eben Änderungen durchgeführt. Das ist missverständlich. VOn wem reden wir hier? Vom Admin oder Etnwickler, Programmabläufe testet ein Entwickler, soll hier der Template-Ablauf getestet werden, ist es der Admin??)  Er kann das neue Template provisionieren und damit seine Programmabläufe testen.
 
 \subsection{Use-Case: Zusätzliche Template Instanz}\label{ssec:akttemp2fall}
-Mit dem aktuellen Stand muss der Mitarbeiter wissen, an welchem Speicherort das Template abgelegt ist, da er die Template-Dateien - nicht die Workflowdateien - kopieren muss.
+Mit dem aktuellen Stand (Kommentar: von was reden wir hier? Vom Stand der Untersuchung? Vom Stand des Template?)  muss der Mitarbeiter (Kommentar wer? Admin?  CICS oder MQ? Entwickler??) wissen, an welchem Speicherort das Template abgelegt ist, da er die Template-Dateien - nicht die Workflowdateien - kopieren muss.
 Es sind Änderungen am Variableinputfile notwendig.
-Unter anderem ist eine andere CICS Application ID zu wählen.
+Unter anderem ist eine andere CICS Application ID zu wählen (Kommentar: von wem?).
 Um die Queues und IBM MQ Prozesse aus Fall eins nicht zu überschreiben, muss  ein anderer Queue Manager gesetzt werden.
 Dieser Queue Manager muss von dem zuständigen Administratorenteam manuell bereitgestellt werden.
 Die Erzeugung einer von Fall eins unabhängigen Instanz setzt die Aufnahme eines neuen Templates, welches die veränderten Dateien beinhalten, in z/OSMF voraus.
@@ -449,9 +450,9 @@ Dies ist auch per Mausklick zu lösen.
 \section{Fazit Realisierung}
 Am Ende der Realisierung steht ein funktionsfähiges Template.
 Dieses Template provisioniert ein für die Rechnungsschreibung individualisiertes CICS und die benötigten IBM MQ Queues. 
-Wie in Absatz \ref{ssec:db2entw} beschrieben, wurde eine Db2 Datenbank wegen hoher Komplexität außen vorgelassen.
+Wie in Absatz \ref{ssec:db2entw} beschrieben, wurde die Provisionierung einer spezifischen Db2 Datenbank wegen hoher Komplexität für diese Arbeit außen vorgelassen
 Auf dem Testplex wurde bewiesen, dass die Provisionierung einer Datenbank möglich ist.
-Des Weiteren wäre die Provisionierung von Tabellen mit hohem einmaligen Arbeitsaufwand ebenfalls möglich.
+DIe Provisionierung der anwendungsspezifischen Db2-Tabellen wäre mit hohem einmaligen Arbeitsaufwand ebenfalls möglich.
 Ein Testablauf der Beispielanwendung DATEV Rechnungsschreibung in einer provisionierten, isolierten CICS-Laufzeitumgebung konnte korrekt durchgeführt werden.
 
 Folgende Probleme wurden im Rahmen der Implementierung erkannt:
