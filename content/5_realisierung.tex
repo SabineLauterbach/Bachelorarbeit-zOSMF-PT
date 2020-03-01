@@ -5,7 +5,7 @@ Es ist noch einmal zu erwähnen, dass zunächst abzuwägen ist, welche Implement
 Die Provisionierung einer CICS-Instanz wird vorerst auf dem Testplex untersucht.
 Danach wird in weiteren Schritten zuerst eine Db2 Datenbank und schließlich IBM MQ Queues dem Bereitstellungsprozess hinzugefügt.
 Um einen Testablauf der DATEV-Rechnungsschreibung mit der so generierten Laufzeitumgebung durchführen zu können, muss das Template auch in der Entwicklungsstage verfügbar sein.
-Ist dies sichergestellt wird der dadurch ermöglichte Bereitstellungsprozess anhand von drei use-cases aufgezeigt.
+Ist dies sichergestellt wird der dadurch ermöglichte Bereitstellungsprozess anhand von drei Use-Cases aufgezeigt.
 Es folgt ein Fazit zu dieser Implementierung.
 Zuletzt folgt eine Bewertung der implementierten Provisionierungslösung durch die Stakeholder bei DATEV e.G. (Entwickler, Administration, Technologiestrategie).
 
@@ -287,7 +287,7 @@ So wäre es zwar möglich, alle für die administrativen Aufgaben notwendigen Re
 Dies würde aber bedeuten, dass auch alle Anwender (Entwickler) dieses Templates diese Rechte benötigen würden.
 Damit bestünde eine potentielle Gefahr für das System, da sie damit auch außerhalb des Templates diese Rechte besitzen würden.
 Somit wurde in Absprache mit den Administratorenteams für CICS und IBM MQ festgelegt, hierfür jeweils einen technischen User\footnote{User ID mit zunächst keinen Berechtigungen} zu beantragen.
-Diesem werden nur die für das Template benötigten Rechte übergeben und er ist somit use-case-spezifisch.
+Diesem werden nur die für das Template benötigten Rechte übergeben und er ist somit Use-Case-spezifisch.
 Um als Anwender das Template nutzen zu können, werden nur die Rechte benötigt, Jobs mit diesen technischen Usern ausführen zu dürfen.
 Für Db2 ist ein solcher User nicht notwendig, da es sich beim Datenbankmanagementsystem hinter der REST-API um DB0C\footnote{Siehe Absatz \ref{sssec:db2}} handelt und jeder Entwickler in dieser \glqq DB2-Sandbox\grqq{} seine Datenbanken verwalten darf. 
 

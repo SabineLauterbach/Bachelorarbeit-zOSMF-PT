@@ -13,7 +13,7 @@ So ist zu empfehlen, dass für jedes Subsystem, also CICS, Db2 und IBM MQ, ein s
 
 Angenommen es besteht für jedes Subsystem ein Template und das IBM MQ Template beinhaltet die Provisionierung eines Queue Managers, so könnte jeder Entwickler seine eigenen Instanzen der Templates besitzen und für eigene Tests nutzen.
 Dennoch wäre der ermöglichte Bereitstellungsprozess nicht optimal.
-So müsste für jede kleine Änderung an der Konfigurationsdatei ein neues Template erzeugt werden, siehe zweiter use-case im Abschnitt \ref{ssec:akttemp2fall}.
+So müsste für jede kleine Änderung an der Konfigurationsdatei ein neues Template erzeugt werden, siehe zweiter Use-Case im Abschnitt \ref{ssec:akttemp2fall}.
 Das dort genannte Beispiel einer CICS-Instanz und der notwendigen eindeutigen Application ID wird hier aufgegriffen.
 Eine Möglichkeit dieses Problem zu lösen, wäre einen Pool mit verfügbaren Application IDs bereitzustellen und dann mittels eines Programms eine ungenutzte Application ID zu ermitteln.
 Dieses Programm könnte dann als Step in das Template aufgenommen werden.
