@@ -5,7 +5,7 @@ Diese Fragebögen werden im Folgenden zunächst nach Gruppen ausgewertet.
 Schließlich wird daraus ein allgemeines Stimmungsbild abgeleitet.
 
 \subsection{CICS Administratoren}
-Der momentan etablierte Bereitstellungsprozess wird von der CICS Administration mit hohen manuellen Aufwand verbunden.
+Der momentan etablierte Bereitstellungsprozess wird von der CICS Administration mit einem hohen manuellen Aufwand verbunden.
 Dies, kombiniert mit viel Abstimmungsbedarf zwischen den Administratoren- und Entwicklerteams, führt dazu, dass der Prozess als langsam und verbesserungswürdig angesehen wird.
 In der Umsetzung mit z/OSMF sieht die CICS Administration trotz des vermuteten, hohen Einarbeitungsaufwandes bereits einen Mehrwert.
 Der Hauptvorteil des vorgestellten z/OSPT Lösungsansatzes sei dessen Flexibilität.
@@ -19,7 +19,7 @@ Im Vergleich dazu funktioniere der momentan etablierte Bereitstellungsprozess se
 Jedoch könnten lange Wartezeiten, die durch die vielen Abhängigkeiten von Personen und Abteilungen zustande kommen, durch einen automatisierten Ablauf mittels des Tools eliminiert werden.
 Der durch z/OSMF ermöglichte Prozess zeige zwar, dass eine Automatisierung in diesem Bereich möglich ist, aber auch noch viel Forschungsaufwand und Weiterentwicklung in diesem Bereich notwendig ist, um die Provisionierung wirklich nutzen zu können.
 z/OSPT diene dabei als Hilfsmittel, den Bereitstellungsprozess in eine CI/CD-Pipeline aufzunehmen und so weiter zu automatisieren.
-Das durch \glqq IBM Cloud Provisioing and Management for z/OS\grqq{} ermöglichte automatisiertes Provisionieren von z/OS Middleware wird als notwendiger Schritt, um den Mainframe weiterhin erfolgreich zu betreiben, betrachtet.
+Das durch \glqq IBM Cloud Provisioing and Management for z/OS\grqq{} ermöglichte automatisierte Provisionieren von z/OS Middleware wird als notwendiger Schritt, um den Mainframe weiterhin erfolgreich zu betreiben, betrachtet.
 
 \subsubsection{IBM MQ Administratoren}
 Die IBM MQ Administratoren stimmen überein, dass der momentan etablierte Bereitstellungprozess mit einem hohen manuellen Arbeitsaufwand verbunden ist.
@@ -37,9 +37,9 @@ Dabei sei zu beachten, dass erst noch eigene Erfahrungen mit dem Tool gesammelt 
 \subsubsection{Entwicklerteam der DATEV Rechnungsschreibung}
 Der Entwicklerfragebogen wurde zusammen mit zwei Entwicklern ausgefüllt.
 
-Aus Sicht des Entwicklers wird vor allem für den in Absatz \ref{ssec:akttemp2fall} beschriebenen Fall viel Wissen über die z/OSMF Oberfläche und das Template selbst benötigt, da sie Änderungen direkt in der Variableinputfile vornehmen müssen.
+Aus Sicht des Entwicklers wird vor allem für den in Absatz \ref{ssec:akttemp2fall} beschriebenen Fall viel Wissen über die z/OSMF Oberfläche und das Template selbst benötigt, da sie Änderungen direkt in dem Variableinputfile vornehmen müssen.
 Dieses Wissen müsse auch bei nicht häufiger Nutzung über einen längeren Zeitraum erhalten werden.
-Deshalb sei der z/OSPT Lösungsansatz, mit dem auf die z/OSMF Oberfläche verzichtet werden kann, und statt dessen mittels Jenkins Build Pipeline oder dem DATEV \glqq Marktplatz\grqq{} gearbeitet werden kann, besser geeignet.
+Deshalb sei der z/OSPT Lösungsansatz, mit dem auf die z/OSMF Oberfläche verzichtet werden kann, und stattdessen mittels Jenkins Build Pipeline oder dem DATEV \glqq Marktplatz\grqq{} gearbeitet werden kann, besser geeignet.
 Ist diese Integration möglich, wird ein Hauptvorteil darin gesehen, dass der Bereitstellungsprozess mehr in den Händen des eigenen Teams liegt.
 So sei eine Steigerung der Effizienz zu erreichen.
 Es stehe dem Sammeln von Erfahrungen mit dem Prozess und mit \glqq IBM Cloud Provisioing and Management for z/OS\grqq{} nichts im Wege.
@@ -51,13 +51,13 @@ Jedoch sei es besser, wenn z/OSMF in den bereits existierenden \glqq Marktplatz\
 Der Prozess, der mit Hilfe von z/OSPT ermöglicht wird, wird als gut angesehen, da durch ihn die Entwicklung von z/OS Anwendungen an die Vorgehensweise der Cloud Native Entwicklung angenähert wird.
 Hier kommt die Rolle des Build Engineers auch für solche Anwendungen ins Spiel.
 Dieser kümmert sich um die Erstellung und Pflege der Build-Pipeline.
-Große Nachteil im momentan etablierten Bereitstellungsprozess sei vor allem,  dass eine Anzahl von Entwicklern, die parallel an einem Produkt arbeiten, sich die gleiche Entwicklungssystemumgebung teilen.
+Ein große Nachteil im momentan etablierten Bereitstellungsprozess sei vor allem,  dass eine Anzahl von Entwicklern, die parallel an einem Produkt arbeiten, sich die gleiche Entwicklungssystemumgebung teilen.
 So arbeiten alle mit der gleichen CICS-Instanz, der gleichen Test-Datenbank und mit den gleichen IBM MQ Queues.
 Dadurch beeinflussen Änderungen des einen Entwicklers die Tests der anderen Kollegen, es entsteht Koordinationsaufwand.
 Falls Änderungen an der Umgebung notwendig sind, kann während dieser Zeit kein Entwickler weiterarbeiten.
 Hier liege der Vorteil von \glqq IBM Cloud Provisioing and Management for z/OS\grqq.
 Es ermögliche aus Entwicklersicht eine sehr einfache, schnelle Möglichkeit eine isolierte Umgebung bereitzustellen, unabhängig von den Administratorenteams.
-Zusätzlich diene die Konfigurationsdateien auch als Dokumentation, welche Ressourcen für ein erneutes Erstellen der Umgebung notwendig sind.
+Zusätzlich dienen die Konfigurationsdateien auch als Dokumentation, welche Ressourcen für ein erneutes Erstellen der Umgebung notwendig sind.
 
 Abschließend lässt sich sagen, dass aus Sicht einer Fachberaterin im Bereich Technologiestrategie das \glqq IBM Cloud Provisioing and Management for z/OS\grqq-Tool die Entwicklung beziehungsweise den Bereitstellungsprozess deutlich verbessern könne.
 So sei für den Entwickler ein an die Cloud Native Welt angenäherter Entwicklungsprozess möglich.
@@ -69,14 +69,14 @@ Dadurch werde der Wechsel zwischen beiden Umgebungen immer fließender.
 \begin{itemize}
 \item neuer Prozess notwendig
 \item z/OSPT Lösung bevorzugt
-\item erste Erfahrungen sammlen
+\item erste Erfahrungen sammeln
 \end{itemize}
 
 Es stimmen alle Gruppen überein, dass der momentan etablierte Bereitstellungsprozess für Mainframesubsysteme durch viele Absprachen und Abstimmungsaufwand zeitaufwändig ist.
 Sie würden einen automatisierten und dadurch schnelleren und weniger fehleranfälligen Prozess begrüßen.
 
 Jedoch muss dieser Prozess aus Entwicklersicht mit minimalem Konfigurationsaufwand verbunden sein.
-Dies könnte durch eine Provisionierung mittels z/OSPT und einer  Integration in eine Jenkins Build Pipeline oder durch die Einbindung in den \glqq DATEV Marktplatz\grqq{} mittels eines entwickelten \glqq Service Brokers\grqq. gewährleistet werden.
+Dies könnte durch eine Provisionierung mittels z/OSPT und einer  Integration in eine Jenkins Build Pipeline oder durch die Einbindung in den \glqq DATEV Marktplatz\grqq{} mittels eines entwickelten \glqq Service Brokers\grqq{} gewährleistet werden.
 Aus Sicht der Administratoren sind mit dieser Umsetzung nur wenige allgemeine Templates zu verwalten, da die Entwickler mit z/OSPT Images arbeiten und keine weiteren Templates erzeugen.
 Der dadurch komplexere Aufbau, der entstehende Erstaufwand bei der Erstellung solcher Templates  und die damit verbundene steile Lernkurve hat eine abschreckende Wirkung.
 
