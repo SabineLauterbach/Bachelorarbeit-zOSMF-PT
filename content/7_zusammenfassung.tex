@@ -25,7 +25,7 @@ Es kann kein klassisches Product-Team-Vorgehen umgesetzt werden, sondern auch mi
 
 Wird der z/OSMF Lösungsansatz genauer betrachtet, dann ist zu erkennen, dass dieser durch den Abbau der Kommunikation zwischen den Abteilungen und nur einmaligem Erstellen der Skripte weniger fehleranfällig und effizienter als der momentan etablierte Prozess ist.
 Nachdem der zeitaufwändige initiale Aufwand für die Implementierung eines Templates erbracht wurde, ermöglicht schon die Lösung mit z/OSMF die  Provisionierung einer anwendungsspezifischen Laufzeitumgebung binnen circa einer Stunde.
-Jedoch ist es noch nicht perfekt.
+Jedoch ist die Lösung noch nicht perfekt.
 Der Bereitstellungsprozess ist noch immer mit einigen manuellen Schritten verbunden. 
 So muss das Template manuell kopiert werden und manuelle Änderungen an der Konfiguration müssen innerhalb des Templates, mit mäßiger bis schlechter Unterstützung bei Fehlern, bzgl. Syntax etc. durchgeführt werden.
 
@@ -41,9 +41,16 @@ z/OSPT ist insgesamt dem cloud native Prozess bei DATEV e.G. näher als z/OSMF u
 Beide Lösungsansätze erzeugen bei den Stakeholdern, also den Entwicklerteams und den Administratorenteams einen Mehrwert und werden akzeptiert.
 Hier wird vor allem aus Sicht des Entwicklerteams Effizienz gewonnen, da nach initialer Bereitstellung der Templates im Vergleich zum aktuell etablierten Bereitstellungsprozesses einer Dauer von ca. 2 Tagen (\glqq Best-Case\grqq), circa eine Stunde mit z/OSMF und wenige Minuten mit z/OSPT gegenübersteht, d.h. eine deutlich Zeiteinsparung möglich wäre.
 Aus Sicht der Administratorenteams ist der hohe initiale Aufwand für die erste Erstellung der Templates abschreckend, danach sinken die notwendigen Absprachen mit den Kollegen deutlich und erhöhen auch hier die Effizienz.
-Allgemein lässt sich sagen, dass die Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} ein kleiner Baustein in Richtung von DevOps und einer CI/CD-Pipeline für den Mainframe sein kann.
-Dieser Baustein bezieht sich nur auf den Aspekt von automatisierter Bereitstellung von isolierten Testumgebungen.
-Dieser Aspekt ist jedoch essenziell für den Einsatz einer Build Pipeline.
-So kann dieser kleine aber wichtige Baustein zu einer besseren Entwicklungseffizienz beitragen und damit die umsatzstarken und geschäftskritsichen Bestandsanwendungen bei DATEV e.G. für die Zukunft sichern.
+
+Allgemein lässt sich sagen, dass die Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} ein kleiner Baustein in 
+Richtung von DevOps und einer CI/CD-Pipeline für den Mainframe sein kann, wie sie aktuell bei DATEV e.g. in Untersuchung ist.
+Dieser  Baustein bezieht sich auf den nicht gelösten Aspekt der Bereitstellung von isolierten Testumgebungen.
+Er ist jedoch essenziell für den Einsatz einer Build Pipeline.
+Integrierte Builds mit automatisierten Tests sind aber z.B. nur möglich, wenn in den bereitgestellten Entwicklungsumgebungen auch Testdaten verfügbar sind.
+D.h. die auf Knopfdruck erzeugten Db2-Tabellen müssen auch mit Daten gefüllt werden, um z.B. Integrationstest für eine Anwendung durchführen zu können.
+Hier könnten Skripte für die Bereitstellung auch eine Testdatengenerierung mit implementieren. 
+Dies war nicht Teil dieser Arbeit, stellt aber einen wichtigen Schritt für den zukünftigen Nutzwert und die Gesamtbeurteilung von DevOps-Prozessen auf z/OS dar.
+Diese ganze Kultur und Entwicklungsweise ist bei DATEV e.G. und anderen Kunden für z/OS-Entwicklung häufig erst in Untersuchung oder Aufbau.
+Aber der hier untersuchte Baustein der Laufzeitprovisionierung kann potenetiell einen wichtigen Beitrag zu einer besseren Entwicklungseffizienz leisten und damit die umsatzstarken und geschäftskritsichen Bestandsanwendungen bei DATEV e.G. für die Zukunft sichern.
 Nicht zuletzt hilft dieser Schritt dabei, das Image von z/OS als ein veraltetes System mit veralteten langsamen Prozessen, zu verbessern.
 
