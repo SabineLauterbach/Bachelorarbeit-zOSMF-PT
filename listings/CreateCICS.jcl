@@ -1,5 +1,6 @@
-##******************************************************************
-##Velocity macro to validate SIT parameters. The following SIT parms
+##***************************************************************
+##Velocity macro to 
+##validate SIT parameters. The following SIT parms
 ##will be commented out if the user supplies them
 ##   APPLID
 ##   CICSSVC
@@ -34,19 +35,22 @@
 ##   XTRAN
 ##   XTST
 ##   XUSER
-##*******************************************************************
+##***************************************************************
 #macro(validateSit $sit)
 #if($sit.toUpperCase().startsWith("APPLID") ||
    $sit.toUpperCase().startsWith("CICSSVC") ||
    $sit.toUpperCase().startsWith("CPSMCONN") ||
    $sit.toUpperCase().startsWith("CSDACC") ||
    $sit.toUpperCase().startsWith("CSDRLS") ||
-   ($sit.toUpperCase().startsWith("CSDRECOV") && $!{instance-DFH_REGION_LOGSTREAM} == "DUMMY") ||
-   ($sit.toUpperCase().startsWith("CSDBKUP") && $!{instance-DFH_REGION_LOGSTREAM} == "DUMMY") ||
+   ($sit.toUpperCase().startsWith("CSDRECOV") 
+   && $!{instance-DFH_REGION_LOGSTREAM} == "DUMMY") ||
+   ($sit.toUpperCase().startsWith("CSDBKUP") 
+   && $!{instance-DFH_REGION_LOGSTREAM} == "DUMMY") ||
    $sit.toUpperCase().startsWith("DFLTUSER") ||
    $sit.toUpperCase().startsWith("JVMPROFILEDIR") ||
    $sit.toUpperCase().startsWith("KEYRING") ||
-   ($sit.toUpperCase().matches("^RLS[^A-Z].*$") && $!{instance-DFH_REGION_CSD_TYPE} == "SHAREDRLS") ||
+   ($sit.toUpperCase().matches("^RLS[^A-Z].*$") 
+   && $!{instance-DFH_REGION_CSD_TYPE} == "SHAREDRLS") ||
    $sit.toUpperCase().startsWith("SEC") ||
    $sit.toUpperCase().startsWith("SECPRFX") ||
    $sit.toUpperCase().startsWith("SIT") ||
@@ -87,13 +91,15 @@
 #if($sitvalue.toUpperCase().startsWith("DFHLIST,"))
 #set ($sitvalue = $sitvalue.substring(8))
 *The list DFHLIST has been removed from the provided GRPLIST
-*specified in the DFH_REGION_SITPARMS property. It is not required.
+*specified in the DFH_REGION_SITPARMS 
+*property. It is not required.
 *The groups from DFHLIST have been added to the list ${csdlist}.
 #end
 #if(!$sitvalue.toUpperCase().equals("DFHLIST"))
 GRPLIST=(${csdlist},$sitvalue)
 #else
-*The GRPLIST SIT parameter only contains DFHLIST. This list is not
+*The GRPLIST SIT parameter only contains DFHLIST. 
+*This list is not
 *required. The groups from DFHLIST have been added to the list
 *${csdlist}.
 *$sit
@@ -104,7 +110,7 @@ GRPLIST=(${csdlist},$sitvalue)
 $sit
 #end
 #end
-##*******************************************************************
+##***************************************************************
 #macro(validateEyuparm $eyuparm)
 #if($eyuparm.toUpperCase().startsWith("CMASSYSID") ||
    $eyuparm.toUpperCase().startsWith("NAME") ||
@@ -118,36 +124,37 @@ $sit
 $eyuparm
 #end
 #end
-##*******************************************************************
-//*********************************************************************
-//**           CICS START PROCEDURE                                   *
-//**           YYYY                                                   *
-//*********************************************************************
+##***************************************************************
+//***************************************************************
+//**           CICS START PROCEDURE                             *
+//**           YYYY                                             *
+//***************************************************************
 #set ($applid = "${instance-DFH_REGION_APPLID}")
 ## csdlist auf leer gesetzt um groessere Aenderungen zu vermeiden
 #set ($csdlist = "")
 //COPY1 EXEC PGM=IEBGENER,MEMLIMIT=0M
 //SYSUT2 DD DISP=SHR,
-//       DSN=${instance-DFH_ZOS_PROCLIB}(${instance-DFH_REGION_APPLID})
+//       DSN=
+//     ${instance-DFH_ZOS_PROCLIB}(${instance-DFH_REGION_APPLID})
 //SYSPRINT DD SYSOUT=*
 //SYSIN  DD *
 //SYSUT1 DD DATA,DLM='@@'
-//DFHSTART  PROC CICSAPPL='${applid}',                                   
-//             CICSREL='TS54',                                         
-//             CPSMREL='TS54',                                         
-//             START='AUTO',                                           
-//             PARMLIB='CICS.STARTUP.PARM'                             
-//**                                                                   
-//**                                                                   
-//RMUTL    EXEC PGM=DFHRMUTL,PARM='SYSIN',REGION=1M                    
-//**                                                                   
-//STEPLIB  DD  DISP=SHR,DSN=CICS.&CICSREL..SDFHLOAD                    
-//SYSPRINT DD  SYSOUT=M                                                
+//DFHSTART  PROC CICSAPPL='${applid}',                   
+//             CICSREL='TS54',                         
+//             CPSMREL='TS54',                          
+//             START='AUTO',                             
+//             PARMLIB='CICS.STARTUP.PARM'                
+//**                                                         
+//**                                                          
+//RMUTL    EXEC PGM=DFHRMUTL,PARM='SYSIN',REGION=1M         
+//**                                                        
+//STEPLIB  DD  DISP=SHR,DSN=CICS.&CICSREL..SDFHLOAD          
+//SYSPRINT DD  SYSOUT=M                                      
 //DFHGCD   DD  DISP=SHR,DSN=TCICS.&CICSAPPL..DFHGCD           
-//SYSIN    DD  DISP=SHR,DSN=&PARMLIB(&START)                           
-//**                                                                    
-//**                                                                    
-//CICS     EXEC PGM=DFHSIP,PARM='SYSIN',REGION=0M,                     
+//SYSIN    DD  DISP=SHR,DSN=&PARMLIB(&START)                 
+//**                                                      
+//**                                                       
+//CICS     EXEC PGM=DFHSIP,PARM='SYSIN',REGION=0M,        
 //            MEMLIMIT=50G
 //**
 //** Include STEPLIB Libraries ******************************
@@ -164,8 +171,8 @@ $eyuparm
 #end
 #end                
 //**
-//**CICS DATASETS                                                      
-//**                                                                   
+//**CICS DATASETS                         
+//**                                  
 //** Include the DFHRPL Libraries ***********************
 #set($rpladded = 0)
 #set ($value2 = $!{instance-DFH_REGION_RPL})
@@ -179,12 +186,13 @@ $eyuparm
 #end
 #end
 #end            
-//**                                                                   
-//**        DFHRPL-USER-DATEIEN WERDEN DYNAMISCH VERKETTET             
-//**                                                                   
+//**                                                            
+//**        DFHRPL-USER-DATEIEN WERDEN DYNAMISCH VERKETTET     
+//**                                                        
 //**CICS PARAMETERS
 //**
-//EYUPARM  DD  DISP=SHR,DSN=CICS.&CPSMREL..CPSM.SEYUPARM.TEST(TESTPLEX)
+//EYUPARM  DD  DISP=SHR,
+//             DSN=CICS.&CPSMREL..CPSM.SEYUPARM.TEST(TESTPLEX)
 //DFHINTRA DD  DISP=SHR,DSN=TCICS.&CICSAPPL..DFHINTRA
 //DFHTEMP  DD  DISP=SHR,DSN=TCICS.&CICSAPPL..DFHTEMP
 //DFHDMPA  DD  DISP=SHR,DSN=TCICS.&CICSAPPL..DFHDMPA
@@ -192,32 +200,32 @@ $eyuparm
 //DFHGCD   DD  DISP=SHR,DSN=TCICS.&CICSAPPL..DFHGCD
 //DFHLCD   DD  DISP=SHR,DSN=TCICS.&CICSAPPL..DFHLCD
 //DFHLRQ   DD  DISP=SHR,DSN=TCICS.&CICSAPPL..DFHLRQ
-//CIGSSUBM DD  SYSOUT=(A,INTRDR)                                     
-//**                                                                 
-//**EXTRAPARTION DATA SETS                                           
-//**                                                                 
-//LOGUSR   DD  SYSOUT=M                                              
-//MSGUSR   DD  SYSOUT=M                                              
-//AUDITLOG DD  SYSOUT=M                                              
-//JVMOUT   DD  SYSOUT=M                            * JVMSERVER STDOUT
-//JVMERR   DD  SYSOUT=M                            * JVMSERVER STDERR
-//JVMTRACE DD  SYSOUT=M                            * JVMSERVER TRACE 
-//SYSUDUMP DD  DUMMY                                                 
-//SYSABEND DD  DUMMY                                                 
-//TRACEOUT DD  SYSOUT=M                                              
-//PRINTER  DD  SYSOUT=M                                              
-//DFHAUXT  DD  DUMMY                                                 
-//DFHBUXT  DD  DUMMY                                                 
-//COUT     DD  DUMMY                                                 
-//DFHCXRF  DD  SYSOUT=M                                              
-//**                                                                 
-//**LE/370-DESTINATIONS                                              
-//**                                                                 
-//CEEMSG   DD  SYSOUT=M                                              
-//CEEOUT   DD  SYSOUT=M                                              
-//**                                                                 
-//**CICS REXX DATASETS                                               
-//**                                                                 
+//CIGSSUBM DD  SYSOUT=(A,INTRDR)                   
+//**                                              
+//**EXTRAPARTION DATA SETS                        
+//**                                             
+//LOGUSR   DD  SYSOUT=M                          
+//MSGUSR   DD  SYSOUT=M                       
+//AUDITLOG DD  SYSOUT=M                         
+//JVMOUT   DD  SYSOUT=M                     * JVMSERVER STDOUT
+//JVMERR   DD  SYSOUT=M                     * JVMSERVER STDERR
+//JVMTRACE DD  SYSOUT=M                     * JVMSERVER TRACE 
+//SYSUDUMP DD  DUMMY                                        
+//SYSABEND DD  DUMMY                                       
+//TRACEOUT DD  SYSOUT=M                                    
+//PRINTER  DD  SYSOUT=M                                   
+//DFHAUXT  DD  DUMMY                                        
+//DFHBUXT  DD  DUMMY                                      
+//COUT     DD  DUMMY                                    
+//DFHCXRF  DD  SYSOUT=M                                   
+//**                                                   
+//**LE/370-DESTINATIONS                                 
+//**                                                   
+//CEEMSG   DD  SYSOUT=M                                  
+//CEEOUT   DD  SYSOUT=M                                  
+//**                                                        
+//**CICS REXX DATASETS                                   
+//**                                                       
 //CICAUTH  DD  DISP=SHR,DSN=CICS.&CICSREL..REXX.SCICCMDS.TEST        
 //CICEXEC  DD  DISP=SHR,DSN=CICS.REXX.EXEC.TEST                      
 //         DD  DISP=SHR,DSN=CICS.&CICSREL..REXX.SCICEXEC.TEST
@@ -239,11 +247,14 @@ PARMERR=ABEND
 * GRPLIST=(${csdlist}) unter CICSSVC rausgenommen wegen csdlist*
 ****************************************************************
 SIT=${instance-DFH_REGION_SIT}
-#if($!{instance-DFH_REGION_CICSSVC} && $!{instance-DFH_REGION_CICSSVC} !="")
+#if($!{instance-DFH_REGION_CICSSVC} 
+# && $!{instance-DFH_REGION_CICSSVC} !="")
 CICSSVC=${instance-DFH_REGION_CICSSVC}
 #end
-#if($!{instance-DFH_ZFS_MOUNTPOINT} && $!{instance-DFH_ZFS_MOUNTPOINT} != "")
-JVMPROFILEDIR=${instance-DFH_ZFS_MOUNTPOINT}/${instance-DFH_REGION_APPLID}/JVMProfiles
+#if($!{instance-DFH_ZFS_MOUNTPOINT} 
+# && $!{instance-DFH_ZFS_MOUNTPOINT} != "")
+JVMPROFILEDIR=${instance-DFH_ZFS_MOUNTPOINT}/
+${instance-DFH_REGION_APPLID}/JVMProfiles
 #end
 #if($!{instance-DFH_REGION_LOGSTREAM} == "DUMMY")
 START=INITIAL
@@ -280,49 +291,64 @@ TCPIP=YES
 ## Security Settings
 #if(${instance-DFH_REGION_SEC} == "YES")
 SEC=YES
-#if($!{instance-DFH_REGION_XAPPC} && $!{instance-DFH_REGION_XAPPC} != "")
+#if($!{instance-DFH_REGION_XAPPC} 
+# && $!{instance-DFH_REGION_XAPPC} != "")
 XAPPC=${instance-DFH_REGION_XAPPC}
 #end
-#if($!{instance-DFH_REGION_XCMD} && $!{instance-DFH_REGION_XCMD} != "")
+#if($!{instance-DFH_REGION_XCMD} 
+# && $!{instance-DFH_REGION_XCMD} != "")
 XCMD=${instance-DFH_REGION_XCMD}
 #end
-#if($!{instance-DFH_REGION_XDB2} && $!{instance-DFH_REGION_XDB2} != "")
+#if($!{instance-DFH_REGION_XDB2} 
+# && $!{instance-DFH_REGION_XDB2} != "")
 XDB2=${instance-DFH_REGION_XDB2}
 #end
-#if($!{instance-DFH_REGION_XDCT} && $!{instance-DFH_REGION_XDCT} != "")
+#if($!{instance-DFH_REGION_XDCT} 
+# && $!{instance-DFH_REGION_XDCT} != "")
 XDCT=${instance-DFH_REGION_XDCT}
 #end
-#if($!{instance-DFH_REGION_XFCT} && $!{instance-DFH_REGION_XFCT} != "")
+#if($!{instance-DFH_REGION_XFCT} 
+# && $!{instance-DFH_REGION_XFCT} != "")
 XFCT=${instance-DFH_REGION_XFCT}
 #end
-#if($!{instance-DFH_REGION_XHFS} && $!{instance-DFH_REGION_XHFS} != "")
+#if($!{instance-DFH_REGION_XHFS} 
+# && $!{instance-DFH_REGION_XHFS} != "")
 XHFS=${instance-DFH_REGION_XHFS}
 #end
-#if($!{instance-DFH_REGION_XJCT} && $!{instance-DFH_REGION_XJCT} != "")
+#if($!{instance-DFH_REGION_XJCT} 
+# && $!{instance-DFH_REGION_XJCT} != "")
 XJCT=${instance-DFH_REGION_XJCT}
 #end
-#if($!{instance-DFH_REGION_XPCT} && $!{instance-DFH_REGION_XPCT} != "")
+#if($!{instance-DFH_REGION_XPCT} 
+# && $!{instance-DFH_REGION_XPCT} != "")
 XPCT=${instance-DFH_REGION_XPCT}
 #end
-#if($!{instance-DFH_REGION_XPPT} && $!{instance-DFH_REGION_XPPT} != "")
+#if($!{instance-DFH_REGION_XPPT} 
+# && $!{instance-DFH_REGION_XPPT} != "")
 XPPT=${instance-DFH_REGION_XPPT}
 #end
-#if($!{instance-DFH_REGION_XPSB} && $!{instance-DFH_REGION_XPSB} != "")
+#if($!{instance-DFH_REGION_XPSB} 
+# && $!{instance-DFH_REGION_XPSB} != "")
 XPSB=${instance-DFH_REGION_XPSB}
 #end
-#if($!{instance-DFH_REGION_XPTKT} && $!{instance-DFH_REGION_XPTKT} != "")
+#if($!{instance-DFH_REGION_XPTKT} 
+# && $!{instance-DFH_REGION_XPTKT} != "")
 XPTKT=${instance-DFH_REGION_XPTKT}
 #end
-#if($!{instance-DFH_REGION_XRES} && $!{instance-DFH_REGION_XRES} != "")
+#if($!{instance-DFH_REGION_XRES} 
+# && $!{instance-DFH_REGION_XRES} != "")
 XRES=${instance-DFH_REGION_XRES}
 #end
-#if($!{instance-DFH_REGION_XTRAN} && $!{instance-DFH_REGION_XTRAN} != "")
+#if($!{instance-DFH_REGION_XTRAN} 
+# && $!{instance-DFH_REGION_XTRAN} != "")
 XTRAN=${instance-DFH_REGION_XTRAN}
 #end
-#if($!{instance-DFH_REGION_XTST} && $!{instance-DFH_REGION_XTST} != "")
+#if($!{instance-DFH_REGION_XTST} 
+# && $!{instance-DFH_REGION_XTST} != "")
 XTST=${instance-DFH_REGION_XTST}
 #end
-#if($!{instance-DFH_REGION_XUSER} && $!{instance-DFH_REGION_XUSER} != "")
+#if($!{instance-DFH_REGION_XUSER} 
+# && $!{instance-DFH_REGION_XUSER} != "")
 XUSER=${instance-DFH_REGION_XUSER}
 #end
 #else
