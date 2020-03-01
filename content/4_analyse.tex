@@ -2,7 +2,7 @@
 Im Folgenden wird der Einsatz von cloud native bei der DATEV e.G. analysiert.
 Im Vergleich dazu wird der aktuelle Bereitstellungsprozess für die Laufzeitumgebung, dem dazugehörigen Datenbanksystem und einer Messaging Lösung erläutert.
 Anschließend erfolgt eine Beschreibung der Beispielanwendung \glqq DATEV-Rechnungsschreibung\grqq.
-Die dafür benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 1 (Kommentar: "Mitarbeiter 1" kennt man nur aus den Fragebögen, oder? D.h. entwder würde ich das Interview verlinken, oder nur "einem Entwickler" aus der Abteilung, die für die DATEV-Rechnungsschreibung zuständig ist.
+Die dafür benötigten Informationen stammen aus Gesprächen mit einem Entwickler aus der Abteilung, die für die DATEV-Rechnungsschreibung zuständig ist.
 Es wird vor allem der technische Aspekt beleuchtet.
 
 \section{Analyse von cloud native bei DATEV e.G.}\label{sec:analysecloud}
@@ -164,7 +164,7 @@ Das betrifft insbesondere die Bereiche
 
 \begin{itemize}
 \item Produktautonomie
-\item Entwicklunsg-Deployment
+\item Entwicklungsdeployment
 \item Architektur
 \item Isolation
 \end{itemize}
@@ -177,7 +177,7 @@ Die Administratorenteams sind aber insbesondere für die produktiven Instanzen i
 Der Cloud-Aspekt des automatischen Deployments einer Anwendung inklusive Runtime zwischen Stages wird hier noch nicht umgesetzt.
 
 \paragraph{Entwicklungsdeployment}~\\
-Da für das Deployment in die bislang geteilte Entwicklungsumgebung (Kommentar: ist Deployment hier der richtige Begriff? Darunter verstehe ich eher die Übergabe in Produktion. Vlt. eher der Begriff "Entwicklungsdeployment) einer z/OS CICS Anwendung, wie in Absatz \ref{sssec:cicsanwd} beschrieben, auch geteilte Programm-Bibliotheken zum Einsatz kommen, muss beim Testen einer Anwendung immer geprüft werden, ob tatsächlich der von dem Entwickler zu testende Stand der Anwendung in dieser Bibliothek abgelegt ist, ob die Bibliothek der CICS Instanz zur Verfügung steht und ob nicht eine andere Bibliothek mit anderem Stand von der CICS Instanz angezogen wird.
+Da für das Deployment in die bislang geteilte Entwicklungsumgebung einer z/OS CICS Anwendung, wie in Absatz \ref{sssec:cicsanwd} beschrieben, auch geteilte Programm-Bibliotheken zum Einsatz kommen, muss beim Testen einer Anwendung immer geprüft werden, ob tatsächlich der von dem Entwickler zu testende Stand der Anwendung in dieser Bibliothek abgelegt ist, ob die Bibliothek der CICS Instanz zur Verfügung steht und ob nicht eine andere Bibliothek mit anderem Stand von der CICS Instanz angezogen wird.
 Diese Probleme verschärfen sich, wenn an der gleichen Anwendung mehrere Mitarbeiter parallel entwickeln. 
 Lt. den Erfahrungen der Entwickler sind hier viele Absprache notwendig, um beispielsweise nicht den Stand eines Kollegen zu überschreiben.
 
@@ -197,7 +197,6 @@ Mit Hilfe von isolierten Testumgebungen, d.h. anwendungsspezifisch und fallabhä
 Nach diesem Vergleich sieht die DATEV e.G. bei dem hier zu untersuchenden  automatisierten Prozess vor allem bzgl. Entwicklungseffizienz einen Vorteil.
 Dabei wird der Fokus auf die Effizienz bei der Bereitstellung isolierter Testumgebungen, ohne Wartezeit und mit möglichst wenig manueller Interaktion gelegt.
 Dadurch verspricht sich die DATEV e.G. kürzere Entwicklungszyklen und weniger Fehleranfälligkeit durch hohen Abstimmungsaufwand.
-
 
 Hierzu wird in dieser Arbeit das Tool \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} für die automatisierte Bereitstellung von Laufzeitumgebungen für die Entwicklungsstage untersucht.
 Als Beispielanwendung dient ein Bereich der z/OS Anwendung \glqq DATEV-Rechnungsschreibung\grqq.
@@ -256,7 +255,7 @@ In den restlichen drei Queues sind die Ergebnisse der Preisermittlung gespeicher
 Die Ergebnisse stehen somit dem Batch-Ablauf zur Weiterverarbeitung zur Verfügung.
 Für jede der vier Queues existieren jeweils 100 vorgefertigte Namen.
 Somit können auch maximal nur 100 Aufträge gleichzeitig auf Weiterverarbeitung warten.
-Falls dieses Limit erreicht ist, wartet der Batch-Ablauf so lange, bis einer der Aufträge fertig gestellt wird. (Kommentar: Meinst Du der Breich 257-259 ist wirklich wichtig? klint crude und ist doch eher nicht BA-relevant, oder?)
+Falls dieses Limit erreicht ist, wartet der Batch-Ablauf so lange, bis einer der Aufträge fertig gestellt wird.
 Sobald ein Auftrag in die allgemeinen Auftragsqueue geschrieben wird, wird eine CICS-Transaktion gestartet.
 Diese führt die Preisermittlung durch und schreibt das Ergebnis auf die dazugehörigen Queues.
 Ist dies geschehen, stehen die Queues wieder für einen neuen Auftrag zur Verfügung.
