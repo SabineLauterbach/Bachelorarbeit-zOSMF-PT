@@ -474,24 +474,24 @@ Folgende Probleme wurden im Rahmen der Implementierung erkannt:
 \end{itemize}
 \end{samepage}
 
-Als erstes Problem sind nicht sprechenden Fehlermeldungen von z/OSMF, Abbildung \ref{fig:zosmffehler}, zu nennen.
+Als erstes Problem sind die nichtsprechenden Fehlermeldungen von z/OSMF, Abbildung \ref{fig:zosmffehler}, zu nennen.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{figures/zosmffehlermeldung.png}
 	\caption{Beispiel einer Fehlermeldung von zOSMF}
 	\label{fig:zosmffehler}
 \end{figure}
-Z.B. wird bei dem Hinzufügen und Aktualisieren eines Templates in z/OSMF das Template und damit alle davon benötigten Dateien (Actiondefinitionfile, Workflowdefinitionfiles, Variableinputfile, JCL-Dateien und REXX-Skripte) auf Syntaxfehler geprüft.
-Die in Abbildung \ref{fig:zosmffehler} gezeigte Meldung tritt dann ein, wenn einer dieser Dateien ein Syntaxfehler vorhanden ist.
-Beispielsweise wenn in einer JCL-Datei das Zeichenlimit von 80 Zeichen pro Zeile überschritten wird, dafür genügt schon ein \glqq Blank\grqq.
-Wie zu erkennen ist, zeigt die Fehlermeldung weder welcher Fehler genau vorliegt, noch nicht einmal in welcher Datei dieser auftritt.
+Z.B. wird bei dem Hinzufügen und Aktualisieren eines Templates in z/OSMF das Template und damit alle dazu benötigten Dateien (Actiondefinitionfile, Workflowdefinitionfiles, Variableinputfile, JCL-Dateien und REXX-Skripte) auf Syntaxfehler geprüft.
+Die in Abbildung \ref{fig:zosmffehler} gezeigte Meldung tritt dann ein, wenn in einer dieser Dateien ein Syntaxfehler vorhanden ist.
+Beispielsweise, wenn in einer JCL-Datei das Zeichenlimit von 80 Zeichen pro Zeile überschritten wird, dafür genügt schon ein \glqq Blank\grqq.
+Wie zu erkennen ist, zeigt die Fehlermeldung weder welcher Fehler genau vorliegt, noch in welcher Datei dieser auftritt.
 Zudem auch keine genaue Anzahl an auftretenden Fehlern.
 Dieser Umstand, kombiniert mit 36 bestehenden Dateien, erschwert die Fehlersuche.
 
-Im Gegensatz dazu, wird im Fehlerfall zur Laufzeit eines Workflow-Steps immer der Fehlercode und der genaue Ort des Fehlers ausgegeben.
-Beispielsweise wird bei einem Workflow-Step, in dem ein REST Aufruf durchgeführt wird, und ein Fehler auftritt, der Requestcode und die hinterlegte Fehlermeldung an der z/OSMF Oberfläche angezeigt. 
+Im Gegensatz dazu wird im Fehlerfall zur Laufzeit eines Workflow-Steps immer der Fehlercode und der genaue Ort des Fehlers ausgegeben.
+Beispielsweise wird bei einem Workflow-Step, in dem ein REST Aufruf durchgeführt wird und ein Fehler auftritt, der Requestcode und die hinterlegte Fehlermeldung an der z/OSMF Oberfläche angezeigt. 
 
-Ein weiteres Problem ist eine nicht genau identifizierbare Programmiersprache, die für die dynamische Generierung von Skripten genutzt wird.
+Ein weiteres Problem ist eine nicht genau identifizierbare Programmiersprache, die für die dynamische Generierung von Skripten im Worfklow genutzt wird.
 Sie kommt unter anderem in den JCLs und REXX-Skripten, die dem Template über Workflowdefinitionfile-Steps zugeordnet werden, vor.
 Um diese Sprache einzusetzen muss am Zeilenanfang ein \glqq\#\grqq{} angegeben werden.
 Diese Sprache bietet einige Features.
