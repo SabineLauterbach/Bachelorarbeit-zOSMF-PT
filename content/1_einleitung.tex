@@ -12,7 +12,7 @@ In dieser Arbeit wird nur auf Mainframes aus dem Hause IBM, die sogenannte z-Pla
 Damit ist auch der Technologiestack festgelegt.
 Das verwendete Betriebssystem ist z/OS, darauf werden Middleware Produkte wie CICS\footnote{Anwendungsserver, CICS Beschreibung Absatz \ref{cics}}, das Datenbankmanagementsystem Db2\footnote{ Beschreibung Absatz \ref{sssec:db2}} sowie die Messaging Lösung \glqq IBM MQ\grqq{}\footnote{Beschreibung im Absatz \ref{sec:mq} zu finden} betrieben.
 Als Programmiersprachen werden z.B. COBOL, IBM Assembler, C und C++ verwendet. 
-Seit ca. 1997 ist auch Java auf dem Mainframe verfügbar. \footnote{\cite[S. 6]{Steegmans.2003}}.
+Seit ca. 1997 ist auch Java auf dem Mainframe verfügbar. \footnote{\cite[S. 6]{Steegmans.2003}}
 
 Der IBM Mainframe hat eine lange Geschichte.
 Vor mehr als fünfzig Jahren wurde der erste Großrechner, das sog. \glqq System/360\grqq{} vorgestellt.
@@ -40,7 +40,7 @@ Die entstandenen, hochgradig geschäftskritischen Kernsysteme haben hohe Anforde
 All diese Punkte sprechen nach wie vor für die Nutzung eines Großrechners, z.B. auch bei der DATEV e.G., weshalb man nach Einführung der IBM z14 Plattform 2019 als Referenzkunde agierte.\footnote{\cite{.29.02.2020}}
 \glqq Hosting our SaaS and cloud services on the IBM z14 gives us peace of mind that customer information is kept secure, in compliance with data protection regulations.\grqq\footnote{Jutta Roessner, Executive Committee Member, DATEV}
 
-Die DATEV e.G. wurde am 14.02.1966 von 65 Steuerbevollmächtigen gegründet.
+Die DATEV e.G. wurde am 14.02.1966 von 65 Steuerbevollmächtigten gegründet.
 Sie verfolgten mit der Gründung das Ziel, Buchführungsaufgaben für ihre Mandanten mit Hilfe der neu aufkommenden EDV zu bewältigen.
 Aufgrund hohen Mitgliederwachstums wurde hierfür bereits 1969 in einen firmeneigenen IBM-Großrechner investiert.\cite{.25.11.2019c}
 Heute umfasst das Leistungsspektrum der DATEV e.G. unter anderem das Rechnungswesen, Personalwirtschaft, Consulting, IT-Sicherheit, Weiterbildung für ihre Kunden, in erster Linie Steuerberater, Wirtschaftsprüfer und Rechtsanwälte, und deren Mandanten.
@@ -82,7 +82,7 @@ Im Jahre 2020 ist der größte Konkurrent für den Mainframe die Cloud.
 Laut einer Vorhersage aus dem Jahr 2018\footnote{Statistik im Anhang \ref{app:itworkload}} soll im Jahre 2020 circa 79 Prozent des weltweiten Workloads in einer Cloud verarbeitet werden.
 Für die Entwicklung von neuen Online-Anwendungen im cloud-native Stil wurde bei der DATEV e.G. eine Platform-as-a-Service (PaaS)-Lösung geschaffen und neue DevOps\footnote{Siehe Absatz \ref{sec:analysecloud}} Prozesse aufgebaut.
 Dies ist im Cloud-Zeitalter nötig, um mit einer verbesserten Entwicklungseffizienz und neuen Architekturen Anwendungen (\glqq Apps\grqq) schneller auf den Markt bringen und auf Kundenanforderungen schneller reagieren zu können. Stichwort: Continuous Integration, Continuous Delivery (CI/CD)\footnote{Siehe Absatz \ref{sec:cicd}}.
-Ein Baustein der effizientern Prozesse durch PaaS sind die sog. \glqq Self Services\grqq.
+Ein Baustein der effizienteren Prozesse durch PaaS sind die sog. \glqq Self Services\grqq.
 D.h., Entwicklerteams können sich über sog. \glqq Cloud Services\grqq, z.B. Datenbanken wie PostgreSQL, Mongo und Messaginglösungen wie Kafka entweder manuell über einen Marktplatz (siehe Abbildung \ref{fig:markt}) oder automatisiert per \glqq Build-Pipeline\grqq{} eine  Laufzeitumgebung für ihre Anwendung zusammenbauen.
 \begin{figure}[h]
 \centering
@@ -107,7 +107,7 @@ Diese stellte z.B. nur ein Syntaxhighlighting zur Verfügung.
 Ein Meilenstein für die modernisierte z/OS Entwicklung bei DATEV war die Einführung von Git im Jahr 2018 auch für z/OS Sourcen. 
 Dieses weit verbreitete Standard-Tool ist im z/OS Umfeld tatsächlich eine entscheidende Neuerung.
 Dadurch wurde ein bis dato verwendetes eigenentwickeltes Tool für die Sourceverwaltung der z/OS Sourcen abgelöst.
-Dieses stellte nur ein sehr einfaches Versionierungskonzept ohne aus Git bekannte Features wie Merge, Branch usw. bereit. 
+Dieses stellte nur ein sehr einfaches Versionierungskonzept ohne aus Git bekannten Features wie Merge, Branch usw. bereit. 
 Parallelentwicklung von verschiedenen Features war vorher mit viel Aufwand und Abstimmung möglich. 
 Das Tooling wurde somit modernisiert, jedoch nicht der Entwicklungsprozess selbst.
 Es teilen sich sehr viele Anwendungen die gleichen Entwicklungs-CICS/Db2/MQ Ressourcen.
@@ -117,7 +117,7 @@ Dadurch wird der aktuelle Prozess im Vergleich zu modernen cloud nativen Prozess
 
 Es bleibt die Frage, wie wird vor diesem Hintergrund mit den vielen Mainframebestandsanwendungen bei der DATEV e.G. in Zukunft umgegangen?
 Die komplette Ablösung dieser Anwendungen durch cloud-native Lösungen ist eine Option, deren zeitlicher Rahmen und Machbarkeit aktuell nicht absehbar ist.
-Für die Funktionsfähigkeit dieses Bestandsgeschäfts, das die Core-Business-Funktionalitäten der DATEV e.G. darstellt, muss also effiziente Weiterentwicklung und Wartung gewährleistet werden.
+Für die Funktionsfähigkeit dieses Bestandsgeschäfts, das die Core-Business-Funktionalitäten der DATEV e.G. darstellt, muss also eine effiziente Weiterentwicklung und Wartung gewährleistet werden.
 Auch im Falle einer geplanten Ablöse von Anwendungen muss je nach Strategie (z.B. \glqq Rewrite\grqq / \glqq Rearchitect\grqq)\footnote{(Kommentar, Strategiepatterns lt. Gartner, ich schick DIr enien Link)} das Alt-System parallel dazu über Jahre oder Jahrzehnte gepflegt und funktional aktuell gehalten werden.
 Daraus folgt, dass aus Sicht der DATEV e.G. weiter in die IBM Mainframe Plattform investiert werden muss. 
 Dies bedeutet Investitionen in die bereitgestellte Infrastruktur (Hardware, Betriebssysteme, Lizenzen), insbesondere aber auch Investitionen, die die oben genannten Anforderungen an Weiterentwicklung, Wartung und Entwicklungseffizienz sowie Effizienz im Betrieb adressieren.
@@ -142,5 +142,5 @@ Hier setzt diese Arbeit an und klärt folgende Fragen:
 \end{samepage}
 
 Um diese Fragen zu beantworten, wird die Provisionierung einer z/OS Laufzeitumgebung für eine bestehende Anwendung untersucht.
-Diese Anwendung sollte CICS als Anwendungsserver, eine Db2 Datenbank und IBM MQ als Messaginglösung nutzen, um für diese 3 Haupt-Technologien (Middleware-Komponenten) eine Aussage treffen zu können.
+Diese Anwendung sollte CICS als Anwendungsserver, eine Db2 Datenbank und IBM MQ als Messaginglösung nutzen, um für diese drei Haupt-Technologien (Middleware-Komponenten) eine Aussage treffen zu können.
 Die genaue Vorgehensweise wird im Kapitel \ref{ch:vorgehensweise} beschrieben.

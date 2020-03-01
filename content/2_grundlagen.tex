@@ -8,12 +8,12 @@ Oft werden damit Online-Anwendungen und mobile \glqq Apps\grqq entwickelt, für 
 Für solche Anwendungen ist das Architekturpattern der sogenannten \glqq Microservices\grqq, weit verbreitet.
 Diese einzelnen, entkoppelten Services sind beispielsweise in Containern paketiert. 
 Bekannt geworden ist hier der Ansatz von \Gls{docker}.
-Die Docker Container werden über Images beschrieben und beinhalte neben der Anwendung alles das, was die Anwendung an Middleware-Komponenten und Services zur Laufzeit benötigt, Bibliotheken, Dateien.\footnote{\cite[Kap. 1]{Vohra.2016}}
+Die Docker Container werden über Images beschrieben und beinhalten neben der Anwendung alles das, was die Anwendung an Middleware-Komponenten und Services zur Laufzeit benötigt, wie Bibliotheken, Dateien.\footnote{\cite[Kap. 1]{Vohra.2016}}
 Somit können Anwendungen auf verschiedenen \glqq privat\grqq{} und \glqq public\grqq{} Cloud-Umgebungen, auch von unterschiedlichen Anbietern, ausgeführt werden.
-Große Anbieter sind hier beispielsweise AWS (Amazon), Google, Microsoft Azure.\footnote{\cite{.27.2.2020}}
+Große Anbieter sind hier beispielsweise AWS (Amazon), Google und Microsoft Azure.\footnote{\cite{.27.2.2020}}
 Dort können bereitstehende Services für Datenhaltung, Security, Messaging usw. genutzt werden. 
 \cite{.23.2.2020d}\\
-Eine moderne cloud native Anwendung innerhalb der DATEV e.G. machen folgende Dinge aus:
+Eine moderne cloud native Anwendung innerhalb der DATEV e.G. macht folgende Dinge aus:
 \begin{itemize}
 \item \glqq Cloud Foundry\grqq
 \item CI/CD-Pipeline
@@ -24,7 +24,7 @@ Bei Cloud Foundry handelt es sich um eine quelloffene Platform-as-a-Service, kur
 Platform-as-a-Service, beschreibt neben Insfrastructure-as-a-Service, kurz IaaS und Software-as-a-Service, kurz SaaS, einen Grad an Auslagerung von IT-Systemen in die Cloud.
 Im Vergleich zu SaaS, bei der ganze Anwendungen in einer Cloud zur Verfügung stehen, und IaaS, bei der die automatisierte Bereitstellung von Infrastrukturkomponenten wie Netzwerk, Speicher usw. im Fokus steht, stellt eine PaaS-Lösung eine Plattform, die sich neben der Infrastruktur auch um das Betriebssystem, die Middleware und die Laufzeitumgebung kümmert, bereit.\footnote{\cite{.25.2.2020}}
 Für die Verwaltung von Ressourcen bietet Cloud Foundry eine Weboberfläche, den sogenannten \glqq Marketplace\grqq, an.
-In diesem können mit wenigen Mausklicks Schnittstellen zu Services wie Datenbankmanagementsysteme, Messaging- oder Monitorlösungen zur Anwendung hinzugefügt werden.
+In diesem können mit wenigen Mausklicks Schnittstellen zu Services wie Datenbankmanagementsystemen, Messaging- oder Monitorlösungen zur Anwendung hinzugefügt werden.
 Diese Schnittstellen, auch \glqq Self Service\grqq{} oder \glqq Service Broker\grqq{} genannt, können mittels einer von Cloud Foundry zur Verfügung gestellten API selbst entwickelt werden.
 Daneben kümmert sich Cloud Foundry um das Staging der Anwendungen.
 D.h. eine Anwendung kann mit den benötigten Komponenten sicher von einer Entwicklungs- in eine QS- bzw. Produktiv-Stage verschoben werden. 
@@ -61,7 +61,7 @@ Nachdem ein Entwickler Änderungen am Code vorgenommen hat, lädt er diese in di
 Dabei kann eine erste Überprüfung des Codes mittels statischer Codeanalyse durchgeführt werden.
 Dazu zählt unter anderem die Prüfung vorher definierter Coderichtlinien.
 Sind diese erfolgreich, wird ein isolierter CI-Server benachrichtigt.
-Dieser Server holt sich den neusten Stand des Quellcodes und baut diesen, um anschließend automatisierte Tests durchzuführen.
+Dieser Server holt sich den neuesten Stand des Quellcodes und baut diesen, um anschließend automatisierte Tests durchzuführen.
 Hier liegt der zentrale Vorteil der Automatisierung. 
 Bei jedem Bauen wird automatisch überprüft, ob das Ergebnis das erwartete ist.
 Voraussetzung dafür ist die oben beschriebene Paketierung der Anwendung mit der Laufzeitumgebung und den benötigten Komponenten. 
@@ -90,12 +90,12 @@ Dabei handelt es sich um die automatisierte Bereitstellung in eine Produktions-S
 Im modernen Sprachgebrauch kann ein Großrechner, oder auch Mainframe, als größte zur Verfügung stehende Serverart betrachtet werden.
 Er wird von Unternehmen verwendet, um  kommerzielle Datenbanken, Transaktionsserver und Anwendungen, die einen hohen Grad an Sicherheit und Verfügbarkeit benötigen, zu hosten.
 Im Gegensatz zu verteilten Serversystemen, bei denen die Funktionalitäten auf einzelne Server, wie zum Beispiel einen E-Mail-Server, einen Datenbank-Server, einen Web-Server usw. aufgeteilt sind, handelt es sich bei einem Mainframe um ein zentralisiertes System.
-Die einzelnen Funktionalitäten werden von sogenannte \glqq Subsysteme\grqq, auch \glqq Middleware\grqq{} genannt, zur Verfügung gestellt. 
+Die einzelnen Funktionalitäten werden von sogenannte \glqq Subsystemen\grqq, auch \glqq Middleware\grqq{} genannt, zur Verfügung gestellt. 
 Darunter zählen unter anderem Datenbankmanagementsysteme und Anwendungsserver.
 \cite[S. 9-10]{Ebbers.2011}
 
 \section{Mainframe Anwendungen bei DATEV e.G.}\label{sec:zosanw}
-Das Betriebssystem des IBM Mainframes ist das für zero downtime stehende z/OS.\footnote{[S. 92]\cite{Ebbers.2011}}
+Das Betriebssystem des IBM Mainframes ist das für zero downtime stehende z/OS.\footnote{\cite[S. 92]{Ebbers.2011}}
 Darauf aufbauend benötigen klassische z/OS Anwendungen bestimmte Middleware.
 Bei der DATEV e.G. handelt es sich unter anderem um folgende Middlewarekomponenten:
 
@@ -122,7 +122,7 @@ Software, die für den Kunden bereitsteht
 \end{samepage}
 
 \section{Subsysteme / Middleware}
-Für die Beantwortung der Forschungsfragen liegt der Fokus auf dem Erstellen (\glqq Provisionieren \grqq) einer anwendungsspezifischen Laufzeitumgebung mit einer Datenhaltung und Message Queuing auf der Entwicklungs-Stage.
+Für die Beantwortung der Forschungsfragen liegt der Fokus auf dem Erstellen (\glqq Provisionieren\grqq) einer anwendungsspezifischen Laufzeitumgebung mit einer Datenhaltung und Message Queuing auf der Entwicklungs-Stage.
 Als Laufzeitumgebung wird \glqq CICS\grqq, als Datenhaltung \glqq Db2\grqq{} und für das Message Queuing \glqq IBM MQ\grqq{} verwendet.
 Wie in Abbildung \ref{fig:archüber} dargestellt ist, sind mehrere Instanzen pro Subsystem möglich.
 Bei der DATEV e.G. wird die Anzahl an Instanzen pro Subsystem möglichst gering gehalten, um den Verwaltungsaufwand und den Aufwand bei Änderungen, beispielsweise bei einem Versionswechsel\footnote{circa alle eineinhalb Jahre erscheint eine neue CICS Version}, gering zu halten.
@@ -134,7 +134,7 @@ Diese einzelnen Subsysteme werden im Folgenden erläutert, hierzu dient Abbildun
 \begin{figure}[h!]
 \centering
 \includegraphics[width=\textwidth]{figures/architektur.pdf}
-\caption{Architekturübersicht über die Subsysteme einer Stage bei DATEV eG}
+\caption{Architekturübersicht über die Subsysteme einer Stage bei DATEV e.G.}
 \label{fig:archüber}
 \end{figure}
 
@@ -155,11 +155,11 @@ Unter einer CICS Instanz ist ein einzelner Bereich, der auf dem z/OS Kernel aufs
 Dieser Bereich ist mittels einer eindeutigen CICS ApplicationID gekennzeichnet und kann darüber explizit verwaltet werden.
 Eine CICS Instanz verwaltet mehrere CICS Transaktionen.
 
-Wenn in dieser Arbeit von dem CICS gesprochen wird, ist damit die CICS-Instanz  gemeint.
+Wenn in dieser Arbeit von einem CICS gesprochen wird, ist damit die CICS-Instanz  gemeint.
 
 \subsubsection{CICS Transaktion}\label{subsec:trans}
 Ein Businessablauf wird im CICS in einer Transaktion gekapselt.
-Eine Transaktion kann mehrere Programme unterschiedlicher Programmiersprachen umfassen und wird über eine eindeutige \glqq TransaktionsID\grqq{} identifiziert..
+Eine Transaktion kann mehrere Programme unterschiedlicher Programmiersprachen umfassen und wird über eine eindeutige \glqq TransaktionsID\grqq{} identifiziert.
 
 Über die TransaktionsID wird der Ablauf gestartet.
 Dies kann sowohl per Webanfrage oder per Messaging Queue als auch aus einem anderen Programm heraus oder manuell geschehen.
@@ -177,7 +177,7 @@ Db2 ist ein relationales Datenbankmanagementsystem, welches unter anderem als Su
 Einer Stage können mehrere Datenbanksysteme, auch Instanzen genannt, zugeordnet werden.
 In einer Instanz befinden sich die Datenbanken und Tabellen. 
 In der Entwicklungsstage sind das bei DATEV e.G. unter anderem \glqq DB0C\grqq{} und \glqq DB0T\grqq.
-DB0C wird als Sandbox betrieben, d.h. jeder Entwickler kann hier eigene Datenbanken erstellen und verwaltet.
+DB0C wird als Sandbox betrieben, d.h. jeder Entwickler kann hier eigene Datenbanken erstellen und verwalten.
 Bei DB0T handelt es sich um ein Datenbankmanagementsystem, dass sich alle Anwendungen der Entwicklungsstage teilen.
 Die darin enthalten Datenbanken werden von der Db2 Administration verwaltet.
 Diese Datenbanken entsprechen in der Struktur den Datenbanken aus der Produktion und werden für Tests bezüglich Strukturänderungen usw. herangezogen.
@@ -210,7 +210,7 @@ Die anderen Queue Arten nutzen als Basis immer eine Local Queue.
 
 \paragraph{Initiation Queue}~\\
 Die sogenannte \glqq Initiation Queue\grqq{} ist eine spezielle Art der Local Queue.
-Diese dient dem Queue Manager dazu, unter bestimmten Bedingungen eine Trigger-Nachricht darauf zu schreiben.
+Diese dient dem Queue Manager dazu, unter bestimmten Bedingungen eine Trigger-Nachricht auf diese Queue zu schreiben.
 Eine ander Local Queue kann so definiert sein, dass sobald eine Nachricht auf sie geschrieben wird, eine solche Trigger-Nachricht erzeugt wird.
 Dies ermöglicht beispielsweise den use-case, dass Anwendungen nur starten, wenn wirklich Daten zum Verarbeiten vorhanden sind.
 \cite[S. 37-38]{Aranha.2013}
@@ -219,13 +219,13 @@ Dies ermöglicht beispielsweise den use-case, dass Anwendungen nur starten, wenn
 Für das Auslösen von Anwendungen wird nicht nur die Initiation Queue benötigt, sondern auch sogenannte \glqq Processes\grqq.
 So muss der Local Queue, die den Start einer Anwendung auslösen soll, bei der Definition nicht nur die Initiation Queue bekannt gemacht werden, sondern auch ein Process.
 Ein Process legt den \glqq Type\grqq{} und den Namen der zu startenden Anwendung fest.
-Als \glqq Type\grqq{} können beispielhaft CICS oder auch WINDOWSNT für Windows unterstütze Plattformen genannt werden.
+Als \glqq Type\grqq{} können beispielhaft CICS oder auch WINDOWSNT für Windows unterstützte Plattformen genannt werden.
 Ist der \glqq Type\grqq{} CICS,  muss der Name der Transaktion angegeben werden, für Windows Plattformen der Dateipfad der auszuführenden exe.
 \cite[Kap. 4.5]{Aranha.2013}
 
 \section{\glqq IBM Cloud Provisioning and Management for z/OS\grqq}\label{sec:tool}
 Die Verwaltung von Subsystemen von z/OS ist eine hochspezialisierte, teilweise manuelle Tätigkeit.\footnote{Analyse des aktuellen Bereitstellungsprozesses, siehe in Absatz \ref{sec:aktbereit}}
-Um diese Aufgaben zu bewältigen, sind aktuell in erster Linie proprietäre Tools (siehe Abbildung \ref{fig:configalt} im Einsatz, die nicht der Erwartungshaltung an moderne Administrationstools entsprechen.
+Um diese Aufgaben zu bewältigen, sind aktuell in erster Linie proprietäre Tools (siehe Abbildung \ref{fig:configalt}) im Einsatz, die nicht der Erwartungshaltung an moderne Administrationstools entsprechen.
 
 \begin{figure}[h]
 \centering
@@ -241,7 +241,7 @@ Es soll z/OS-Administration über moderne Oberflächen und APIs  ermöglichen.
 z/OSMF (und damit auch \glqq IBM Cloud Provisioning and Management for z/OS\grqq) ist bei DATEV verfügbar, wird aber noch nicht flächendeckend eingesetzt. Die Administratoren kennen und vertrauen auf ihre herkömmlichen Tools, und sehen in der Umstellung immer auch Lernaufwand und Risiko.
 \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} ist auch außerhalb der DATEV e.G. kaum verbreitet. 
 Deshalb besteht auch aus Sicht der IBM  Interesse an Erfahrungsberichten zur Nutzung von \glqq IBM Cloud Provisioning and Management for z/OS\grqq.
-So wurde im Rahmen der neunzehnten \glqq AMC\grqq{}\footnote{Academic Mainframe Consortium e.V.} Tagung im IBM Client Center Böblingen am 16.01.2020  bei einem circa 30 minütigen Vortrag ein Arbeitsstand dieser Arbeit vorgestellt.
+So wurde im Rahmen der neunzehnten \glqq AMC\grqq{}\footnote{Academic Mainframe Consortium e.V.} Tagung im IBM Client Center Böblingen am 16.01.2020  bei einem circa 30-minütigen Vortrag ein Arbeitsstand dieser Arbeit vorgestellt.
 Die Agenda der Veranstaltung ist im Anhang \ref{app:AMC} zu finden.
 Der AMC e.V. ist ein Förderverein für die akademische Ausbildung auf dem Mainframe.\footnote{\cite{.23.2.2020}}
 Neben Vertretern der IBM nahmen an der Tagung Vertreter von Hochschulen und verschiedenen Unternehmen teil.
@@ -254,7 +254,7 @@ Diese Instanz kann eine oder mehrere verschiedene Subsystem-Instanzen enthalten.
 \\Das Template selbst ist eine Art \glqq Verwaltungseinheit\grqq{} und besteht aus drei Dateien:
 
 \paragraph{\glqq Manifest-File\grqq} ~\\
-Im Manifest-File ist der Speicherpfad für das sogenannte \glqq Aktiondefinitionfile\grqq{} und das sogenannte \glqq Variableinputfile\grqq{} angegeben.
+Im Manifest-File ist der Speicherpfad für das sogenannte \glqq Actiondefinitionfile\grqq{} und das sogenannte \glqq Variableinputfile\grqq{} angegeben.
 Erläuterungen zu diesen beiden Dateien folgen im Anschluss.
 Ein Template benötigt zur Provisionierung einen dazugehörigen Provisionierungsworkflow, der Speicherpfad von diesem Workflow wird in der Manifest-File angegeben.
 \cite{.26.2.2020}
@@ -265,7 +265,7 @@ Diese lässt sich grob in zwei Teile untergliedern:
 \item Variablendefinition
 \item Steps
 \end{itemize}
-In der Variablendefinition werden, wie der Name schon sagt, alle Variablen, die für diesen Workflow notwendig sind definiert.
+In der Variablendefinition werden, wie der Name schon sagt, alle Variablen, die für diesen Workflow notwendig sind, definiert.
 
 Ein Step beschreibt einen Teilablauf eines Workflows.
 Ein Workflow kann aus mehreren Steps bestehen.
@@ -281,8 +281,8 @@ Dadurch können Variablen an einer Stelle im Template definiert und in alle Work
 
 Zusätzlich kann in dem Manifest-File eine Beschreibung des Templates hinzugefügt werden.
 \cite{.26.2.2020}
-\paragraph{\glqq Aktiondefinitionfile\grqq} ~\\
-Weitere optionale Aktionen, die ein Anwender mit einer Instanz eines Templates durchführen kann, werden in dem Aktiondefinitionfile festgelegt.
+\paragraph{\glqq Actiondefinitionfile\grqq} ~\\
+Weitere optionale Aktionen, die ein Anwender mit einer Instanz eines Templates durchführen kann, werden in dem Actiondefinitionfile festgelegt.
 Standardmäßig handelt es sich dabei um folgende Aktionen.
 Die Begriffe werden am Beispiel einer Template-Instanz, die eine Datenbank provisioniert, erläutert.
 \begin{itemize}
@@ -321,14 +321,14 @@ Zu diesen Funktionen zählt auch die Verwaltung von Workflows und Templates.
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{figures/zosmf.png}
-\caption{z/OSMF Willkomens Ansicht}
+\caption{z/OSMF Willkommens-Ansicht}
 \label{fig:zosmf_welcome}
 \end{figure}
 
 Die linke Seite der Abbildung \ref{fig:zosmf_welcome} zeigt den Umfang der z/OSMF  Funktionen.
-Für diese Arbeit besitzt nur der Menüpunkt \glqq Cloud Provisioning\grqq{} Relevanz .
-Unter diesem Punkt sind die Funktionalitäten von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} zu finden, und der Begriff  \glqq z/OSMF\grqq{} wird im folgenden synonym für diese Lösung verwendet
-\cite{Rotthove.2018}
+Für diese Arbeit besitzt nur der Menüpunkt \glqq Cloud Provisioning\grqq{} Relevanz.
+Unter diesem Punkt sind die Funktionalitäten von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} zu finden, und der Begriff  \glqq z/OSMF\grqq{} wird im folgenden synonym für diese Lösung verwendet.
+\cite[S. 32]{Rotthove.2018}
 
 Unter dem Punkt \glqq Resource Management\grqq{} werden die \glqq Domains\grqq{} und \glqq Tenants\grqq{} verwaltet.
 Zur Verwaltung der Templates und Template-Instanzen kommen die \glqq Software Services\grqq{} zum Einsatz.
@@ -367,15 +367,15 @@ Danach ist es möglich, die Werte aus der Variableinputfile zu überschreiben un
 Dadurch kann ein Template mit spezifischen Änderungen provisioniert werden, ohne dass ein neues Template erzeugt werden muss.
 
 \paragraph{\glqq z/OSPT-Container\grqq}~\\
-Die Beziehung zwischen einem z/OSPT-Container und einem z/OSPT-Image ist die gleiche wie zwischen einem Docker-Container und einem Docker-Image.
+Die Beziehung zwischen einem z/OSPT-Container und einem z/OSPT-Image ist die gleiche, wie zwischen einem Docker-Container und einem Docker-Image.
 Ein z/OSPT-Container entspricht einer Template-Instanz, die mit Hilfe eines z/OSPT-Images gestartet wurde.
 
 Um nun einen z/OSPT-Container bereitzustellen, muss ein Template zur Verfügung stehen.
 Anschließend kann mittels des Konsolenbefehls \glqq zospt build\grqq{} und der Angabe des Pfades der zosptfile ein Image erzeugt werden.
 Wird nun der \glqq zospt run\grqq-Befehl ausgeführt, wird ein z/OSPT-Container erzeugt (entspricht dem Provisionieren einer Template-Instanz) und gestartet (nur wenn die start-Aktion in der Actiondefinitionfile definiert wurde).
-Der Status von vorhanden Instanzen und Container kann ebenfalls mittels Kommandozeilenbefehlen abgefragt werden.
+Der Status von vorhandenen Instanzen und Containern kann ebenfalls mittels Kommandozeilenbefehlen abgefragt werden.
 In Abbildung \ref{fig:zospt_help} werden die möglichen Kommandozeilenbefehle mittels des Befehls \glqq zospt -h\grqq{} in einem Kommandofenster angezeigt. 
-\begin{figure}[h]
+\begin{figure}[ht!]
 	\centering
 	\includegraphics[width=\textwidth]{figures/zospt_help_putty.png}
 	\caption{z/OSPT mögliche Kommandozeilenbefehle}
