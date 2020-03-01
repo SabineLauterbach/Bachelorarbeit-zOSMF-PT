@@ -1,5 +1,5 @@
 \chapter{Vorgehensweise}\label{ch:vorgehensweise}
-Für die Beantwortung der Forschungsfrage \glqq IIst es möglich, den Bereitstellungsprozess für z/OS Anwendung bei DATEV e.G. mit Hilfe des \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Tools an cloud native Prozesse anzunähern?\grqq{} werden zunächst die Vorteile des cloud native Prozesses bei der DATEV e.G. dargestellt.
+Für die Beantwortung der Forschungsfrage \glqq Ist es möglich, den Bereitstellungsprozess für z/OS Anwendung bei DATEV e.G. mit Hilfe des \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Tools an cloud native Prozesse anzunähern?\grqq{} werden zunächst die Vorteile des cloud native Prozesses bei der DATEV e.G. dargestellt.
 Um letztendlich eine mögliche Verbesserung des momentan in der DATEV e.G. etablierten Breitstellungsprozesses für die Middlewarekomponenten CICS, Db2 und IBM MQ bewerten zu können, wird dieser analysiert.
 
 Wie in Absatz \ref{sec:ziel} beschrieben, wird für die Beantwortung der Forschungsfragen eine Beispielanwendung, die als Laufzeitumgebung CICS, als Datenbank Db2 und als Message Lösung IBM MQ verwendet, benötigt.
@@ -11,8 +11,8 @@ Konkret verlangt dies die Implementierung eines Templates.
 Für die Entscheidung, ob z/OSPT oder z/OSMF zum Einsatz kommt, wurden die Vor- und Nachteile beider Lösungen gegenübergestellt.
 
 Im Folgenden wird speziell auf die Vorgehensweise bei der Implementierung des Templates eingegangen.\\
-Um die von allen Entwicklern bei DATEV e.G. verwendeten Subsysteme der Entwicklungsstage bei eventuell auftretenden Fehler in der neuen, automatisierten Bereitstellung nicht zu beeinflussen, wurden die ersten Schritte auf dem Testplex durchgeführt.
-Die Anwendung selbst kann auf dem Testplex nicht verprobt werden, da die notwendigen Testdaten auf Db2 dort nicht verfügbar sind.
+Um die von allen Entwicklern bei DATEV e.G. verwendeten Subsysteme der Entwicklungsstage bei eventuell auftretenden Fehlern in der neuen, automatisierten Bereitstellung nicht zu beeinflussen, wurden die ersten Schritte auf dem Testplex durchgeführt.
+Die Anwendung selbst kann auf dem Testplex nicht erprobt werden, da die notwendigen Testdaten auf Db2 dort nicht verfügbar sind.
 Deshalb wird dort vorerst nur die Provisionierung der benötigten Middleware untersucht.
 Damit wird das Ziel verfolgt, erste Erfahrungen mit \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} zu sammeln und ein Template zu provisionieren, das DATEV spezifische Middleware, also CICS, Db2 und IBM MQ Instanzen beinhaltet. 
 Da das CICS Subsystem als Laufzeitumgebung im Mittelpunkt der Subsysteme steht, werden zunächst folgende, von der IBM bei der Installation von z/OSMF mitgelierferten, CICS Templates untersucht:
@@ -42,10 +42,10 @@ Dabei handelt es sich um den Wechsel vom Testplex in die Entwicklungsstage.
 In der Entwicklungsstage sind alle Anwendungsdaten, die für Anwendungsttests notwendig sind, vorhanden.
 Somit kann hier die Integration der Beispielanwendung in die provisionierte Laufzeitumgebung sowie ein Testlauf stattfinden.
 
-Um ein Meinungsbild bezüglich des Einsatzen von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} bei DATEV e.G. zu bekommen, wurden mit Stakeholdern, also Mitarbeitern der Administratorenteams, Entwicklern und dem Technologiestrategieteam semi-strukturelle Interviews durchgeführt.
+Um ein Meinungsbild bezüglich des Einsatzes von \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} bei DATEV e.G. zu bekommen, wurden mit Stakeholdern, also Mitarbeitern der Administratorenteams, Entwicklern und dem Technologiestrategieteam semi-strukturelle Interviews durchgeführt.
 Aus den Administratorenteams und von den Entwicklern wurden jeweils zwei Vertreter und aus dem Technologiestrategieteam ein Vertreter befragt.
 Es handelt sich hier um Experten in ihrem Arbeitsbereich, es ist zu beachten, dass hier generell nur eine geringe Anzahl von Kollegen für Befragungen zur Verfügung steht.
-Es wurden semi-strukturelle Interviews gewählt um auf einzelne Antworten genauer eingehen zu können.
+Es wurden semi-strukturelle Interviews gewählt, um auf einzelne Antworten genauer eingehen zu können.
 Auf eine Transkription der Interviews wurde verzichtet, da nicht der genaue Verlauf der Interviews, sondern die Antworten auf die Fragen relevant sind.
 
 Die Interviews fanden in  Besprechungsräumen innerhalb eines DATEV e.G. Gebäudes statt und dauerten etwa dreißig bis vierzig Minuten.

@@ -1,5 +1,5 @@
 \chapter{Analyse}\label{ch:analyse}
-Im Folgendem wird der Einsatz von cloud native bei der DATEV e.G. analysiert.
+Im Folgenden wird der Einsatz von cloud native bei der DATEV e.G. analysiert.
 Im Vergleich dazu, wird der aktuelle Bereitstellungsprozess für die Laufzeitumgebung, dem dazugehörigen Datenbanksystem und einer Messaging Lösung erläutert.
 Anschließend erfolgt eine Beschreibung der Beispielanwendung \glqq DATEV-Rechnungsschreibung\grqq.
 Die dafür benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 1 aus der Abteilung, die für die DATEV-Rechnungsschreibung zuständig ist.
@@ -23,7 +23,7 @@ Ein Beispiel aus Entwicklersicht:\\
 Eine Kultur, die erlaubt Risiken einzugehen und aus Fehlern zu lernen, aber auch das Verständnis, dass Wiederholung und Übung Voraussetzung für einen guten Entwickler sind.
 Dabei ist ein hoher Grad an Vertrauen in das Team notwendig.
 
-Bei der DATEV e.G. wird dieser DevOps-Gedanke durch sogenannte \glqq Product-Teams\grqq umgesetzt.
+Bei der DATEV e.G. wird dieser DevOps-Gedanke durch sogenannte \glqq Product-Teams\grqq{} umgesetzt.
 In einem solchen Team kümmert man sich neben der eigentlichen Softwareentwicklung, Testmaßnahmen usw. auch um den Betrieb der Middleware, z.B. die im Cloud Native Umfeld üblichen noSQL Datenbanken wie Mongo oder PostgreSQL. 
 Dem ganzen Team wird viel Vertrauen gegeben und es soll weitestgehend autonom Software erstellen und betreiben können.
 Dadurch steigt die Effektivität des Teams.
@@ -55,7 +55,7 @@ Wie in Absatz \ref{sec:zosanw} beschrieben benötigt eine z/OS Anwendung zunäch
 Um eine lauffähige CICS-Instanz einzurichten, sind mehrere Schritte notwendig.
 Der komplette Prozess wird in Abbildung \ref{fig:aktcics} dargestellt.
 Wie zu sehen ist, ist der Initiator des Prozesses das Entwicklerteam.
-Zunächst wird dort während der Entwicklungsphase festgestellt, dass ein neue CICS-Instanz benötigt wird, z.B. um eine neue Fachlichkeit testen zu können. 
+Zunächst wird dort während der Entwicklungsphase festgestellt, dass ein neue CICS-Instanz benötigt wird, z.B. um eine neue Anforderung testen zu können. 
 Hier hilft das CICS Administratorenteam mittels Beratung.
 Während einer Beratungsphase, die via Telefon, Emails oder Terminen stattfindet, wird sichergestellt, ob wirklich eine neue CICS-Instanz notwendig ist oder ob nicht eine bereits bestehende Instanz genutzt werden kann, die dann aber meist wieder zwischen Anwendungen und Entwicklern geteilt wird.
 Falls eine neue CICS-Instanz benötigt wird, wird ein \Gls{racf} Eintrag für diese Instanz beantragt.
@@ -69,7 +69,7 @@ Um sicherzustellen, dass die CICS-Instanz in den täglichen Sicherungen enthalte
 \label{fig:aktcics}
 \end{figure}
 
-Nun kann mit dem eigentlichen Anlegen der CICS-Instanz begonnen werdem.
+Nun kann mit dem eigentlichen Anlegen der CICS-Instanz begonnen werden.
 Dabei müssen folgende Schritte manuell durchgeführt werden.
 Es werden nur die Schritte, die im Laufe dieser Arbeit durch \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} automatisiert werden, dargestellt.
 Es handelt sich um das Anlegen von:
@@ -91,7 +91,7 @@ Eine CSD Datei kann für mehrere CICS-Instanzen verwendet werden und besteht aus
 Ein Eintrag besteht aus einer Gruppe und einer Liste.
 Die Gruppe ist hierbei die Definition einer Systemressource und muss manuell angelegt werden.
 Bei der Liste handelt es sich um das System, welches diese Ressource benötigt.
-Dort ist unter anderem für jede CICS-Instanz hinterlegt, zu welchem Db2 Datenbankmanagementsystem und welchem MQ Queue Manager sich diese Instanz verbinden soll.
+Dort ist unter anderem für jede CICS-Instanz hinterlegt, mit welchem Db2 Datenbankmanagementsystem und welchem MQ Queue Manager sich diese Instanz verbinden soll.
 Somit können Transaktionen auf diese beiden Ressourcen zugreifen.
 
 \paragraph{Started Task Control-Job} ~\\
@@ -105,7 +105,7 @@ Anschließend können diese Standardwerte überschrieben werden.
 Zu diesen Parametern zählen unter anderem der eindeutige Name der CICS-Instanz, der Speicherort der dazugehörenden CSD und die Information, ob eine Verbindung zu einem Db2 Datenbankmanagementsystem und/oder zu einem Queue Manager hergestellt werden soll.
 
 Nach der Durchführung dieser Schritte wird das CICS gestartet und es steht dem Entwickler eine neue CICS-Instanz zur Verfügung.
-Der komplette Ablauf dauert, unter der Annahme, dass alle Beteiligten verfügbar sind, nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
+Der komplette Ablauf dauert, unter der Annahme, dass alle Beteiligten verfügbar sind, sie nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
 
 \subsection{Bereitstellungsprozess einer Db2 Datenbank}
 Wie in Abbildung \ref{fig:aktdb2} zu erkennen ist, ist der Bereitstellungsprozess einer neuen Db2 Datenbank mit vielen Aufgaben im Entwicklerteam verbunden.
@@ -116,7 +116,7 @@ Wie in Abbildung \ref{fig:aktdb2} zu erkennen ist, ist der Bereitstellungsprozes
 \label{fig:aktdb2}
 \end{figure}
 Zunächst müssen sogenannte Projektinformationen, unter anderem Daten der Voruntersuchung, vom Entwicklerteam bereitgestellt werden.
-Das Projektkürzel\footnote{eindeutige Kennung von DATEV Projekten}, der Datenbank- und Projektname und die Projektbezeichnung müssen mit den involvierten Abteilungen besprochen werden.
+Das Projektkürzel\footnote{eindeutige Kennung von DATEV Projekten}, der Datenbank- und Projektname sowie die Projektbezeichnung müssen mit den involvierten Abteilungen besprochen werden.
 Über den sogenannten \glqq Datenbankänderungsantrag\grqq{} wird ein Genehmigungsprozess angestoßen.
 Wenn alle Genehmigungen erteilt wurden, kann ein Dateneigentümer festgelegt werden.
 Anschließend muss die Datenbank mittels eines Datenbankmodells vom Entwicklerteam beschrieben werden und eine Usergruppe, die im späteren Verlauf die Datenbankzugriffsrechte benötigt, beantragt und angelegt werden.
@@ -125,7 +125,7 @@ Die eigentliche manuelle Erstellung der Datenbank wird mittels des Datenbankmode
 Die Zugriffsrechte für die zuvor angeforderte Usergruppe auf die neue Datenbank werden beantragt.
 Schließlich steht dem Entwicklerteam die neue Db2 Datenbank zur Verfügung.
 Wird die Db2 Datenbank in Verbindung mit einem CICS verwendet, wie im Fallbeispiel dieser Arbeit, der DATEV-Rechnungsschreibung, so muss der entsprechende Eintrag in die CSD Datei manuell aufgenommen werden. 
-Der komplette Ablauf dauert, unter der Annahme, dass alle Beteiligten verfügbar sind, nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
+Der komplette Ablauf dauert, unter der Annahme, dass alle Beteiligten verfügbar sind, sie nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
 
 \subsection{Bereitstellungsprozess einer IBM MQ Queue}
 Auch bei dem Bereitstellungsprozess, siehe Abbildung \ref{fig:aktmq}, einer IBM MQ Queue ist das Entwicklerteam der Initiator.
@@ -206,11 +206,11 @@ Somit kann ein umfangreicher Bereitstellungsmechanismus untersucht werden.
 Bei dem Gesamtablauf handelt es sich um einen Batch-Ablauf auf dem Großrechner der DATEV e.G.
 Dieser setzt sich aus folgenden Teilen zusammen:
 \begin{itemize}
-\item Sammeln von Berechnungssätze
+\item Sammeln von Berechnungssätzen
 \item Tägliche Bewertung
 \item Rechnungsaufbereitung
 \end{itemize}
-Für die Beantwortung der Forschungsfragen ist nur ein Teil der \glqq Tägliche Bewertung\grqq relevant, die Preisermittlung.
+Für die Beantwortung der Forschungsfragen ist nur ein Teil der \glqq Tägliche Bewertung\grqq{} relevant, die Preisermittlung.
 
 \subsection{Tägliche Bewertung}\label{sssec:täglbew}
 Dieser Ablauf läuft einmal täglich von Montag bis Freitag und ist für die Preisermittlung und Kundenzuordnung zuständig.
