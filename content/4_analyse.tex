@@ -1,8 +1,8 @@
 \chapter{Analyse}\label{ch:analyse}
 Im Folgenden wird der Einsatz von cloud native bei der DATEV e.G. analysiert.
-Im Vergleich dazu, wird der aktuelle Bereitstellungsprozess für die Laufzeitumgebung, dem dazugehörigen Datenbanksystem und einer Messaging Lösung erläutert.
+Im Vergleich dazu wird der aktuelle Bereitstellungsprozess für die Laufzeitumgebung, dem dazugehörigen Datenbanksystem und einer Messaging Lösung erläutert.
 Anschließend erfolgt eine Beschreibung der Beispielanwendung \glqq DATEV-Rechnungsschreibung\grqq.
-Die dafür benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 1 aus der Abteilung, die für die DATEV-Rechnungsschreibung zuständig ist.
+Die dafür benötigten Informationen stammen aus Gesprächen mit Mitarbeiter 1 (Kommentar: "Mitarbeiter 1" kennt man nur aus den Fragebögen, oder? D.h. entwder würde ich das Interview verlinken, oder nur "einem Entwickler" aus der Abteilung, die für die DATEV-Rechnungsschreibung zuständig ist.
 Es wird vor allem der technische Aspekt beleuchtet.
 
 \section{Analyse von cloud native bei DATEV e.G.}\label{sec:analysecloud}
@@ -17,7 +17,7 @@ Dabei helfen unter anderem Continuous Integration\footnote{Siehe Absatz \ref{sec
 Ziel dabei ist, möglichst schnell Fehler zu erkennen und diese zu beheben oder gar zu vermeiden.
 Zur Erreichung dieses Ziels gehört unter anderem das Abschaffen der sog. \glqq Schubladendenkweise\grqq.
 Ein Beispiel aus Entwicklersicht:\\
-\glqq Meine Anwendung läuft nicht... Ach da gibt es Probleme mit dem Webserver, dass werden die Kollegen der Administration schon lösen\grqq.
+\glqq Meine Anwendung läuft nicht... Ach da gibt es Probleme mit dem Webserver, das werden die Kollegen der Administration schon lösen\grqq.
 
 \paragraph{\glqq The Third Way\grqq} betrachtet weniger den Prozess an sich, sondern eher das Schaffen einer Kultur.
 Eine Kultur, die erlaubt Risiken einzugehen und aus Fehlern zu lernen, aber auch das Verständnis, dass Wiederholung und Übung Voraussetzung für einen guten Entwickler sind.
@@ -37,7 +37,7 @@ Dadurch kann sichergestellt werden, dass der Code den gewünschten Qualitätskri
 Durch Continuous Delivery und Continuous Deployment kommen diese Änderungen im Idealfall voll automatisiert beim Kunden an.
 Auch dies führt  zu einer Effizienzsteigerung.
 
-Für die Bereitstellung der benötigten Laufzeitumgebung kommt bei DATEV e.G. die Cloud Foundry Distribution von \glqq pivotal\grqq{} als PaaS Plattform zum Einsatz.
+Für die Bereitstellung der benötigten Laufzeitumgebung kommt bei DATEV e.G. die Cloud Foundry Distribution der Firma \glqq pivotal\grqq{} als PaaS Plattform zum Einsatz.
 Durch den darin zur Verfügung gestellten \glqq Marketplace\grqq{} können Laufzeitumgebungen effizient \glqq auf Knopfdruck\grqq generiert werden.
 Mittels des Kommandozeileninterfaces kann die Bereitstellung auch in eine CI/CD-Pipeline integriert werden.
 So werden z.B. für jeden Entwickler isolierte Testumgebungen geschaffen.
@@ -48,7 +48,7 @@ Die \glqq CICS Administration\grqq{} kümmert sich um alles rund um das CICS Sub
 Die \glqq Db2 Administration\grqq{} stellt Datenbanken und Tabellen auf Anfrage der Entwickler bereit.
 Die \glqq IBM MQ Administration\grqq{} verwaltet die IBM MQ Ressourcen.
 Um die Bereiche, an denen das \glqq IBM Cloud Provisioning and Management for z/OS\grqq-Tool helfen kann, identifizieren zu können, wird im Folgenden der aktuell etablierte Prozess für z/OS Anwendungen beschrieben.
-Die in diesem Absatz genannten Informationen stammen aus Gesprächen mit Mitarbeitern aus den jeweiligen Administratorenteams.
+Die in diesem Absatz genannten Informationen zu den Prozessen und Einschätzungen, bzgl. Zeitaufwand stammen aus Gesprächen mit Mitarbeitern aus den jeweiligen Administratorenteams.
 Wie in Absatz \ref{sec:zosanw} beschrieben benötigt eine z/OS Anwendung zunächst eine Laufzeitumgebung, im Fall dieser Arbeit handelt es sich um CICS.
 
 \subsection{Bereitstellung einer CICS Instanz}\label{ssec:aktcics}
@@ -83,7 +83,7 @@ Es handelt sich um das Anlegen von:
 \paragraph{CICS spezifische Dateien}\label{sssec:speziDat} ~\\
 Zunächst müssen CICS spezifische Dateien im z/OS angelegt werden.
 Im Fall des dieser Arbeit zugrunde liegenden Beispiels handelt es sich um siebzehn verschiedene VSAM Dateien.
-Diese Dateien benötigt die CICS-Instanz um zum Beispiel Systemfehler zu protokollieren oder den Debugger aktivieren zu können.
+Diese Dateien benötigt die CICS-Instanz um zum Beispiel Systemfehler zu protokollieren oder den Debugger aktivieren zu können. 
 
 \paragraph{\glqq CICS System Definition\grqq} ~\\
 In der Datei \glqq CICS System Definition\grqq, kurz CSD, muss jede Ressource, die dem System zur Verfügung stehen soll, definiert werden.
@@ -108,7 +108,7 @@ Nach der Durchführung dieser Schritte wird das CICS gestartet und es steht dem 
 Der komplette Ablauf dauert, unter der Annahme, dass alle Beteiligten verfügbar sind, sie nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
 
 \subsection{Bereitstellungsprozess einer Db2 Datenbank}
-Wie in Abbildung \ref{fig:aktdb2} zu erkennen ist, ist der Bereitstellungsprozess einer neuen Db2 Datenbank mit vielen Aufgaben im Entwicklerteam verbunden.
+Wie in Abbildung \ref{fig:aktdb2} zu erkennen ist, ist der Bereitstellungsprozess einer neuen Db2 Datenbank mit vielen Vorarbeiten im Entwicklerteam verbunden.
 \begin{figure}[ht!]
 \centering
 \includegraphics[width=\paperwidth,angle=90]{figures/swimlaneDb2.pdf}
@@ -140,7 +140,7 @@ Auch bei dem Bereitstellungsprozess, siehe Abbildung \ref{fig:aktmq}, einer IBM 
 Die Grundlage diese Prozesses ist ein Antrag auf Erstellung einer neuen IBM MQ Queue.
 Zuvor findet eine Beratung via Telefon, Email oder Terminen statt.
 Die Queues werden anschließend manuell eingerichtet und stehen dem Entwicklerteam zur Verfügung.
-Wird die Queue in Verbindung mit einem CICS verwendet, so muss der Queue Manger auf dem die Queue angelegt wurde dem CICS mittels einem entsprechenden Eintrag in die CSD Datei mitgeteilt werden.
+Wird die Queue in Verbindung mit einem CICS verwendet, so muss der Queue Manger auf dem die Queue angelegt wurde dem CICS mittels eines entsprechenden Eintrags in der CSD Datei mitgeteilt werden.
 Trotz des scheinbar schmalen Prozesses dauert der Ablauf unter der Annahme, dass alle Beteiligten verfügbar sind, sie nur diese Anforderung umsetzen müssen und für die Beratung ein Arbeitstag veranschlagt wird, circa zwei Arbeitstage.
 
 \subsection{Zusammenfassung aktueller Bereitstellungsprozess}\label{ssec:sumaktbereit}
@@ -159,12 +159,14 @@ Der Start des gesamten Prozesses findet meist auf \glqq Zuruf\grqq{} statt.
 So existiert für die erste Kontaktaufnahme kein Formular, keine Automation oder ähnliches.
 Es wird auf E-Mail, Telefon oder mittels Terminen zurückgegriffen.
 
-Wird jetzt der Vergleich zu dem Bereitstellungsprozess im cloud native-Umfeld\footnote{Siehe Absatz \ref{sec:analysecloud}} in folgenden Punkten gezogen, so steht dem automatisierten und dadurch effizienten cloud native Prozess, ein durch viele Absprachen langsamer und fehleranfälliger Prozess auf z/OS gegenüber.
+Wird jetzt der Vergleich zu dem Bereitstellungsprozess im cloud native-Umfeld\footnote{Siehe Absatz \ref{sec:analysecloud}} in folgenden Punkten gezogen, so steht dem automatisierten und dadurch effizienten cloud native Prozess, ein durch viele Absprachen langsamer und fehleranfälliger Prozess auf z/OS gegenüber. 
+Das betrifft insbesondere die Bereiche
 
 \begin{itemize}
 \item Produktautonomie
-\item Deployment
+\item Entwicklunsg-Deployment
 \item Architektur
+\item Isolation
 \end{itemize}
 
 \paragraph{Produktautonomie}~\\
@@ -172,30 +174,33 @@ Die Autonomie eines Product-Teams ist hier nicht gegeben, die Administratorentea
 Daran wird sich auch durch automatisierte Provisionierung in Zukunft nichts ändern, da hier hohes Spezialistenwissen benötigt wird, das nicht von jedem Product-Team bereitgestellt werden kann. 
 Dazu kommt, dass die Provisionierung im Rahmen dieser Arbeit auch nur die Bereitstellung von Entwicklungs-Instanzen der Middleware Systeme betrachtet. 
 Die Administratorenteams sind aber insbesondere für die produktiven Instanzen im Betrieb verantwortlich, die nach wie vor von Anwendungen geteilt werden.  
-D.h. der Cloud-Aspekt des automatischen Deployments einer Anwendung inklusive Runtime zwischen Stages wird also nicht umgesetzt.
+Der Cloud-Aspekt des automatischen Deployments einer Anwendung inklusive Runtime zwischen Stages wird hier noch nicht umgesetzt.
 
-\paragraph{Deployment}~\\
-Da für das Deployment einer z/OS CICS Anwendung, wie in Absatz \ref{sssec:cicsanwd} beschrieben, Bibliotheken zum Einsatz kommen, muss beim Testen einer Anwendung immer geprüft werden, ob der aktuellste Stand der Anwendung in dieser Bibliothek abgelegt ist, ob die Bibliothek überhaupt der CICS Instanz zur Verfügung steht und ob nicht eine andere Bibliothek mit anderem Stand von der CICS Instanz angezogen wird.
-Diese Probleme verschlechtern sich, wenn an der gleichen Anwendung mehrere Mitarbeiter entwickeln, so ist viel Absprache notwendig, um beispielsweise nicht den Stand eines Kollegen zu überschreiben.
+\paragraph{Entwicklungsdeployment}~\\
+Da für das Deployment in die bislang geteilte Entwicklungsumgebung (Kommentar: ist Deployment hier der richtige Begriff? Darunter verstehe ich eher die Übergabe in Produktion. Vlt. eher der Begriff "Entwicklungsdeployment) einer z/OS CICS Anwendung, wie in Absatz \ref{sssec:cicsanwd} beschrieben, auch geteilte Programm-Bibliotheken zum Einsatz kommen, muss beim Testen einer Anwendung immer geprüft werden, ob tatsächlich der von dem Entwickler zu testende Stand der Anwendung in dieser Bibliothek abgelegt ist, ob die Bibliothek der CICS Instanz zur Verfügung steht und ob nicht eine andere Bibliothek mit anderem Stand von der CICS Instanz angezogen wird.
+Diese Probleme verschärfen sich, wenn an der gleichen Anwendung mehrere Mitarbeiter parallel entwickeln. 
+Lt. den Erfahrungen der Entwickler sind hier viele Absprache notwendig, um beispielsweise nicht den Stand eines Kollegen zu überschreiben.
 
 \paragraph{Architektur}~\\
 Neben den Problemen im Bereitstellungsprozess ist die grundlegende Architektur einer z/OS Anwendung zu betrachten.
 Im Vergleich zur \glqq Microservices\grqq-Architektur, die im cloud native Umfeld häufig zum Einsatz kommt\footnote{Siehe Absatz \ref{sec:cloudnative}}, sind klassische z/OS Anwendungen monolithisch aufgebaut.
-Insbesondere aus Performancegründen, haben sich über die Jahre Abhängigkeiten und Verzahnungen zwischen einzelnen Anwendungen gebildet.
+Insbesondere aus Performancegründen haben sich über die Jahre Abhängigkeiten und Verzahnungen zwischen einzelnen Anwendungen, auch Fachdomänen-übergreifend, gebildet.
 Diese starke Koppelung erhöht die Komplexität und erschwert das Testen dieser Anwendungen.
 
-Wird der Architekturaspekt der geteilten Subsystem Ressourcen betrachtet, kristallisiert sich ein weiteres Problem heraus.
-Es ist möglich, dass eine Anwendung eine komplette CICS Instanz zum Absturz bringt.
-Ist dies der Fall sind auf Grund einer Anwendung alle anderen Anwendungen dieser CICS Instanz nicht mehr verfügbar.
-Mit Hilfe von isolierten Testumgebungen kann dieser Problem gelöst werden.
+\paragraph{Isolation}~\\
 
-Nach diesem Vergleich sieht die DATEV e.G. bei dem hier untersuchten automatisierten Prozess vor allem bei der Entwicklungseffizienz einen Vorteil.
+Wird der Architekturaspekt der geteilten Subsystem Ressourcen betrachtet, kristallisiert sich ein weiteres Problem heraus.
+Es ist möglich, dass eine Anwendung durch einen Fehler (beispielsweise Speicherüberschreibung) eine komplette CICS Instanz zum Absturz bringt.
+Ist dies der Fall, sind auf Grund einer Anwendung alle anderen Anwendungen dieser CICS Instanz nicht mehr verfügbar, bzw können nicht mehr getestet werden.
+Mit Hilfe von isolierten Testumgebungen, d.h. anwendungsspezifisch und fallabhängig provisionierten Laufzeitumgebungen kann dieser Problem gelöst werden.
+
+Nach diesem Vergleich sieht die DATEV e.G. bei dem hier zu untersuchenden  automatisierten Prozess vor allem bzgl. Entwicklungseffizienz einen Vorteil.
 Dabei wird der Fokus auf die Effizienz bei der Bereitstellung isolierter Testumgebungen, ohne Wartezeit und mit möglichst wenig manueller Interaktion gelegt.
-Dadurch verspricht sich die DATEV e.G. kürzere Entwicklungszyklen und weniger Fehleranfälligkeit durch zu hohen Abstimmungsaufwand.
+Dadurch verspricht sich die DATEV e.G. kürzere Entwicklungszyklen und weniger Fehleranfälligkeit durch hohen Abstimmungsaufwand.
 
 
 Hierzu wird in dieser Arbeit das Tool \glqq IBM Cloud Provisioning and Management for z/OS\grqq{} für die automatisierte Bereitstellung von Laufzeitumgebungen für die Entwicklungsstage untersucht.
-Als Beispielanwendung dient ein Teil der z/OS Anwendung \glqq DATEV-Rechnungsschreibung\grqq.
+Als Beispielanwendung dient ein Bereich der z/OS Anwendung \glqq DATEV-Rechnungsschreibung\grqq.
 
 \section{DATEV-Rechnungsschreibung}\label{rechBesch}
 Für diese Arbeit wurde die DATEV-Rechnungsschreibung als Beispielanwendung herangezogen, weil sie folgenden Anforderungen entspricht.
@@ -210,21 +215,21 @@ Dieser setzt sich aus folgenden Teilen zusammen:
 \item Tägliche Bewertung
 \item Rechnungsaufbereitung
 \end{itemize}
-Für die Beantwortung der Forschungsfragen ist nur ein Teil der \glqq Tägliche Bewertung\grqq{} relevant, die Preisermittlung.
+Für die Beantwortung der Forschungsfragen ist nur der Teil der \glqq Tägliche Bewertung\grqq{} relevant, die Preisermittlung.
 
 \subsection{Tägliche Bewertung}\label{sssec:täglbew}
 Dieser Ablauf läuft einmal täglich von Montag bis Freitag und ist für die Preisermittlung und Kundenzuordnung zuständig.
 Zur Realisierung wurden die Programmiersprachen Assembler, COBOL und Java genutzt.
 Am Ende dieses Ablaufes steht die ARUBA\footnote{Abrechnungs- und Umsatz-Basis}-Db2-Datenbank.
 Dort werden die Berechnungsdaten der letzten 36 Monate aufbewahrt.
-Dabei handelt es ich um insgesamt circa 3,8 Milliarden Datensätze von einer Gesamtgröße von circa 400 GB mit Indizes.
-Diese Datensätze beinhalten alle Informationen für die endgültige Erzeugung der Rechnungen.
+Dabei handelt es ich um insgesamt circa 3,8 Milliarden Datensätze mit einer Gesamtgröße von circa 400 GB mit Indizes.
+Diese Datensätze beinhalten alle Informationen für die endgültige Erzeugung der Rechnungen der DATEV e.G.
 
 \subsection{Preisermittlung}\label{ssec:preis}
-Die Preisermittlung ist für die Berechnung der Preise mit den dazugehörigen kundenindividuellen Abhängigkeiten, beispielsweise Rabatte, zuständig.
-Die Eingabe beläuft sich an Lasttagen auf bis zu 180.000 Geschäftspartner.
+Die Preisermittlung ist für die Berechnung der Preise mit den dazugehörigen kundenindividuellen Abhängigkeiten, beispielsweise Rabatten, zuständig.
+Der Inpute kommt an Lasttagen von bis zu 180.000 Geschäftspartnern.
 Im DATEV e.G. Umfeld ist ein Geschäftspartner entweder eine Kanzlei oder ein einzelner Mandant.
-Aufgrund dieser Last wird die Berechnung in CICS durchgeführt und in folgende zwei Teile zerlegt:
+Aufgrund dieser Last wird die Berechnung auf dem IBM Mainframe der DATEV e.G. in CICS durchgeführt und ist in folgende zwei Bereiche aufgeteilt:
 \begin{itemize}
 \item Bereitstellen der Preisinformationen
 \item Berechnung der Preise
@@ -238,7 +243,7 @@ Diese Informationen werden dann in einem sogenannten \glqq SHARED GETMAIN\grqq-B
 Dabei handelt es sich im Prinzip um einen Hauptspeicherbereich, der dem CICS Subsystem zur Verfügung steht.
 Die Adresse dieses Bereiches wird den Transaktionen zur Verfügung gestellt.
 Somit greifen die einzelnen Transaktionen nicht mehr direkt auf die Datenbank zu, sondern stattdessen auf den schnelleren Hauptspeicher.
-Diese Vorarbeit ist notwendig, da die notwendige Performance aufgrund von bis zu 60 Millionen Datenbankzugriffen nicht erreicht werden würde.
+Diese Vorarbeit ist notwendig, da die notwendige Performance aufgrund von bis zu 60 Millionen Datenbankzugriffen sonst nicht erreicht werden würde.
 
 \paragraph{Berechnung der Preise}~\\
 Um die Berechnungsdaten der 180.000 Geschäftspartner an CICS-Instanzen zu übertragen, stehen dem System weitere Queues zur Verfügung.
@@ -251,7 +256,7 @@ In den restlichen drei Queues sind die Ergebnisse der Preisermittlung gespeicher
 Die Ergebnisse stehen somit dem Batch-Ablauf zur Weiterverarbeitung zur Verfügung.
 Für jede der vier Queues existieren jeweils 100 vorgefertigte Namen.
 Somit können auch maximal nur 100 Aufträge gleichzeitig auf Weiterverarbeitung warten.
-Falls dieses Limit erreicht ist, wartet der Batch-Ablauf so lange, bis einer der Aufträge fertig gestellt wird.
+Falls dieses Limit erreicht ist, wartet der Batch-Ablauf so lange, bis einer der Aufträge fertig gestellt wird. (Kommentar: Meinst Du der Breich 257-259 ist wirklich wichtig? klint crude und ist doch eher nicht BA-relevant, oder?)
 Sobald ein Auftrag in die allgemeinen Auftragsqueue geschrieben wird, wird eine CICS-Transaktion gestartet.
 Diese führt die Preisermittlung durch und schreibt das Ergebnis auf die dazugehörigen Queues.
 Ist dies geschehen, stehen die Queues wieder für einen neuen Auftrag zur Verfügung.
