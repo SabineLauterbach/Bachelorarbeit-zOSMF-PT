@@ -331,8 +331,8 @@ Dadurch ändert sich die Gruppe in Zeile acht im Codeabschnitt \ref{code:addCSD}
 Außerdem wurden sowohl in der Provisionierungs- als auch in der Deprovisionierungsdatei die Datenbanksteps auskommentiert, da diese für den weiteren Test in der Entwicklungs-Stage nicht mehr zum Einsatz kommen.
 
 \subsection{IBM MQ Anpassung}\label{ssec:mqentw}
-Da für die DATEV Rechnungsschreibung, wie im Absatz \ref{ssec:preis} beschrieben, sehr viele gleichartige Queues benötigt werden, wurde für die Erstellung dieser von den IBM MQ Administratorenteam ein \Gls{rexx} Skript angefertigt.
-Dies geschah unabhängig dieser Arbeit zum Zeitpunkt der Einführung des aktuellen DATEV Rechnungsschreibungsprozesses.
+Da für die DATEV-Rechnungsschreibung, wie im Absatz \ref{ssec:preis} beschrieben, sehr viele gleichartige Queues benötigt werden, wurde für die Erstellung dieser von den IBM MQ Administratorenteam ein \Gls{rexx} Skript angefertigt.
+Dies geschah unabhängig dieser Arbeit zum Zeitpunkt der Einführung des aktuellen DATEV-Rechnungsschreibungsprozesses.
 Dieses Skript steht dieser Arbeit zur Verfügung.
 Für die Provisionierung IBM MQ Queues waren folgende Arbeitsschritte notwendig.
 
@@ -383,8 +383,8 @@ Für jeden IBM MQ bezogenen Job wurde die Jobkarte angepasst und der technische 
 
 \subsection{Testablauf}
 Für die Prüfung der Funktionsfähigkeit der so generierten Laufzeitumgebung steht dieser Arbeit ein Testablauf zur Verfügung.
-Dieser wurde von den Mitarbeitern der DATEV Rechnungsschreibung bereitgestellt.
-Dabei handelt es sich um einen Teilablauf des gesamten DATEV Rechnungsschreibungsprozesses.
+Dieser wurde von den Mitarbeitern der DATEV-Rechnungsschreibung bereitgestellt.
+Dabei handelt es sich um einen Teilablauf des gesamten DATEV-Rechnungsschreibungsprozesses.
 In diesem Ablauf wird nur die Preisermittlung, die die Laufzeitumgebung CICS benötigt, getestet.
 Als Eingabe dienen vordefinierte Dateien mit Testdaten, die Ergebnisse werden zur Prüfung ebenfalls in Dateien geschrieben.
 Der Ablauf liegt in Form von zwei Jobs vor.
@@ -393,7 +393,7 @@ Dies ist notwendig, da der erste Job die Verarbeitung im CICS über die Queues s
 
 Um den Ablauf in der provisionierten Laufzeitumgebung zu starten, musste lediglich der verwendete Queue Manager angepasst werden.
 Über die Queues und das verwendete Triggering wird die Transaktion im provisionierten CICS gestartet.
-Um das Ergebnis der Anwendung zu prüfen, wurde dies mit dem gleichen Testablauf und den gleichen Eingabedateien in der aktuell existierenden Testumgebung der DATEV e.G. Rechnungsschreibung durchgeführt.
+Um das Ergebnis der Anwendung zu prüfen, wurde dies mit dem gleichen Testablauf und den gleichen Eingabedateien in der aktuell existierenden Testumgebung der DATEV-Rechnungsschreibung durchgeführt.
 Bei einem anschließenden Vergleich der Ausgabedateien beider Läufe waren keine Abweichungen festzustellen und der Test wird somit als erfolgreich bewertet.
 
 \section{Bereitstellungsprozess aktuelles Template}\label{sec:akttemp}
@@ -462,7 +462,7 @@ Dies ist auch per Mausklick zu lösen.
 
 \section{Fazit Realisierung}
 Am Ende der Realisierung steht ein funktionsfähiges Template.
-Dieses Template provisioniert ein für die Rechnungsschreibung individualisiertes CICS und die benötigten IBM MQ Queues. 
+Dieses Template provisioniert ein für die DATEV-Rechnungsschreibung individualisiertes CICS und die benötigten IBM MQ Queues. 
 Wie in Absatz \ref{ssec:db2entw} beschrieben, wurde die Provisionierung einer spezifischen Db2 Datenbank wegen hoher Komplexität für diese Arbeit außen vorgelassen
 Auf dem Testplex wurde bewiesen, dass die Provisionierung einer Datenbank möglich ist.
 Die Provisionierung der anwendungsspezifischen Db2-Tabellen wäre mit hohem einmaligen Arbeitsaufwand ebenfalls möglich.
