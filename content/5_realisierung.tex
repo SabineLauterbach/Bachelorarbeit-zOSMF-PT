@@ -139,13 +139,13 @@ Um dieses Template an die DATEV Umgebung anzupassen und letztendlich eine \glqq 
 \begin{itemize}
 \item Analyse des bestehenden Templates und der darauffolgenden Überarbeitung 
 \item Umgang und Anpassung der CSD Datei
-\item Anpassung der Jobs und Skripte mit Schwerpunkt auf der \glqq createCICS.jcl\grqq-Datei.
+\item Anpassung der Jobs und Skripte mit Schwerpunkt auf der \glqq createCICS.jcl\grqq-JCL-Datei\footnote{Quellcode siehe Anhang \ref{app:createcics}}.
 \end{itemize}
 \end{samepage}
 
 Die Analyse ergab, dass das mitgelieferte \glqq cics\_54\grqq-Template mit insgesamt 76 verwendeten Dateien sehr komplex und umfangreich ist.
 Es zählen alle Dateien, die direkt mit dem Template in Verbindung stehen.
-Im Zentrum des Templates steht die Workflow Definitionsdatei \glqq provision.xml \grqq{} mit circa 583 Zeilen Code.
+Im Zentrum des Templates steht die Workflow Definitionsdatei \glqq provision.xml\grqq{} mit circa 583 Zeilen Code.
 In dieser sind alle Steps, die bei einer Provisionierung durchgeführt werden, definiert.
 Das Template beinhaltet nicht nur die Möglichkeit, CICS Instanzen mit unterschiedlichen Konfigurationen zu provisionieren, sondern auch, festzulegen, ob dies mit Skripten oder mit der REST-API geschieht.
 
@@ -189,11 +189,11 @@ Die Reihenfolge ist relevant, da sie der Initialisierungsreihenfolge beim Startv
 Diese beiden Jobs wurde jeweils als neuer Workflowdefinitionfile-Step in den z/OSMF Workflow eingebunden.
 
 \begin{minipage}{\linewidth}
-\lstinputlisting[caption={Hinzufügen weiterer CSD Gruppen zur Liste der provisionierten CICS-Instanz mittels eines Jobs},captionpos=b,label={code:addCSD}]{listings/initaddCSDalt.jcl}
+\lstinputlisting[caption={Hinzufügen weiterer CSD Gruppen zur Liste der provisionierten CICS-Instanz mittels des Jobs \glqq InitAdditionalCSD.jcl\grqq},captionpos=b,label={code:addCSD}]{listings/initaddCSDalt.jcl}
 \end{minipage}
 
 Der abschließende Schritt zur Bereitstellung einer CICS Instanz ist das Erzeugen des STC Jobs.
-Die Definition bzw. das Script zur Erzeugung dieses Jobs ist in der \glqq createCICS.jcl\grqq-Datei zu finden.
+Die Definition bzw. das Script zur Erzeugung dieses Jobs ist in der \glqq createCICS.jcl\grqq-JCL-Datei zu finden.
 Im \glqq cics\_54\grqq-Template beinhaltet diese ein Makro für die Validierung der SIT Parameter.
 Zusätzlich werden alle aus der Datei für die Eingabevariablen benötigten Variablenwerte in temporäre Zwischenvariablen eingefügt.
 Danach folgt die Definition des Jobs, diese setzt sich aus folgenden Hauptbestandteilen zusammen:
@@ -215,7 +215,7 @@ Nach und nach wurde damit die für die DATEV e.G. spezifische CICS Provisionieru
 Damit wurde die vorher statische DATEV e.G. Standard JCL für das Erstellen von CICS Instanzen durch die Verwendung von Template  Variablen flexibilisiert.
 
 \begin{minipage}{\linewidth}
-\lstinputlisting[caption={Setzen der SIT Parameter durch Auslesen der \glqq DFH\_REGION\_SITPARAMS\grqq{} Variablen. (Zeile 379 bis 401 aus \glqq createCICS.jcl\grqq, siehe Anhang \ref{app:createcics})},captionpos=b,label={code:sitparams},firstline=379, lastline=401]{listings/CreateCICS.jcl}
+\lstinputlisting[caption={Setzen der SIT Parameter durch Auslesen der \glqq DFH\_REGION\_SITPARAMS\grqq{} Variablen. (Zeile 379 bis 401 aus der \glqq createCICS.jcl\grqq-JCL-Datei, siehe Anhang \ref{app:createcics})},captionpos=b,label={code:sitparams},firstline=379, lastline=401]{listings/CreateCICS.jcl}
 \end{minipage}
 
 Es wurden nur die wirklich benötigten SIT Parameter aufgenommen.
@@ -252,7 +252,7 @@ Die zwei notwendigen Steps wurden erzeugt und in den Workflow eingebunden.
 
 Die API ist nur dazu fähig, Datenbanken auf dem DB0C Sandbox Datenbankmanagementsystem\footnote{Siehe Absatz \ref{sssec:db2}} zu erzeugen.
 Um die Datenbank aus der CICS-Instanz heraus nutzen zu können, muss dem CICS dieses Datenbanksystem mitgeteilt werden.
-Hierfür ist, wie in Abbildung \ref{code:addCSD} in Zeile acht bereits zu sehen ist, das Hinzufügen einer weiteren CSD Gruppe notwendig, sowie die Aufnahme weitere Bibliotheken in der \glqq createCICS.jcl\grqq.
+Hierfür ist, wie in Abbildung \ref{code:addCSD} in Zeile acht bereits zu sehen ist, das Hinzufügen einer weiteren CSD Gruppe notwendig, sowie die Aufnahme weitere Bibliotheken in die \glqq createCICS.jcl\grqq-JCL-Datei.
 Dieser Aufruf wurde mittels neuer Variablen im Template möglichst dynamisch gestaltet und diese Variablen mussten in dem Variableinputfile gesetzt werden.
 
 \subsubsection{Bereitstellung IBM MQ}\label{sssec:mqtplx}
@@ -279,7 +279,7 @@ Der Job für das Löschen der Queues ist analog aufgebaut.
 Ähnlich wie in Absatz \ref{sssec:db2tpl} für die Datenbank-Provisionierung beschrieben, muss der CSD Datei eine weitere Gruppe für den Queuemanager angegeben werden.
 Zu sehen in Abbildung \ref{code:addCSD} in Zeile 11.
 Dadurch hat eine Anwendung in dieser CICS-Instanz Zugriff auf alle Queues, die sich innerhalb dieses Managers befinden.
-Des Weiteren ist die Aufnahme weiterer IBM MQ-System-Bibliotheken in der \glqq createCICS.jcl\grqq{} notwendig.
+Des Weiteren ist die Aufnahme weiterer IBM MQ-System-Bibliotheken in der \glqq createCICS.jcl\grqq-JCL-Datei notwendig.
 
 \section{Entwicklungsstage}
 Innerhalb der Entwicklungsstage sind die Sicherheits- und Rechtevorschriften schärfer als auf dem Testplex.
@@ -295,13 +295,13 @@ Bei der Übertragung des Templates vom Testplex in die Entwicklungsstage waren A
 
 \subsection{CICS Anpassung}\label{ssec:cicsentw}
 Damit der CICS spezifische technische User zum Einsatz kommt, musste der \glqq Job\grqq{} Baustein jeder JCL in jedem Step modifiziert werden.
-Dafür bietet z/OSMF die Möglichkeit, beim Zuweisen des \glqq Tenants\grqq{} eine Standard Jobkarte\footnote{Beschrieben im Glossar Eintrag \Gls{Batch-Job}}, die vor jedem Job des Templates eingefügt wird, zu hinterlegen.
+Dafür bietet z/OSMF die Möglichkeit, beim Zuweisen des Tenants eine Standard Jobkarte\footnote{Beschrieben im Glossar Eintrag \Gls{Batch-Job}}, die vor jedem Job des Templates eingefügt wird, zu hinterlegen.
 Die CICS spezifischen Dateien können von der täglichen Datensicherung der Entwicklungsstage ausgeschlossen werden, da diese bei der Deprovisionierung gelöscht werden.
 Um dies zu gewährleisten, musste der Messageclass Parameter mit dem Wert  \glqq NONE\grqq{} angegeben werden.
 
 Als Vorlage für die spezifische CSD Datei, die im Template genutzt wird, wird die Standard Entwicklunsgstage CSD genutzt.
 In der Entwicklungsstage kommen im Vergleich zum Testplex andere Db2 und IBM MQ Bibliotheken zum Einsatz.
-Dahingehend wurde die \glqq createCICS.jcl\grqq-Datei angepasst.\footnote{Code siehe Anhang \ref{app:createcics}}
+Dahingehend wurde die \glqq createCICS.jcl\grqq-JCL-Datei angepasst.
 Zusätzlich musste ein SIT Parameter angepasst werden, so dass die Log Dateien in der Entwicklungsstage funktionsfähig sind.
 Eine weitere CSD Gruppe für die Verkettung der Anwendungsbibliotheken musste hinzugefügt werden.
 Siehe Zeile 16 im Codeabschnitt \ref{code:createGrp}.
@@ -376,7 +376,7 @@ Diese Entscheidung hatte eine Änderung des in Abbildung \ref{code:addCSD} gezei
 So wird, wie in Abbildung \ref{code:createGrp} in Zeile sieben bis zehn dargestellt, zunächst eine Gruppe angelegt und anschließend wird diese Gruppe dem CSD (Zeile fünfzehn) hinzugefügt.
 
 \begin{minipage}{\linewidth}
-\lstinputlisting[caption={Erstellung einer neuen CSD Gruppe},captionpos=b,label={code:createGrp}]{listings/InitAdditionalCSD.jcl}
+\lstinputlisting[caption={Erstellung einer neuen CSD Gruppe mit Hilfe eines Jobs am Beispiel des \glqq InitAdditionalCSD.jcl\grqq-Jobs },captionpos=b,label={code:createGrp}]{listings/InitAdditionalCSD.jcl}
 \end{minipage}
 
 Für jeden IBM MQ bezogenen Job wurde die Jobkarte angepasst und der technische User der CICS-Administration durch den technischen User der IBM MQ-Administration, der für administrative Aufgaben berechtigt ist, ausgetauscht.
@@ -491,8 +491,9 @@ Dieser Umstand, kombiniert mit 36 bestehenden Dateien, erschwert die Fehlersuche
 Im Gegensatz dazu wird im Fehlerfall zur Laufzeit eines Workflow-Steps immer der Fehlercode und der genaue Ort des Fehlers ausgegeben.
 Beispielsweise wird bei einem Workflow-Step, in dem ein REST Aufruf durchgeführt wird und ein Fehler auftritt, der Requestcode und die hinterlegte Fehlermeldung an der z/OSMF Oberfläche angezeigt. 
 
-Ein weiteres Problem ist eine nicht genau identifizierbare Programmiersprache, die für die dynamische Generierung von Skripten im WOrkflow genutzt wird.
-Um diese Sprache einzusetzen muss am Zeilenanfang ein \glqq\#\grqq{} angegeben werden, sie kann damit in den REXX Skripten, JCL-Dateien usw. eingebettet werden
+Ein weiteres Problem ist eine nicht genau identifizierbare Programmiersprache, die für die dynamische Generierung von Skripten im Worfklow genutzt wird.
+Sie kommt unter anderem in den JCLs und REXX-Skripten, die dem Template über Workflowdefinitionfile-Steps zugeordnet werden, vor.
+Um diese Sprache einzusetzen muss am Zeilenanfang ein \glqq\#\grqq{} angegeben werden.
 Diese Sprache bietet einige Features.
 So ermöglicht diese die dynamische Wertzuweisung von zum Beispiel REXX-Variablen durch Variablen des Templates.
 Außerdem besteht eine Art von String Verarbeitung.
